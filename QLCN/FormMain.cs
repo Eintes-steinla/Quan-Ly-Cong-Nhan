@@ -12,6 +12,8 @@ namespace QLCN
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            // Đặt form ở chế độ tối đa hóa
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void mnuCongNhan_Click(object sender, EventArgs e)
@@ -87,6 +89,18 @@ namespace QLCN
         private void mnuExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void mnuProfile_Click(object sender, EventArgs e)
+        {
+            FormProfile f = new FormProfile();
+            f.MdiParent = this;
+            f.Show();
         }
     }
 }

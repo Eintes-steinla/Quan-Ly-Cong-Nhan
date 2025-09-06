@@ -10,6 +10,11 @@ namespace QLCN
             InitializeComponent();
         }
 
+        private void FormChangePassword_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+        }
+
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             string oldPass = txtOldPassword.Text.Trim();

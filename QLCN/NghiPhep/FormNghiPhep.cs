@@ -13,6 +13,7 @@ namespace QLCN
         private void FormNghiPhep_Load(object sender, EventArgs e)
         {
             // TODO: Load dữ liệu từ DB vào DataGridView
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -43,5 +44,6 @@ namespace QLCN
         {
 
         }
+
     }
 }

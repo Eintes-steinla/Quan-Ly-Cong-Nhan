@@ -161,6 +161,7 @@
             Name = "FormTangCa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Tăng Ca";
+            Load += FormTangCa_Load;
             ((System.ComponentModel.ISupportInitialize)dgvTangCa).EndInit();
             ResumeLayout(false);
             PerformLayout();

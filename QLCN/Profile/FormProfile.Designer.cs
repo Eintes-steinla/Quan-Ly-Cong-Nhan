@@ -180,6 +180,7 @@
             Controls.Add(btnClose);
             Name = "FormProfile";
             Text = "Thông tin cá nhân";
+            Load += FormProfile_Load;
             ResumeLayout(false);
             PerformLayout();
         }

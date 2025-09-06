@@ -13,6 +13,7 @@ namespace QLCN
 
         private void FormNhatKyHeThong_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             LoadLogs();
         }
 

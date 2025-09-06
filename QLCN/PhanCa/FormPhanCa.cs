@@ -15,6 +15,7 @@ namespace QLCN
             // TODO: Load công nhân vào cboCongNhan
             // TODO: Load ca làm vào cboCaLam
             // TODO: Load danh sách phân ca vào dgvPhanCa
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -40,5 +41,6 @@ namespace QLCN
             // TODO: Làm mới danh sách
             MessageBox.Show("Đã làm mới danh sách phân ca!");
         }
+
     }
 }

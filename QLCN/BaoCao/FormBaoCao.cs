@@ -12,6 +12,7 @@ namespace QLCN
 
         private void FormBaoCao_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             cboLoaiBaoCao.Items.Add("Báo cáo chấm công");
             cboLoaiBaoCao.Items.Add("Báo cáo tăng ca");
             cboLoaiBaoCao.Items.Add("Báo cáo nghỉ phép");

@@ -13,6 +13,7 @@ namespace QLCN
         private void FormCongNhan_Load(object sender, EventArgs e)
         {
             // TODO: Load dữ liệu từ DB vào DataGridView
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

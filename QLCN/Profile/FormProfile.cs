@@ -20,5 +20,11 @@ namespace QLCN
         {
             this.Close();
         }
+
+        private void FormProfile_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+
+        }
     }
 }

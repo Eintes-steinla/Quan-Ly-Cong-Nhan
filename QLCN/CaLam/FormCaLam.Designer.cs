@@ -162,6 +162,7 @@
             Name = "FormCaLam";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Ca Làm";
+            Load += FormCaLam_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCaLam).EndInit();
             ResumeLayout(false);
             PerformLayout();

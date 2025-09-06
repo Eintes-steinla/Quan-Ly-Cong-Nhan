@@ -132,6 +132,7 @@ namespace QLCN
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng nhập - QLCN";
+            Load += FormLogin_Load;
             ResumeLayout(false);
             PerformLayout();
         }

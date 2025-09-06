@@ -141,6 +141,7 @@
             Name = "FormPhanCa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Phân Ca";
+            Load += FormPhanCa_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPhanCa).EndInit();
             ResumeLayout(false);
         }

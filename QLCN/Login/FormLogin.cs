@@ -14,6 +14,12 @@ namespace QLCN
             InitializeComponent();
         }
 
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();

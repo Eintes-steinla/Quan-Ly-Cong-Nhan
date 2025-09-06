@@ -217,6 +217,7 @@
             Name = "FormCongNhan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Công nhân";
+            Load += FormCongNhan_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCongNhan).EndInit();
             ResumeLayout(false);
             PerformLayout();

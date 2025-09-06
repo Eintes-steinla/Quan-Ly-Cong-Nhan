@@ -23,6 +23,7 @@
             mnuTangCa = new ToolStripMenuItem();
             mnuCaLam = new ToolStripMenuItem();
             mnuPhanCa = new ToolStripMenuItem();
+            mnuProfile = new ToolStripMenuItem();
             mnuBaoCao = new ToolStripMenuItem();
             mnuUser = new ToolStripMenuItem();
             mnuSettings = new ToolStripMenuItem();
@@ -34,11 +35,12 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuCongNhan, mnuChamCong, mnuNghiPhep, mnuTangCa, mnuCaLam, mnuPhanCa, mnuBaoCao, mnuUser, mnuSettings, mnuNhatKy, mnuExit });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuCongNhan, mnuChamCong, mnuNghiPhep, mnuTangCa, mnuCaLam, mnuPhanCa, mnuProfile, mnuBaoCao, mnuUser, mnuSettings, mnuNhatKy, mnuExit });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1000, 33);
+            menuStrip1.Size = new Size(1227, 33);
             menuStrip1.TabIndex = 0;
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // mnuCongNhan
             // 
@@ -82,6 +84,13 @@
             mnuPhanCa.Text = "Phân ca";
             mnuPhanCa.Click += mnuPhanCa_Click;
             // 
+            // mnuProfile
+            // 
+            mnuProfile.Name = "mnuProfile";
+            mnuProfile.Size = new Size(78, 29);
+            mnuProfile.Text = "Hồ Sơ";
+            mnuProfile.Click += mnuProfile_Click;
+            // 
             // mnuBaoCao
             // 
             mnuBaoCao.Name = "mnuBaoCao";
@@ -119,7 +128,7 @@
             // 
             // FormMain
             // 
-            ClientSize = new Size(1000, 600);
+            ClientSize = new Size(1227, 600);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
@@ -132,5 +141,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private ToolStripMenuItem mnuProfile;
     }
 }

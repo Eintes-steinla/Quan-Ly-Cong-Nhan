@@ -13,6 +13,7 @@ namespace QLCN
         private void FormCaLam_Load(object sender, EventArgs e)
         {
             // TODO: Load danh sách ca làm từ DB
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

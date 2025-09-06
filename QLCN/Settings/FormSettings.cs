@@ -12,6 +12,8 @@ namespace QLCN
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
+
             // TODO: Load cài đặt hiện tại từ file config hoặc DB
             txtCompanyName.Text = "Công ty ABC";
             txtAddress.Text = "123 Đường A, Quận B, TP.HCM";

@@ -12,6 +12,8 @@ namespace QLCN
 
         private void FormUser_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
+
             cboRole.Items.Add("Admin");
             cboRole.Items.Add("Quản lý");
             cboRole.Items.Add("Nhân viên");

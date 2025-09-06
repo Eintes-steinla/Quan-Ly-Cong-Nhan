@@ -143,6 +143,7 @@
             Name = "FormChamCong";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Chấm Công";
+            Load += FormChamCong_Load;
             ((System.ComponentModel.ISupportInitialize)dgvChamCong).EndInit();
             ResumeLayout(false);
         }

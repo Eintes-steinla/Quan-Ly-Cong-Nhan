@@ -13,6 +13,8 @@ namespace QLCN
         private void FormTangCa_Load(object sender, EventArgs e)
         {
             // TODO: Load dữ liệu từ DB vào DataGridView
+            this.WindowState = FormWindowState.Maximized;
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -38,5 +40,6 @@ namespace QLCN
             // TODO: Làm mới danh sách
             MessageBox.Show("Đã làm mới danh sách tăng ca!");
         }
+
     }
 }
