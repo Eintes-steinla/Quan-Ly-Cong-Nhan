@@ -12,7 +12,6 @@ namespace QLCN
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            lblWelcome.Text = "Xin chào, Admin!";
         }
 
         private void mnuCongNhan_Click(object sender, EventArgs e)
