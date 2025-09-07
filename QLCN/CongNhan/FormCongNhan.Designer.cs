@@ -37,120 +37,123 @@
             btnEdit = new Button();
             btnDelete = new Button();
             btnRefresh = new Button();
+            title = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCongNhan).BeginInit();
             SuspendLayout();
             // 
             // dgvCongNhan
             // 
             dgvCongNhan.ColumnHeadersHeight = 34;
-            dgvCongNhan.Location = new Point(30, 250);
+            dgvCongNhan.Location = new Point(400, 100);
             dgvCongNhan.Name = "dgvCongNhan";
             dgvCongNhan.RowHeadersWidth = 62;
-            dgvCongNhan.Size = new Size(576, 200);
+            dgvCongNhan.Size = new Size(600, 416);
             dgvCongNhan.TabIndex = 0;
             // 
             // lblMaCN
             // 
-            lblMaCN.Location = new Point(30, 30);
+            lblMaCN.Location = new Point(50, 100);
             lblMaCN.Name = "lblMaCN";
-            lblMaCN.Size = new Size(100, 23);
+            lblMaCN.Size = new Size(100, 31);
             lblMaCN.TabIndex = 1;
             lblMaCN.Text = "Mã CN:";
             // 
             // lblHoTen
             // 
-            lblHoTen.Location = new Point(30, 70);
+            lblHoTen.Location = new Point(50, 150);
             lblHoTen.Name = "lblHoTen";
-            lblHoTen.Size = new Size(100, 23);
+            lblHoTen.Size = new Size(100, 31);
             lblHoTen.TabIndex = 2;
             lblHoTen.Text = "Họ tên:";
             // 
             // lblGioiTinh
             // 
-            lblGioiTinh.Location = new Point(30, 110);
+            lblGioiTinh.Location = new Point(50, 200);
             lblGioiTinh.Name = "lblGioiTinh";
-            lblGioiTinh.Size = new Size(100, 23);
+            lblGioiTinh.Size = new Size(100, 31);
             lblGioiTinh.TabIndex = 3;
             lblGioiTinh.Text = "Giới tính:";
             // 
             // lblNgaySinh
             // 
-            lblNgaySinh.Location = new Point(30, 150);
+            lblNgaySinh.Location = new Point(50, 250);
             lblNgaySinh.Name = "lblNgaySinh";
-            lblNgaySinh.Size = new Size(100, 23);
+            lblNgaySinh.Size = new Size(100, 31);
             lblNgaySinh.TabIndex = 4;
             lblNgaySinh.Text = "Ngày sinh:";
             // 
             // lblSDT
             // 
-            lblSDT.Location = new Point(400, 30);
+            lblSDT.Location = new Point(50, 300);
             lblSDT.Name = "lblSDT";
-            lblSDT.Size = new Size(100, 23);
+            lblSDT.Size = new Size(100, 31);
             lblSDT.TabIndex = 5;
             lblSDT.Text = "SĐT:";
             // 
             // lblDiaChi
             // 
-            lblDiaChi.Location = new Point(400, 70);
+            lblDiaChi.Location = new Point(50, 350);
             lblDiaChi.Name = "lblDiaChi";
-            lblDiaChi.Size = new Size(100, 23);
+            lblDiaChi.Size = new Size(100, 31);
             lblDiaChi.TabIndex = 6;
             lblDiaChi.Text = "Địa chỉ:";
             // 
             // lblBoPhan
             // 
-            lblBoPhan.Location = new Point(400, 110);
+            lblBoPhan.Location = new Point(50, 400);
             lblBoPhan.Name = "lblBoPhan";
-            lblBoPhan.Size = new Size(100, 23);
+            lblBoPhan.Size = new Size(100, 31);
             lblBoPhan.TabIndex = 7;
             lblBoPhan.Text = "Bộ phận:";
             // 
             // txtMaCN
             // 
-            txtMaCN.Location = new Point(141, 22);
+            txtMaCN.Location = new Point(150, 100);
             txtMaCN.Name = "txtMaCN";
             txtMaCN.Size = new Size(200, 31);
             txtMaCN.TabIndex = 8;
             // 
             // txtHoTen
             // 
-            txtHoTen.Location = new Point(141, 62);
+            txtHoTen.Location = new Point(150, 150);
             txtHoTen.Name = "txtHoTen";
             txtHoTen.Size = new Size(200, 31);
             txtHoTen.TabIndex = 9;
             // 
             // txtSDT
             // 
-            txtSDT.Location = new Point(506, 22);
+            txtSDT.Location = new Point(150, 300);
             txtSDT.Name = "txtSDT";
-            txtSDT.Size = new Size(100, 31);
+            txtSDT.Size = new Size(200, 31);
             txtSDT.TabIndex = 12;
+            txtSDT.TextChanged += txtSDT_TextChanged;
             // 
             // txtDiaChi
             // 
-            txtDiaChi.Location = new Point(506, 62);
+            txtDiaChi.Location = new Point(150, 350);
             txtDiaChi.Name = "txtDiaChi";
-            txtDiaChi.Size = new Size(100, 31);
+            txtDiaChi.Size = new Size(200, 31);
             txtDiaChi.TabIndex = 13;
             // 
             // txtBoPhan
             // 
-            txtBoPhan.Location = new Point(506, 102);
+            txtBoPhan.Location = new Point(150, 400);
             txtBoPhan.Name = "txtBoPhan";
-            txtBoPhan.Size = new Size(100, 31);
+            txtBoPhan.Size = new Size(200, 31);
             txtBoPhan.TabIndex = 14;
             // 
             // cbGioiTinh
             // 
             cbGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
-            cbGioiTinh.Location = new Point(141, 99);
+            cbGioiTinh.Location = new Point(150, 200);
             cbGioiTinh.Name = "cbGioiTinh";
             cbGioiTinh.Size = new Size(200, 33);
             cbGioiTinh.TabIndex = 10;
             // 
             // dtpNgaySinh
             // 
-            dtpNgaySinh.Location = new Point(141, 142);
+            dtpNgaySinh.Format = DateTimePickerFormat.Custom;
+            dtpNgaySinh.Location = new Point(150, 250);
             dtpNgaySinh.Name = "dtpNgaySinh";
             dtpNgaySinh.Size = new Size(200, 31);
             dtpNgaySinh.TabIndex = 11;
@@ -158,43 +161,55 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(141, 191);
+            btnAdd.Location = new Point(150, 450);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 32);
+            btnAdd.Size = new Size(100, 31);
             btnAdd.TabIndex = 15;
             btnAdd.Text = "Thêm";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(266, 191);
+            btnEdit.Location = new Point(250, 450);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 32);
+            btnEdit.Size = new Size(100, 31);
             btnEdit.TabIndex = 16;
             btnEdit.Text = "Sửa";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(391, 191);
+            btnDelete.Location = new Point(150, 485);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 32);
+            btnDelete.Size = new Size(100, 31);
             btnDelete.TabIndex = 17;
             btnDelete.Text = "Xóa";
             btnDelete.Click += btnDelete_Click;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(501, 191);
+            btnRefresh.Location = new Point(250, 485);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(105, 32);
+            btnRefresh.Size = new Size(100, 31);
             btnRefresh.TabIndex = 18;
             btnRefresh.Text = "Làm mới";
             btnRefresh.Click += btnRefresh_Click;
             // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(370, 30);
+            title.Name = "title";
+            title.Size = new Size(317, 45);
+            title.TabIndex = 19;
+            title.Text = "Quản Lý Công Nhân";
+            title.Click += label1_Click;
+            // 
             // FormCongNhan
             // 
-            ClientSize = new Size(648, 500);
+            ClientSize = new Size(1061, 564);
+            Controls.Add(title);
             Controls.Add(dgvCongNhan);
             Controls.Add(lblMaCN);
             Controls.Add(lblHoTen);
@@ -217,10 +232,12 @@
             Name = "FormCongNhan";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Công nhân";
+            WindowState = FormWindowState.Maximized;
             Load += FormCongNhan_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCongNhan).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label title;
     }
 }
