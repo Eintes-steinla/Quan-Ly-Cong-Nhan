@@ -38,6 +38,8 @@
             btnDelete = new Button();
             btnRefresh = new Button();
             title = new Label();
+            lblCCCD = new Label();
+            txtCCCD = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvCongNhan).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +49,7 @@
             dgvCongNhan.Location = new Point(400, 100);
             dgvCongNhan.Name = "dgvCongNhan";
             dgvCongNhan.RowHeadersWidth = 62;
-            dgvCongNhan.Size = new Size(600, 416);
+            dgvCongNhan.Size = new Size(600, 468);
             dgvCongNhan.TabIndex = 0;
             // 
             // lblMaCN
@@ -92,7 +94,7 @@
             // 
             // lblDiaChi
             // 
-            lblDiaChi.Location = new Point(50, 350);
+            lblDiaChi.Location = new Point(50, 400);
             lblDiaChi.Name = "lblDiaChi";
             lblDiaChi.Size = new Size(100, 31);
             lblDiaChi.TabIndex = 6;
@@ -100,7 +102,7 @@
             // 
             // lblBoPhan
             // 
-            lblBoPhan.Location = new Point(50, 400);
+            lblBoPhan.Location = new Point(50, 450);
             lblBoPhan.Name = "lblBoPhan";
             lblBoPhan.Size = new Size(100, 31);
             lblBoPhan.TabIndex = 7;
@@ -130,14 +132,14 @@
             // 
             // txtDiaChi
             // 
-            txtDiaChi.Location = new Point(150, 350);
+            txtDiaChi.Location = new Point(150, 400);
             txtDiaChi.Name = "txtDiaChi";
             txtDiaChi.Size = new Size(200, 31);
             txtDiaChi.TabIndex = 13;
             // 
             // txtBoPhan
             // 
-            txtBoPhan.Location = new Point(150, 400);
+            txtBoPhan.Location = new Point(150, 450);
             txtBoPhan.Name = "txtBoPhan";
             txtBoPhan.Size = new Size(200, 31);
             txtBoPhan.TabIndex = 14;
@@ -161,7 +163,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(150, 450);
+            btnAdd.Location = new Point(150, 500);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(100, 31);
             btnAdd.TabIndex = 15;
@@ -170,7 +172,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(250, 450);
+            btnEdit.Location = new Point(250, 500);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(100, 31);
             btnEdit.TabIndex = 16;
@@ -179,7 +181,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(150, 485);
+            btnDelete.Location = new Point(150, 537);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(100, 31);
             btnDelete.TabIndex = 17;
@@ -188,7 +190,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(250, 485);
+            btnRefresh.Location = new Point(250, 537);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(100, 31);
             btnRefresh.TabIndex = 18;
@@ -206,9 +208,27 @@
             title.Text = "Quản Lý Công Nhân";
             title.Click += label1_Click;
             // 
+            // lblCCCD
+            // 
+            lblCCCD.AutoSize = true;
+            lblCCCD.Location = new Point(50, 350);
+            lblCCCD.Name = "lblCCCD";
+            lblCCCD.Size = new Size(88, 25);
+            lblCCCD.TabIndex = 20;
+            lblCCCD.Text = "Số CCCD:";
+            // 
+            // txtCCCD
+            // 
+            txtCCCD.Location = new Point(150, 350);
+            txtCCCD.Name = "txtCCCD";
+            txtCCCD.Size = new Size(200, 31);
+            txtCCCD.TabIndex = 21;
+            // 
             // FormCongNhan
             // 
-            ClientSize = new Size(1061, 564);
+            ClientSize = new Size(1061, 613);
+            Controls.Add(txtCCCD);
+            Controls.Add(lblCCCD);
             Controls.Add(title);
             Controls.Add(dgvCongNhan);
             Controls.Add(lblMaCN);
@@ -239,5 +259,7 @@
             PerformLayout();
         }
         private Label title;
+        private Label lblCCCD;
+        private TextBox txtCCCD;
     }
 }

@@ -26,5 +26,25 @@ namespace QLCN
             this.WindowState = FormWindowState.Maximized;
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCCCD_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCCCD_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

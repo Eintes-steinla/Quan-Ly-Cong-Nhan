@@ -29,15 +29,16 @@
             txtEmail = new TextBox();
             lblAddress = new Label();
             txtAddress = new TextBox();
-            lblPosition = new Label();
-            txtPosition = new TextBox();
+            txtCCCD = new TextBox();
             btnSave = new Button();
             btnClose = new Button();
+            title = new Label();
+            lblCCCD = new Label();
             SuspendLayout();
             // 
             // lblName
             // 
-            lblName.Location = new Point(30, 30);
+            lblName.Location = new Point(50, 90);
             lblName.Name = "lblName";
             lblName.Size = new Size(100, 23);
             lblName.TabIndex = 0;
@@ -45,14 +46,14 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(150, 30);
+            txtName.Location = new Point(170, 90);
             txtName.Name = "txtName";
             txtName.Size = new Size(318, 31);
             txtName.TabIndex = 1;
             // 
             // lblGender
             // 
-            lblGender.Location = new Point(30, 70);
+            lblGender.Location = new Point(50, 130);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(100, 23);
             lblGender.TabIndex = 2;
@@ -61,14 +62,14 @@
             // cbGender
             // 
             cbGender.Items.AddRange(new object[] { "Nam", "Nữ", "Khác" });
-            cbGender.Location = new Point(150, 70);
+            cbGender.Location = new Point(170, 130);
             cbGender.Name = "cbGender";
             cbGender.Size = new Size(318, 33);
             cbGender.TabIndex = 3;
             // 
             // lblDob
             // 
-            lblDob.Location = new Point(30, 110);
+            lblDob.Location = new Point(50, 170);
             lblDob.Name = "lblDob";
             lblDob.Size = new Size(100, 23);
             lblDob.TabIndex = 4;
@@ -76,14 +77,15 @@
             // 
             // dtpDob
             // 
-            dtpDob.Location = new Point(150, 110);
+            dtpDob.Format = DateTimePickerFormat.Custom;
+            dtpDob.Location = new Point(170, 170);
             dtpDob.Name = "dtpDob";
             dtpDob.Size = new Size(318, 31);
             dtpDob.TabIndex = 5;
             // 
             // lblPhone
             // 
-            lblPhone.Location = new Point(30, 150);
+            lblPhone.Location = new Point(50, 210);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(100, 23);
             lblPhone.TabIndex = 6;
@@ -91,14 +93,14 @@
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(150, 150);
+            txtPhone.Location = new Point(170, 210);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(318, 31);
             txtPhone.TabIndex = 7;
             // 
             // lblEmail
             // 
-            lblEmail.Location = new Point(30, 190);
+            lblEmail.Location = new Point(50, 250);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(100, 23);
             lblEmail.TabIndex = 8;
@@ -106,14 +108,15 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(150, 190);
+            txtEmail.Location = new Point(170, 250);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(318, 31);
             txtEmail.TabIndex = 9;
+            txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // lblAddress
             // 
-            lblAddress.Location = new Point(30, 230);
+            lblAddress.Location = new Point(50, 290);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(100, 23);
             lblAddress.TabIndex = 10;
@@ -121,29 +124,22 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(150, 230);
+            txtAddress.Location = new Point(170, 290);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(318, 31);
             txtAddress.TabIndex = 11;
             // 
-            // lblPosition
+            // txtCCCD
             // 
-            lblPosition.Location = new Point(30, 270);
-            lblPosition.Name = "lblPosition";
-            lblPosition.Size = new Size(100, 23);
-            lblPosition.TabIndex = 12;
-            lblPosition.Text = "Chức vụ:";
-            // 
-            // txtPosition
-            // 
-            txtPosition.Location = new Point(150, 270);
-            txtPosition.Name = "txtPosition";
-            txtPosition.Size = new Size(318, 31);
-            txtPosition.TabIndex = 13;
+            txtCCCD.Location = new Point(170, 330);
+            txtCCCD.Name = "txtCCCD";
+            txtCCCD.Size = new Size(318, 31);
+            txtCCCD.TabIndex = 13;
+            txtCCCD.TextChanged += txtCCCD_TextChanged;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(150, 320);
+            btnSave.Location = new Point(170, 380);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 37);
             btnSave.TabIndex = 14;
@@ -152,16 +148,37 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(393, 320);
+            btnClose.Location = new Point(413, 380);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 37);
             btnClose.TabIndex = 15;
             btnClose.Text = "Đóng";
             btnClose.Click += btnClose_Click;
             // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(136, 25);
+            title.Name = "title";
+            title.Size = new Size(274, 45);
+            title.TabIndex = 16;
+            title.Text = "Hồ sơ công nhân";
+            title.Click += label1_Click;
+            // 
+            // lblCCCD
+            // 
+            lblCCCD.Location = new Point(50, 330);
+            lblCCCD.Name = "lblCCCD";
+            lblCCCD.Size = new Size(100, 23);
+            lblCCCD.TabIndex = 12;
+            lblCCCD.Text = "Số CCCD:";
+            lblCCCD.Click += lblCCCD_Click;
+            // 
             // FormProfile
             // 
-            ClientSize = new Size(541, 400);
+            ClientSize = new Size(545, 487);
+            Controls.Add(title);
             Controls.Add(lblName);
             Controls.Add(txtName);
             Controls.Add(lblGender);
@@ -174,8 +191,8 @@
             Controls.Add(txtEmail);
             Controls.Add(lblAddress);
             Controls.Add(txtAddress);
-            Controls.Add(lblPosition);
-            Controls.Add(txtPosition);
+            Controls.Add(lblCCCD);
+            Controls.Add(txtCCCD);
             Controls.Add(btnSave);
             Controls.Add(btnClose);
             Name = "FormProfile";
@@ -192,16 +209,17 @@
         private System.Windows.Forms.Label lblGender;
         private System.Windows.Forms.ComboBox cbGender;
         private System.Windows.Forms.Label lblDob;
-        private System.Windows.Forms.DateTimePicker dtpDob;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.Label lblPosition;
-        private System.Windows.Forms.TextBox txtPosition;
+        private System.Windows.Forms.TextBox txtCCCD;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
+        private Label title;
+        protected DateTimePicker dtpDob;
+        private Label lblCCCD;
     }
 }
