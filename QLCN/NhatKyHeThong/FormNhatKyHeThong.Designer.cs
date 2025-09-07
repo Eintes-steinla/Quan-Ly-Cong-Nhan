@@ -24,6 +24,7 @@
             lblFilterDate = new Label();
             txtFilterUser = new TextBox();
             dtpFilterDate = new DateTimePicker();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             SuspendLayout();
             // 
@@ -32,17 +33,17 @@
             dgvLogs.AllowUserToAddRows = false;
             dgvLogs.AllowUserToDeleteRows = false;
             dgvLogs.ColumnHeadersHeight = 34;
-            dgvLogs.Location = new Point(30, 115);
+            dgvLogs.Location = new Point(47, 197);
             dgvLogs.Name = "dgvLogs";
             dgvLogs.ReadOnly = true;
             dgvLogs.RowHeadersWidth = 62;
             dgvLogs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvLogs.Size = new Size(443, 315);
+            dgvLogs.Size = new Size(449, 375);
             dgvLogs.TabIndex = 0;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(368, 67);
+            btnRefresh.Location = new Point(391, 143);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(105, 31);
             btnRefresh.TabIndex = 5;
@@ -51,7 +52,7 @@
             // 
             // btnExport
             // 
-            btnExport.Location = new Point(368, 30);
+            btnExport.Location = new Point(391, 104);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(105, 31);
             btnExport.TabIndex = 6;
@@ -60,7 +61,7 @@
             // 
             // lblFilterUser
             // 
-            lblFilterUser.Location = new Point(30, 30);
+            lblFilterUser.Location = new Point(47, 104);
             lblFilterUser.Name = "lblFilterUser";
             lblFilterUser.Size = new Size(125, 31);
             lblFilterUser.TabIndex = 1;
@@ -68,7 +69,7 @@
             // 
             // lblFilterDate
             // 
-            lblFilterDate.Location = new Point(30, 67);
+            lblFilterDate.Location = new Point(47, 141);
             lblFilterDate.Name = "lblFilterDate";
             lblFilterDate.Size = new Size(106, 31);
             lblFilterDate.TabIndex = 3;
@@ -76,7 +77,7 @@
             // 
             // txtFilterUser
             // 
-            txtFilterUser.Location = new Point(161, 30);
+            txtFilterUser.Location = new Point(188, 104);
             txtFilterUser.Name = "txtFilterUser";
             txtFilterUser.Size = new Size(169, 31);
             txtFilterUser.TabIndex = 2;
@@ -85,14 +86,25 @@
             // dtpFilterDate
             // 
             dtpFilterDate.Format = DateTimePickerFormat.Short;
-            dtpFilterDate.Location = new Point(161, 67);
+            dtpFilterDate.Location = new Point(188, 141);
             dtpFilterDate.Name = "dtpFilterDate";
             dtpFilterDate.Size = new Size(169, 31);
             dtpFilterDate.TabIndex = 4;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label1.Location = new Point(137, 28);
+            label1.Name = "label1";
+            label1.Size = new Size(281, 45);
+            label1.TabIndex = 7;
+            label1.Text = "Nhật ký hệ thống";
+            // 
             // FormNhatKyHeThong
             // 
-            ClientSize = new Size(511, 450);
+            ClientSize = new Size(547, 606);
+            Controls.Add(label1);
             Controls.Add(dgvLogs);
             Controls.Add(lblFilterUser);
             Controls.Add(txtFilterUser);
@@ -108,5 +120,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label label1;
     }
 }
