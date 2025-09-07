@@ -57,6 +57,40 @@ namespace QLCN
             f.MdiParent = this;
             f.Show();
         }
+        private void mnuChamCongDropDown_Click(object sender, EventArgs e)
+        {
+            FormChamCong f = new FormChamCong();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void mnuNghiPhepDropDown_Click(object sender, EventArgs e)
+        {
+            FormNghiPhep f = new FormNghiPhep();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void mnuTangCaDropDown_Click(object sender, EventArgs e)
+        {
+            FormTangCa f = new FormTangCa();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void mnuCaLamDropDown_Click(object sender, EventArgs e)
+        {
+            FormCaLam f = new FormCaLam();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void mnuPhanCaDropDown_Click(object sender, EventArgs e)
+        {
+            FormPhanCa f = new FormPhanCa();
+            f.MdiParent = this;
+            f.Show();
+        }
 
         private void mnuBaoCao_Click(object sender, EventArgs e)
         {
