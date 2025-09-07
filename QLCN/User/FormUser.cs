@@ -45,5 +45,10 @@ namespace QLCN
             // TODO: Làm mới danh sách
             MessageBox.Show("Đã làm mới danh sách!");
         }
+
+        private void lblUsername_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

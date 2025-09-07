@@ -28,43 +28,45 @@
             btnDelete = new Button();
             btnRefresh = new Button();
             dgvUser = new DataGridView();
+            title = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvUser).BeginInit();
             SuspendLayout();
             // 
             // lblUsername
             // 
-            lblUsername.Location = new Point(30, 30);
+            lblUsername.Location = new Point(30, 112);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(140, 27);
+            lblUsername.Size = new Size(140, 31);
             lblUsername.TabIndex = 0;
             lblUsername.Text = "Tên đăng nhập:";
+            lblUsername.Click += lblUsername_Click;
             // 
             // lblPassword
             // 
-            lblPassword.Location = new Point(30, 70);
+            lblPassword.Location = new Point(30, 149);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(100, 23);
+            lblPassword.Size = new Size(100, 31);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Mật khẩu:";
             // 
             // lblRole
             // 
-            lblRole.Location = new Point(30, 110);
+            lblRole.Location = new Point(30, 186);
             lblRole.Name = "lblRole";
-            lblRole.Size = new Size(100, 23);
+            lblRole.Size = new Size(100, 33);
             lblRole.TabIndex = 4;
             lblRole.Text = "Vai trò:";
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(176, 26);
+            txtUsername.Location = new Point(176, 112);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(200, 31);
             txtUsername.TabIndex = 1;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(176, 63);
+            txtPassword.Location = new Point(176, 149);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(200, 31);
@@ -73,14 +75,14 @@
             // cboRole
             // 
             cboRole.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboRole.Location = new Point(176, 100);
+            cboRole.Location = new Point(176, 186);
             cboRole.Name = "cboRole";
             cboRole.Size = new Size(200, 33);
             cboRole.TabIndex = 5;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(405, 26);
+            btnAdd.Location = new Point(405, 112);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(106, 31);
             btnAdd.TabIndex = 6;
@@ -89,7 +91,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(534, 26);
+            btnEdit.Location = new Point(534, 112);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(106, 31);
             btnEdit.TabIndex = 7;
@@ -98,7 +100,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(405, 63);
+            btnDelete.Location = new Point(405, 149);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(106, 31);
             btnDelete.TabIndex = 8;
@@ -107,7 +109,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(534, 63);
+            btnRefresh.Location = new Point(534, 149);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(106, 31);
             btnRefresh.TabIndex = 9;
@@ -117,15 +119,26 @@
             // dgvUser
             // 
             dgvUser.ColumnHeadersHeight = 34;
-            dgvUser.Location = new Point(30, 160);
+            dgvUser.Location = new Point(30, 246);
             dgvUser.Name = "dgvUser";
             dgvUser.RowHeadersWidth = 62;
-            dgvUser.Size = new Size(610, 300);
+            dgvUser.Size = new Size(610, 359);
             dgvUser.TabIndex = 10;
+            // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(176, 36);
+            title.Name = "title";
+            title.Size = new Size(319, 45);
+            title.TabIndex = 11;
+            title.Text = "Quản lý người dùng";
             // 
             // FormUser
             // 
-            ClientSize = new Size(673, 500);
+            ClientSize = new Size(673, 633);
+            Controls.Add(title);
             Controls.Add(lblUsername);
             Controls.Add(txtUsername);
             Controls.Add(lblPassword);
@@ -145,5 +158,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label title;
     }
 }

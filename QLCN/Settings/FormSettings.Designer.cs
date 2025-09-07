@@ -42,11 +42,12 @@
             cboTheme = new ComboBox();
             btnSave = new Button();
             btnCancel = new Button();
+            title = new Label();
             SuspendLayout();
             // 
             // lblCompanyName
             // 
-            lblCompanyName.Location = new Point(30, 30);
+            lblCompanyName.Location = new Point(30, 88);
             lblCompanyName.Name = "lblCompanyName";
             lblCompanyName.Size = new Size(114, 31);
             lblCompanyName.TabIndex = 0;
@@ -54,7 +55,7 @@
             // 
             // lblAddress
             // 
-            lblAddress.Location = new Point(30, 67);
+            lblAddress.Location = new Point(30, 125);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(100, 31);
             lblAddress.TabIndex = 2;
@@ -62,7 +63,7 @@
             // 
             // lblPhone
             // 
-            lblPhone.Location = new Point(30, 104);
+            lblPhone.Location = new Point(30, 162);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(126, 31);
             lblPhone.TabIndex = 4;
@@ -70,28 +71,28 @@
             // 
             // txtCompanyName
             // 
-            txtCompanyName.Location = new Point(162, 30);
+            txtCompanyName.Location = new Point(162, 88);
             txtCompanyName.Name = "txtCompanyName";
             txtCompanyName.Size = new Size(200, 31);
             txtCompanyName.TabIndex = 1;
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(162, 67);
+            txtAddress.Location = new Point(162, 125);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(200, 31);
             txtAddress.TabIndex = 3;
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(162, 104);
+            txtPhone.Location = new Point(162, 162);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(200, 31);
             txtPhone.TabIndex = 5;
             // 
             // lblServer
             // 
-            lblServer.Location = new Point(30, 141);
+            lblServer.Location = new Point(30, 199);
             lblServer.Name = "lblServer";
             lblServer.Size = new Size(100, 31);
             lblServer.TabIndex = 6;
@@ -99,7 +100,7 @@
             // 
             // lblDatabase
             // 
-            lblDatabase.Location = new Point(30, 178);
+            lblDatabase.Location = new Point(30, 236);
             lblDatabase.Name = "lblDatabase";
             lblDatabase.Size = new Size(100, 31);
             lblDatabase.TabIndex = 8;
@@ -107,7 +108,7 @@
             // 
             // lblDbUser
             // 
-            lblDbUser.Location = new Point(30, 215);
+            lblDbUser.Location = new Point(30, 273);
             lblDbUser.Name = "lblDbUser";
             lblDbUser.Size = new Size(100, 31);
             lblDbUser.TabIndex = 10;
@@ -115,7 +116,7 @@
             // 
             // lblDbPassword
             // 
-            lblDbPassword.Location = new Point(30, 252);
+            lblDbPassword.Location = new Point(30, 310);
             lblDbPassword.Name = "lblDbPassword";
             lblDbPassword.Size = new Size(126, 31);
             lblDbPassword.TabIndex = 12;
@@ -123,28 +124,28 @@
             // 
             // txtServer
             // 
-            txtServer.Location = new Point(162, 141);
+            txtServer.Location = new Point(162, 199);
             txtServer.Name = "txtServer";
             txtServer.Size = new Size(200, 31);
             txtServer.TabIndex = 7;
             // 
             // txtDatabase
             // 
-            txtDatabase.Location = new Point(162, 178);
+            txtDatabase.Location = new Point(162, 236);
             txtDatabase.Name = "txtDatabase";
             txtDatabase.Size = new Size(200, 31);
             txtDatabase.TabIndex = 9;
             // 
             // txtDbUser
             // 
-            txtDbUser.Location = new Point(162, 215);
+            txtDbUser.Location = new Point(162, 273);
             txtDbUser.Name = "txtDbUser";
             txtDbUser.Size = new Size(200, 31);
             txtDbUser.TabIndex = 11;
             // 
             // txtDbPassword
             // 
-            txtDbPassword.Location = new Point(162, 252);
+            txtDbPassword.Location = new Point(162, 310);
             txtDbPassword.Name = "txtDbPassword";
             txtDbPassword.PasswordChar = '*';
             txtDbPassword.Size = new Size(200, 31);
@@ -152,7 +153,7 @@
             // 
             // lblLanguage
             // 
-            lblLanguage.Location = new Point(30, 289);
+            lblLanguage.Location = new Point(30, 347);
             lblLanguage.Name = "lblLanguage";
             lblLanguage.Size = new Size(100, 33);
             lblLanguage.TabIndex = 14;
@@ -160,7 +161,7 @@
             // 
             // lblTheme
             // 
-            lblTheme.Location = new Point(30, 328);
+            lblTheme.Location = new Point(30, 386);
             lblTheme.Name = "lblTheme";
             lblTheme.Size = new Size(100, 33);
             lblTheme.TabIndex = 16;
@@ -169,7 +170,7 @@
             // cboLanguage
             // 
             cboLanguage.Items.AddRange(new object[] { "Tiếng Việt", "English" });
-            cboLanguage.Location = new Point(162, 289);
+            cboLanguage.Location = new Point(162, 347);
             cboLanguage.Name = "cboLanguage";
             cboLanguage.Size = new Size(200, 33);
             cboLanguage.TabIndex = 15;
@@ -177,14 +178,14 @@
             // cboTheme
             // 
             cboTheme.Items.AddRange(new object[] { "Sáng", "Tối" });
-            cboTheme.Location = new Point(162, 328);
+            cboTheme.Location = new Point(162, 386);
             cboTheme.Name = "cboTheme";
             cboTheme.Size = new Size(200, 33);
             cboTheme.TabIndex = 17;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(162, 367);
+            btnSave.Location = new Point(162, 425);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(92, 33);
             btnSave.TabIndex = 18;
@@ -193,16 +194,27 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(270, 367);
+            btnCancel.Location = new Point(270, 425);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(92, 33);
             btnCancel.TabIndex = 19;
             btnCancel.Text = "Hủy";
             btnCancel.Click += btnCancel_Click;
             // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(140, 30);
+            title.Name = "title";
+            title.Size = new Size(124, 45);
+            title.TabIndex = 20;
+            title.Text = "Cài đặt";
+            // 
             // FormSettings
             // 
-            ClientSize = new Size(394, 446);
+            ClientSize = new Size(394, 486);
+            Controls.Add(title);
             Controls.Add(lblCompanyName);
             Controls.Add(txtCompanyName);
             Controls.Add(lblAddress);
@@ -230,5 +242,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label title;
     }
 }
