@@ -31,12 +31,13 @@
             btnDelete = new Button();
             btnRefresh = new Button();
             dgvTangCa = new DataGridView();
+            title = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTangCa).BeginInit();
             SuspendLayout();
             // 
             // lblMaCN
             // 
-            lblMaCN.Location = new Point(30, 30);
+            lblMaCN.Location = new Point(31, 116);
             lblMaCN.Name = "lblMaCN";
             lblMaCN.Size = new Size(100, 23);
             lblMaCN.TabIndex = 0;
@@ -44,7 +45,7 @@
             // 
             // lblNgay
             // 
-            lblNgay.Location = new Point(30, 70);
+            lblNgay.Location = new Point(31, 156);
             lblNgay.Name = "lblNgay";
             lblNgay.Size = new Size(100, 23);
             lblNgay.TabIndex = 2;
@@ -52,7 +53,7 @@
             // 
             // lblSoGio
             // 
-            lblSoGio.Location = new Point(30, 110);
+            lblSoGio.Location = new Point(31, 196);
             lblSoGio.Name = "lblSoGio";
             lblSoGio.Size = new Size(100, 23);
             lblSoGio.TabIndex = 4;
@@ -60,7 +61,7 @@
             // 
             // lblLyDo
             // 
-            lblLyDo.Location = new Point(348, 30);
+            lblLyDo.Location = new Point(349, 116);
             lblLyDo.Name = "lblLyDo";
             lblLyDo.Size = new Size(73, 23);
             lblLyDo.TabIndex = 6;
@@ -69,7 +70,7 @@
             // cbMaCN
             // 
             cbMaCN.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbMaCN.Location = new Point(136, 20);
+            cbMaCN.Location = new Point(137, 106);
             cbMaCN.Name = "cbMaCN";
             cbMaCN.Size = new Size(171, 33);
             cbMaCN.TabIndex = 1;
@@ -77,21 +78,21 @@
             // dtpNgay
             // 
             dtpNgay.Format = DateTimePickerFormat.Short;
-            dtpNgay.Location = new Point(136, 62);
+            dtpNgay.Location = new Point(137, 148);
             dtpNgay.Name = "dtpNgay";
             dtpNgay.Size = new Size(171, 31);
             dtpNgay.TabIndex = 3;
             // 
             // txtSoGio
             // 
-            txtSoGio.Location = new Point(136, 102);
+            txtSoGio.Location = new Point(137, 188);
             txtSoGio.Name = "txtSoGio";
             txtSoGio.Size = new Size(171, 31);
             txtSoGio.TabIndex = 5;
             // 
             // txtLyDo
             // 
-            txtLyDo.Location = new Point(427, 20);
+            txtLyDo.Location = new Point(428, 106);
             txtLyDo.Multiline = true;
             txtLyDo.Name = "txtLyDo";
             txtLyDo.Size = new Size(313, 113);
@@ -99,7 +100,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(136, 154);
+            btnAdd.Location = new Point(137, 240);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(75, 35);
             btnAdd.TabIndex = 8;
@@ -108,7 +109,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(306, 154);
+            btnEdit.Location = new Point(307, 240);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(75, 35);
             btnEdit.TabIndex = 9;
@@ -117,7 +118,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(473, 154);
+            btnDelete.Location = new Point(474, 240);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 35);
             btnDelete.TabIndex = 10;
@@ -126,7 +127,7 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(641, 154);
+            btnRefresh.Location = new Point(642, 240);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(99, 35);
             btnRefresh.TabIndex = 11;
@@ -136,15 +137,26 @@
             // dgvTangCa
             // 
             dgvTangCa.ColumnHeadersHeight = 34;
-            dgvTangCa.Location = new Point(30, 230);
+            dgvTangCa.Location = new Point(31, 316);
             dgvTangCa.Name = "dgvTangCa";
             dgvTangCa.RowHeadersWidth = 62;
-            dgvTangCa.Size = new Size(710, 250);
+            dgvTangCa.Size = new Size(710, 324);
             dgvTangCa.TabIndex = 12;
+            // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(255, 38);
+            title.Name = "title";
+            title.Size = new Size(252, 45);
+            title.TabIndex = 13;
+            title.Text = "Quản lý tăng ca";
             // 
             // FormTangCa
             // 
-            ClientSize = new Size(784, 500);
+            ClientSize = new Size(784, 674);
+            Controls.Add(title);
             Controls.Add(lblMaCN);
             Controls.Add(cbMaCN);
             Controls.Add(lblNgay);
@@ -166,5 +178,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label title;
     }
 }
