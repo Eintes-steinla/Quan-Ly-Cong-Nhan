@@ -44,5 +44,10 @@ namespace QLCN
         {
 
         }
+
+        private void txtMaCa_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

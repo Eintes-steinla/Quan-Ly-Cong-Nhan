@@ -28,20 +28,21 @@
             btnDelete = new Button();
             btnRefresh = new Button();
             dgvPhanCa = new DataGridView();
+            title = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPhanCa).BeginInit();
             SuspendLayout();
             // 
             // lblCongNhan
             // 
-            lblCongNhan.Location = new Point(30, 30);
+            lblCongNhan.Location = new Point(28, 106);
             lblCongNhan.Name = "lblCongNhan";
-            lblCongNhan.Size = new Size(100, 23);
+            lblCongNhan.Size = new Size(115, 23);
             lblCongNhan.TabIndex = 0;
             lblCongNhan.Text = "Công nhân:";
             // 
             // lblCaLam
             // 
-            lblCaLam.Location = new Point(30, 70);
+            lblCaLam.Location = new Point(28, 146);
             lblCaLam.Name = "lblCaLam";
             lblCaLam.Size = new Size(100, 23);
             lblCaLam.TabIndex = 2;
@@ -49,7 +50,7 @@
             // 
             // lblNgay
             // 
-            lblNgay.Location = new Point(30, 110);
+            lblNgay.Location = new Point(28, 186);
             lblNgay.Name = "lblNgay";
             lblNgay.Size = new Size(100, 23);
             lblNgay.TabIndex = 4;
@@ -58,15 +59,16 @@
             // cboCongNhan
             // 
             cboCongNhan.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboCongNhan.Location = new Point(136, 20);
+            cboCongNhan.Location = new Point(149, 96);
             cboCongNhan.Name = "cboCongNhan";
             cboCongNhan.Size = new Size(200, 33);
             cboCongNhan.TabIndex = 1;
+            cboCongNhan.SelectedIndexChanged += cboCongNhan_SelectedIndexChanged;
             // 
             // cboCaLam
             // 
             cboCaLam.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboCaLam.Location = new Point(136, 60);
+            cboCaLam.Location = new Point(149, 139);
             cboCaLam.Name = "cboCaLam";
             cboCaLam.Size = new Size(200, 33);
             cboCaLam.TabIndex = 3;
@@ -74,14 +76,14 @@
             // dtpNgay
             // 
             dtpNgay.Format = DateTimePickerFormat.Short;
-            dtpNgay.Location = new Point(136, 102);
+            dtpNgay.Location = new Point(149, 181);
             dtpNgay.Name = "dtpNgay";
             dtpNgay.Size = new Size(200, 31);
             dtpNgay.TabIndex = 5;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(383, 20);
+            btnAdd.Location = new Point(381, 96);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(107, 33);
             btnAdd.TabIndex = 6;
@@ -90,7 +92,7 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(383, 60);
+            btnEdit.Location = new Point(381, 139);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(107, 33);
             btnEdit.TabIndex = 7;
@@ -99,7 +101,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(524, 19);
+            btnDelete.Location = new Point(522, 96);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(107, 33);
             btnDelete.TabIndex = 8;
@@ -108,9 +110,9 @@
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(524, 59);
+            btnRefresh.Location = new Point(522, 139);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(107, 34);
+            btnRefresh.Size = new Size(107, 33);
             btnRefresh.TabIndex = 9;
             btnRefresh.Text = "Làm mới";
             btnRefresh.Click += btnRefresh_Click;
@@ -118,15 +120,26 @@
             // dgvPhanCa
             // 
             dgvPhanCa.ColumnHeadersHeight = 34;
-            dgvPhanCa.Location = new Point(30, 160);
+            dgvPhanCa.Location = new Point(28, 240);
             dgvPhanCa.Name = "dgvPhanCa";
             dgvPhanCa.RowHeadersWidth = 62;
-            dgvPhanCa.Size = new Size(601, 300);
+            dgvPhanCa.Size = new Size(601, 342);
             dgvPhanCa.TabIndex = 10;
+            // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(253, 21);
+            title.Name = "title";
+            title.Size = new Size(136, 45);
+            title.TabIndex = 11;
+            title.Text = "Phân ca";
             // 
             // FormPhanCa
             // 
-            ClientSize = new Size(661, 500);
+            ClientSize = new Size(661, 613);
+            Controls.Add(title);
             Controls.Add(lblCongNhan);
             Controls.Add(cboCongNhan);
             Controls.Add(lblCaLam);
@@ -144,6 +157,8 @@
             Load += FormPhanCa_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPhanCa).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
+        private Label title;
     }
 }

@@ -30,60 +30,62 @@
             btnDelete = new Button();
             btnRefresh = new Button();
             dgvCaLam = new DataGridView();
+            title = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCaLam).BeginInit();
             SuspendLayout();
             // 
             // lblMaCa
             // 
-            lblMaCa.Location = new Point(30, 30);
+            lblMaCa.Location = new Point(36, 124);
             lblMaCa.Name = "lblMaCa";
-            lblMaCa.Size = new Size(100, 23);
+            lblMaCa.Size = new Size(83, 23);
             lblMaCa.TabIndex = 0;
             lblMaCa.Text = "Mã ca:";
             // 
             // lblTenCa
             // 
-            lblTenCa.Location = new Point(30, 70);
+            lblTenCa.Location = new Point(36, 164);
             lblTenCa.Name = "lblTenCa";
-            lblTenCa.Size = new Size(100, 23);
+            lblTenCa.Size = new Size(83, 23);
             lblTenCa.TabIndex = 2;
             lblTenCa.Text = "Tên ca:";
             // 
             // lblGioBD
             // 
-            lblGioBD.Location = new Point(372, 30);
+            lblGioBD.Location = new Point(363, 124);
             lblGioBD.Name = "lblGioBD";
-            lblGioBD.Size = new Size(100, 23);
+            lblGioBD.Size = new Size(115, 23);
             lblGioBD.TabIndex = 4;
             lblGioBD.Text = "Giờ bắt đầu:";
             // 
             // lblGioKT
             // 
-            lblGioKT.Location = new Point(372, 70);
+            lblGioKT.Location = new Point(363, 164);
             lblGioKT.Name = "lblGioKT";
-            lblGioKT.Size = new Size(100, 23);
+            lblGioKT.Size = new Size(115, 23);
             lblGioKT.TabIndex = 6;
             lblGioKT.Text = "Giờ kết thúc:";
             // 
             // txtMaCa
             // 
-            txtMaCa.Location = new Point(136, 22);
+            txtMaCa.Location = new Point(125, 116);
             txtMaCa.Name = "txtMaCa";
-            txtMaCa.Size = new Size(150, 31);
+            txtMaCa.Size = new Size(167, 31);
             txtMaCa.TabIndex = 1;
+            txtMaCa.TextChanged += txtMaCa_TextChanged;
             // 
             // txtTenCa
             // 
-            txtTenCa.Location = new Point(136, 62);
+            txtTenCa.Location = new Point(125, 156);
             txtTenCa.Name = "txtTenCa";
-            txtTenCa.Size = new Size(150, 31);
+            txtTenCa.Size = new Size(167, 31);
             txtTenCa.TabIndex = 3;
             txtTenCa.TextChanged += txtTenCa_TextChanged;
             // 
             // dtpGioBD
             // 
             dtpGioBD.Format = DateTimePickerFormat.Time;
-            dtpGioBD.Location = new Point(478, 22);
+            dtpGioBD.Location = new Point(484, 116);
             dtpGioBD.Name = "dtpGioBD";
             dtpGioBD.ShowUpDown = true;
             dtpGioBD.Size = new Size(200, 31);
@@ -92,7 +94,7 @@
             // dtpGioKT
             // 
             dtpGioKT.Format = DateTimePickerFormat.Time;
-            dtpGioKT.Location = new Point(478, 62);
+            dtpGioKT.Location = new Point(484, 156);
             dtpGioKT.Name = "dtpGioKT";
             dtpGioKT.ShowUpDown = true;
             dtpGioKT.Size = new Size(200, 31);
@@ -100,36 +102,36 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(136, 118);
+            btnAdd.Location = new Point(125, 212);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 41);
+            btnAdd.Size = new Size(75, 30);
             btnAdd.TabIndex = 8;
             btnAdd.Text = "Thêm";
             btnAdd.Click += btnAdd_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(424, 118);
+            btnEdit.Location = new Point(430, 212);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 41);
+            btnEdit.Size = new Size(75, 30);
             btnEdit.TabIndex = 9;
             btnEdit.Text = "Sửa";
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(280, 118);
+            btnDelete.Location = new Point(286, 212);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 41);
+            btnDelete.Size = new Size(75, 30);
             btnDelete.TabIndex = 10;
             btnDelete.Text = "Xóa";
             btnDelete.Click += btnDelete_Click;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(558, 118);
+            btnRefresh.Location = new Point(564, 212);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(120, 41);
+            btnRefresh.Size = new Size(120, 30);
             btnRefresh.TabIndex = 11;
             btnRefresh.Text = "Làm mới";
             btnRefresh.Click += btnRefresh_Click;
@@ -137,15 +139,26 @@
             // dgvCaLam
             // 
             dgvCaLam.ColumnHeadersHeight = 34;
-            dgvCaLam.Location = new Point(30, 200);
+            dgvCaLam.Location = new Point(36, 276);
             dgvCaLam.Name = "dgvCaLam";
             dgvCaLam.RowHeadersWidth = 62;
-            dgvCaLam.Size = new Size(648, 250);
+            dgvCaLam.Size = new Size(648, 279);
             dgvCaLam.TabIndex = 12;
+            // 
+            // title
+            // 
+            title.AutoSize = true;
+            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            title.Location = new Point(239, 38);
+            title.Name = "title";
+            title.Size = new Size(239, 45);
+            title.TabIndex = 13;
+            title.Text = "Quản lý ca làm";
             // 
             // FormCaLam
             // 
-            ClientSize = new Size(733, 500);
+            ClientSize = new Size(733, 588);
+            Controls.Add(title);
             Controls.Add(lblMaCa);
             Controls.Add(txtMaCa);
             Controls.Add(lblTenCa);
@@ -167,5 +180,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
+        private Label title;
     }
 }

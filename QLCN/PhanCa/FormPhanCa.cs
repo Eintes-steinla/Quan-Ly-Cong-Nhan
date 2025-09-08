@@ -42,5 +42,9 @@ namespace QLCN
             MessageBox.Show("Đã làm mới danh sách phân ca!");
         }
 
+        private void cboCongNhan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
