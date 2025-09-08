@@ -83,6 +83,16 @@ namespace QLCN.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_countdown_clock_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-countdown-clock-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_defend_family_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-defend-family-32", resourceCulture);
@@ -96,6 +106,16 @@ namespace QLCN.Properties {
         internal static System.Drawing.Bitmap icons8_exit_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-exit-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_hotel_bed_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-hotel-bed-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +166,36 @@ namespace QLCN.Properties {
         internal static System.Drawing.Bitmap icons8_setting_undefined_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-setting-undefined-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_stopwatch_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-stopwatch-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_time_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-time-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_time_321 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-time-321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

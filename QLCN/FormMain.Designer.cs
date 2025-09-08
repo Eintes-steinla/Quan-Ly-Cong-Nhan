@@ -76,36 +76,41 @@
             // 
             // mnuChamCongDropDown
             // 
+            mnuChamCongDropDown.Image = Properties.Resources.icons8_stopwatch_32;
             mnuChamCongDropDown.Name = "mnuChamCongDropDown";
-            mnuChamCongDropDown.Size = new Size(205, 34);
+            mnuChamCongDropDown.Size = new Size(270, 34);
             mnuChamCongDropDown.Text = "Chấm công";
             mnuChamCongDropDown.Click += mnuChamCongDropDown_Click;
             // 
             // mnuNghiPhepDropDown
             // 
+            mnuNghiPhepDropDown.Image = Properties.Resources.icons8_hotel_bed_32;
             mnuNghiPhepDropDown.Name = "mnuNghiPhepDropDown";
-            mnuNghiPhepDropDown.Size = new Size(205, 34);
+            mnuNghiPhepDropDown.Size = new Size(270, 34);
             mnuNghiPhepDropDown.Text = "Nghỉ phép";
             mnuNghiPhepDropDown.Click += mnuNghiPhepDropDown_Click;
             // 
             // mnuTangCaDropDown
             // 
+            mnuTangCaDropDown.Image = Properties.Resources.icons8_countdown_clock_32;
             mnuTangCaDropDown.Name = "mnuTangCaDropDown";
-            mnuTangCaDropDown.Size = new Size(205, 34);
+            mnuTangCaDropDown.Size = new Size(270, 34);
             mnuTangCaDropDown.Text = "Tăng ca";
             mnuTangCaDropDown.Click += mnuTangCaDropDown_Click;
             // 
             // mnuCaLamDropDown
             // 
+            mnuCaLamDropDown.Image = Properties.Resources.icons8_time_32;
             mnuCaLamDropDown.Name = "mnuCaLamDropDown";
-            mnuCaLamDropDown.Size = new Size(205, 34);
+            mnuCaLamDropDown.Size = new Size(270, 34);
             mnuCaLamDropDown.Text = "Ca làm";
             mnuCaLamDropDown.Click += mnuCaLamDropDown_Click;
             // 
             // mnuPhanCaDropDown
             // 
+            mnuPhanCaDropDown.Image = Properties.Resources.icons8_time_321;
             mnuPhanCaDropDown.Name = "mnuPhanCaDropDown";
-            mnuPhanCaDropDown.Size = new Size(205, 34);
+            mnuPhanCaDropDown.Size = new Size(270, 34);
             mnuPhanCaDropDown.Text = "Phân ca";
             mnuPhanCaDropDown.Click += mnuPhanCaDropDown_Click;
             // 
