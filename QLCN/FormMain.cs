@@ -136,5 +136,12 @@ namespace QLCN
             f.MdiParent = this;
             f.Show();
         }
+
+        private void mnuChamCongQR_Click(object sender, EventArgs e)
+        {
+            FormChamCongQR f = new FormChamCongQR();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

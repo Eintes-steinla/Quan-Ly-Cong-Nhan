@@ -7,6 +7,9 @@
     <Compile Update="CaLam\FormCaLam.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ChamCongQR\FormChamCongQR.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ChamCong\FormChamCong.cs">
       <SubType>Form</SubType>
     </Compile>

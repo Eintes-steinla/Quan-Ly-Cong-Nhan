@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AForge.Video" Version="2.2.5" />
+    <PackageReference Include="AForge.Video.DirectShow" Version="2.2.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageReference Include="ZXing.Net" Version="0.16.10" />
   </ItemGroup>
 
   <ItemGroup>

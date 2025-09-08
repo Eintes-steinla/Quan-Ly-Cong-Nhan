@@ -113,6 +113,26 @@ namespace QLCN.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_qr_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-qr-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_qr_321 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-qr-321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_report_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-report-32", resourceCulture);

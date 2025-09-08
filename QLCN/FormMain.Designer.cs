@@ -18,6 +18,7 @@
         {
             menuStrip = new MenuStrip();
             mnuCongNhan = new ToolStripMenuItem();
+            mnuChamCongQR = new ToolStripMenuItem();
             mnuQLCN = new ToolStripMenuItem();
             mnuChamCongDropDown = new ToolStripMenuItem();
             mnuNghiPhepDropDown = new ToolStripMenuItem();
@@ -41,7 +42,7 @@
             // menuStrip
             // 
             menuStrip.ImageScalingSize = new Size(24, 24);
-            menuStrip.Items.AddRange(new ToolStripItem[] { mnuCongNhan, mnuQLCN, mnuChamCong, mnuNghiPhep, mnuTangCa, mnuCaLam, mnuPhanCa, mnuProfile, mnuBaoCao, mnuUser, mnuSettings, mnuNhatKy, mnuExit });
+            menuStrip.Items.AddRange(new ToolStripItem[] { mnuCongNhan, mnuChamCongQR, mnuQLCN, mnuChamCong, mnuNghiPhep, mnuTangCa, mnuCaLam, mnuPhanCa, mnuProfile, mnuBaoCao, mnuUser, mnuSettings, mnuNhatKy, mnuExit });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Size = new Size(1424, 33);
@@ -56,6 +57,14 @@
             mnuCongNhan.Text = "Công nhân";
             mnuCongNhan.ToolTipText = "Công Nhân";
             mnuCongNhan.Click += mnuCongNhan_Click;
+            // 
+            // mnuChamCongQR
+            // 
+            mnuChamCongQR.Image = Properties.Resources.icons8_qr_321;
+            mnuChamCongQR.Name = "mnuChamCongQR";
+            mnuChamCongQR.Size = new Size(173, 29);
+            mnuChamCongQR.Text = "Chấm công QR";
+            mnuChamCongQR.Click += mnuChamCongQR_Click;
             // 
             // mnuQLCN
             // 
@@ -210,5 +219,6 @@
         private ToolStripMenuItem mnuTangCaDropDown;
         private ToolStripMenuItem mnuCaLamDropDown;
         private ToolStripMenuItem mnuPhanCaDropDown;
+        private ToolStripMenuItem mnuChamCongQR;
     }
 }
