@@ -46,7 +46,7 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(170, 90);
+            txtName.Location = new Point(217, 90);
             txtName.Name = "txtName";
             txtName.Size = new Size(318, 31);
             txtName.TabIndex = 1;
@@ -62,7 +62,7 @@
             // cbGender
             // 
             cbGender.Items.AddRange(new object[] { "Nam", "Nữ", "Khác" });
-            cbGender.Location = new Point(170, 130);
+            cbGender.Location = new Point(217, 130);
             cbGender.Name = "cbGender";
             cbGender.Size = new Size(318, 33);
             cbGender.TabIndex = 3;
@@ -78,7 +78,7 @@
             // dtpDob
             // 
             dtpDob.Format = DateTimePickerFormat.Custom;
-            dtpDob.Location = new Point(170, 170);
+            dtpDob.Location = new Point(217, 170);
             dtpDob.Name = "dtpDob";
             dtpDob.Size = new Size(318, 31);
             dtpDob.TabIndex = 5;
@@ -87,13 +87,13 @@
             // 
             lblPhone.Location = new Point(50, 210);
             lblPhone.Name = "lblPhone";
-            lblPhone.Size = new Size(100, 23);
+            lblPhone.Size = new Size(125, 23);
             lblPhone.TabIndex = 6;
             lblPhone.Text = "Số điện thoại:";
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(170, 210);
+            txtPhone.Location = new Point(217, 210);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(318, 31);
             txtPhone.TabIndex = 7;
@@ -108,7 +108,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(170, 250);
+            txtEmail.Location = new Point(217, 250);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(318, 31);
             txtEmail.TabIndex = 9;
@@ -124,14 +124,14 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(170, 290);
+            txtAddress.Location = new Point(217, 290);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(318, 31);
             txtAddress.TabIndex = 11;
             // 
             // txtCCCD
             // 
-            txtCCCD.Location = new Point(170, 330);
+            txtCCCD.Location = new Point(217, 330);
             txtCCCD.Name = "txtCCCD";
             txtCCCD.Size = new Size(318, 31);
             txtCCCD.TabIndex = 13;
@@ -139,7 +139,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(170, 380);
+            btnSave.Location = new Point(217, 380);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 37);
             btnSave.TabIndex = 14;
@@ -148,7 +148,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(413, 380);
+            btnClose.Location = new Point(460, 380);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 37);
             btnClose.TabIndex = 15;
@@ -159,7 +159,7 @@
             // 
             title.AutoSize = true;
             title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            title.Location = new Point(136, 25);
+            title.Location = new Point(170, 24);
             title.Name = "title";
             title.Size = new Size(274, 45);
             title.TabIndex = 16;
@@ -177,7 +177,7 @@
             // 
             // FormProfile
             // 
-            ClientSize = new Size(545, 487);
+            ClientSize = new Size(588, 487);
             Controls.Add(title);
             Controls.Add(lblName);
             Controls.Add(txtName);

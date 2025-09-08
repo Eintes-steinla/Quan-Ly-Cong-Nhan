@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using QLCN.DAL;
 
 namespace QLCN
 {
     public partial class FormLogin : Form
     {
-        //private string connectionString = "Data Source=.;Initial Catalog=QLCN;Integrated Security=True";
-        private string connectionString = @"Server=localhost\SQLEXPRESS;Database=QLCN;Trusted_Connection=True;";
-
         public FormLogin()
         {
             InitializeComponent();
@@ -36,7 +34,7 @@ namespace QLCN
                 string sql = "SELECT COUNT(*) FROM Users WHERE Username=@u AND Password=@p";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@u", username);
-                cmd.Parameters.AddWithValue("@p", password); // ⚠️ demo, nên dùng hash mật khẩu
+                cmd.Parameters.AddWithValue("@p", password); 
 
                 conn.Open();
                 int count = (int)cmd.ExecuteScalar();
