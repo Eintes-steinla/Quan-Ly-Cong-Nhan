@@ -44,13 +44,6 @@ namespace QLCN
             f.Show();
         }
 
-        private void mnuCaLam_Click(object sender, EventArgs e)
-        {
-            FormCaLam f = new FormCaLam();
-            f.MdiParent = this;
-            f.Show();
-        }
-
         private void mnuPhanCa_Click(object sender, EventArgs e)
         {
             FormPhanCa f = new FormPhanCa();
@@ -74,13 +67,6 @@ namespace QLCN
         private void mnuTangCaDropDown_Click(object sender, EventArgs e)
         {
             FormTangCa f = new FormTangCa();
-            f.MdiParent = this;
-            f.Show();
-        }
-
-        private void mnuCaLamDropDown_Click(object sender, EventArgs e)
-        {
-            FormCaLam f = new FormCaLam();
             f.MdiParent = this;
             f.Show();
         }

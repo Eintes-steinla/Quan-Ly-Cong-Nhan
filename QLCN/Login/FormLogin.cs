@@ -20,38 +20,7 @@ namespace QLCN
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text;
-
-            if (username == "" || password == "")
-            {
-                MessageBox.Show("Vui lòng nhập tài khoản và mật khẩu!", "Thông báo");
-                return;
-            }
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string sql = "SELECT COUNT(*) FROM Users WHERE Username=@u AND Password=@p";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@u", username);
-                cmd.Parameters.AddWithValue("@p", password); 
-
-                conn.Open();
-                int count = (int)cmd.ExecuteScalar();
-
-                if (count > 0)
-                {
-                    MessageBox.Show("Đăng nhập thành công!", "QLCN");
-                    this.Hide();
-                    FormMain frm = new FormMain();
-                    frm.ShowDialog();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo");
-                }
-            }
+            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
