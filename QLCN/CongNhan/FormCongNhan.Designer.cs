@@ -1,264 +1,274 @@
-﻿namespace QLCN
+﻿using System.Data;
+using Microsoft.Data.SqlClient;
+using QLCN.DB;
+using ClosedXML.Excel;
+
+namespace QLCN.CongNhan
 {
-    partial class FormCongNhan
+    partial class CongNhan
     {
-        private System.ComponentModel.IContainer components = null;
-        private DataGridView dgvCongNhan;
-        private Label lblMaCN, lblHoTen, lblGioiTinh, lblNgaySinh, lblSDT, lblDiaChi, lblBoPhan;
-        private TextBox txtMaCN, txtHoTen, txtSDT, txtDiaChi, txtBoPhan;
-        private ComboBox cbGioiTinh;
+        private Label? lblHo;
+        private TextBox txtHo;
+        private Label? lblTenDem;
+        private TextBox txtTenDem;
+        private Label? lblTen;
+        private TextBox txtTen;
+        private Label? lblNgaySinh;
         private DateTimePicker dtpNgaySinh;
-        private Button btnAdd, btnEdit, btnDelete, btnRefresh;
+        private Label? lblGioiTinh;
+        private ComboBox cbGioiTinh;
+        private Label? lblSDT;
+        private TextBox txtSDT;
+        private Label? lblCCCD;
+        private TextBox txtCCCD;
+
+        private Button btnAdd;
+        private Button btnEdit;
+        private Button btnDelete;
+        private Button btnRefresh;
+        private Button btnExport;
+        private Panel? panelFilter;
+        private DataGridView dgvWorker;
+        private Label lblMessage;
+        private TextBox txtFilterName;
+        private TextBox txtFilterSDT;
+        private PictureBox pictureBoxRemoveFilter;
+        private ToolTip? toolTip;
+        private DataGridViewTextBoxColumn? dataGridViewColumnSTT;
+        private DataGridViewTextBoxColumn? dataGridViewColumnHoTen;
+        private DataGridViewTextBoxColumn? dataGridViewColumnNgaySinh;
+        private DataGridViewTextBoxColumn? dataGridViewColumnGioiTinh;
+        private DataGridViewTextBoxColumn? dataGridViewColumnSDT;
+        private DataGridViewTextBoxColumn? dataGridViewColumnCCCD;
+        private DataGridViewTextBoxColumn? dataGridViewColumnID;
+        private DataGridViewCheckBoxColumn dataGridViewColumnCheckBox;
+        private System.ComponentModel.Container? components;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) components.Dispose();
+            if (disposing && (components != null))
+                components.Dispose();
             base.Dispose(disposing);
         }
 
+        #region Component Designer generated code
         private void InitializeComponent()
         {
-            dgvCongNhan = new DataGridView();
-            lblMaCN = new Label();
-            lblHoTen = new Label();
-            lblGioiTinh = new Label();
-            lblNgaySinh = new Label();
-            lblSDT = new Label();
-            lblDiaChi = new Label();
-            lblBoPhan = new Label();
-            txtMaCN = new TextBox();
-            txtHoTen = new TextBox();
-            txtSDT = new TextBox();
-            txtDiaChi = new TextBox();
-            txtBoPhan = new TextBox();
-            cbGioiTinh = new ComboBox();
-            dtpNgaySinh = new DateTimePicker();
-            btnAdd = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
-            btnRefresh = new Button();
-            title = new Label();
-            lblCCCD = new Label();
-            txtCCCD = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)dgvCongNhan).BeginInit();
+            components = new();
+            lblMessage = new();
+            btnExport = new();
+            btnDelete = new();
+            btnEdit = new();
+            btnAdd = new();
+            btnRefresh = new();
+            dgvWorker = new();
+            panelFilter = new();
+            txtFilterName = new();
+            txtFilterSDT = new();
+            pictureBoxRemoveFilter = new();
+            toolTip = new(components);
+
+            dataGridViewColumnSTT = new();
+            dataGridViewColumnHoTen = new();
+            dataGridViewColumnNgaySinh = new();
+            dataGridViewColumnGioiTinh = new();
+            dataGridViewColumnSDT = new();
+            dataGridViewColumnCCCD = new();
+            dataGridViewColumnID = new();
+            dataGridViewColumnCheckBox = new();
+
+            lblHo = new();
+            txtHo = new();
+            lblTenDem = new();
+            txtTenDem = new();
+            lblTen = new();
+            txtTen = new();
+            lblNgaySinh = new();
+            dtpNgaySinh = new();
+            lblGioiTinh = new();
+            cbGioiTinh = new();
+            lblSDT = new();
+            txtSDT = new();
+            lblCCCD = new();
+            txtCCCD = new();
+
+            ((System.ComponentModel.ISupportInitialize)dgvWorker).BeginInit();
+            panelFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
             SuspendLayout();
-            // 
-            // dgvCongNhan
-            // 
-            dgvCongNhan.ColumnHeadersHeight = 34;
-            dgvCongNhan.Location = new Point(400, 100);
-            dgvCongNhan.Name = "dgvCongNhan";
-            dgvCongNhan.RowHeadersWidth = 62;
-            dgvCongNhan.Size = new Size(600, 468);
-            dgvCongNhan.TabIndex = 0;
-            // 
-            // lblMaCN
-            // 
-            lblMaCN.Location = new Point(50, 100);
-            lblMaCN.Name = "lblMaCN";
-            lblMaCN.Size = new Size(100, 31);
-            lblMaCN.TabIndex = 1;
-            lblMaCN.Text = "Mã CN:";
-            // 
-            // lblHoTen
-            // 
-            lblHoTen.Location = new Point(50, 150);
-            lblHoTen.Name = "lblHoTen";
-            lblHoTen.Size = new Size(100, 31);
-            lblHoTen.TabIndex = 2;
-            lblHoTen.Text = "Họ tên:";
-            // 
-            // lblGioiTinh
-            // 
-            lblGioiTinh.Location = new Point(50, 200);
-            lblGioiTinh.Name = "lblGioiTinh";
-            lblGioiTinh.Size = new Size(100, 31);
-            lblGioiTinh.TabIndex = 3;
-            lblGioiTinh.Text = "Giới tính:";
-            // 
-            // lblNgaySinh
-            // 
-            lblNgaySinh.Location = new Point(50, 250);
-            lblNgaySinh.Name = "lblNgaySinh";
-            lblNgaySinh.Size = new Size(100, 31);
-            lblNgaySinh.TabIndex = 4;
-            lblNgaySinh.Text = "Ngày sinh:";
-            // 
-            // lblSDT
-            // 
-            lblSDT.Location = new Point(50, 300);
-            lblSDT.Name = "lblSDT";
-            lblSDT.Size = new Size(100, 31);
-            lblSDT.TabIndex = 5;
-            lblSDT.Text = "SĐT:";
-            // 
-            // lblDiaChi
-            // 
-            lblDiaChi.Location = new Point(50, 400);
-            lblDiaChi.Name = "lblDiaChi";
-            lblDiaChi.Size = new Size(100, 31);
-            lblDiaChi.TabIndex = 6;
-            lblDiaChi.Text = "Địa chỉ:";
-            // 
-            // lblBoPhan
-            // 
-            lblBoPhan.Location = new Point(50, 450);
-            lblBoPhan.Name = "lblBoPhan";
-            lblBoPhan.Size = new Size(100, 31);
-            lblBoPhan.TabIndex = 7;
-            lblBoPhan.Text = "Bộ phận:";
-            // 
-            // txtMaCN
-            // 
-            txtMaCN.Location = new Point(150, 100);
-            txtMaCN.Name = "txtMaCN";
-            txtMaCN.Size = new Size(200, 31);
-            txtMaCN.TabIndex = 8;
-            // 
-            // txtHoTen
-            // 
-            txtHoTen.Location = new Point(150, 150);
-            txtHoTen.Name = "txtHoTen";
-            txtHoTen.Size = new Size(200, 31);
-            txtHoTen.TabIndex = 9;
-            // 
-            // txtSDT
-            // 
-            txtSDT.Location = new Point(150, 300);
-            txtSDT.Name = "txtSDT";
-            txtSDT.Size = new Size(200, 31);
-            txtSDT.TabIndex = 12;
-            txtSDT.TextChanged += txtSDT_TextChanged;
-            // 
-            // txtDiaChi
-            // 
-            txtDiaChi.Location = new Point(150, 400);
-            txtDiaChi.Name = "txtDiaChi";
-            txtDiaChi.Size = new Size(200, 31);
-            txtDiaChi.TabIndex = 13;
-            // 
-            // txtBoPhan
-            // 
-            txtBoPhan.Location = new Point(150, 450);
-            txtBoPhan.Name = "txtBoPhan";
-            txtBoPhan.Size = new Size(200, 31);
-            txtBoPhan.TabIndex = 14;
-            // 
-            // cbGioiTinh
-            // 
-            cbGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
-            cbGioiTinh.Location = new Point(150, 200);
-            cbGioiTinh.Name = "cbGioiTinh";
-            cbGioiTinh.Size = new Size(200, 33);
-            cbGioiTinh.TabIndex = 10;
-            // 
-            // dtpNgaySinh
-            // 
-            dtpNgaySinh.Format = DateTimePickerFormat.Custom;
-            dtpNgaySinh.Location = new Point(150, 250);
-            dtpNgaySinh.Name = "dtpNgaySinh";
-            dtpNgaySinh.Size = new Size(200, 31);
-            dtpNgaySinh.TabIndex = 11;
-            dtpNgaySinh.ValueChanged += dtpNgaySinh_ValueChanged;
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(150, 500);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(100, 31);
-            btnAdd.TabIndex = 15;
+
+
+            // lblMessage
+            lblMessage.AutoSize = true;
+            lblMessage.ForeColor = Color.Green;
+            lblMessage.Location = new(669, 20);
+            lblMessage.MaximumSize = new(500, 0);
+            lblMessage.TextAlign = ContentAlignment.MiddleLeft;
+
+            // Nút Xuất Excel
+            btnExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnExport.Location = new(1043, 744);
+            btnExport.Size = new(151, 36);
+            btnExport.Text = "Xuất Excel";
+
+            // CRUD Buttons
+            btnAdd.Location = new(32, 175);
+            btnAdd.Size = new(160, 36);
             btnAdd.Text = "Thêm";
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // btnEdit
-            // 
-            btnEdit.Location = new Point(250, 500);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(100, 31);
-            btnEdit.TabIndex = 16;
+
+            btnEdit.Location = new(192, 175);
+            btnEdit.Size = new(160, 36);
             btnEdit.Text = "Sửa";
-            btnEdit.Click += btnEdit_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(150, 537);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 31);
-            btnDelete.TabIndex = 17;
+
+            btnDelete.Location = new(352, 175);
+            btnDelete.Size = new(160, 36);
             btnDelete.Text = "Xóa";
-            btnDelete.Click += btnDelete_Click;
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(250, 537);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(100, 31);
-            btnRefresh.TabIndex = 18;
+
+            btnRefresh.Location = new(513, 175);
+            btnRefresh.Size = new(130, 36);
             btnRefresh.Text = "Làm mới";
-            btnRefresh.Click += btnRefresh_Click;
-            // 
-            // title
-            // 
-            title.AutoSize = true;
-            title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            title.Location = new Point(370, 30);
-            title.Name = "title";
-            title.Size = new Size(317, 45);
-            title.TabIndex = 19;
-            title.Text = "Quản Lý Công Nhân";
-            title.Click += label1_Click;
-            // 
-            // lblCCCD
-            // 
-            lblCCCD.AutoSize = true;
-            lblCCCD.Location = new Point(50, 350);
-            lblCCCD.Name = "lblCCCD";
-            lblCCCD.Size = new Size(88, 25);
-            lblCCCD.TabIndex = 20;
-            lblCCCD.Text = "Số CCCD:";
-            // 
-            // txtCCCD
-            // 
-            txtCCCD.Location = new Point(150, 350);
-            txtCCCD.Name = "txtCCCD";
-            txtCCCD.Size = new Size(200, 31);
-            txtCCCD.TabIndex = 21;
-            // 
-            // FormCongNhan
-            // 
-            ClientSize = new Size(1061, 613);
-            Controls.Add(txtCCCD);
-            Controls.Add(lblCCCD);
-            Controls.Add(title);
-            Controls.Add(dgvCongNhan);
-            Controls.Add(lblMaCN);
-            Controls.Add(lblHoTen);
-            Controls.Add(lblGioiTinh);
-            Controls.Add(lblNgaySinh);
-            Controls.Add(lblSDT);
-            Controls.Add(lblDiaChi);
-            Controls.Add(lblBoPhan);
-            Controls.Add(txtMaCN);
-            Controls.Add(txtHoTen);
-            Controls.Add(cbGioiTinh);
-            Controls.Add(dtpNgaySinh);
-            Controls.Add(txtSDT);
-            Controls.Add(txtDiaChi);
-            Controls.Add(txtBoPhan);
-            Controls.Add(btnAdd);
-            Controls.Add(btnEdit);
+            toolTip.SetToolTip(btnRefresh, "Xóa tất cả các ô nhập dữ liệu");
+
+            // TextBox nhập liệu
+            lblHo.Text = "Họ:";
+            lblHo.Location = new(31, 25);
+            txtHo.Location = new(195, 20);
+            txtHo.Size = new(200, 33);
+
+            lblTenDem.Text = "Tên đệm:";
+            lblTenDem.Location = new(420, 25);
+            txtTenDem.Location = new(520, 20);
+            txtTenDem.Size = new(200, 33);
+
+            lblTen.Text = "Tên:";
+            lblTen.Location = new(31, 75);
+            txtTen.Location = new(195, 70);
+            txtTen.Size = new(200, 33);
+
+            lblNgaySinh.Text = "Ngày sinh:";
+            lblNgaySinh.Location = new(420, 75);
+            dtpNgaySinh.Location = new(520, 70);
+            dtpNgaySinh.Format = DateTimePickerFormat.Short;
+
+            lblGioiTinh.Text = "Giới tính:";
+            lblGioiTinh.Location = new(31, 125);
+            cbGioiTinh.Location = new(195, 120);
+            cbGioiTinh.Size = new(150, 33);
+            cbGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
+
+            lblSDT.Text = "Số điện thoại:";
+            lblSDT.Location = new(420, 125);
+            txtSDT.Location = new(550, 120);
+            txtSDT.Size = new(170, 33);
+
+            lblCCCD.Text = "CCCD:";
+            lblCCCD.Location = new(740, 125);
+            txtCCCD.Location = new(810, 120);
+            txtCCCD.Size = new(200, 33);
+
+            // DataGridView
+            dgvWorker.AllowUserToAddRows = false;
+            dgvWorker.AllowUserToDeleteRows = false;
+            dgvWorker.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvWorker.BackgroundColor = Color.White;
+            dgvWorker.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvWorker.Columns.AddRange(new DataGridViewColumn[]
+            {
+                dataGridViewColumnSTT, dataGridViewColumnHoTen, dataGridViewColumnNgaySinh,
+                dataGridViewColumnGioiTinh, dataGridViewColumnSDT, dataGridViewColumnCCCD,
+                dataGridViewColumnID, dataGridViewColumnCheckBox
+            });
+            dgvWorker.Location = new(31, 275);
+            dgvWorker.ReadOnly = true;
+            dgvWorker.Size = new(1163, 449);
+
+            // Định nghĩa cột
+            dataGridViewColumnSTT.HeaderText = "STT";
+            dataGridViewColumnSTT.Width = 80;
+
+            dataGridViewColumnHoTen.HeaderText = "Họ và tên";
+            dataGridViewColumnHoTen.MinimumWidth = 250;
+
+            dataGridViewColumnNgaySinh.HeaderText = "Ngày sinh";
+            dataGridViewColumnNgaySinh.MinimumWidth = 150;
+
+            dataGridViewColumnGioiTinh.HeaderText = "Giới tính";
+            dataGridViewColumnGioiTinh.MinimumWidth = 100;
+
+            dataGridViewColumnSDT.HeaderText = "SĐT";
+            dataGridViewColumnSDT.MinimumWidth = 150;
+
+            dataGridViewColumnCCCD.HeaderText = "CCCD";
+            dataGridViewColumnCCCD.MinimumWidth = 150;
+
+            dataGridViewColumnID.Visible = false;
+
+            dataGridViewColumnCheckBox.HeaderText = "✅";
+            dataGridViewColumnCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            // Panel Filter
+            panelFilter.BackColor = Color.WhiteSmoke;
+            panelFilter.BorderStyle = BorderStyle.FixedSingle;
+            panelFilter.Controls.Add(txtFilterName);
+            panelFilter.Controls.Add(txtFilterSDT);
+            panelFilter.Controls.Add(pictureBoxRemoveFilter);
+            panelFilter.Location = new(31, 230);
+            panelFilter.Size = new(1163, 45);
+
+            txtFilterName.Font = new("Times New Roman", 13.2F);
+            txtFilterName.Location = new(130, 5);
+            txtFilterName.PlaceholderText = "Tìm theo tên...";
+            txtFilterName.Size = new(405, 33);
+
+            txtFilterSDT.Font = new("Times New Roman", 13.2F);
+            txtFilterSDT.Location = new(550, 5);
+            txtFilterSDT.PlaceholderText = "Tìm theo SĐT...";
+            txtFilterSDT.Size = new(250, 33);
+
+            pictureBoxRemoveFilter.Cursor = Cursors.Hand;
+            pictureBoxRemoveFilter.Image = Properties.Resources.images;
+            pictureBoxRemoveFilter.Location = new(0, 5);
+            pictureBoxRemoveFilter.Size = new(33, 33);
+            pictureBoxRemoveFilter.SizeMode = PictureBoxSizeMode.StretchImage;
+            toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
+
+            // CongNhan UserControl
+            AutoScaleDimensions = new(12F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblMessage);
+            Controls.Add(btnExport);
             Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
+            Controls.Add(btnAdd);
             Controls.Add(btnRefresh);
-            Name = "FormCongNhan";
-            Dock = DockStyle.Fill;
-            Text = "Quản lý Công nhân";  
-            Load += FormCongNhan_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvCongNhan).EndInit();
+            Controls.Add(lblHo);
+            Controls.Add(txtHo);
+            Controls.Add(lblTenDem);
+            Controls.Add(txtTenDem);
+            Controls.Add(lblTen);
+            Controls.Add(txtTen);
+            Controls.Add(lblNgaySinh);
+            Controls.Add(dtpNgaySinh);
+            Controls.Add(lblGioiTinh);
+            Controls.Add(cbGioiTinh);
+            Controls.Add(lblSDT);
+            Controls.Add(txtSDT);
+            Controls.Add(lblCCCD);
+            Controls.Add(txtCCCD);
+            Controls.Add(dgvWorker);
+            Controls.Add(panelFilter);
+
+            Font = new("Times New Roman", 13.2F);
+            Name = "CongNhan";
+            Size = new(1228, 780);
+
+            ((System.ComponentModel.ISupportInitialize)dgvWorker).EndInit();
+            panelFilter.ResumeLayout(false);
+            panelFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
-        private Label title;
-        private Label lblCCCD;
-        private TextBox txtCCCD;
+        #endregion
     }
 }
