@@ -7,7 +7,7 @@ namespace QLCN.DB
     public class DatabaseHelper
     {
         private static string connectionString =
-            @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyCongTrinh;Integrated Security=True; Trust Server Certificate=True";
+            @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyCongNhan;Integrated Security=True; Trust Server Certificate=True";
 
         public static SqlConnection GetConnection()
         {

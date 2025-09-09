@@ -4,9 +4,6 @@
     <Compile Update="BaoCao\FormBaoCao.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ChamCongQR\FormChamCongQR.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="ChamCong\FormChamCong.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -10,6 +10,7 @@ namespace QLCN.CongTrinh
 {
     public partial class CongTrinh : UserControl
     {
+        string query;
         public CongTrinh()
         {
             InitializeComponent();
@@ -71,7 +72,7 @@ namespace QLCN.CongTrinh
                 // Lấy kết nối từ DatabaseHelper
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                string query = "insert into CongTrinh (MaCT, TenCT, TinhTrang, NgayBatDau, NgayKetThuc, DuToan, ChuDauTu, GhiChu) values (@MaCT, @TenCT, @TinhTrang, @NgayBatDau, @NgayKetThuc, @DuToan, @ChuDauTu, @GhiChu)";
+                query = "insert into CongTrinh (MaCT, TenCT, TinhTrang, NgayBatDau, NgayKetThuc, DuToan, ChuDauTu, GhiChu) values (@MaCT, @TenCT, @TinhTrang, @NgayBatDau, @NgayKetThuc, @DuToan, @ChuDauTu, @GhiChu)";
 
                 using SqlCommand command = new(query, connection);
 
@@ -90,6 +91,11 @@ namespace QLCN.CongTrinh
                 command.Parameters.AddWithValue("@GhiChu", txtGhiChu.Text);
                 command.ExecuteNonQuery();
 
+                query = @"insert into DiaChiCongTrinh (MaCT, MaXP, MoTaChiTiet) values (@MaCT, @MaXP, @MoTaChiTiet)";
+                using SqlCommand command2 = new(query, connection);
+                command2.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
+                command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
+                command2.Parameters.AddWithValue("@MoTaChiTiet", txtMoTaChiTiet.Text);
 
                 // Hiển thị thông báo thành công
                 lblMessage.Text = "Đã thêm công trình thành công!";
@@ -128,7 +134,7 @@ namespace QLCN.CongTrinh
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                string query = @"select ct.mact, tenct, MoTaChiTiet + ', ' + TenXP + ', ' + TenQH + ', ' + TenTinh as diachi , tinhtrang, ngaybatdau, ngayketthuc, dutoan, chudautu, ct.ghichu
+                query = @"select ct.mact, tenct, MoTaChiTiet + ', ' + TenXP + ', ' + TenQH + ', ' + TenTinh as diachi , tinhtrang, ngaybatdau, ngayketthuc, dutoan, chudautu, ct.ghichu
 from congtrinh ct
 join diachicongtrinh dt on ct.mact = dt.mact
 join XaPhuong xp on xp.MaXP = dt.MaXP
@@ -170,6 +176,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
             }
+
+            LoadcboTinh();
 
         }
 
@@ -239,12 +247,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             btnEdit.Click += btnEdit_Click;
             Load += ConstructionUserControl_Load;
 
-            // Thêm dữ liệu mẫu cho ComboBox
-            LoadComboBoxData();
-
-            // Thêm sự kiện cho ComboBox
-            cboTinh.SelectedIndexChanged += CboTinh_SelectedIndexChanged;
-            cboQuanHuyen.SelectedIndexChanged += CboQuanHuyen_SelectedIndexChanged;
 
             // Thêm sự kiện TextChanged cho các ô tìm kiếm
             txtFilterName.TextChanged += TxtFilter_TextChanged;
@@ -369,7 +371,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
 
-                string query = "update CongTrinh set Name = @Name, Location = @Location, Year = @Year where ID = @ID";
+                query = "update CongTrinh set Name = @Name, Location = @Location, Year = @Year where ID = @ID";
 
                 using SqlCommand command = new(query, connection);
 
@@ -684,82 +686,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 dgvConstruction.ClearSelection();
             // dgvConstruction.CurrentCell = null;
         }
-        private void LoadComboBoxData()
-        {
-            // Thêm dữ liệu mẫu cho ComboBox Tỉnh/TP
-            cboTinh.Items.AddRange(new string[] {
-                "Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ",
-                "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu",
-                "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước",
-                "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông",
-                "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang",
-                "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình",
-                "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu",
-                "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định",
-                "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên",
-                "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị",
-                "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên",
-                "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang",
-                "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"
-            });
-        }
 
-        private void CboTinh_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            // Xóa dữ liệu cũ của quận/huyện và xã/phường
-            cboQuanHuyen.Items.Clear();
-            cboXaPhuong.Items.Clear();
-
-            // Thêm dữ liệu mẫu cho quận/huyện dựa trên tỉnh được chọn
-            if (cboTinh.SelectedIndex >= 0 && cboTinh.SelectedItem != null)
-            {
-                string selectedTinh = cboTinh.SelectedItem.ToString() ?? "";
-                switch (selectedTinh)
-                {
-                    case "Hà Nội":
-                        cboQuanHuyen.Items.AddRange(new string[] {
-                            "Quận Ba Đình", "Quận Hoàn Kiếm", "Quận Tây Hồ", "Quận Long Biên",
-                            "Quận Cầu Giấy", "Quận Đống Đa", "Quận Hai Bà Trưng", "Quận Hoàng Mai",
-                            "Quận Thanh Xuân", "Huyện Sóc Sơn", "Huyện Đông Anh", "Huyện Gia Lâm",
-                            "Quận Nam Từ Liêm", "Huyện Thanh Trì", "Quận Bắc Từ Liêm", "Huyện Mê Linh",
-                            "Quận Hà Đông", "Huyện Hương Sơn", "Huyện Ba Vì", "Huyện Phúc Thọ",
-                            "Huyện Đan Phượng", "Huyện Hoài Đức", "Huyện Quốc Oai", "Huyện Thạch Thất",
-                            "Huyện Chương Mỹ", "Huyện Thanh Oai", "Huyện Thường Tín", "Huyện Phú Xuyên",
-                            "Huyện Ứng Hòa", "Huyện Mỹ Đức"
-                        });
-                        break;
-                    case "TP. Hồ Chí Minh":
-                        cboQuanHuyen.Items.AddRange(new string[] {
-                            "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6",
-                            "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12",
-                            "Quận Thủ Đức", "Quận Gò Vấp", "Quận Bình Thạnh", "Quận Tân Bình",
-                            "Quận Tân Phú", "Quận Phú Nhuận", "Huyện Củ Chi", "Huyện Hóc Môn",
-                            "Huyện Bình Chánh", "Huyện Nhà Bè", "Huyện Cần Giờ"
-                        });
-                        break;
-                    default:
-                        cboQuanHuyen.Items.AddRange(new string[] {
-                            "Quận/Huyện 1", "Quận/Huyện 2", "Quận/Huyện 3", "Quận/Huyện 4", "Quận/Huyện 5"
-                        });
-                        break;
-                }
-            }
-        }
-
-        private void CboQuanHuyen_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            // Xóa dữ liệu cũ của xã/phường
-            cboXaPhuong.Items.Clear();
-
-            // Thêm dữ liệu mẫu cho xã/phường
-            if (cboQuanHuyen.SelectedIndex >= 0)
-            {
-                cboXaPhuong.Items.AddRange(new string[] {
-                    "Xã/Phường 1", "Xã/Phường 2", "Xã/Phường 3", "Xã/Phường 4", "Xã/Phường 5",
-                    "Xã/Phường 6", "Xã/Phường 7", "Xã/Phường 8", "Xã/Phường 9", "Xã/Phường 10"
-                });
-            }
-        }
 
         private void btnExport_Click(object? sender, EventArgs e)
         {
@@ -849,19 +776,91 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
         }
 
-        private void lblMessage_Click(object sender, EventArgs e)
-        {
 
+
+        private void cboTinh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTinh.SelectedValue != null && int.TryParse(cboTinh.SelectedValue.ToString(), out int maTinh))
+                LoadcboHuyen(maTinh);
         }
 
-        private void cboQuanHuyen_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void LoadcboHuyen(int maTinh)
         {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    query = "SELECT MaQH, TenQH FROM QuanHuyen WHERE MaTinh = @MaTinh";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@MaTinh", SqlDbType.Int).Value = maTinh;
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
+                    cboQuanHuyen.DataSource = dt;
+                    cboQuanHuyen.DisplayMember = "TenQH";
+                    cboQuanHuyen.ValueMember = "MaQH";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi khi tải dữ liệu: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
         }
 
-        private void CongTrinh_Load(object sender, EventArgs e)
+        private void LoadcboTinh()
         {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    query = "SELECT MaTinh, TenTinh FROM Tinh";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    cboTinh.DataSource = dt;
+                    cboTinh.DisplayMember = "TenTinh";  // cột hiển thị
+                    cboTinh.ValueMember = "MaTinh";     // cột giá trị 
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi khi tải dữ liệu: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+        }
 
+        private void LoadcboXa(int maHuyen)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    string query = "SELECT MaXP, TenXP FROM XaPhuong WHERE MaQH = @MaHuyen";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@MaHuyen", SqlDbType.Int).Value = maHuyen;
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    cboXaPhuong.DataSource = dt;
+                    cboXaPhuong.DisplayMember = "TenXP";
+                    cboXaPhuong.ValueMember = "MaXP";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi load Xã: " + ex.Message);
+            }
+        }
+
+        private void cboQuanHuyen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboQuanHuyen.SelectedValue != null && int.TryParse(cboQuanHuyen.SelectedValue.ToString(), out int maHuyen))
+                LoadcboXa(maHuyen);
         }
     }
 }
