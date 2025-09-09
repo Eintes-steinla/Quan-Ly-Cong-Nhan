@@ -1,58 +1,26 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace QLCN
+﻿namespace QLCN.CongNhan
 {
-    public partial class FormCongNhan : UserControl
+    public partial class CongNhan : UserControl
     {
-        public FormCongNhan()
+        public CongNhan()
         {
             InitializeComponent();
         }
 
-        private void FormCongNhan_Load(object sender, EventArgs e)
-        {
-            // TODO: Load dữ liệu từ DB vào DataGridView
-            this.Dock = DockStyle.Fill;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            // TODO: Code thêm công nhân
-            MessageBox.Show("Đã thêm công nhân mới!");
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            // TODO: Code sửa công nhân
-            MessageBox.Show("Đã cập nhật thông tin công nhân!");
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            // TODO: Code xóa công nhân
-            MessageBox.Show("Đã xóa công nhân!");
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            // TODO: Refresh dữ liệu
-            MessageBox.Show("Làm mới danh sách!");
-        }
-
-        private void dtpNgaySinh_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtSDT_TextChanged(object sender, EventArgs e)
         {
-
+            // Ví dụ: kiểm tra chỉ cho nhập số
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtSDT.Text, "^[0-9]*$"))
+            {
+                lblMessage.Text = "Chỉ được nhập số!";
+                lblMessage.ForeColor = Color.Red;
+            }
+            else
+            {
+                lblMessage.Text = "";
+            }
         }
+
+
     }
 }
