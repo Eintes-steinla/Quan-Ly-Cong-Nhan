@@ -37,7 +37,6 @@ namespace QLCN.CongTrinh
         private Button btnEdit;
         private Button btnDelete;
         private Button btnRefresh;
-        private Button btnExport;
         private Panel panelFilter;
         private DataGridView dgvConstruction;
         private Label lblMessage;
@@ -79,7 +78,6 @@ namespace QLCN.CongTrinh
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CongTrinh));
             lblMessage = new Label();
-            btnExport = new Button();
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
@@ -116,286 +114,285 @@ namespace QLCN.CongTrinh
             txtFilterLocation = new TextBox();
             pictureBoxRemoveFilter = new PictureBox();
             toolTip = new ToolTip(components);
+            panel1 = new Panel();
+            panel2 = new Panel();
+            btnExport = new Button();
+            panel3 = new Panel();
+            panel4 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // lblMessage
             // 
-            lblMessage.AutoSize = true;
             lblMessage.ForeColor = Color.Green;
-            lblMessage.Location = new Point(669, 20);
+            lblMessage.Location = new Point(50, 10);
             lblMessage.Margin = new Padding(4, 0, 4, 0);
-            lblMessage.MaximumSize = new Size(500, 0);
+            lblMessage.MaximumSize = new Size(1800, 30);
             lblMessage.Name = "lblMessage";
-            lblMessage.Size = new Size(0, 25);
+            lblMessage.Size = new Size(1800, 30);
             lblMessage.TabIndex = 0;
-            lblMessage.TextAlign = ContentAlignment.MiddleLeft;
             lblMessage.Text = "test";
-            // 
-            // btnExport
-            // 
-            btnExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnExport.Location = new Point(1043, 744);
-            btnExport.Margin = new Padding(4, 5, 4, 5);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(151, 36);
-            btnExport.TabIndex = 11;
-            btnExport.Text = "Xuất Excel";
-            btnExport.UseVisualStyleBackColor = true;
+            lblMessage.TextAlign = ContentAlignment.MiddleLeft;
+            lblMessage.Click += lblMessage_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(384, 734);
+            btnDelete.Location = new Point(550, 23);
             btnDelete.Margin = new Padding(4, 5, 4, 5);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(160, 36);
+            btnDelete.Size = new Size(150, 50);
             btnDelete.TabIndex = 17;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(216, 744);
+            btnEdit.Location = new Point(300, 23);
             btnEdit.Margin = new Padding(4, 5, 4, 5);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(160, 36);
+            btnEdit.Size = new Size(150, 50);
             btnEdit.TabIndex = 16;
             btnEdit.Text = "Sửa";
             btnEdit.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(32, 763);
+            btnAdd.Location = new Point(50, 23);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(160, 36);
+            btnAdd.Size = new Size(150, 50);
             btnAdd.TabIndex = 15;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
             // 
             // txtMaCT
             // 
-            txtMaCT.Location = new Point(195, 170);
+            txtMaCT.Location = new Point(300, 23);
             txtMaCT.Margin = new Padding(4, 5, 4, 5);
             txtMaCT.Name = "txtMaCT";
-            txtMaCT.Size = new Size(223, 33);
+            txtMaCT.Size = new Size(300, 38);
             txtMaCT.TabIndex = 3;
             // 
             // lblMaCT
             // 
             lblMaCT.AutoSize = true;
-            lblMaCT.Location = new Point(31, 175);
+            lblMaCT.Location = new Point(50, 23);
             lblMaCT.Margin = new Padding(4, 0, 4, 0);
             lblMaCT.Name = "lblMaCT";
-            lblMaCT.Size = new Size(139, 25);
+            lblMaCT.Size = new Size(174, 31);
             lblMaCT.TabIndex = 1;
             lblMaCT.Text = "Mã công trình:";
             // 
             // txtTenCT
             // 
-            txtTenCT.Location = new Point(195, 220);
+            txtTenCT.Location = new Point(300, 73);
             txtTenCT.Margin = new Padding(4, 5, 4, 5);
             txtTenCT.Name = "txtTenCT";
-            txtTenCT.Size = new Size(448, 33);
+            txtTenCT.Size = new Size(300, 38);
             txtTenCT.TabIndex = 4;
             // 
             // lblTenCT
             // 
             lblTenCT.AutoSize = true;
-            lblTenCT.Location = new Point(31, 225);
+            lblTenCT.Location = new Point(50, 73);
             lblTenCT.Margin = new Padding(4, 0, 4, 0);
             lblTenCT.Name = "lblTenCT";
-            lblTenCT.Size = new Size(144, 25);
+            lblTenCT.Size = new Size(180, 31);
             lblTenCT.TabIndex = 2;
             lblTenCT.Text = "Tên công trình:";
             // 
             // txtTinhTrang
             // 
-            txtTinhTrang.Location = new Point(195, 270);
+            txtTinhTrang.Location = new Point(300, 123);
             txtTinhTrang.Margin = new Padding(4, 5, 4, 5);
             txtTinhTrang.Name = "txtTinhTrang";
-            txtTinhTrang.Size = new Size(223, 33);
+            txtTinhTrang.Size = new Size(300, 38);
             txtTinhTrang.TabIndex = 5;
             // 
             // lblTinhTrang
             // 
             lblTinhTrang.AutoSize = true;
-            lblTinhTrang.Location = new Point(31, 275);
+            lblTinhTrang.Location = new Point(50, 123);
             lblTinhTrang.Margin = new Padding(4, 0, 4, 0);
             lblTinhTrang.Name = "lblTinhTrang";
-            lblTinhTrang.Size = new Size(107, 25);
+            lblTinhTrang.Size = new Size(133, 31);
             lblTinhTrang.TabIndex = 3;
             lblTinhTrang.Text = "Tình trạng:";
             // 
             // dtpNgayBatDau
             // 
             dtpNgayBatDau.Format = DateTimePickerFormat.Short;
-            dtpNgayBatDau.Location = new Point(195, 320);
+            dtpNgayBatDau.Location = new Point(1550, 23);
             dtpNgayBatDau.Margin = new Padding(4, 5, 4, 5);
             dtpNgayBatDau.Name = "dtpNgayBatDau";
-            dtpNgayBatDau.Size = new Size(223, 33);
+            dtpNgayBatDau.Size = new Size(300, 38);
             dtpNgayBatDau.TabIndex = 6;
             // 
             // lblNgayBatDau
             // 
             lblNgayBatDau.AutoSize = true;
-            lblNgayBatDau.Location = new Point(31, 325);
+            lblNgayBatDau.Location = new Point(1300, 23);
             lblNgayBatDau.Margin = new Padding(4, 0, 4, 0);
             lblNgayBatDau.Name = "lblNgayBatDau";
-            lblNgayBatDau.Size = new Size(136, 25);
+            lblNgayBatDau.Size = new Size(164, 31);
             lblNgayBatDau.TabIndex = 4;
             lblNgayBatDau.Text = "Ngày bắt đầu:";
             // 
             // dtpNgayKetThuc
             // 
             dtpNgayKetThuc.Format = DateTimePickerFormat.Short;
-            dtpNgayKetThuc.Location = new Point(195, 370);
+            dtpNgayKetThuc.Location = new Point(1550, 73);
             dtpNgayKetThuc.Margin = new Padding(4, 5, 4, 5);
             dtpNgayKetThuc.Name = "dtpNgayKetThuc";
-            dtpNgayKetThuc.Size = new Size(223, 33);
+            dtpNgayKetThuc.Size = new Size(300, 38);
             dtpNgayKetThuc.TabIndex = 7;
             // 
             // lblNgayKetThuc
             // 
             lblNgayKetThuc.AutoSize = true;
-            lblNgayKetThuc.Location = new Point(31, 375);
+            lblNgayKetThuc.Location = new Point(1300, 73);
             lblNgayKetThuc.Margin = new Padding(4, 0, 4, 0);
             lblNgayKetThuc.Name = "lblNgayKetThuc";
-            lblNgayKetThuc.Size = new Size(141, 25);
+            lblNgayKetThuc.Size = new Size(171, 31);
             lblNgayKetThuc.TabIndex = 5;
             lblNgayKetThuc.Text = "Ngày kết thúc:";
             // 
             // txtDuToan
             // 
-            txtDuToan.Location = new Point(195, 420);
+            txtDuToan.Location = new Point(1550, 123);
             txtDuToan.Margin = new Padding(4, 5, 4, 5);
             txtDuToan.Name = "txtDuToan";
-            txtDuToan.Size = new Size(223, 33);
+            txtDuToan.Size = new Size(300, 38);
             txtDuToan.TabIndex = 8;
             // 
             // lblDuToan
             // 
             lblDuToan.AutoSize = true;
-            lblDuToan.Location = new Point(31, 425);
+            lblDuToan.Location = new Point(1300, 123);
             lblDuToan.Margin = new Padding(4, 0, 4, 0);
             lblDuToan.Name = "lblDuToan";
-            lblDuToan.Size = new Size(89, 25);
+            lblDuToan.Size = new Size(109, 31);
             lblDuToan.TabIndex = 6;
             lblDuToan.Text = "Dự toán:";
             // 
             // txtChuDauTu
             // 
-            txtChuDauTu.Location = new Point(195, 470);
+            txtChuDauTu.Location = new Point(300, 173);
             txtChuDauTu.Margin = new Padding(4, 5, 4, 5);
             txtChuDauTu.Name = "txtChuDauTu";
-            txtChuDauTu.Size = new Size(448, 33);
+            txtChuDauTu.Size = new Size(300, 38);
             txtChuDauTu.TabIndex = 9;
             // 
             // lblChuDauTu
             // 
             lblChuDauTu.AutoSize = true;
-            lblChuDauTu.Location = new Point(31, 475);
+            lblChuDauTu.Location = new Point(50, 173);
             lblChuDauTu.Margin = new Padding(4, 0, 4, 0);
             lblChuDauTu.Name = "lblChuDauTu";
-            lblChuDauTu.Size = new Size(116, 25);
+            lblChuDauTu.Size = new Size(143, 31);
             lblChuDauTu.TabIndex = 7;
             lblChuDauTu.Text = "Chủ đầu tư:";
             // 
             // txtGhiChu
             // 
-            txtGhiChu.Location = new Point(195, 520);
+            txtGhiChu.Location = new Point(1550, 173);
             txtGhiChu.Margin = new Padding(4, 5, 4, 5);
             txtGhiChu.Name = "txtGhiChu";
-            txtGhiChu.Size = new Size(448, 33);
+            txtGhiChu.Size = new Size(300, 38);
             txtGhiChu.TabIndex = 10;
             // 
             // lblGhiChu
             // 
             lblGhiChu.AutoSize = true;
-            lblGhiChu.Location = new Point(31, 525);
+            lblGhiChu.Location = new Point(1300, 173);
             lblGhiChu.Margin = new Padding(4, 0, 4, 0);
             lblGhiChu.Name = "lblGhiChu";
-            lblGhiChu.Size = new Size(87, 25);
+            lblGhiChu.Size = new Size(107, 31);
             lblGhiChu.TabIndex = 8;
             lblGhiChu.Text = "Ghi chú:";
             // 
             // cboTinh
             // 
             cboTinh.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboTinh.Location = new Point(195, 570);
+            cboTinh.Location = new Point(900, 23);
             cboTinh.Margin = new Padding(4, 5, 4, 5);
             cboTinh.Name = "cboTinh";
-            cboTinh.Size = new Size(223, 33);
+            cboTinh.Size = new Size(300, 37);
             cboTinh.TabIndex = 11;
             // 
             // lblTinh
             // 
             lblTinh.AutoSize = true;
-            lblTinh.Location = new Point(31, 575);
+            lblTinh.Location = new Point(700, 23);
             lblTinh.Margin = new Padding(4, 0, 4, 0);
             lblTinh.Name = "lblTinh";
-            lblTinh.Size = new Size(90, 25);
+            lblTinh.Size = new Size(110, 31);
             lblTinh.TabIndex = 9;
             lblTinh.Text = "Tỉnh/TP:";
             // 
             // cboQuanHuyen
             // 
             cboQuanHuyen.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboQuanHuyen.Location = new Point(195, 620);
+            cboQuanHuyen.Location = new Point(900, 73);
             cboQuanHuyen.Margin = new Padding(4, 5, 4, 5);
             cboQuanHuyen.Name = "cboQuanHuyen";
-            cboQuanHuyen.Size = new Size(223, 33);
+            cboQuanHuyen.Size = new Size(300, 37);
             cboQuanHuyen.TabIndex = 12;
+            cboQuanHuyen.SelectedIndexChanged += cboQuanHuyen_SelectedIndexChanged_1;
             // 
             // lblQuanHuyen
             // 
             lblQuanHuyen.AutoSize = true;
-            lblQuanHuyen.Location = new Point(31, 625);
+            lblQuanHuyen.Location = new Point(700, 73);
             lblQuanHuyen.Margin = new Padding(4, 0, 4, 0);
             lblQuanHuyen.Name = "lblQuanHuyen";
-            lblQuanHuyen.Size = new Size(128, 25);
+            lblQuanHuyen.Size = new Size(159, 31);
             lblQuanHuyen.TabIndex = 10;
             lblQuanHuyen.Text = "Quận/Huyện:";
             // 
             // cboXaPhuong
             // 
             cboXaPhuong.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboXaPhuong.Location = new Point(195, 670);
+            cboXaPhuong.Location = new Point(900, 123);
             cboXaPhuong.Margin = new Padding(4, 5, 4, 5);
             cboXaPhuong.Name = "cboXaPhuong";
-            cboXaPhuong.Size = new Size(223, 33);
+            cboXaPhuong.Size = new Size(300, 37);
             cboXaPhuong.TabIndex = 13;
             // 
             // lblXaPhuong
             // 
             lblXaPhuong.AutoSize = true;
-            lblXaPhuong.Location = new Point(31, 675);
+            lblXaPhuong.Location = new Point(700, 123);
             lblXaPhuong.Margin = new Padding(4, 0, 4, 0);
             lblXaPhuong.Name = "lblXaPhuong";
-            lblXaPhuong.Size = new Size(115, 25);
+            lblXaPhuong.Size = new Size(143, 31);
             lblXaPhuong.TabIndex = 11;
             lblXaPhuong.Text = "Xã/Phường:";
             // 
             // txtMoTaChiTiet
             // 
-            txtMoTaChiTiet.Location = new Point(767, 553);
+            txtMoTaChiTiet.Location = new Point(900, 173);
             txtMoTaChiTiet.Margin = new Padding(4, 5, 4, 5);
             txtMoTaChiTiet.Multiline = true;
             txtMoTaChiTiet.Name = "txtMoTaChiTiet";
             txtMoTaChiTiet.ScrollBars = ScrollBars.Vertical;
-            txtMoTaChiTiet.Size = new Size(448, 60);
+            txtMoTaChiTiet.Size = new Size(300, 70);
             txtMoTaChiTiet.TabIndex = 14;
             // 
             // lblMoTaChiTiet
             // 
             lblMoTaChiTiet.AutoSize = true;
-            lblMoTaChiTiet.Location = new Point(541, 578);
+            lblMoTaChiTiet.Location = new Point(700, 173);
             lblMoTaChiTiet.Margin = new Padding(4, 0, 4, 0);
             lblMoTaChiTiet.Name = "lblMoTaChiTiet";
-            lblMoTaChiTiet.Size = new Size(218, 25);
+            lblMoTaChiTiet.Size = new Size(185, 31);
             lblMoTaChiTiet.TabIndex = 12;
-            lblMoTaChiTiet.Text = "Mô tả chi tiết địa điểm:";
+            lblMoTaChiTiet.Text = "Mô tả địa điểm:";
             // 
             // dgvConstruction
             // 
@@ -422,13 +419,13 @@ namespace QLCN.CongTrinh
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvConstruction.Location = new Point(31, 850);
+            dgvConstruction.Location = new Point(0, 45);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
             dgvConstruction.Name = "dgvConstruction";
             dgvConstruction.ReadOnly = true;
             dgvConstruction.RowHeadersWidth = 51;
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvConstruction.Size = new Size(1163, 449);
+            dgvConstruction.Size = new Size(1900, 408);
             dgvConstruction.TabIndex = 19;
             // 
             // dataGridViewColumnCheckBox
@@ -439,14 +436,14 @@ namespace QLCN.CongTrinh
             dataGridViewColumnCheckBox.Name = "dataGridViewColumnCheckBox";
             dataGridViewColumnCheckBox.ReadOnly = true;
             dataGridViewColumnCheckBox.Visible = false;
-            dataGridViewColumnCheckBox.Width = 125;
+            dataGridViewColumnCheckBox.Width = 150;
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(568, 734);
+            btnRefresh.Location = new Point(800, 23);
             btnRefresh.Margin = new Padding(4, 5, 4, 5);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(130, 36);
+            btnRefresh.Size = new Size(150, 50);
             btnRefresh.TabIndex = 18;
             btnRefresh.Text = "Làm mới";
             toolTip.SetToolTip(btnRefresh, "Xóa tất cả các ô nhập dữ liệu");
@@ -460,9 +457,10 @@ namespace QLCN.CongTrinh
             panelFilter.Controls.Add(txtFilterYear);
             panelFilter.Controls.Add(txtFilterLocation);
             panelFilter.Controls.Add(pictureBoxRemoveFilter);
-            panelFilter.Location = new Point(31, 805);
+            panelFilter.Dock = DockStyle.Top;
+            panelFilter.Location = new Point(0, 0);
             panelFilter.Name = "panelFilter";
-            panelFilter.Size = new Size(1163, 45);
+            panelFilter.Size = new Size(1900, 45);
             panelFilter.TabIndex = 20;
             // 
             // txtFilterName
@@ -471,7 +469,7 @@ namespace QLCN.CongTrinh
             txtFilterName.Location = new Point(130, 5);
             txtFilterName.Name = "txtFilterName";
             txtFilterName.PlaceholderText = "Tìm theo tên công trình...";
-            txtFilterName.Size = new Size(405, 33);
+            txtFilterName.Size = new Size(405, 38);
             txtFilterName.TabIndex = 7;
             // 
             // txtFilterYear
@@ -480,7 +478,7 @@ namespace QLCN.CongTrinh
             txtFilterYear.Location = new Point(943, 5);
             txtFilterYear.Name = "txtFilterYear";
             txtFilterYear.PlaceholderText = "Tìm theo năm...";
-            txtFilterYear.Size = new Size(175, 33);
+            txtFilterYear.Size = new Size(175, 38);
             txtFilterYear.TabIndex = 9;
             // 
             // txtFilterLocation
@@ -489,7 +487,7 @@ namespace QLCN.CongTrinh
             txtFilterLocation.Location = new Point(536, 5);
             txtFilterLocation.Name = "txtFilterLocation";
             txtFilterLocation.PlaceholderText = "Tìm theo địa điểm...";
-            txtFilterLocation.Size = new Size(405, 33);
+            txtFilterLocation.Size = new Size(405, 38);
             txtFilterLocation.TabIndex = 8;
             // 
             // pictureBoxRemoveFilter
@@ -505,57 +503,108 @@ namespace QLCN.CongTrinh
             pictureBoxRemoveFilter.TabStop = false;
             toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(txtMoTaChiTiet);
+            panel1.Controls.Add(lblMoTaChiTiet);
+            panel1.Controls.Add(lblXaPhuong);
+            panel1.Controls.Add(cboXaPhuong);
+            panel1.Controls.Add(lblQuanHuyen);
+            panel1.Controls.Add(cboQuanHuyen);
+            panel1.Controls.Add(txtMaCT);
+            panel1.Controls.Add(lblTinh);
+            panel1.Controls.Add(lblMaCT);
+            panel1.Controls.Add(cboTinh);
+            panel1.Controls.Add(txtTenCT);
+            panel1.Controls.Add(lblGhiChu);
+            panel1.Controls.Add(lblTenCT);
+            panel1.Controls.Add(txtGhiChu);
+            panel1.Controls.Add(txtTinhTrang);
+            panel1.Controls.Add(lblChuDauTu);
+            panel1.Controls.Add(lblTinhTrang);
+            panel1.Controls.Add(txtChuDauTu);
+            panel1.Controls.Add(dtpNgayBatDau);
+            panel1.Controls.Add(lblDuToan);
+            panel1.Controls.Add(lblNgayBatDau);
+            panel1.Controls.Add(txtDuToan);
+            panel1.Controls.Add(dtpNgayKetThuc);
+            panel1.Controls.Add(lblNgayKetThuc);
+            panel1.Location = new Point(0, 50);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1900, 260);
+            panel1.TabIndex = 21;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(btnExport);
+            panel2.Controls.Add(btnAdd);
+            panel2.Controls.Add(btnEdit);
+            panel2.Controls.Add(btnDelete);
+            panel2.Controls.Add(btnRefresh);
+            panel2.Location = new Point(0, 310);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1900, 100);
+            panel2.TabIndex = 22;
+            // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(1050, 23);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(150, 50);
+            btnExport.TabIndex = 19;
+            btnExport.Text = "Xuất Excel";
+            btnExport.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(dgvConstruction);
+            panel3.Controls.Add(panelFilter);
+            panel3.Location = new Point(0, 410);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1900, 600);
+            panel3.TabIndex = 23;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(lblMessage);
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(1900, 50);
+            panel4.TabIndex = 24;
+            // 
             // CongTrinh
             // 
-            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleDimensions = new SizeF(14F, 29F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lblMessage);
-            Controls.Add(btnExport);
-            Controls.Add(btnDelete);
-            Controls.Add(btnEdit);
-            Controls.Add(btnAdd);
-            Controls.Add(txtMaCT);
-            Controls.Add(lblMaCT);
-            Controls.Add(txtTenCT);
-            Controls.Add(lblTenCT);
-            Controls.Add(txtTinhTrang);
-            Controls.Add(lblTinhTrang);
-            Controls.Add(dtpNgayBatDau);
-            Controls.Add(lblNgayBatDau);
-            Controls.Add(dtpNgayKetThuc);
-            Controls.Add(lblNgayKetThuc);
-            Controls.Add(txtDuToan);
-            Controls.Add(lblDuToan);
-            Controls.Add(txtChuDauTu);
-            Controls.Add(lblChuDauTu);
-            Controls.Add(txtGhiChu);
-            Controls.Add(lblGhiChu);
-            Controls.Add(cboTinh);
-            Controls.Add(lblTinh);
-            Controls.Add(cboQuanHuyen);
-            Controls.Add(lblQuanHuyen);
-            Controls.Add(cboXaPhuong);
-            Controls.Add(lblXaPhuong);
-            Controls.Add(txtMoTaChiTiet);
-            Controls.Add(lblMoTaChiTiet);
-            Controls.Add(dgvConstruction);
-            Controls.Add(btnRefresh);
-            Controls.Add(panelFilter);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 5, 4, 5);
             Name = "CongTrinh";
-            Size = new Size(1228, 1320);
+            Size = new Size(1884, 1190);
+            Load += CongTrinh_Load;
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).EndInit();
             panelFilter.ResumeLayout(false);
             panelFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
 
         }
 
         #endregion
 
         private System.ComponentModel.IContainer components;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Button btnExport;
+        private Panel panel4;
     }
 }

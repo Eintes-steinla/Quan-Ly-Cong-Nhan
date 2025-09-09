@@ -55,7 +55,7 @@ namespace QLCN.CongTrinh
             return false;
         }
 
-        private void TxtDuToan_KeyPress(object ?sender, KeyPressEventArgs e)
+        private void TxtDuToan_KeyPress(object? sender, KeyPressEventArgs e)
         {
             // Allow control characters (like backspace) and digits
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -847,6 +847,21 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
             }
+        }
+
+        private void lblMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboQuanHuyen_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CongTrinh_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
