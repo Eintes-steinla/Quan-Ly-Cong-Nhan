@@ -2,45 +2,42 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Compile Update="BaoCao\FormBaoCao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="CaLam\FormCaLam.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="ChamCongQR\FormChamCongQR.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="ChamCong\FormChamCong.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="ChangePassword\FormChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CongNhan\FormCongNhan.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CongTrinh\CongTrinh.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Login\FormLogin.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="NghiPhep\FormNghiPhep.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="NhatKyHeThong\FormNhatKyHeThong.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PhanCa\FormPhanCa.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Profile\FormProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Settings\FormSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="TangCa\FormTangCa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="User\FormUser.cs">

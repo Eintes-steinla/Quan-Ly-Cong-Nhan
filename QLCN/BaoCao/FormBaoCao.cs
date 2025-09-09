@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace QLCN
 {
-    public partial class FormBaoCao : Form
+    public partial class FormBaoCao : UserControl
     {
         public FormBaoCao()
         {
@@ -12,7 +12,7 @@ namespace QLCN
 
         private void FormBaoCao_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
             cboLoaiBaoCao.Items.Add("Báo cáo chấm công");
             cboLoaiBaoCao.Items.Add("Báo cáo tăng ca");
             cboLoaiBaoCao.Items.Add("Báo cáo nghỉ phép");
@@ -22,7 +22,7 @@ namespace QLCN
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            string loai = cboLoaiBaoCao.SelectedItem.ToString();
+            string ?loai = cboLoaiBaoCao.SelectedItem?.ToString();
             DateTime tuNgay = dtpFrom.Value;
             DateTime denNgay = dtpTo.Value;
 

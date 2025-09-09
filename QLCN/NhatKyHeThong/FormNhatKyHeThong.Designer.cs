@@ -113,7 +113,7 @@
             Controls.Add(btnRefresh);
             Controls.Add(btnExport);
             Name = "FormNhatKyHeThong";
-            StartPosition = FormStartPosition.CenterScreen;
+            Dock = DockStyle.Fill;
             Text = "Nhật ký hệ thống";
             Load += FormNhatKyHeThong_Load;
             ((System.ComponentModel.ISupportInitialize)dgvLogs).EndInit();

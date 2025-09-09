@@ -250,9 +250,8 @@
             Controls.Add(btnDelete);
             Controls.Add(btnRefresh);
             Name = "FormCongNhan";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Quản lý Công nhân";
-            WindowState = FormWindowState.Maximized;
+            Dock = DockStyle.Fill;
+            Text = "Quản lý Công nhân";  
             Load += FormCongNhan_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCongNhan).EndInit();
             ResumeLayout(false);

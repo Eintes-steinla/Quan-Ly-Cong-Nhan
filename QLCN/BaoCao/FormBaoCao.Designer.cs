@@ -1,6 +1,6 @@
 ﻿namespace QLCN
 {
-    partial class FormBaoCao
+    partial class FormBaoCao : UserControl
     {
         private System.ComponentModel.IContainer components = null;
         private Label lblLoai, lblFrom, lblTo;
@@ -129,7 +129,7 @@
             Controls.Add(btnExport);
             Controls.Add(dgvBaoCao);
             Name = "FormBaoCao";
-            StartPosition = FormStartPosition.CenterScreen;
+            Dock = DockStyle.Fill;
             Text = "Báo Cáo Thống Kê";
             Load += FormBaoCao_Load;
             ((System.ComponentModel.ISupportInitialize)dgvBaoCao).EndInit();

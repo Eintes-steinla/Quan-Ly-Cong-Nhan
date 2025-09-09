@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
-namespace QLCN.DAL
+namespace QLCN.DB
 {
     public class DatabaseHelper
     {
         private static string connectionString =
-            @"Data Source=.\SQLEXPRESS;Initial Catalog=QLCN;Integrated Security=True";
+            @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyCongNhan;Integrated Security=True";
 
         public static SqlConnection GetConnection()
         {

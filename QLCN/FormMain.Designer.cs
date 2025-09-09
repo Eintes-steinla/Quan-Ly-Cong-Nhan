@@ -1,12 +1,20 @@
-﻿namespace QLCN
+
+namespace QLCN
 {
     partial class FormMain
     {
         private System.ComponentModel.IContainer components = null;
-        private MenuStrip menuStrip;
-        private ToolStripMenuItem mnuCongNhan, mnuChamCong, mnuNghiPhep, mnuTangCa;
-        private ToolStripMenuItem mnuCaLam, mnuPhanCa, mnuBaoCao;
-        private ToolStripMenuItem mnuUser, mnuSettings, mnuNhatKy, mnuExit;
+        private TabControl tabControl;
+        private TabPage baoCao;
+        private TabPage chamCong;
+        private TabPage nghiPhep;
+        private TabPage phanCa;
+        private TabPage nhatKyHeThong;
+        private TabPage congNhan;
+        private TabPage congTrinh;
+        private System.Windows.Forms.ImageList imageList1;
+
+       private QLCN.CongTrinh.CongTrinh congTrinhControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -16,214 +24,173 @@
 
         private void InitializeComponent()
         {
-            menuStrip = new MenuStrip();
-            mnuCongNhan = new ToolStripMenuItem();
-            mnuChamCongQR = new ToolStripMenuItem();
-            mnuQLCN = new ToolStripMenuItem();
-            mnuChamCongDropDown = new ToolStripMenuItem();
-            mnuNghiPhepDropDown = new ToolStripMenuItem();
-            mnuTangCaDropDown = new ToolStripMenuItem();
-            mnuCaLamDropDown = new ToolStripMenuItem();
-            mnuPhanCaDropDown = new ToolStripMenuItem();
-            mnuChamCong = new ToolStripMenuItem();
-            mnuNghiPhep = new ToolStripMenuItem();
-            mnuTangCa = new ToolStripMenuItem();
-            mnuCaLam = new ToolStripMenuItem();
-            mnuPhanCa = new ToolStripMenuItem();
-            mnuProfile = new ToolStripMenuItem();
-            mnuBaoCao = new ToolStripMenuItem();
-            mnuUser = new ToolStripMenuItem();
-            mnuSettings = new ToolStripMenuItem();
-            mnuNhatKy = new ToolStripMenuItem();
-            mnuExit = new ToolStripMenuItem();
-            menuStrip.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            tabControl = new TabControl();
+            congTrinh = new TabPage();
+            congTrinhControl = new QLCN.CongTrinh.CongTrinh();
+            congNhan = new TabPage();
+            chamCong = new TabPage();
+            nghiPhep = new TabPage();
+            phanCa = new TabPage();
+            baoCao = new TabPage();
+            nhatKyHeThong = new TabPage();
+            tabControl.SuspendLayout();
+            congTrinh.SuspendLayout();
             SuspendLayout();
             // 
-            // menuStrip
+            // tabControl
             // 
-            menuStrip.ImageScalingSize = new Size(24, 24);
-            menuStrip.Items.AddRange(new ToolStripItem[] { mnuCongNhan, mnuChamCongQR, mnuQLCN, mnuChamCong, mnuNghiPhep, mnuTangCa, mnuCaLam, mnuPhanCa, mnuProfile, mnuBaoCao, mnuUser, mnuSettings, mnuNhatKy, mnuExit });
-            menuStrip.Location = new Point(0, 0);
-            menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(1424, 33);
-            menuStrip.TabIndex = 0;
-            menuStrip.ItemClicked += menuStrip1_ItemClicked;
+            tabControl.Controls.Add(congTrinh);
+            tabControl.Controls.Add(congNhan);
+            tabControl.Controls.Add(chamCong);
+            tabControl.Controls.Add(nghiPhep);
+            tabControl.Controls.Add(phanCa);
+            tabControl.Controls.Add(baoCao);
+            tabControl.Controls.Add(nhatKyHeThong);
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.Location = new Point(0, 0);
+            tabControl.Margin = new Padding(4, 5, 4, 5);
+            tabControl.Name = "tabControl";
+            tabControl.ImageList = this.imageList1;
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(1335, 537);
+            tabControl.TabIndex = 0;
             // 
-            // mnuCongNhan
+            // congTrinh
             // 
-            mnuCongNhan.Image = Properties.Resources.icons8_people_3d_fluency_32;
-            mnuCongNhan.Name = "mnuCongNhan";
-            mnuCongNhan.Size = new Size(139, 29);
-            mnuCongNhan.Text = "Công nhân";
-            mnuCongNhan.ToolTipText = "Công Nhân";
-            mnuCongNhan.Click += mnuCongNhan_Click;
+            congTrinh.Controls.Add(congTrinhControl);
+            congTrinh.Dock = DockStyle.Fill;
+            congTrinh.Location = new Point(4, 34);
+            congTrinh.Margin = new Padding(4, 5, 4, 5);
+            congTrinh.Name = "congTrinh";
+            congTrinh.Padding = new Padding(3);
+            congTrinh.ImageIndex = 0;
+            congTrinh.Size = new Size(1327, 499);
+            congTrinh.TabIndex = 5;
+            congTrinh.Text = "Công trình";
+            congTrinh.UseVisualStyleBackColor = true;
             // 
-            // mnuChamCongQR
+            // congTrinhControl
             // 
-            mnuChamCongQR.Image = Properties.Resources.icons8_qr_321;
-            mnuChamCongQR.Name = "mnuChamCongQR";
-            mnuChamCongQR.Size = new Size(173, 29);
-            mnuChamCongQR.Text = "Chấm công QR";
-            mnuChamCongQR.Click += mnuChamCongQR_Click;
+            congTrinhControl.Dock = DockStyle.Fill;
+            congTrinhControl.Font = new Font("Times New Roman", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            congTrinhControl.Location = new Point(3, 3);
+            congTrinhControl.Margin = new Padding(4, 5, 4, 5);
+            congTrinhControl.Name = "congTrinhControl";
+            congTrinhControl.Size = new Size(1321, 493);
+            congTrinhControl.TabIndex = 0;
             // 
-            // mnuQLCN
+            // congNhan
             // 
-            mnuQLCN.DropDownItems.AddRange(new ToolStripItem[] { mnuChamCongDropDown, mnuNghiPhepDropDown, mnuTangCaDropDown, mnuCaLamDropDown, mnuPhanCaDropDown });
-            mnuQLCN.Image = Properties.Resources.icons8_defend_family_32;
-            mnuQLCN.Name = "mnuQLCN";
-            mnuQLCN.Size = new Size(97, 29);
-            mnuQLCN.Text = "QLCN";
+            congNhan.Dock = DockStyle.Fill;
+            congNhan.Location = new Point(4, 29);
+            congNhan.Margin = new Padding(4, 5, 4, 5);
+            congNhan.Name = "congNhan";
+            congNhan.Padding = new Padding(3);
+            congNhan.ImageIndex = 1;
+            congNhan.Size = new Size(1327, 504);
+            congNhan.TabIndex = 0;
+            congNhan.Text = "Công nhân";
+            congNhan.UseVisualStyleBackColor = true;
             // 
-            // mnuChamCongDropDown
+            // chamCong
             // 
-            mnuChamCongDropDown.Image = Properties.Resources.icons8_stopwatch_32;
-            mnuChamCongDropDown.Name = "mnuChamCongDropDown";
-            mnuChamCongDropDown.Size = new Size(270, 34);
-            mnuChamCongDropDown.Text = "Chấm công";
-            mnuChamCongDropDown.Click += mnuChamCongDropDown_Click;
+            chamCong.Dock = DockStyle.Fill;
+            chamCong.Location = new Point(4, 29);
+            chamCong.Margin = new Padding(4, 5, 4, 5);
+            chamCong.Name = "chamCong";
+            chamCong.Padding = new Padding(3);
+            chamCong.ImageIndex = 2;
+            chamCong.Size = new Size(1327, 504);
+            chamCong.TabIndex = 1;
+            chamCong.Text = "Chấm công";
+            chamCong.UseVisualStyleBackColor = true;
             // 
-            // mnuNghiPhepDropDown
+            // nghiPhep
             // 
-            mnuNghiPhepDropDown.Image = Properties.Resources.icons8_hotel_bed_32;
-            mnuNghiPhepDropDown.Name = "mnuNghiPhepDropDown";
-            mnuNghiPhepDropDown.Size = new Size(270, 34);
-            mnuNghiPhepDropDown.Text = "Nghỉ phép";
-            mnuNghiPhepDropDown.Click += mnuNghiPhepDropDown_Click;
+            nghiPhep.Dock = DockStyle.Fill;
+            nghiPhep.Location = new Point(4, 29);
+            nghiPhep.Margin = new Padding(4, 5, 4, 5);
+            nghiPhep.Name = "nghiPhep";
+            nghiPhep.Padding = new Padding(3);
+            nghiPhep.ImageIndex = 3;
+            nghiPhep.Size = new Size(1327, 504);
+            nghiPhep.TabIndex = 2;
+            nghiPhep.Text = "Nghỉ phép";
+            nghiPhep.UseVisualStyleBackColor = true;
             // 
-            // mnuTangCaDropDown
+            // phanCa
             // 
-            mnuTangCaDropDown.Image = Properties.Resources.icons8_countdown_clock_32;
-            mnuTangCaDropDown.Name = "mnuTangCaDropDown";
-            mnuTangCaDropDown.Size = new Size(270, 34);
-            mnuTangCaDropDown.Text = "Tăng ca";
-            mnuTangCaDropDown.Click += mnuTangCaDropDown_Click;
+            phanCa.Dock = DockStyle.Fill;
+            phanCa.Location = new Point(4, 29);
+            phanCa.Margin = new Padding(4, 5, 4, 5);
+            phanCa.Name = "phanCa";
+            phanCa.Padding = new Padding(3);
+            phanCa.ImageIndex = 4;
+            phanCa.Size = new Size(1327, 504);
+            phanCa.TabIndex = 3;
+            phanCa.Text = "Phân ca / Ca làm";
+            phanCa.UseVisualStyleBackColor = true;
             // 
-            // mnuCaLamDropDown
+            // baoCao
             // 
-            mnuCaLamDropDown.Image = Properties.Resources.icons8_time_32;
-            mnuCaLamDropDown.Name = "mnuCaLamDropDown";
-            mnuCaLamDropDown.Size = new Size(270, 34);
-            mnuCaLamDropDown.Text = "Ca làm";
-            mnuCaLamDropDown.Click += mnuCaLamDropDown_Click;
+            baoCao.Dock = DockStyle.Fill;
+            baoCao.Location = new Point(4, 29);
+            baoCao.Margin = new Padding(4, 5, 4, 5);
+            baoCao.Name = "baoCao";
+            baoCao.Padding = new Padding(3);
+            baoCao.ImageIndex = 5;
+            baoCao.Size = new Size(1327, 504);
+            baoCao.TabIndex = 4;
+            baoCao.Text = "Báo cáo";
+            baoCao.UseVisualStyleBackColor = true;
             // 
-            // mnuPhanCaDropDown
+            // nhatKyHeThong
             // 
-            mnuPhanCaDropDown.Image = Properties.Resources.icons8_time_321;
-            mnuPhanCaDropDown.Name = "mnuPhanCaDropDown";
-            mnuPhanCaDropDown.Size = new Size(270, 34);
-            mnuPhanCaDropDown.Text = "Phân ca";
-            mnuPhanCaDropDown.Click += mnuPhanCaDropDown_Click;
-            // 
-            // mnuChamCong
-            // 
-            mnuChamCong.Name = "mnuChamCong";
-            mnuChamCong.Size = new Size(119, 29);
-            mnuChamCong.Text = "Chấm công";
-            mnuChamCong.Visible = false;
-            mnuChamCong.Click += mnuChamCong_Click;
-            // 
-            // mnuNghiPhep
-            // 
-            mnuNghiPhep.Name = "mnuNghiPhep";
-            mnuNghiPhep.Size = new Size(112, 29);
-            mnuNghiPhep.Text = "Nghỉ phép";
-            mnuNghiPhep.Visible = false;
-            mnuNghiPhep.Click += mnuNghiPhep_Click;
-            // 
-            // mnuTangCa
-            // 
-            mnuTangCa.Name = "mnuTangCa";
-            mnuTangCa.Size = new Size(87, 29);
-            mnuTangCa.Text = "Tăng ca";
-            mnuTangCa.Visible = false;
-            mnuTangCa.Click += mnuTangCa_Click;
-            // 
-            // mnuCaLam
-            // 
-            mnuCaLam.Name = "mnuCaLam";
-            mnuCaLam.Size = new Size(82, 29);
-            mnuCaLam.Text = "Ca làm";
-            mnuCaLam.Visible = false;
-            mnuCaLam.Click += mnuCaLam_Click;
-            // 
-            // mnuPhanCa
-            // 
-            mnuPhanCa.Name = "mnuPhanCa";
-            mnuPhanCa.Size = new Size(89, 29);
-            mnuPhanCa.Text = "Phân ca";
-            mnuPhanCa.Visible = false;
-            mnuPhanCa.Click += mnuPhanCa_Click;
-            // 
-            // mnuProfile
-            // 
-            mnuProfile.Image = Properties.Resources.icons8_user_menu_male_32;
-            mnuProfile.Name = "mnuProfile";
-            mnuProfile.Size = new Size(102, 29);
-            mnuProfile.Text = "Hồ Sơ";
-            mnuProfile.Click += mnuProfile_Click;
-            // 
-            // mnuBaoCao
-            // 
-            mnuBaoCao.Image = Properties.Resources.icons8_report_32;
-            mnuBaoCao.Name = "mnuBaoCao";
-            mnuBaoCao.Size = new Size(115, 29);
-            mnuBaoCao.Text = "Báo cáo";
-            mnuBaoCao.Click += mnuBaoCao_Click;
-            // 
-            // mnuUser
-            // 
-            mnuUser.Image = Properties.Resources.icons8_user_32;
-            mnuUser.Name = "mnuUser";
-            mnuUser.Size = new Size(149, 29);
-            mnuUser.Text = "Người dùng";
-            mnuUser.Click += mnuUser_Click;
-            // 
-            // mnuSettings
-            // 
-            mnuSettings.Image = Properties.Resources.icons8_setting_undefined_32;
-            mnuSettings.Name = "mnuSettings";
-            mnuSettings.Size = new Size(107, 29);
-            mnuSettings.Text = "Cài đặt";
-            mnuSettings.Click += mnuSettings_Click;
-            // 
-            // mnuNhatKy
-            // 
-            mnuNhatKy.Image = Properties.Resources.icons8_copybook_32;
-            mnuNhatKy.Name = "mnuNhatKy";
-            mnuNhatKy.Size = new Size(190, 29);
-            mnuNhatKy.Text = "Nhật ký hệ thống";
-            mnuNhatKy.Click += mnuNhatKy_Click;
-            // 
-            // mnuExit
-            // 
-            mnuExit.Image = Properties.Resources.icons8_exit_32;
-            mnuExit.Name = "mnuExit";
-            mnuExit.Size = new Size(97, 29);
-            mnuExit.Text = "Thoát";
-            mnuExit.Click += mnuExit_Click;
+            nhatKyHeThong.Dock = DockStyle.Fill;
+            nhatKyHeThong.Location = new Point(4, 29);
+            nhatKyHeThong.Margin = new Padding(4, 5, 4, 5);
+            nhatKyHeThong.Name = "nhatKyHeThong";
+            nhatKyHeThong.Padding = new Padding(3);
+            nhatKyHeThong.ImageIndex = 6;
+            nhatKyHeThong.Size = new Size(1327, 504);
+            nhatKyHeThong.TabIndex = 5;
+            nhatKyHeThong.Text = "Nhật ký hệ thống";
+            nhatKyHeThong.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
-            ClientSize = new Size(1424, 600);
-            Controls.Add(menuStrip);
-            IsMdiContainer = true;
-            MainMenuStrip = menuStrip;
+            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1335, 537);
+            Controls.Add(tabControl);
+            Font = new Font("Times New Roman", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Hệ thống quản lý công nhân";
-            Load += FormMain_Load;
-            menuStrip.ResumeLayout(false);
-            menuStrip.PerformLayout();
+            WindowState = FormWindowState.Maximized;
+            //
+            // imageList1
+            //
+            // Cấu hình ImageList trước khi sử dụng
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            
+            // Thêm các hình ảnh từ Resources
+            this.imageList1.Images.Add(Properties.Resources.icons8_hotel_bed_32);
+            this.imageList1.Images.Add(Properties.Resources.icons8_people_3d_fluency_32);
+            this.imageList1.Images.Add(Properties.Resources.icons8_countdown_clock_32);
+            this.imageList1.Images.Add(Properties.Resources.icons8_exit_32);
+            this.imageList1.Images.Add(Properties.Resources.icons8_time_321);
+            this.imageList1.Images.Add(Properties.Resources.icons8_report_32);
+            this.imageList1.Images.Add(Properties.Resources.icons8_copybook_32);
+            tabControl.ResumeLayout(false);
+            congTrinh.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
-        private ToolStripMenuItem mnuProfile;
-        private ToolStripMenuItem mnuQLCN;
-        private ToolStripMenuItem mnuChamCongDropDown;
-        private ToolStripMenuItem mnuNghiPhepDropDown;
-        private ToolStripMenuItem mnuTangCaDropDown;
-        private ToolStripMenuItem mnuCaLamDropDown;
-        private ToolStripMenuItem mnuPhanCaDropDown;
-        private ToolStripMenuItem mnuChamCongQR;
     }
 }

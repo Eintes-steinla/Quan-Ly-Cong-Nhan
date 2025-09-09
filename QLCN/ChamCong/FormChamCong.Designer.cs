@@ -153,7 +153,7 @@
             Controls.Add(btnDelete);
             Controls.Add(btnRefresh);
             Name = "FormChamCong";
-            StartPosition = FormStartPosition.CenterScreen;
+            Dock = DockStyle.Fill;
             Text = "Quản lý Chấm Công";
             Load += FormChamCong_Load;
             ((System.ComponentModel.ISupportInitialize)dgvChamCong).EndInit();

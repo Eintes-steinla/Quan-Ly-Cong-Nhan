@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace QLCN
 {
-    public partial class FormNhatKyHeThong : Form
+    public partial class FormNhatKyHeThong : UserControl
     {
         public FormNhatKyHeThong()
         {
@@ -13,7 +13,7 @@ namespace QLCN
 
         private void FormNhatKyHeThong_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
             LoadLogs();
         }
 

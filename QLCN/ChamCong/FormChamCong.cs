@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace QLCN
 {
-    public partial class FormChamCong : Form
+    public partial class FormChamCong : UserControl
     {
         public FormChamCong()
         {
@@ -13,7 +13,7 @@ namespace QLCN
         private void FormChamCong_Load(object sender, EventArgs e)
         {
             // TODO: Load dữ liệu chấm công từ DB vào DataGridView
-            this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

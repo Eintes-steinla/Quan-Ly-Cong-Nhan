@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace QLCN
 {
-    public partial class FormPhanCa : Form
+    public partial class FormPhanCa : UserControl
     {
         public FormPhanCa()
         {
@@ -15,7 +15,7 @@ namespace QLCN
             // TODO: Load công nhân vào cboCongNhan
             // TODO: Load ca làm vào cboCaLam
             // TODO: Load danh sách phân ca vào dgvPhanCa
-            this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

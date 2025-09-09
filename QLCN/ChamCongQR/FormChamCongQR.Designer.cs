@@ -110,9 +110,8 @@
             Controls.Add(btnStart);
             Controls.Add(btnStop);
             Controls.Add(statusStrip);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "FormChamCongQR";
-            StartPosition = FormStartPosition.CenterScreen;
+            Dock = DockStyle.Fill;
             Text = "Chấm Công QR - QLCN";
             Load += FormChamCongQR_Load;
             ((System.ComponentModel.ISupportInitialize)picCamera).EndInit();

@@ -1,7 +1,7 @@
 ﻿// FormLogin.Designer.cs
 namespace QLCN
 {
-    partial class FormLogin
+    partial class FormLogin : UserControl
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -130,7 +130,7 @@ namespace QLCN
             Controls.Add(btnExit);
             Controls.Add(lblForgotPassword);
             Name = "FormLogin";
-            StartPosition = FormStartPosition.CenterScreen;
+            Dock = DockStyle.Fill;
             Text = "Đăng nhập - QLCN";
             Load += FormLogin_Load;
             ResumeLayout(false);

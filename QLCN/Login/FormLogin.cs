@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
-using QLCN.DAL;
+using QLCN.DB;
 
 namespace QLCN
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin : UserControl
     {
         public FormLogin()
         {
@@ -14,7 +14,7 @@ namespace QLCN
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            this.Dock = DockStyle.Fill;
 
         }
 
@@ -29,7 +29,7 @@ namespace QLCN
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = DatabaseHelper.GetConnection())
             {
                 string sql = "SELECT COUNT(*) FROM Users WHERE Username=@u AND Password=@p";
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -45,7 +45,7 @@ namespace QLCN
                     this.Hide();
                     FormMain frm = new FormMain();
                     frm.ShowDialog();
-                    this.Close();
+                    this.Dispose();
                 }
                 else
                 {

@@ -173,7 +173,6 @@
             Controls.Add(btnRefresh);
             Controls.Add(dgvNghiPhep);
             Name = "FormNghiPhep";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý Nghỉ Phép";
             Load += FormNghiPhep_Load;
             ((System.ComponentModel.ISupportInitialize)dgvNghiPhep).EndInit();
