@@ -52,15 +52,6 @@ namespace QLCN.CongTrinh
                 return true;
             }
 
-            // Kiểm tra địa điểm không được bỏ trống
-            if (string.IsNullOrWhiteSpace(txtLocation.Text))
-            {
-                lblMessage.Text = "Vui lòng nhập địa điểm!";
-                lblMessage.ForeColor = Color.Red;
-                TimeIntervalMessage();
-                txtLocation.Focus();
-                return true;
-            }
             return false;
         }
         private void btnAdd_Click(object? sender, EventArgs e)
@@ -100,9 +91,6 @@ namespace QLCN.CongTrinh
                 txtDuToan.Clear();
                 txtChuDauTu.Clear();
                 txtGhiChu.Clear();
-                txtName.Clear();
-                txtYear.Clear();
-                txtLocation.Clear();
                 cboTinh.SelectedIndex = -1;
                 cboQuanHuyen.SelectedIndex = -1;
                 cboXaPhuong.SelectedIndex = -1;
@@ -126,7 +114,7 @@ namespace QLCN.CongTrinh
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                string query = "select Name, Location, trim(str(Year)) as Year, ID from CongTrinh order by Name";
+                string query = "select TenCT, ID from CongTrinh order by TenCT";
 
                 using SqlCommand command = new(query, connection);
 
@@ -225,9 +213,6 @@ namespace QLCN.CongTrinh
 
         private void Event()
         {
-            // Thêm sự kiện KeyPress cho ô nhập năm để chỉ cho phép nhập số
-            txtYear.KeyPress += TxtYear_KeyPress;
-            //
             pictureBoxRemoveFilter.Click += pictureBoxRemoveFilter_Click;
             btnRefresh.Click += btnRefresh_Click;
             btnAdd.Click += btnAdd_Click;
@@ -270,27 +255,10 @@ namespace QLCN.CongTrinh
            }
         } */
 
-        private void TxtYear_KeyPress(object? sender, KeyPressEventArgs e)
-        {
-            // Chỉ cho phép nhập số và phím điều khiển (như backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true; // Ngăn ký tự được nhập vào
-
-                // Hiển thị thông báo
-                lblMessage.Text = "Chỉ nhập số vào ô này!";
-                lblMessage.ForeColor = Color.Red;
-
-                TimeIntervalMessage();
-            }
-        }
 
         private void btnRefresh_Click(object? sender, EventArgs e)
         {
             // Xóa nội dung của tất cả các ô nhập liệu
-            txtName.Clear();
-            txtYear.Clear();
-            txtLocation.Clear();
             txtMaCT.Clear();
             txtTenCT.Clear();
             txtTinhTrang.Clear();
@@ -322,9 +290,7 @@ namespace QLCN.CongTrinh
                 DataGridViewRow row = dgvConstruction.Rows[e.RowIndex];
 
                 // Hiển thị dữ liệu vào các ô nhập tương ứng
-                txtName.Text = row.Cells["dataGridViewColumnName"].Value.ToString();
-                txtLocation.Text = row.Cells["dataGridViewColumnLocation"].Value.ToString();
-                txtYear.Text = row.Cells["dataGridViewColumnYear"].Value?.ToString() ?? string.Empty;
+                txtTenCT.Text = row.Cells["dataGridViewColumnName"].Value.ToString();
                 constructionID = Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value); // Lưu ID công trình để sử dụng cho việc sửa hoặc xóa
 
                 // TODO: Cần cập nhật để hiển thị dữ liệu từ database cho các trường mới
@@ -387,9 +353,8 @@ namespace QLCN.CongTrinh
 
                 using SqlCommand command = new(query, connection);
 
-                command.Parameters.AddWithValue("@Name", txtName.Text);
-                command.Parameters.AddWithValue("@Location", txtLocation.Text);
-                command.Parameters.AddWithValue("@Year", string.IsNullOrEmpty(txtYear.Text) ? DBNull.Value : Convert.ToInt32(txtYear.Text));
+                command.Parameters.AddWithValue("@Name", txtTenCT.Text);
+                command.Parameters.AddWithValue("@Year", string.IsNullOrEmpty(txtTenCT.Text) ? DBNull.Value : Convert.ToInt32(txtTenCT.Text));
                 command.Parameters.AddWithValue("@ID", constructionID);
 
                 // Thực thi câu lệnh
@@ -401,9 +366,7 @@ namespace QLCN.CongTrinh
                     lblMessage.ForeColor = Color.Green;
                     TimeIntervalMessage();
 
-                    txtName.Clear();
-                    txtYear.Clear();
-                    txtLocation.Clear();
+                    txtTenCT.Clear();
                     txtMaCT.Clear();
                     txtTenCT.Clear();
                     txtTinhTrang.Clear();
@@ -469,9 +432,7 @@ namespace QLCN.CongTrinh
                 // Đổi tên nút thành "Hủy xóa"
                 btnDelete.Text = "Hủy xóa";
                 dgvConstruction.ClearSelection();
-                txtName.Clear();
-                txtYear.Clear();
-                txtLocation.Clear();
+                
                 txtMaCT.Clear();
                 txtTenCT.Clear();
                 txtTinhTrang.Clear();
@@ -484,9 +445,7 @@ namespace QLCN.CongTrinh
                 cboQuanHuyen.SelectedIndex = -1;
                 cboXaPhuong.SelectedIndex = -1;
                 txtMoTaChiTiet.Clear();
-                txtName.Enabled = false;
-                txtYear.Enabled = false;
-                txtLocation.Enabled = false;
+                txtTenCT.Enabled = false;
                 txtMaCT.Enabled = false;
                 txtTenCT.Enabled = false;
                 txtTinhTrang.Enabled = false;
@@ -605,9 +564,7 @@ namespace QLCN.CongTrinh
             btnAdd.Click += btnAdd_Click;
             btnEdit.Click += btnEdit_Click;
             dgvConstruction.CellClick += DgvConstruction_CellClick;
-            txtName.Enabled = true;
-            txtYear.Enabled = true;
-            txtLocation.Enabled = true;
+            txtTenCT.Enabled = true;
             txtMaCT.Enabled = true;
             txtTenCT.Enabled = true;
             txtTinhTrang.Enabled = true;
