@@ -71,11 +71,11 @@ namespace QLCN
             congTrinh.Controls.Add(congTrinhControl);
             congTrinh.Dock = DockStyle.Fill;
             congTrinh.ImageIndex = 0;
-            congTrinh.Location = new Point(4, 34);
+            congTrinh.Location = new Point(4, 38);
             congTrinh.Margin = new Padding(4, 5, 4, 5);
             congTrinh.Name = "congTrinh";
             congTrinh.Padding = new Padding(3);
-            congTrinh.Size = new Size(1399, 499);
+            congTrinh.Size = new Size(1399, 495);
             congTrinh.TabIndex = 5;
             congTrinh.Text = "Công trình";
             congTrinh.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@ namespace QLCN
             congTrinhControl.Location = new Point(3, 3);
             congTrinhControl.Margin = new Padding(4, 5, 4, 5);
             congTrinhControl.Name = "congTrinhControl";
-            congTrinhControl.Size = new Size(1393, 493);
+            congTrinhControl.Size = new Size(1393, 489);
             congTrinhControl.TabIndex = 0;
             // 
             // congNhan
@@ -95,11 +95,11 @@ namespace QLCN
             congNhan.Controls.Add(congNhanControl);
             congNhan.Dock = DockStyle.Fill;
             congNhan.ImageIndex = 1;
-            congNhan.Location = new Point(4, 34);
+            congNhan.Location = new Point(4, 38);
             congNhan.Margin = new Padding(4, 5, 4, 5);
             congNhan.Name = "congNhan";
             congNhan.Padding = new Padding(3);
-            congNhan.Size = new Size(1399, 499);
+            congNhan.Size = new Size(1399, 495);
             congNhan.TabIndex = 0;
             congNhan.Text = "Công nhân";
             congNhan.UseVisualStyleBackColor = true;
@@ -111,18 +111,18 @@ namespace QLCN
             congNhanControl.Location = new Point(3, 3);
             congNhanControl.Margin = new Padding(4, 5, 4, 5);
             congNhanControl.Name = "congNhanControl";
-            congNhanControl.Size = new Size(1393, 493);
+            congNhanControl.Size = new Size(1393, 489);
             congNhanControl.TabIndex = 0;
             // 
             // chamCong
             // 
             chamCong.Dock = DockStyle.Fill;
             chamCong.ImageIndex = 2;
-            chamCong.Location = new Point(4, 31);
+            chamCong.Location = new Point(4, 34);
             chamCong.Margin = new Padding(4, 5, 4, 5);
             chamCong.Name = "chamCong";
             chamCong.Padding = new Padding(3);
-            chamCong.Size = new Size(1399, 502);
+            chamCong.Size = new Size(1399, 499);
             chamCong.TabIndex = 1;
             chamCong.Text = "Chấm công";
             chamCong.UseVisualStyleBackColor = true;
@@ -131,11 +131,11 @@ namespace QLCN
             // 
             nghiPhep.Dock = DockStyle.Fill;
             nghiPhep.ImageIndex = 3;
-            nghiPhep.Location = new Point(4, 31);
+            nghiPhep.Location = new Point(4, 34);
             nghiPhep.Margin = new Padding(4, 5, 4, 5);
             nghiPhep.Name = "nghiPhep";
             nghiPhep.Padding = new Padding(3);
-            nghiPhep.Size = new Size(1399, 502);
+            nghiPhep.Size = new Size(1399, 499);
             nghiPhep.TabIndex = 2;
             nghiPhep.Text = "Nghỉ phép";
             nghiPhep.UseVisualStyleBackColor = true;
@@ -144,11 +144,11 @@ namespace QLCN
             // 
             phanCa.Dock = DockStyle.Fill;
             phanCa.ImageIndex = 4;
-            phanCa.Location = new Point(4, 31);
+            phanCa.Location = new Point(4, 34);
             phanCa.Margin = new Padding(4, 5, 4, 5);
             phanCa.Name = "phanCa";
             phanCa.Padding = new Padding(3);
-            phanCa.Size = new Size(1399, 502);
+            phanCa.Size = new Size(1399, 499);
             phanCa.TabIndex = 3;
             phanCa.Text = "Phân ca / Ca làm";
             phanCa.UseVisualStyleBackColor = true;
@@ -157,11 +157,11 @@ namespace QLCN
             // 
             baoCao.Dock = DockStyle.Fill;
             baoCao.ImageIndex = 5;
-            baoCao.Location = new Point(4, 31);
+            baoCao.Location = new Point(4, 34);
             baoCao.Margin = new Padding(4, 5, 4, 5);
             baoCao.Name = "baoCao";
             baoCao.Padding = new Padding(3);
-            baoCao.Size = new Size(1399, 502);
+            baoCao.Size = new Size(1399, 499);
             baoCao.TabIndex = 4;
             baoCao.Text = "Báo cáo";
             baoCao.UseVisualStyleBackColor = true;
@@ -170,18 +170,18 @@ namespace QLCN
             // 
             nhatKyHeThong.Dock = DockStyle.Fill;
             nhatKyHeThong.ImageIndex = 6;
-            nhatKyHeThong.Location = new Point(4, 31);
+            nhatKyHeThong.Location = new Point(4, 34);
             nhatKyHeThong.Margin = new Padding(4, 5, 4, 5);
             nhatKyHeThong.Name = "nhatKyHeThong";
             nhatKyHeThong.Padding = new Padding(3);
-            nhatKyHeThong.Size = new Size(1399, 502);
+            nhatKyHeThong.Size = new Size(1399, 499);
             nhatKyHeThong.TabIndex = 5;
             nhatKyHeThong.Text = "Nhật ký hệ thống";
             nhatKyHeThong.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
-            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleDimensions = new SizeF(14F, 29F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1407, 537);
             Controls.Add(tabControl);

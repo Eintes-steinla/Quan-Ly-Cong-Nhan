@@ -10,7 +10,7 @@
     <Compile Update="ChangePassword\FormChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CongNhan\FormCongNhan.cs">
+    <Compile Update="CongNhan\CongNhan.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="CongTrinh\CongTrinh.cs">
