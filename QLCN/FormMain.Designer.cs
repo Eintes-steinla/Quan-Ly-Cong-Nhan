@@ -118,11 +118,11 @@ namespace QLCN
             // 
             chamCong.Dock = DockStyle.Fill;
             chamCong.ImageIndex = 2;
-            chamCong.Location = new Point(4, 34);
+            chamCong.Location = new Point(4, 31);
             chamCong.Margin = new Padding(4, 5, 4, 5);
             chamCong.Name = "chamCong";
             chamCong.Padding = new Padding(3);
-            chamCong.Size = new Size(1399, 499);
+            chamCong.Size = new Size(1399, 502);
             chamCong.TabIndex = 1;
             chamCong.Text = "Chấm công";
             chamCong.UseVisualStyleBackColor = true;

@@ -54,6 +54,15 @@ namespace QLCN.CongTrinh
 
             return false;
         }
+
+        private void TxtDuToan_KeyPress(object ?sender, KeyPressEventArgs e)
+        {
+            // Allow control characters (like backspace) and digits
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         private void btnAdd_Click(object? sender, EventArgs e)
         {
             if (CheckRequiredFields()) return;
@@ -69,8 +78,13 @@ namespace QLCN.CongTrinh
                 command.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command.Parameters.AddWithValue("@TenCT", txtTenCT.Text);
                 command.Parameters.AddWithValue("@TinhTrang", txtTinhTrang.Text);
-                command.Parameters.AddWithValue("@NgayBatDau", dtpNgayBatDau.Value.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value.ToString("yyyy-MM-dd"));
+                DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
+
+                command.Parameters.AddWithValue("@NgayBatDau", ngayBatDau.ToString("yyyy-MM-dd"));
+                if (dtpNgayKetThuc.Checked && dtpNgayKetThuc.Value != DateTime.MinValue)
+                    command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value.ToString("yyyy-MM-dd"));
+                else
+                    command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
                 command.Parameters.AddWithValue("@DuToan", txtDuToan.Text);
                 command.Parameters.AddWithValue("@ChuDauTu", txtChuDauTu.Text);
                 command.Parameters.AddWithValue("@GhiChu", txtGhiChu.Text);
@@ -114,7 +128,12 @@ namespace QLCN.CongTrinh
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                string query = "select TenCT, ID from CongTrinh order by TenCT";
+                string query = @"select ct.mact, tenct, MoTaChiTiet + ', ' + TenXP + ', ' + TenQH + ', ' + TenTinh as diachi , tinhtrang, ngaybatdau, ngayketthuc, dutoan, chudautu, ct.ghichu
+from congtrinh ct
+join diachicongtrinh dt on ct.mact = dt.mact
+join XaPhuong xp on xp.MaXP = dt.MaXP
+join QuanHuyen qh on qh.MaQH = xp.MaQH
+join Tinh t on t.MaTinh = qh.MaTinh";
 
                 using SqlCommand command = new(query, connection);
 
@@ -213,6 +232,7 @@ namespace QLCN.CongTrinh
 
         private void Event()
         {
+            txtDuToan.KeyPress += TxtDuToan_KeyPress;
             pictureBoxRemoveFilter.Click += pictureBoxRemoveFilter_Click;
             btnRefresh.Click += btnRefresh_Click;
             btnAdd.Click += btnAdd_Click;
@@ -432,7 +452,7 @@ namespace QLCN.CongTrinh
                 // Đổi tên nút thành "Hủy xóa"
                 btnDelete.Text = "Hủy xóa";
                 dgvConstruction.ClearSelection();
-                
+
                 txtMaCT.Clear();
                 txtTenCT.Clear();
                 txtTinhTrang.Clear();
