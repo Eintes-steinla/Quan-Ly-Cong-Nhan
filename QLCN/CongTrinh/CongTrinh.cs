@@ -179,9 +179,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             {
                 if (constructionData == null) return;
 
-                string nameFilter = txtFilterName.Text.Trim();
-                string locationFilter = txtFilterLocation.Text.Trim();
-                string yearFilter = txtFilterYear.Text.Trim();
+                string nameFilter = txtFilterMaCT.Text.Trim();
+                string locationFilter = txtFilterTenCT.Text.Trim();
+                string yearFilter = txtFilterTinhTrang.Text.Trim();
 
                 // Xây dựng biểu thức lọc
                 string filterExpression = "";
@@ -221,10 +221,10 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         // Xóa nội dung của tất cả các ô tìm kiếm
         private void pictureBoxRemoveFilter_Click(object? sender, EventArgs e)
         {
-            txtFilterName.Clear();
-            txtFilterYear.Clear();
-            txtFilterLocation.Clear();
-            txtFilterName.Focus(); // Đặt focus vào ô tìm kiếm tên công trình
+            txtFilterMaCT.Clear();
+            txtFilterTinhTrang.Clear();
+            txtFilterTenCT.Clear();
+            txtFilterMaCT.Focus(); // Đặt focus vào ô tìm kiếm tên công trình
 
             // Áp dụng lại bộ lọc (sẽ hiển thị tất cả dữ liệu vì các ô tìm kiếm đã được xóa)
             ApplyFilter();
@@ -247,9 +247,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             cboQuanHuyen.SelectedIndexChanged += CboQuanHuyen_SelectedIndexChanged;
 
             // Thêm sự kiện TextChanged cho các ô tìm kiếm
-            txtFilterName.TextChanged += TxtFilter_TextChanged;
-            txtFilterYear.TextChanged += TxtFilter_TextChanged;
-            txtFilterLocation.TextChanged += TxtFilter_TextChanged;
+            txtFilterMaCT.TextChanged += TxtFilter_TextChanged;
+            txtFilterTinhTrang.TextChanged += TxtFilter_TextChanged;
+            txtFilterTenCT.TextChanged += TxtFilter_TextChanged;
             // Đăng ký sự kiện KeyDown cho các TextBox
             /* txtName.KeyDown += TextBox_KeyDown;
             txtLocation.KeyDown += TextBox_KeyDown;
@@ -860,6 +860,11 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         }
 
         private void CongTrinh_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFilterName_TextChanged(object sender, EventArgs e)
         {
 
         }
