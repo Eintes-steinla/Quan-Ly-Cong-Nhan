@@ -7,7 +7,7 @@
     <Compile Update="ChamCongQR\FormChamCongQR.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ChamCong\FormChamCong.cs">
+    <Compile Update="ChamCong\ChamCong.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="ChangePassword\FormChangePassword.cs">

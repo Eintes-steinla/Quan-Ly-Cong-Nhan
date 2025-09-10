@@ -73,8 +73,8 @@ namespace QLCN.CongTrinh
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CongTrinh));
             lblMessage = new Label();
             btnDelete = new Button();
@@ -119,8 +119,6 @@ namespace QLCN.CongTrinh
             btnRefresh = new Button();
             panelFilter = new Panel();
             txtFilterGhiChu = new TextBox();
-            txtFilterNgayKetThuc = new TextBox();
-            txtFilterNgayBatDau = new TextBox();
             txtFilterDuToan = new TextBox();
             txtFilterDiaDiem = new TextBox();
             txtFilterChuDauTu = new TextBox();
@@ -134,6 +132,8 @@ namespace QLCN.CongTrinh
             btnExport = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
+            dtpFilterNgayBatDau = new DateTimePicker();
+            dtpFilterNgayKetThuc = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -416,24 +416,24 @@ namespace QLCN.CongTrinh
             dgvConstruction.AllowUserToOrderColumns = true;
             dgvConstruction.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvConstruction.BackgroundColor = Color.White;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCT, dgvColTenCongTrinh, dgvColTinhTrang, dgvColChuDauTu, dgvColDiaDiem, dgvColDuToan, dgvColNgayBatDau, dgvColNgayKetThuc, dgvColGhiChu, dataGridViewColumnCheckBox });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.AntiqueWhite;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.AntiqueWhite;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle4;
             dgvConstruction.Location = new Point(0, 38);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
             dgvConstruction.Name = "dgvConstruction";
@@ -557,9 +557,9 @@ namespace QLCN.CongTrinh
             // 
             panelFilter.BackColor = Color.WhiteSmoke;
             panelFilter.BorderStyle = BorderStyle.FixedSingle;
+            panelFilter.Controls.Add(dtpFilterNgayKetThuc);
+            panelFilter.Controls.Add(dtpFilterNgayBatDau);
             panelFilter.Controls.Add(txtFilterGhiChu);
-            panelFilter.Controls.Add(txtFilterNgayKetThuc);
-            panelFilter.Controls.Add(txtFilterNgayBatDau);
             panelFilter.Controls.Add(txtFilterDuToan);
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterChuDauTu);
@@ -580,24 +580,6 @@ namespace QLCN.CongTrinh
             txtFilterGhiChu.Size = new Size(150, 38);
             txtFilterGhiChu.TabIndex = 16;
             txtFilterGhiChu.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterNgayKetThuc
-            // 
-            txtFilterNgayKetThuc.Location = new Point(1480, 0);
-            txtFilterNgayKetThuc.Name = "txtFilterNgayKetThuc";
-            txtFilterNgayKetThuc.PlaceholderText = "NgayKetThuc";
-            txtFilterNgayKetThuc.Size = new Size(200, 38);
-            txtFilterNgayKetThuc.TabIndex = 15;
-            txtFilterNgayKetThuc.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterNgayBatDau
-            // 
-            txtFilterNgayBatDau.Location = new Point(1280, 0);
-            txtFilterNgayBatDau.Name = "txtFilterNgayBatDau";
-            txtFilterNgayBatDau.PlaceholderText = "NgayBatDau";
-            txtFilterNgayBatDau.Size = new Size(200, 38);
-            txtFilterNgayBatDau.TabIndex = 14;
-            txtFilterNgayBatDau.TextAlign = HorizontalAlignment.Center;
             // 
             // txtFilterDuToan
             // 
@@ -739,6 +721,22 @@ namespace QLCN.CongTrinh
             panel4.Size = new Size(1900, 50);
             panel4.TabIndex = 24;
             // 
+            // dtpFilterNgayBatDau
+            // 
+            dtpFilterNgayBatDau.Format = DateTimePickerFormat.Short;
+            dtpFilterNgayBatDau.Location = new Point(1280, 0);
+            dtpFilterNgayBatDau.Name = "dtpFilterNgayBatDau";
+            dtpFilterNgayBatDau.Size = new Size(200, 38);
+            dtpFilterNgayBatDau.TabIndex = 17;
+            // 
+            // dtpFilterNgayKetThuc
+            // 
+            dtpFilterNgayKetThuc.Format = DateTimePickerFormat.Short;
+            dtpFilterNgayKetThuc.Location = new Point(1480, 0);
+            dtpFilterNgayKetThuc.Name = "dtpFilterNgayKetThuc";
+            dtpFilterNgayKetThuc.Size = new Size(200, 38);
+            dtpFilterNgayKetThuc.TabIndex = 20;
+            // 
             // CongTrinh
             // 
             AutoScaleDimensions = new SizeF(14F, 29F);
@@ -785,10 +783,10 @@ namespace QLCN.CongTrinh
         private DataGridViewTextBoxColumn dgvColGhiChu;
         private DataGridViewCheckBoxColumn dataGridViewColumnCheckBox;
         private TextBox txtFilterGhiChu;
-        private TextBox txtFilterNgayKetThuc;
-        private TextBox txtFilterNgayBatDau;
         private TextBox txtFilterDuToan;
         private TextBox txtFilterDiaDiem;
         private TextBox txtFilterChuDauTu;
+        private DateTimePicker dtpFilterNgayBatDau;
+        private DateTimePicker dtpFilterNgayKetThuc;
     }
 }
