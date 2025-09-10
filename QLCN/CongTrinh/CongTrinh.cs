@@ -598,25 +598,25 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     using SqlConnection connection = DatabaseHelper.GetConnection();
                     connection.Open();
 
-                    // Tạo danh sách các ID cần xóa
-                    List<int> idsToDelete = [];
+                    // Tạo danh sách các mã cồng trình cần xóa
+                    List<string> dsmact = [];
                     foreach (DataGridViewRow row in dgvConstruction.Rows)
                     {
                         if (row.Cells["checkbox"].Value != null &&
                             Convert.ToBoolean(row.Cells["checkbox"].Value))
                         {
-                            int id = Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value);
-                            idsToDelete.Add(id);
+                            string ?mact = row.Cells["mact"].Value?.ToString();
+                            dsmact.Add(mact);
                         }
                     }
 
                     // Xóa từng công trình
                     int deletedCount = 0;
-                    foreach (int id in idsToDelete)
+                    foreach (string mact in dsmact)
                     {
-                        string query = "delete from CongTrinh where ID = @ID";
+                        string query = "delete from CongTrinh where mact = @mact";
                         using SqlCommand command = new(query, connection);
-                        command.Parameters.AddWithValue("@ID", id);
+                        command.Parameters.AddWithValue("@mact", mact);
                         deletedCount += command.ExecuteNonQuery();
                     }
 
@@ -624,8 +624,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     lblMessage.Text = $"Đã xóa {deletedCount} công trình thành công!";
                     lblMessage.ForeColor = Color.Green;
                     TimeIntervalMessage();
-
-
                 }
             }
             catch (Exception ex)
