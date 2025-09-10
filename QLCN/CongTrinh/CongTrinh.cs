@@ -181,7 +181,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                 string nameFilter = txtFilterMaCT.Text.Trim();
                 string locationFilter = txtFilterTenCT.Text.Trim();
-                string yearFilter = txtFilterTinhTrang.Text.Trim();
 
                 // Xây dựng biểu thức lọc
                 string filterExpression = "";
@@ -196,12 +195,12 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     filterExpression += $"Location like '%{locationFilter}%'";
                 }
 
-                if (!string.IsNullOrEmpty(yearFilter))
-                {
-                    if (!string.IsNullOrEmpty(filterExpression))
-                        filterExpression += " and ";
-                    filterExpression += $"Year like '%{yearFilter}%'";
-                }
+                //if (!string.IsNullOrEmpty(yearFilter))
+                //{
+                //    if (!string.IsNullOrEmpty(filterExpression))
+                //        filterExpression += " and ";
+                //    filterExpression += $"Year like '%{yearFilter}%'";
+                //}
 
                 // Áp dụng bộ lọc
                 var dv = new DataView(constructionData)
@@ -222,7 +221,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         private void pictureBoxRemoveFilter_Click(object? sender, EventArgs e)
         {
             txtFilterMaCT.Clear();
-            txtFilterTinhTrang.Clear();
             txtFilterTenCT.Clear();
             txtFilterMaCT.Focus(); // Đặt focus vào ô tìm kiếm tên công trình
 
@@ -248,7 +246,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
             // Thêm sự kiện TextChanged cho các ô tìm kiếm
             txtFilterMaCT.TextChanged += TxtFilter_TextChanged;
-            txtFilterTinhTrang.TextChanged += TxtFilter_TextChanged;
             txtFilterTenCT.TextChanged += TxtFilter_TextChanged;
             // Đăng ký sự kiện KeyDown cho các TextBox
             /* txtName.KeyDown += TextBox_KeyDown;
