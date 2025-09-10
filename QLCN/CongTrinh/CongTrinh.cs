@@ -228,9 +228,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                         filterExpression += " and ";
                     filterExpression += $"Location like '%{tenct}%'";
                 }
-
-                
-
                 // Áp dụng bộ lọc
                 var dv = new DataView(constructionData)
                 {

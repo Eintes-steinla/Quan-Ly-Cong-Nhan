@@ -53,6 +53,13 @@ namespace QLCN.ChamCong
             btnEdit = new Button();
             btnAdd = new Button();
             dgvConstruction = new DataGridView();
+            dgvColSTT = new DataGridViewTextBoxColumn();
+            dgvColMaCN = new DataGridViewTextBoxColumn();
+            dgvColTenCN = new DataGridViewTextBoxColumn();
+            dgvColCongTrinh = new DataGridViewTextBoxColumn();
+            dgvColGioQuet = new DataGridViewTextBoxColumn();
+            dgvColGhiChu = new DataGridViewTextBoxColumn();
+            dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
             dtpFilterGioQuet = new DateTimePicker();
@@ -77,13 +84,6 @@ namespace QLCN.ChamCong
             lblMaCN = new Label();
             txtMaCN = new TextBox();
             panel1 = new Panel();
-            dgvColSTT = new DataGridViewTextBoxColumn();
-            dgvColMaCN = new DataGridViewTextBoxColumn();
-            dgvColTenCN = new DataGridViewTextBoxColumn();
-            dgvColCongTrinh = new DataGridViewTextBoxColumn();
-            dgvColGioQuet = new DataGridViewTextBoxColumn();
-            dgvColGhiChu = new DataGridViewTextBoxColumn();
-            dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -167,6 +167,69 @@ namespace QLCN.ChamCong
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConstruction.Size = new Size(1884, 463);
             dgvConstruction.TabIndex = 19;
+            // 
+            // dgvColSTT
+            // 
+            dgvColSTT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSTT.HeaderText = "STT";
+            dgvColSTT.MinimumWidth = 8;
+            dgvColSTT.Name = "dgvColSTT";
+            dgvColSTT.ReadOnly = true;
+            dgvColSTT.Width = 60;
+            // 
+            // dgvColMaCN
+            // 
+            dgvColMaCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColMaCN.HeaderText = "Mã CN";
+            dgvColMaCN.MinimumWidth = 8;
+            dgvColMaCN.Name = "dgvColMaCN";
+            dgvColMaCN.ReadOnly = true;
+            dgvColMaCN.Width = 150;
+            // 
+            // dgvColTenCN
+            // 
+            dgvColTenCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColTenCN.HeaderText = "Tên CN";
+            dgvColTenCN.MinimumWidth = 8;
+            dgvColTenCN.Name = "dgvColTenCN";
+            dgvColTenCN.ReadOnly = true;
+            dgvColTenCN.Width = 250;
+            // 
+            // dgvColCongTrinh
+            // 
+            dgvColCongTrinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColCongTrinh.HeaderText = "Công Trình";
+            dgvColCongTrinh.MinimumWidth = 8;
+            dgvColCongTrinh.Name = "dgvColCongTrinh";
+            dgvColCongTrinh.ReadOnly = true;
+            dgvColCongTrinh.Width = 300;
+            // 
+            // dgvColGioQuet
+            // 
+            dgvColGioQuet.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGioQuet.HeaderText = "Giờ quét";
+            dgvColGioQuet.MinimumWidth = 8;
+            dgvColGioQuet.Name = "dgvColGioQuet";
+            dgvColGioQuet.ReadOnly = true;
+            dgvColGioQuet.Width = 250;
+            // 
+            // dgvColGhiChu
+            // 
+            dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGhiChu.HeaderText = "Ghi chú";
+            dgvColGhiChu.MinimumWidth = 8;
+            dgvColGhiChu.Name = "dgvColGhiChu";
+            dgvColGhiChu.ReadOnly = true;
+            dgvColGhiChu.Width = 150;
+            // 
+            // dataGridViewColumnCheckBox
+            // 
+            dataGridViewColumnCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewColumnCheckBox.HeaderText = "✅";
+            dataGridViewColumnCheckBox.MinimumWidth = 6;
+            dataGridViewColumnCheckBox.Name = "dataGridViewColumnCheckBox";
+            dataGridViewColumnCheckBox.ReadOnly = true;
+            dataGridViewColumnCheckBox.Width = 52;
             // 
             // btnRefresh
             // 
@@ -264,7 +327,7 @@ namespace QLCN.ChamCong
             panel2.Controls.Add(btnRefresh);
             panel2.Location = new Point(0, 310);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1900, 100);
+            panel2.Size = new Size(1881, 100);
             panel2.TabIndex = 22;
             // 
             // btnExport
@@ -398,71 +461,8 @@ namespace QLCN.ChamCong
             panel1.Controls.Add(lblGioQuet);
             panel1.Location = new Point(0, 50);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1900, 260);
+            panel1.Size = new Size(1881, 260);
             panel1.TabIndex = 21;
-            // 
-            // dgvColSTT
-            // 
-            dgvColSTT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColSTT.HeaderText = "STT";
-            dgvColSTT.MinimumWidth = 8;
-            dgvColSTT.Name = "dgvColSTT";
-            dgvColSTT.ReadOnly = true;
-            dgvColSTT.Width = 60;
-            // 
-            // dgvColMaCN
-            // 
-            dgvColMaCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColMaCN.HeaderText = "Mã CN";
-            dgvColMaCN.MinimumWidth = 8;
-            dgvColMaCN.Name = "dgvColMaCN";
-            dgvColMaCN.ReadOnly = true;
-            dgvColMaCN.Width = 150;
-            // 
-            // dgvColTenCN
-            // 
-            dgvColTenCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColTenCN.HeaderText = "Tên CN";
-            dgvColTenCN.MinimumWidth = 8;
-            dgvColTenCN.Name = "dgvColTenCN";
-            dgvColTenCN.ReadOnly = true;
-            dgvColTenCN.Width = 250;
-            // 
-            // dgvColCongTrinh
-            // 
-            dgvColCongTrinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColCongTrinh.HeaderText = "Công Trình";
-            dgvColCongTrinh.MinimumWidth = 8;
-            dgvColCongTrinh.Name = "dgvColCongTrinh";
-            dgvColCongTrinh.ReadOnly = true;
-            dgvColCongTrinh.Width = 300;
-            // 
-            // dgvColGioQuet
-            // 
-            dgvColGioQuet.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColGioQuet.HeaderText = "Giờ quét";
-            dgvColGioQuet.MinimumWidth = 8;
-            dgvColGioQuet.Name = "dgvColGioQuet";
-            dgvColGioQuet.ReadOnly = true;
-            dgvColGioQuet.Width = 250;
-            // 
-            // dgvColGhiChu
-            // 
-            dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColGhiChu.HeaderText = "Ghi chú";
-            dgvColGhiChu.MinimumWidth = 8;
-            dgvColGhiChu.Name = "dgvColGhiChu";
-            dgvColGhiChu.ReadOnly = true;
-            dgvColGhiChu.Width = 150;
-            // 
-            // dataGridViewColumnCheckBox
-            // 
-            dataGridViewColumnCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewColumnCheckBox.HeaderText = "✅";
-            dataGridViewColumnCheckBox.MinimumWidth = 6;
-            dataGridViewColumnCheckBox.Name = "dataGridViewColumnCheckBox";
-            dataGridViewColumnCheckBox.ReadOnly = true;
-            dataGridViewColumnCheckBox.Width = 52;
             // 
             // ChamCong
             // 
