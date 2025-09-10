@@ -783,19 +783,25 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                     // Đặt tiêu đề cho file Excel
                     worksheet.Cell(1, 1).Value = "DANH SÁCH CÔNG TRÌNH";
-                    worksheet.Range(1, 1, 1, 4).Merge();
+                    worksheet.Range(1, 1, 1, 10).Merge();
                     worksheet.Cell(1, 1).Style.Font.Bold = true;
                     worksheet.Cell(1, 1).Style.Font.FontSize = 16;
                     worksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
                     // Thêm tiêu đề các cột
                     worksheet.Cell(3, 1).Value = "STT";
-                    worksheet.Cell(3, 2).Value = "Tên công trình";
-                    worksheet.Cell(3, 3).Value = "Địa điểm";
-                    worksheet.Cell(3, 4).Value = "Năm thực hiện";
+                    worksheet.Cell(3, 2).Value = "Mã công trình";
+                    worksheet.Cell(3, 3).Value = "Tên công trình";
+                    worksheet.Cell(3, 4).Value = "Tình trạng";
+                    worksheet.Cell(3, 5).Value = "Chủ đầu tư";
+                    worksheet.Cell(3, 6).Value = "Địa điểm";
+                    worksheet.Cell(3, 7).Value = "Dự toán (VNĐ)";
+                    worksheet.Cell(3, 8).Value = "Ngày bắt đầu";
+                    worksheet.Cell(3, 9).Value = "Ngày kết thúc";
+                    worksheet.Cell(3, 10).Value = "Ghi chú";
 
                     // Định dạng tiêu đề cột
-                    var headerRange = worksheet.Range(3, 1, 3, 4);
+                    var headerRange = worksheet.Range(3, 1, 3, 10);
                     headerRange.Style.Font.Bold = true;
                     headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
                     headerRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
@@ -806,20 +812,28 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     int rowCount = dgvConstruction.Rows.Count;
                     for (int i = 0; i < rowCount; i++)
                     {
-                        worksheet.Cell(i + 4, 1).Value = i + 1; // STT
-                        worksheet.Cell(i + 4, 2).Value = dgvConstruction.Rows[i].Cells["dataGridViewColumnName"].Value.ToString();
-                        worksheet.Cell(i + 4, 3).Value = dgvConstruction.Rows[i].Cells["dataGridViewColumnLocation"].Value.ToString();
-                        worksheet.Cell(i + 4, 4).Value = Convert.ToInt32(dgvConstruction.Rows[i].Cells["dataGridViewColumnYear"].Value);
+                        worksheet.Cell(i + 4, 1).Value = i + 1;
+                        worksheet.Cell(i + 4, 2).Value = dgvConstruction.Rows[i].Cells["mact"].Value.ToString();
+                        worksheet.Cell(i + 4, 3).Value = dgvConstruction.Rows[i].Cells["tenct"].Value.ToString();
+                        worksheet.Cell(i + 4, 4).Value = dgvConstruction.Rows[i].Cells["tinhtrang"].Value.ToString();
+                        worksheet.Cell(i + 4, 5).Value = dgvConstruction.Rows[i].Cells["chudautu"].Value.ToString();
+                        worksheet.Cell(i + 4, 6).Value = dgvConstruction.Rows[i].Cells["diadiem"].Value.ToString();
+                        worksheet.Cell(i + 4, 7).Value = dgvConstruction.Rows[i].Cells["dutoan"].Value != DBNull.Value ? Convert.ToDecimal(dgvConstruction.Rows[i].Cells["dutoan"].Value) : (decimal?)null;
+                        worksheet.Cell(i + 4, 8).Value = Convert.ToDateTime(dgvConstruction.Rows[i].Cells["ngaybatdau"].Value);
+                        worksheet.Cell(i + 4, 9).Value = dgvConstruction.Rows[i].Cells["ngayketthuc"].Value != DBNull.Value ? Convert.ToDateTime(dgvConstruction.Rows[i].Cells["ngayketthuc"].Value) : (DateTime?)null;
+                        worksheet.Cell(i + 4, 10).Value = dgvConstruction.Rows[i].Cells["ghichu"].Value.ToString();
                     }
 
                     // Định dạng dữ liệu
-                    var dataRange = worksheet.Range(4, 1, dgvConstruction.Rows.Count + 3, 4);
+                    var dataRange = worksheet.Range(4, 1, dgvConstruction.Rows.Count + 3, 10);
+                    dataRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                    dataRange.Style.Alignment.WrapText = true;
+                    dataRange.Style.Font.FontSize = 12;
                     dataRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
                     dataRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
 
                     // Căn giữa cột STT và Năm thực hiện
                     worksheet.Column(1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    worksheet.Column(4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
                     // Tự động điều chỉnh độ rộng các cột
                     worksheet.Columns().AdjustToContents();
