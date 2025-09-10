@@ -159,9 +159,9 @@
             // nghiPhep
             // 
             nghiPhep.ImageIndex = 4;
-            nghiPhep.Location = new Point(4, 34);
+            nghiPhep.Location = new Point(4, 38);
             nghiPhep.Name = "nghiPhep";
-            nghiPhep.Size = new Size(1399, 499);
+            nghiPhep.Size = new Size(1399, 495);
             nghiPhep.TabIndex = 2;
             nghiPhep.Text = "Nghỉ phép";
             nghiPhep.UseVisualStyleBackColor = true;
