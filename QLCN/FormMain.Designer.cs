@@ -97,9 +97,9 @@
             // 
             congTrinh.Controls.Add(congTrinhControl);
             congTrinh.ImageIndex = 1;
-            congTrinh.Location = new Point(4, 38);
+            congTrinh.Location = new Point(4, 34);
             congTrinh.Name = "congTrinh";
-            congTrinh.Size = new Size(1399, 495);
+            congTrinh.Size = new Size(1399, 499);
             congTrinh.TabIndex = 1;
             congTrinh.Text = "Công trình";
             congTrinh.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             congTrinhControl.Location = new Point(0, 0);
             congTrinhControl.Margin = new Padding(4, 5, 4, 5);
             congTrinhControl.Name = "congTrinhControl";
-            congTrinhControl.Size = new Size(1399, 495);
+            congTrinhControl.Size = new Size(1399, 499);
             congTrinhControl.TabIndex = 0;
             // 
             // chamCong
@@ -139,9 +139,9 @@
             // 
             hopDong.Controls.Add(hopDongControl);
             hopDong.ImageIndex = 3;
-            hopDong.Location = new Point(4, 38);
+            hopDong.Location = new Point(4, 34);
             hopDong.Name = "hopDong";
-            hopDong.Size = new Size(1399, 495);
+            hopDong.Size = new Size(1399, 499);
             hopDong.TabIndex = 2;
             hopDong.Text = "Hợp đồng";
             hopDong.UseVisualStyleBackColor = true;
@@ -153,15 +153,15 @@
             hopDongControl.Location = new Point(0, 0);
             hopDongControl.Margin = new Padding(4, 5, 4, 5);
             hopDongControl.Name = "hopDongControl";
-            hopDongControl.Size = new Size(1399, 495);
+            hopDongControl.Size = new Size(1399, 499);
             hopDongControl.TabIndex = 0;
             // 
             // nghiPhep
             // 
             nghiPhep.ImageIndex = 4;
-            nghiPhep.Location = new Point(4, 38);
+            nghiPhep.Location = new Point(4, 34);
             nghiPhep.Name = "nghiPhep";
-            nghiPhep.Size = new Size(1399, 495);
+            nghiPhep.Size = new Size(1399, 499);
             nghiPhep.TabIndex = 2;
             nghiPhep.Text = "Nghỉ phép";
             nghiPhep.UseVisualStyleBackColor = true;
