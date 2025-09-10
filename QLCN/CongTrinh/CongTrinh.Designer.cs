@@ -455,7 +455,7 @@ namespace QLCN.CongTrinh
             dgvColSTT.DataPropertyName = "STT";
             dgvColSTT.HeaderText = "STT";
             dgvColSTT.MinimumWidth = 8;
-            dgvColSTT.Name = "dgvColSTT";
+            dgvColSTT.Name = "STT";
             dgvColSTT.ReadOnly = true;
             dgvColSTT.Width = 60;
             // 
@@ -465,7 +465,7 @@ namespace QLCN.CongTrinh
             dgvColMaCT.DataPropertyName = "mact";
             dgvColMaCT.HeaderText = "Mã CT";
             dgvColMaCT.MinimumWidth = 8;
-            dgvColMaCT.Name = "dgvColMaCT";
+            dgvColMaCT.Name = "mact";
             dgvColMaCT.ReadOnly = true;
             dgvColMaCT.Width = 150;
             // 
@@ -475,7 +475,7 @@ namespace QLCN.CongTrinh
             dgvColTenCongTrinh.DataPropertyName = "tenct";
             dgvColTenCongTrinh.HeaderText = "Tên CT";
             dgvColTenCongTrinh.MinimumWidth = 8;
-            dgvColTenCongTrinh.Name = "dgvColTenCongTrinh";
+            dgvColTenCongTrinh.Name = "tenct";
             dgvColTenCongTrinh.ReadOnly = true;
             dgvColTenCongTrinh.Width = 140;
             // 
@@ -485,7 +485,7 @@ namespace QLCN.CongTrinh
             dgvColTinhTrang.DataPropertyName = "tinhtrang";
             dgvColTinhTrang.HeaderText = "Tình trạng";
             dgvColTinhTrang.MinimumWidth = 8;
-            dgvColTinhTrang.Name = "dgvColTinhTrang";
+            dgvColTinhTrang.Name = "tinhtrang";
             dgvColTinhTrang.ReadOnly = true;
             dgvColTinhTrang.Width = 180;
             // 
@@ -495,7 +495,7 @@ namespace QLCN.CongTrinh
             dgvColChuDauTu.DataPropertyName = "chudautu";
             dgvColChuDauTu.HeaderText = "Chủ đầu tư";
             dgvColChuDauTu.MinimumWidth = 8;
-            dgvColChuDauTu.Name = "dgvColChuDauTu";
+            dgvColChuDauTu.Name = "chudautu";
             dgvColChuDauTu.ReadOnly = true;
             dgvColChuDauTu.Width = 270;
             // 
@@ -505,7 +505,7 @@ namespace QLCN.CongTrinh
             dgvColDiaDiem.DataPropertyName = "diadiem";
             dgvColDiaDiem.HeaderText = "Địa điểm";
             dgvColDiaDiem.MinimumWidth = 8;
-            dgvColDiaDiem.Name = "dgvColDiaDiem";
+            dgvColDiaDiem.Name = "diadiem";
             dgvColDiaDiem.ReadOnly = true;
             dgvColDiaDiem.Width = 270;
             // 
@@ -515,7 +515,7 @@ namespace QLCN.CongTrinh
             dgvColDuToan.DataPropertyName = "dutoan";
             dgvColDuToan.HeaderText = "Dự toán";
             dgvColDuToan.MinimumWidth = 8;
-            dgvColDuToan.Name = "dgvColDuToan";
+            dgvColDuToan.Name = "dutoan";
             dgvColDuToan.ReadOnly = true;
             dgvColDuToan.Width = 160;
             // 
@@ -525,7 +525,7 @@ namespace QLCN.CongTrinh
             dgvColNgayBatDau.DataPropertyName = "ngaybatdau";
             dgvColNgayBatDau.HeaderText = "Ngày bắt đầu";
             dgvColNgayBatDau.MinimumWidth = 8;
-            dgvColNgayBatDau.Name = "dgvColNgayBatDau";
+            dgvColNgayBatDau.Name = "ngaybatdau";
             dgvColNgayBatDau.ReadOnly = true;
             dgvColNgayBatDau.Width = 200;
             // 
@@ -535,7 +535,7 @@ namespace QLCN.CongTrinh
             dgvColNgayKetThuc.DataPropertyName = "ngayketthuc";
             dgvColNgayKetThuc.HeaderText = "Ngày kết thúc";
             dgvColNgayKetThuc.MinimumWidth = 8;
-            dgvColNgayKetThuc.Name = "dgvColNgayKetThuc";
+            dgvColNgayKetThuc.Name = "ngayketthuc";
             dgvColNgayKetThuc.ReadOnly = true;
             dgvColNgayKetThuc.Width = 200;
             // 
@@ -545,7 +545,7 @@ namespace QLCN.CongTrinh
             dgvColGhiChu.DataPropertyName = "ghichu";
             dgvColGhiChu.HeaderText = "Ghi chú";
             dgvColGhiChu.MinimumWidth = 8;
-            dgvColGhiChu.Name = "dgvColGhiChu";
+            dgvColGhiChu.Name = "ghichu";
             dgvColGhiChu.ReadOnly = true;
             dgvColGhiChu.Width = 150;
             // 
@@ -554,7 +554,7 @@ namespace QLCN.CongTrinh
             dgvColCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvColCheckBox.HeaderText = "✅";
             dgvColCheckBox.MinimumWidth = 6;
-            dgvColCheckBox.Name = "dgvColCheckBox";
+            dgvColCheckBox.Name = "checkbox";
             dgvColCheckBox.ReadOnly = true;
             dgvColCheckBox.Visible = false;
             dgvColCheckBox.Width = 125;
