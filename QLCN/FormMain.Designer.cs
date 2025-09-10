@@ -118,11 +118,11 @@ namespace QLCN
             // 
             chamCong.Dock = DockStyle.Fill;
             chamCong.ImageIndex = 2;
-            chamCong.Location = new Point(4, 34);
+            chamCong.Location = new Point(4, 38);
             chamCong.Margin = new Padding(4, 5, 4, 5);
             chamCong.Name = "chamCong";
             chamCong.Padding = new Padding(3);
-            chamCong.Size = new Size(1399, 499);
+            chamCong.Size = new Size(1399, 495);
             chamCong.TabIndex = 1;
             chamCong.Text = "Chấm công";
             chamCong.UseVisualStyleBackColor = true;
@@ -131,11 +131,11 @@ namespace QLCN
             // 
             nghiPhep.Dock = DockStyle.Fill;
             nghiPhep.ImageIndex = 3;
-            nghiPhep.Location = new Point(4, 34);
+            nghiPhep.Location = new Point(4, 38);
             nghiPhep.Margin = new Padding(4, 5, 4, 5);
             nghiPhep.Name = "nghiPhep";
             nghiPhep.Padding = new Padding(3);
-            nghiPhep.Size = new Size(1399, 499);
+            nghiPhep.Size = new Size(1399, 495);
             nghiPhep.TabIndex = 2;
             nghiPhep.Text = "Nghỉ phép";
             nghiPhep.UseVisualStyleBackColor = true;
