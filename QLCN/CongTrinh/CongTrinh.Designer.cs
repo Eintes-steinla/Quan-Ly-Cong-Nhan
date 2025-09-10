@@ -182,7 +182,7 @@ namespace QLCN.CongTrinh
             txtMaCT.Location = new Point(300, 23);
             txtMaCT.Margin = new Padding(4, 5, 4, 5);
             txtMaCT.Name = "txtMaCT";
-            txtMaCT.Size = new Size(300, 33);
+            txtMaCT.Size = new Size(300, 38);
             txtMaCT.TabIndex = 3;
             // 
             // lblMaCT
@@ -191,7 +191,7 @@ namespace QLCN.CongTrinh
             lblMaCT.Location = new Point(50, 23);
             lblMaCT.Margin = new Padding(4, 0, 4, 0);
             lblMaCT.Name = "lblMaCT";
-            lblMaCT.Size = new Size(139, 25);
+            lblMaCT.Size = new Size(174, 31);
             lblMaCT.TabIndex = 1;
             lblMaCT.Text = "Mã công trình:";
             // 
@@ -200,7 +200,7 @@ namespace QLCN.CongTrinh
             txtTenCT.Location = new Point(300, 73);
             txtTenCT.Margin = new Padding(4, 5, 4, 5);
             txtTenCT.Name = "txtTenCT";
-            txtTenCT.Size = new Size(300, 33);
+            txtTenCT.Size = new Size(300, 38);
             txtTenCT.TabIndex = 4;
             // 
             // lblTenCT
@@ -209,7 +209,7 @@ namespace QLCN.CongTrinh
             lblTenCT.Location = new Point(50, 73);
             lblTenCT.Margin = new Padding(4, 0, 4, 0);
             lblTenCT.Name = "lblTenCT";
-            lblTenCT.Size = new Size(144, 25);
+            lblTenCT.Size = new Size(180, 31);
             lblTenCT.TabIndex = 2;
             lblTenCT.Text = "Tên công trình:";
             // 
@@ -217,22 +217,13 @@ namespace QLCN.CongTrinh
             // 
             cboTinhTrang.DisplayMember = "Key";
             cboTinhTrang.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTinhTrang.Items.AddRange(new object[] { resources.GetObject("cboTinhTrang.Items") });
             cboTinhTrang.Location = new Point(300, 123);
             cboTinhTrang.Margin = new Padding(4, 5, 4, 5);
             cboTinhTrang.Name = "cboTinhTrang";
-            cboTinhTrang.Size = new Size(300, 33);
+            cboTinhTrang.Size = new Size(300, 37);
             cboTinhTrang.TabIndex = 5;
             cboTinhTrang.ValueMember = "Value";
-            var tinhTrang = new Dictionary<string, int>
-{
-    { "Chưa thi công", 0 },
-    { "Đang thi công", 1 },
-    { "Hoàn thành", 2 },
-    { "Đang cập nhật", 3 }
-};
-            cboTinhTrang.DataSource = new BindingSource(tinhTrang, null);
-            cboTinhTrang.DisplayMember = "Key";   // hiển thị text
-            cboTinhTrang.ValueMember = "Value";   // giá trị để lưu DB
             // 
             // lblTinhTrang
             // 
@@ -240,7 +231,7 @@ namespace QLCN.CongTrinh
             lblTinhTrang.Location = new Point(50, 123);
             lblTinhTrang.Margin = new Padding(4, 0, 4, 0);
             lblTinhTrang.Name = "lblTinhTrang";
-            lblTinhTrang.Size = new Size(107, 25);
+            lblTinhTrang.Size = new Size(133, 31);
             lblTinhTrang.TabIndex = 3;
             lblTinhTrang.Text = "Tình trạng:";
             // 
@@ -250,7 +241,7 @@ namespace QLCN.CongTrinh
             dtpNgayBatDau.Location = new Point(1550, 23);
             dtpNgayBatDau.Margin = new Padding(4, 5, 4, 5);
             dtpNgayBatDau.Name = "dtpNgayBatDau";
-            dtpNgayBatDau.Size = new Size(300, 33);
+            dtpNgayBatDau.Size = new Size(300, 38);
             dtpNgayBatDau.TabIndex = 6;
             // 
             // lblNgayBatDau
@@ -259,7 +250,7 @@ namespace QLCN.CongTrinh
             lblNgayBatDau.Location = new Point(1300, 23);
             lblNgayBatDau.Margin = new Padding(4, 0, 4, 0);
             lblNgayBatDau.Name = "lblNgayBatDau";
-            lblNgayBatDau.Size = new Size(136, 25);
+            lblNgayBatDau.Size = new Size(164, 31);
             lblNgayBatDau.TabIndex = 4;
             lblNgayBatDau.Text = "Ngày bắt đầu:";
             // 
@@ -269,7 +260,7 @@ namespace QLCN.CongTrinh
             dtpNgayKetThuc.Location = new Point(1550, 73);
             dtpNgayKetThuc.Margin = new Padding(4, 5, 4, 5);
             dtpNgayKetThuc.Name = "dtpNgayKetThuc";
-            dtpNgayKetThuc.Size = new Size(300, 33);
+            dtpNgayKetThuc.Size = new Size(300, 38);
             dtpNgayKetThuc.TabIndex = 7;
             // 
             // lblNgayKetThuc
@@ -278,7 +269,7 @@ namespace QLCN.CongTrinh
             lblNgayKetThuc.Location = new Point(1300, 73);
             lblNgayKetThuc.Margin = new Padding(4, 0, 4, 0);
             lblNgayKetThuc.Name = "lblNgayKetThuc";
-            lblNgayKetThuc.Size = new Size(141, 25);
+            lblNgayKetThuc.Size = new Size(171, 31);
             lblNgayKetThuc.TabIndex = 5;
             lblNgayKetThuc.Text = "Ngày kết thúc:";
             // 
@@ -287,7 +278,7 @@ namespace QLCN.CongTrinh
             txtDuToan.Location = new Point(1550, 123);
             txtDuToan.Margin = new Padding(4, 5, 4, 5);
             txtDuToan.Name = "txtDuToan";
-            txtDuToan.Size = new Size(300, 33);
+            txtDuToan.Size = new Size(300, 38);
             txtDuToan.TabIndex = 8;
             // 
             // lblDuToan
@@ -296,7 +287,7 @@ namespace QLCN.CongTrinh
             lblDuToan.Location = new Point(1300, 123);
             lblDuToan.Margin = new Padding(4, 0, 4, 0);
             lblDuToan.Name = "lblDuToan";
-            lblDuToan.Size = new Size(89, 25);
+            lblDuToan.Size = new Size(109, 31);
             lblDuToan.TabIndex = 6;
             lblDuToan.Text = "Dự toán:";
             // 
@@ -305,7 +296,7 @@ namespace QLCN.CongTrinh
             txtChuDauTu.Location = new Point(300, 173);
             txtChuDauTu.Margin = new Padding(4, 5, 4, 5);
             txtChuDauTu.Name = "txtChuDauTu";
-            txtChuDauTu.Size = new Size(300, 33);
+            txtChuDauTu.Size = new Size(300, 38);
             txtChuDauTu.TabIndex = 9;
             // 
             // lblChuDauTu
@@ -314,7 +305,7 @@ namespace QLCN.CongTrinh
             lblChuDauTu.Location = new Point(50, 173);
             lblChuDauTu.Margin = new Padding(4, 0, 4, 0);
             lblChuDauTu.Name = "lblChuDauTu";
-            lblChuDauTu.Size = new Size(116, 25);
+            lblChuDauTu.Size = new Size(143, 31);
             lblChuDauTu.TabIndex = 7;
             lblChuDauTu.Text = "Chủ đầu tư:";
             // 
@@ -323,7 +314,7 @@ namespace QLCN.CongTrinh
             txtGhiChu.Location = new Point(1550, 173);
             txtGhiChu.Margin = new Padding(4, 5, 4, 5);
             txtGhiChu.Name = "txtGhiChu";
-            txtGhiChu.Size = new Size(300, 33);
+            txtGhiChu.Size = new Size(300, 38);
             txtGhiChu.TabIndex = 10;
             // 
             // lblGhiChu
@@ -332,7 +323,7 @@ namespace QLCN.CongTrinh
             lblGhiChu.Location = new Point(1300, 173);
             lblGhiChu.Margin = new Padding(4, 0, 4, 0);
             lblGhiChu.Name = "lblGhiChu";
-            lblGhiChu.Size = new Size(87, 25);
+            lblGhiChu.Size = new Size(107, 31);
             lblGhiChu.TabIndex = 8;
             lblGhiChu.Text = "Ghi chú:";
             // 
@@ -342,7 +333,7 @@ namespace QLCN.CongTrinh
             cboTinh.Location = new Point(900, 23);
             cboTinh.Margin = new Padding(4, 5, 4, 5);
             cboTinh.Name = "cboTinh";
-            cboTinh.Size = new Size(300, 33);
+            cboTinh.Size = new Size(300, 37);
             cboTinh.TabIndex = 11;
             cboTinh.SelectedIndexChanged += cboTinh_SelectedIndexChanged;
             // 
@@ -352,7 +343,7 @@ namespace QLCN.CongTrinh
             lblTinh.Location = new Point(700, 23);
             lblTinh.Margin = new Padding(4, 0, 4, 0);
             lblTinh.Name = "lblTinh";
-            lblTinh.Size = new Size(90, 25);
+            lblTinh.Size = new Size(110, 31);
             lblTinh.TabIndex = 9;
             lblTinh.Text = "Tỉnh/TP:";
             // 
@@ -362,7 +353,7 @@ namespace QLCN.CongTrinh
             cboQuanHuyen.Location = new Point(900, 73);
             cboQuanHuyen.Margin = new Padding(4, 5, 4, 5);
             cboQuanHuyen.Name = "cboQuanHuyen";
-            cboQuanHuyen.Size = new Size(300, 33);
+            cboQuanHuyen.Size = new Size(300, 37);
             cboQuanHuyen.TabIndex = 12;
             cboQuanHuyen.SelectedIndexChanged += cboQuanHuyen_SelectedIndexChanged;
             // 
@@ -372,7 +363,7 @@ namespace QLCN.CongTrinh
             lblQuanHuyen.Location = new Point(700, 73);
             lblQuanHuyen.Margin = new Padding(4, 0, 4, 0);
             lblQuanHuyen.Name = "lblQuanHuyen";
-            lblQuanHuyen.Size = new Size(128, 25);
+            lblQuanHuyen.Size = new Size(159, 31);
             lblQuanHuyen.TabIndex = 10;
             lblQuanHuyen.Text = "Quận/Huyện:";
             // 
@@ -382,7 +373,7 @@ namespace QLCN.CongTrinh
             cboXaPhuong.Location = new Point(900, 123);
             cboXaPhuong.Margin = new Padding(4, 5, 4, 5);
             cboXaPhuong.Name = "cboXaPhuong";
-            cboXaPhuong.Size = new Size(300, 33);
+            cboXaPhuong.Size = new Size(300, 37);
             cboXaPhuong.TabIndex = 13;
             // 
             // lblXaPhuong
@@ -391,7 +382,7 @@ namespace QLCN.CongTrinh
             lblXaPhuong.Location = new Point(700, 123);
             lblXaPhuong.Margin = new Padding(4, 0, 4, 0);
             lblXaPhuong.Name = "lblXaPhuong";
-            lblXaPhuong.Size = new Size(115, 25);
+            lblXaPhuong.Size = new Size(143, 31);
             lblXaPhuong.TabIndex = 11;
             lblXaPhuong.Text = "Xã/Phường:";
             // 
@@ -411,7 +402,7 @@ namespace QLCN.CongTrinh
             lblMoTaChiTiet.Location = new Point(700, 173);
             lblMoTaChiTiet.Margin = new Padding(4, 0, 4, 0);
             lblMoTaChiTiet.Name = "lblMoTaChiTiet";
-            lblMoTaChiTiet.Size = new Size(152, 25);
+            lblMoTaChiTiet.Size = new Size(185, 31);
             lblMoTaChiTiet.TabIndex = 12;
             lblMoTaChiTiet.Text = "Mô tả địa điểm:";
             // 
@@ -557,7 +548,7 @@ namespace QLCN.CongTrinh
             dgvColCheckBox.Name = "checkbox";
             dgvColCheckBox.ReadOnly = true;
             dgvColCheckBox.Visible = false;
-            dgvColCheckBox.Width = 125;
+            dgvColCheckBox.Width = 150;
             // 
             // btnRefresh
             // 
@@ -593,46 +584,24 @@ namespace QLCN.CongTrinh
             cboFilterDuToan.DisplayMember = "Key";
             cboFilterDuToan.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFilterDuToan.FormattingEnabled = true;
+            cboFilterDuToan.Items.AddRange(new object[] { resources.GetObject("cboFilterDuToan.Items") });
             cboFilterDuToan.Location = new Point(1120, 0);
             cboFilterDuToan.Name = "cboFilterDuToan";
-            cboFilterDuToan.Size = new Size(160, 33);
+            cboFilterDuToan.Size = new Size(160, 37);
             cboFilterDuToan.TabIndex = 22;
             cboFilterDuToan.ValueMember = "Value";
-            var duToanDict = new Dictionary<string, int>
-{
-    { "Tất cả", 0 },
-    { "Trên 1 tỉ", 1 },
-    {"Trên 2 tỉ", 2 },
-    {"Trên 5 tỉ", 3 },
-    {"Trên 10 tỉ", 4 },
-    {"Trên 20 tỉ", 5 },
-            };
-            cboFilterDuToan.DataSource = new BindingSource(duToanDict, null);
-            cboFilterDuToan.DisplayMember = "Key";   // hiển thị text
-            cboFilterDuToan.ValueMember = "Value";   // giá trị để lưu DB
-
             // 
             // cboFilterTinhTrang
             // 
             cboFilterTinhTrang.DisplayMember = "Key";
             cboFilterTinhTrang.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFilterTinhTrang.FormattingEnabled = true;
+            cboFilterTinhTrang.Items.AddRange(new object[] { resources.GetObject("cboFilterTinhTrang.Items") });
             cboFilterTinhTrang.Location = new Point(400, 0);
             cboFilterTinhTrang.Name = "cboFilterTinhTrang";
-            cboFilterTinhTrang.Size = new Size(180, 33);
+            cboFilterTinhTrang.Size = new Size(180, 37);
             cboFilterTinhTrang.TabIndex = 21;
             cboFilterTinhTrang.ValueMember = "Value";
-            var tinhTrangDict = new Dictionary<string, int>
-{
-    { "Tất cả", 0 },
-    { "Chưa thi công", 1 },
-    { "Đang thi công", 2 },
-    { "Hoàn thành", 3 },
-    { "Đang cập nhật", 4 }
-};
-            cboFilterTinhTrang.DataSource = new BindingSource(tinhTrangDict, null);
-            cboFilterTinhTrang.DisplayMember = "Key";   // hiển thị text
-            cboFilterTinhTrang.ValueMember = "Value";   // giá trị để lưu DB
             // 
             // dtpFilterNgayKetThuc
             // 
@@ -640,7 +609,7 @@ namespace QLCN.CongTrinh
             dtpFilterNgayKetThuc.Location = new Point(1480, 0);
             dtpFilterNgayKetThuc.Name = "dtpFilterNgayKetThuc";
             dtpFilterNgayKetThuc.ShowCheckBox = true;
-            dtpFilterNgayKetThuc.Size = new Size(200, 33);
+            dtpFilterNgayKetThuc.Size = new Size(200, 38);
             dtpFilterNgayKetThuc.TabIndex = 20;
             // 
             // dtpFilterNgayBatDau
@@ -649,7 +618,7 @@ namespace QLCN.CongTrinh
             dtpFilterNgayBatDau.Location = new Point(1280, 0);
             dtpFilterNgayBatDau.Name = "dtpFilterNgayBatDau";
             dtpFilterNgayBatDau.ShowCheckBox = true;
-            dtpFilterNgayBatDau.Size = new Size(200, 33);
+            dtpFilterNgayBatDau.Size = new Size(200, 38);
             dtpFilterNgayBatDau.TabIndex = 17;
             // 
             // txtFilterDiaDiem
@@ -657,7 +626,7 @@ namespace QLCN.CongTrinh
             txtFilterDiaDiem.Location = new Point(850, 0);
             txtFilterDiaDiem.Name = "txtFilterDiaDiem";
             txtFilterDiaDiem.PlaceholderText = "Tìm địa điểm";
-            txtFilterDiaDiem.Size = new Size(270, 33);
+            txtFilterDiaDiem.Size = new Size(270, 38);
             txtFilterDiaDiem.TabIndex = 12;
             txtFilterDiaDiem.TextAlign = HorizontalAlignment.Center;
             // 
@@ -666,7 +635,7 @@ namespace QLCN.CongTrinh
             txtFilterChuDauTu.Location = new Point(580, 0);
             txtFilterChuDauTu.Name = "txtFilterChuDauTu";
             txtFilterChuDauTu.PlaceholderText = "Tìm chủ đầu tư";
-            txtFilterChuDauTu.Size = new Size(270, 33);
+            txtFilterChuDauTu.Size = new Size(270, 38);
             txtFilterChuDauTu.TabIndex = 11;
             txtFilterChuDauTu.TextAlign = HorizontalAlignment.Center;
             // 
@@ -676,7 +645,7 @@ namespace QLCN.CongTrinh
             txtFilterMaCT.Location = new Point(110, 0);
             txtFilterMaCT.Name = "txtFilterMaCT";
             txtFilterMaCT.PlaceholderText = "Tìm mã CT";
-            txtFilterMaCT.Size = new Size(150, 33);
+            txtFilterMaCT.Size = new Size(150, 38);
             txtFilterMaCT.TabIndex = 7;
             txtFilterMaCT.TextAlign = HorizontalAlignment.Center;
             // 
@@ -686,7 +655,7 @@ namespace QLCN.CongTrinh
             txtFilterTenCT.Location = new Point(260, 0);
             txtFilterTenCT.Name = "txtFilterTenCT";
             txtFilterTenCT.PlaceholderText = "Tìm tên CT";
-            txtFilterTenCT.Size = new Size(140, 33);
+            txtFilterTenCT.Size = new Size(140, 38);
             txtFilterTenCT.TabIndex = 8;
             txtFilterTenCT.TextAlign = HorizontalAlignment.Center;
             // 
@@ -774,7 +743,7 @@ namespace QLCN.CongTrinh
             // 
             // CongTrinh
             // 
-            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleDimensions = new SizeF(14F, 29F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel4);
             Controls.Add(panel3);

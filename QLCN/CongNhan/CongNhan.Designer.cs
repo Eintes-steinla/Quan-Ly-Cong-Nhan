@@ -38,7 +38,6 @@ namespace QLCN.CongNhan
         private Label lblMessage;
         private TextBox txtFilterMaCN;
         private TextBox txtFilterTenCN;
-        private PictureBox pictureBoxRemoveFilter;
         private ToolTip toolTip;
         
 
@@ -66,6 +65,7 @@ namespace QLCN.CongNhan
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CongNhan));
             lblMessage = new Label();
             btnDelete = new Button();
             btnEdit = new Button();
@@ -104,6 +104,7 @@ namespace QLCN.CongNhan
             dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
+            pictureBoxRemoveFilter = new PictureBox();
             cboGioiTinh = new ComboBox();
             dtpFilterNgaySinhDen = new DateTimePicker();
             dtpFilterNgaySinhTu = new DateTimePicker();
@@ -111,18 +112,19 @@ namespace QLCN.CongNhan
             txtFilterDiaDiem = new TextBox();
             txtFilterMaCN = new TextBox();
             txtFilterTenCN = new TextBox();
-            pictureBoxRemoveFilter = new PictureBox();
             toolTip = new ToolTip(components);
             panel1 = new Panel();
+            comboBox1 = new ComboBox();
             cboTenCongTrinh = new ComboBox();
             lblGioiTinh = new Label();
             lblTenCT = new Label();
             panel2 = new Panel();
+            btnXemChamCong = new Button();
+            btnXemHD = new Button();
             btnImport = new Button();
             btnExport = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
-            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -146,7 +148,7 @@ namespace QLCN.CongNhan
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(550, 23);
+            btnDelete.Location = new Point(474, 23);
             btnDelete.Margin = new Padding(4, 5, 4, 5);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(150, 50);
@@ -156,7 +158,7 @@ namespace QLCN.CongNhan
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(300, 23);
+            btnEdit.Location = new Point(261, 23);
             btnEdit.Margin = new Padding(4, 5, 4, 5);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(150, 50);
@@ -495,7 +497,7 @@ namespace QLCN.CongNhan
             // 
             // btnRefresh
             // 
-            btnRefresh.Location = new Point(800, 23);
+            btnRefresh.Location = new Point(693, 23);
             btnRefresh.Margin = new Padding(4, 5, 4, 5);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(150, 50);
@@ -508,6 +510,7 @@ namespace QLCN.CongNhan
             // 
             panelFilter.BackColor = Color.WhiteSmoke;
             panelFilter.BorderStyle = BorderStyle.FixedSingle;
+            panelFilter.Controls.Add(pictureBoxRemoveFilter);
             panelFilter.Controls.Add(cboGioiTinh);
             panelFilter.Controls.Add(dtpFilterNgaySinhDen);
             panelFilter.Controls.Add(dtpFilterNgaySinhTu);
@@ -515,11 +518,23 @@ namespace QLCN.CongNhan
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterMaCN);
             panelFilter.Controls.Add(txtFilterTenCN);
-            panelFilter.Controls.Add(pictureBoxRemoveFilter);
             panelFilter.Location = new Point(0, 0);
             panelFilter.Name = "panelFilter";
             panelFilter.Size = new Size(1884, 38);
             panelFilter.TabIndex = 20;
+            // 
+            // pictureBoxRemoveFilter
+            // 
+            pictureBoxRemoveFilter.BackColor = Color.Transparent;
+            pictureBoxRemoveFilter.Cursor = Cursors.Hand;
+            pictureBoxRemoveFilter.Image = (Image)resources.GetObject("pictureBoxRemoveFilter.Image");
+            pictureBoxRemoveFilter.Location = new Point(0, 0);
+            pictureBoxRemoveFilter.Name = "pictureBoxRemoveFilter";
+            pictureBoxRemoveFilter.Size = new Size(38, 38);
+            pictureBoxRemoveFilter.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxRemoveFilter.TabIndex = 20;
+            pictureBoxRemoveFilter.TabStop = false;
+            toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
             // 
             // cboGioiTinh
             // 
@@ -590,18 +605,6 @@ namespace QLCN.CongNhan
             txtFilterTenCN.TabIndex = 8;
             txtFilterTenCN.TextAlign = HorizontalAlignment.Center;
             // 
-            // pictureBoxRemoveFilter
-            // 
-            pictureBoxRemoveFilter.BackColor = Color.Transparent;
-            pictureBoxRemoveFilter.Cursor = Cursors.Hand;
-            pictureBoxRemoveFilter.Location = new Point(0, 0);
-            pictureBoxRemoveFilter.Name = "pictureBoxRemoveFilter";
-            pictureBoxRemoveFilter.Size = new Size(38, 38);
-            pictureBoxRemoveFilter.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBoxRemoveFilter.TabIndex = 10;
-            pictureBoxRemoveFilter.TabStop = false;
-            toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
-            // 
             // panel1
             // 
             panel1.Controls.Add(comboBox1);
@@ -632,6 +635,16 @@ namespace QLCN.CongNhan
             panel1.Name = "panel1";
             panel1.Size = new Size(1881, 260);
             panel1.TabIndex = 21;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox1.Location = new Point(300, 123);
+            comboBox1.Margin = new Padding(4, 5, 4, 5);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(300, 37);
+            comboBox1.TabIndex = 17;
             // 
             // cboTenCongTrinh
             // 
@@ -664,6 +677,8 @@ namespace QLCN.CongNhan
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnXemChamCong);
+            panel2.Controls.Add(btnXemHD);
             panel2.Controls.Add(btnImport);
             panel2.Controls.Add(btnExport);
             panel2.Controls.Add(btnAdd);
@@ -675,9 +690,27 @@ namespace QLCN.CongNhan
             panel2.Size = new Size(1881, 100);
             panel2.TabIndex = 22;
             // 
+            // btnXemChamCong
+            // 
+            btnXemChamCong.Location = new Point(1647, 23);
+            btnXemChamCong.Name = "btnXemChamCong";
+            btnXemChamCong.Size = new Size(203, 50);
+            btnXemChamCong.TabIndex = 22;
+            btnXemChamCong.Text = "Xem chấm công";
+            btnXemChamCong.UseVisualStyleBackColor = true;
+            // 
+            // btnXemHD
+            // 
+            btnXemHD.Location = new Point(1364, 23);
+            btnXemHD.Name = "btnXemHD";
+            btnXemHD.Size = new Size(203, 50);
+            btnXemHD.TabIndex = 21;
+            btnXemHD.Text = "Xem hợp đồng";
+            btnXemHD.UseVisualStyleBackColor = true;
+            // 
             // btnImport
             // 
-            btnImport.Location = new Point(1293, 23);
+            btnImport.Location = new Point(1133, 23);
             btnImport.Name = "btnImport";
             btnImport.Size = new Size(150, 50);
             btnImport.TabIndex = 20;
@@ -686,7 +719,7 @@ namespace QLCN.CongNhan
             // 
             // btnExport
             // 
-            btnExport.Location = new Point(1050, 23);
+            btnExport.Location = new Point(915, 23);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(150, 50);
             btnExport.TabIndex = 19;
@@ -709,16 +742,6 @@ namespace QLCN.CongNhan
             panel4.Name = "panel4";
             panel4.Size = new Size(1900, 50);
             panel4.TabIndex = 24;
-            // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ" });
-            comboBox1.Location = new Point(300, 123);
-            comboBox1.Margin = new Padding(4, 5, 4, 5);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(300, 37);
-            comboBox1.TabIndex = 17;
             // 
             // CongNhan
             // 
@@ -774,5 +797,8 @@ namespace QLCN.CongNhan
         private Button btnImport;
         private ComboBox cboTenCongTrinh;
         private ComboBox comboBox1;
+        private PictureBox pictureBoxRemoveFilter;
+        private Button btnXemHD;
+        private Button btnXemChamCong;
     }
 }
