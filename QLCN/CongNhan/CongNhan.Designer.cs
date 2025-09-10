@@ -104,9 +104,9 @@ namespace QLCN.CongNhan
             dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
-            dateTimePicker1 = new DateTimePicker();
-            cbGioiTinh = new ComboBox();
-            dtpFilterNgaySinh = new DateTimePicker();
+            cboGioiTinh = new ComboBox();
+            dtpFilterNgaySinhDen = new DateTimePicker();
+            dtpFilterNgaySinhTu = new DateTimePicker();
             txtFilterTenCT = new TextBox();
             txtFilterDiaDiem = new TextBox();
             txtFilterMaCN = new TextBox();
@@ -114,14 +114,15 @@ namespace QLCN.CongNhan
             pictureBoxRemoveFilter = new PictureBox();
             toolTip = new ToolTip(components);
             panel1 = new Panel();
-            txtTenCT = new TextBox();
-            txtGioiTinh = new TextBox();
+            cboTenCongTrinh = new ComboBox();
             lblGioiTinh = new Label();
             lblTenCT = new Label();
             panel2 = new Panel();
+            btnImport = new Button();
             btnExport = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -210,7 +211,8 @@ namespace QLCN.CongNhan
             // 
             // dtpNgaySinh
             // 
-            dtpNgaySinh.Format = DateTimePickerFormat.Short;
+            dtpNgaySinh.CustomFormat = " dd/MM/yy";
+            dtpNgaySinh.Format = DateTimePickerFormat.Custom;
             dtpNgaySinh.Location = new Point(300, 173);
             dtpNgaySinh.Margin = new Padding(4, 5, 4, 5);
             dtpNgaySinh.Name = "dtpNgaySinh";
@@ -435,7 +437,7 @@ namespace QLCN.CongNhan
             dgvColNgaySinh.MinimumWidth = 8;
             dgvColNgaySinh.Name = "dgvColNgaySinh";
             dgvColNgaySinh.ReadOnly = true;
-            dgvColNgaySinh.Width = 250;
+            dgvColNgaySinh.Width = 310;
             // 
             // dgvColSDT
             // 
@@ -444,7 +446,7 @@ namespace QLCN.CongNhan
             dgvColSDT.MinimumWidth = 8;
             dgvColSDT.Name = "dgvColSDT";
             dgvColSDT.ReadOnly = true;
-            dgvColSDT.Width = 220;
+            dgvColSDT.Width = 180;
             // 
             // dgvColCCCD
             // 
@@ -462,7 +464,7 @@ namespace QLCN.CongNhan
             dgvColDiaDiem.MinimumWidth = 8;
             dgvColDiaDiem.Name = "dgvColDiaDiem";
             dgvColDiaDiem.ReadOnly = true;
-            dgvColDiaDiem.Width = 270;
+            dgvColDiaDiem.Width = 250;
             // 
             // dgvColTenCT
             // 
@@ -506,9 +508,9 @@ namespace QLCN.CongNhan
             // 
             panelFilter.BackColor = Color.WhiteSmoke;
             panelFilter.BorderStyle = BorderStyle.FixedSingle;
-            panelFilter.Controls.Add(dateTimePicker1);
-            panelFilter.Controls.Add(cbGioiTinh);
-            panelFilter.Controls.Add(dtpFilterNgaySinh);
+            panelFilter.Controls.Add(cboGioiTinh);
+            panelFilter.Controls.Add(dtpFilterNgaySinhDen);
+            panelFilter.Controls.Add(dtpFilterNgaySinhTu);
             panelFilter.Controls.Add(txtFilterTenCT);
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterMaCN);
@@ -519,35 +521,36 @@ namespace QLCN.CongNhan
             panelFilter.Size = new Size(1884, 38);
             panelFilter.TabIndex = 20;
             // 
-            // dateTimePicker1
+            // cboGioiTinh
             // 
-            dateTimePicker1.CustomFormat = " ";
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.ImeMode = ImeMode.NoControl;
-            dateTimePicker1.Location = new Point(705, 0);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(125, 38);
-            dateTimePicker1.TabIndex = 19;
-            dateTimePicker1.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
+            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
+            cboGioiTinh.Location = new Point(400, 0);
+            cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
+            cboGioiTinh.Name = "cboGioiTinh";
+            cboGioiTinh.Size = new Size(180, 37);
+            cboGioiTinh.TabIndex = 16;
             // 
-            // cbGioiTinh
+            // dtpFilterNgaySinhDen
             // 
-            cbGioiTinh.FormattingEnabled = true;
-            cbGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
-            cbGioiTinh.Location = new Point(400, 0);
-            cbGioiTinh.Name = "cbGioiTinh";
-            cbGioiTinh.Size = new Size(180, 37);
-            cbGioiTinh.TabIndex = 18;
+            dtpFilterNgaySinhDen.CustomFormat = " dd/MM/yy";
+            dtpFilterNgaySinhDen.Format = DateTimePickerFormat.Custom;
+            dtpFilterNgaySinhDen.ImeMode = ImeMode.NoControl;
+            dtpFilterNgaySinhDen.Location = new Point(735, 0);
+            dtpFilterNgaySinhDen.Name = "dtpFilterNgaySinhDen";
+            dtpFilterNgaySinhDen.Size = new Size(155, 38);
+            dtpFilterNgaySinhDen.TabIndex = 19;
+            dtpFilterNgaySinhDen.Value = new DateTime(2025, 10, 1, 0, 0, 0, 0);
             // 
-            // dtpFilterNgaySinh
+            // dtpFilterNgaySinhTu
             // 
-            dtpFilterNgaySinh.CustomFormat = " ";
-            dtpFilterNgaySinh.Format = DateTimePickerFormat.Short;
-            dtpFilterNgaySinh.Location = new Point(580, 0);
-            dtpFilterNgaySinh.Name = "dtpFilterNgaySinh";
-            dtpFilterNgaySinh.Size = new Size(125, 38);
-            dtpFilterNgaySinh.TabIndex = 17;
-            dtpFilterNgaySinh.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
+            dtpFilterNgaySinhTu.CustomFormat = " dd/MM/yy";
+            dtpFilterNgaySinhTu.Format = DateTimePickerFormat.Custom;
+            dtpFilterNgaySinhTu.Location = new Point(580, 0);
+            dtpFilterNgaySinhTu.Name = "dtpFilterNgaySinhTu";
+            dtpFilterNgaySinhTu.Size = new Size(155, 38);
+            dtpFilterNgaySinhTu.TabIndex = 17;
+            dtpFilterNgaySinhTu.Value = new DateTime(2025, 9, 24, 0, 0, 0, 0);
             // 
             // txtFilterTenCT
             // 
@@ -560,10 +563,10 @@ namespace QLCN.CongNhan
             // 
             // txtFilterDiaDiem
             // 
-            txtFilterDiaDiem.Location = new Point(1210, 0);
+            txtFilterDiaDiem.Location = new Point(1230, 0);
             txtFilterDiaDiem.Name = "txtFilterDiaDiem";
             txtFilterDiaDiem.PlaceholderText = "Tìm địa điểm";
-            txtFilterDiaDiem.Size = new Size(270, 38);
+            txtFilterDiaDiem.Size = new Size(250, 38);
             txtFilterDiaDiem.TabIndex = 14;
             txtFilterDiaDiem.TextAlign = HorizontalAlignment.Center;
             // 
@@ -601,7 +604,8 @@ namespace QLCN.CongNhan
             // 
             // panel1
             // 
-            panel1.Controls.Add(txtTenCT);
+            panel1.Controls.Add(comboBox1);
+            panel1.Controls.Add(cboTenCongTrinh);
             panel1.Controls.Add(txtMoTaChiTiet);
             panel1.Controls.Add(lblMoTaChiTiet);
             panel1.Controls.Add(lblXaPhuong);
@@ -616,7 +620,6 @@ namespace QLCN.CongNhan
             panel1.Controls.Add(lblGhiChu);
             panel1.Controls.Add(lblTenCN);
             panel1.Controls.Add(txtGhiChu);
-            panel1.Controls.Add(txtGioiTinh);
             panel1.Controls.Add(lblCCCD);
             panel1.Controls.Add(lblGioiTinh);
             panel1.Controls.Add(txtCCCD);
@@ -630,21 +633,14 @@ namespace QLCN.CongNhan
             panel1.Size = new Size(1881, 260);
             panel1.TabIndex = 21;
             // 
-            // txtTenCT
+            // cboTenCongTrinh
             // 
-            txtTenCT.Location = new Point(1550, 123);
-            txtTenCT.Margin = new Padding(4, 5, 4, 5);
-            txtTenCT.Name = "txtTenCT";
-            txtTenCT.Size = new Size(300, 38);
-            txtTenCT.TabIndex = 15;
-            // 
-            // txtGioiTinh
-            // 
-            txtGioiTinh.Location = new Point(300, 123);
-            txtGioiTinh.Margin = new Padding(4, 5, 4, 5);
-            txtGioiTinh.Name = "txtGioiTinh";
-            txtGioiTinh.Size = new Size(300, 38);
-            txtGioiTinh.TabIndex = 5;
+            cboTenCongTrinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTenCongTrinh.Location = new Point(1550, 123);
+            cboTenCongTrinh.Margin = new Padding(4, 5, 4, 5);
+            cboTenCongTrinh.Name = "cboTenCongTrinh";
+            cboTenCongTrinh.Size = new Size(300, 37);
+            cboTenCongTrinh.TabIndex = 16;
             // 
             // lblGioiTinh
             // 
@@ -668,6 +664,7 @@ namespace QLCN.CongNhan
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnImport);
             panel2.Controls.Add(btnExport);
             panel2.Controls.Add(btnAdd);
             panel2.Controls.Add(btnEdit);
@@ -677,6 +674,15 @@ namespace QLCN.CongNhan
             panel2.Name = "panel2";
             panel2.Size = new Size(1881, 100);
             panel2.TabIndex = 22;
+            // 
+            // btnImport
+            // 
+            btnImport.Location = new Point(1293, 23);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new Size(150, 50);
+            btnImport.TabIndex = 20;
+            btnImport.Text = "Nhập Excel";
+            btnImport.UseVisualStyleBackColor = true;
             // 
             // btnExport
             // 
@@ -703,6 +709,16 @@ namespace QLCN.CongNhan
             panel4.Name = "panel4";
             panel4.Size = new Size(1900, 50);
             panel4.TabIndex = 24;
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox1.Location = new Point(300, 123);
+            comboBox1.Margin = new Padding(4, 5, 4, 5);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(300, 37);
+            comboBox1.TabIndex = 17;
             // 
             // CongNhan
             // 
@@ -739,10 +755,11 @@ namespace QLCN.CongNhan
         private Panel panel4;
         private TextBox txtFilterTenCT;
         private TextBox txtFilterDiaDiem;
-        private TextBox txtGioiTinh;
         private Label lblGioiTinh;
         private Label lblTenCT;
-        private TextBox txtTenCT;
+        private DateTimePicker dtpFilterNgaySinhTu;
+        private DateTimePicker dtpFilterNgaySinhDen;
+        private ComboBox cboGioiTinh;
         private DataGridViewTextBoxColumn dgvColSTT;
         private DataGridViewTextBoxColumn dgvColMaCN;
         private DataGridViewTextBoxColumn dgvColTenCN;
@@ -754,8 +771,8 @@ namespace QLCN.CongNhan
         private DataGridViewTextBoxColumn dgvColTenCT;
         private DataGridViewTextBoxColumn dgvColGhiChu;
         private DataGridViewCheckBoxColumn dataGridViewColumnCheckBox;
-        private DateTimePicker dtpFilterNgaySinh;
-        private ComboBox cbGioiTinh;
-        private DateTimePicker dateTimePicker1;
+        private Button btnImport;
+        private ComboBox cboTenCongTrinh;
+        private ComboBox comboBox1;
     }
 }
