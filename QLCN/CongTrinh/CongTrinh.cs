@@ -211,7 +211,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                 string mact = txtFilterMaCT.Text.Trim();
                 string tenct = txtFilterTenCT.Text.Trim();
-                string tinhtrang = txtFilterTinhTrang.Text.Trim();
                 string chudautu = txtFilterChuDauTu.Text.Trim();
                 string diadiem = txtFilterDiaDiem.Text.Trim();
                 DateTime? ngaybatdau = dtpFilterNgayBatDau.Checked ? dtpFilterNgayBatDau.Value.Date : null;
@@ -230,12 +229,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     filterExpression += $"Location like '%{tenct}%'";
                 }
 
-                if (!string.IsNullOrEmpty(tinhtrang))
-                {
-                    if (!string.IsNullOrEmpty(filterExpression))
-                        filterExpression += " and ";
-                    filterExpression += $"Year like '%{tinhtrang}%'";
-                }
+                
 
                 // Áp dụng bộ lọc
                 var dv = new DataView(constructionData)
@@ -287,18 +281,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             dgvConstruction.SelectionChanged += DgvConstruction_SelectionChanged;
             btnExport.Click += btnExport_Click;
         }
-        /* private void TextBox_KeyDown(object? sender, KeyEventArgs e)
-        {
-           // Kiểm tra nếu phím Enter được nhấn
-           if (e.KeyCode == Keys.Enter)
-           {
-              // Ngăn không cho phím Enter tạo ra tiếng "beep"
-              e.SuppressKeyPress = true;
-
-              // Kích hoạt sự kiện Click của nút Thêm
-              btnAdd.PerformClick();
-           }
-        } */
 
 
         private void btnRefresh_Click(object? sender, EventArgs e)
@@ -317,7 +299,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             cboXaPhuong.SelectedIndex = -1;
             txtMoTaChiTiet.Clear();
 
-            txtMaCT.Focus(); // Đặt focus vào ô nhập mã công trình
+            txtMaCT.Focus();
         }
 
         private void CongTrinh_Load(object? sender, EventArgs e) => LoadCongTrinh();
@@ -347,17 +329,14 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 else
                     dtpNgayKetThuc.Value = DateTime.Now;
 
-                // ...trong DgvConstruction_CellClick...
                 string diaChi = row.Cells["diadiem"].Value?.ToString() ?? "";
                 string[] parts = diaChi.Split(',');
 
 
-                // Lấy 3 phần cuối
                 string tenTinh = parts[^1].Trim();
                 string tenHuyen = parts[^2].Trim();
                 string tenXa = parts[^3].Trim();
 
-                // Ghép lại phần mô tả chi tiết (có thể có dấu ,)
                 string moTaChiTiet = string.Join(",", parts.Take(parts.Length - 3)).Trim();
 
                 txtMoTaChiTiet.Text = moTaChiTiet;
@@ -427,7 +406,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             try
             {
 
-                // Cập nhật dữ liệu vào database
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
 
@@ -467,7 +445,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 command2.Parameters.AddWithValue("@mact1", mact);
                 command2.ExecuteNonQuery();
 
-                // Thực thi câu lệnh
 
                 lblMessage.Text = "Cập nhật công trình thành công!";
                 lblMessage.ForeColor = Color.Green;
@@ -482,9 +459,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 txtDuToan.Clear();
                 txtChuDauTu.Clear();
                 txtGhiChu.Clear();
-                cboTinh.SelectedIndex = -1;
-                cboQuanHuyen.SelectedIndex = -1;
-                cboXaPhuong.SelectedIndex = -1;
                 txtMoTaChiTiet.Clear();
                 ActiveControl = null;
                 mact = null;
