@@ -41,11 +41,7 @@ namespace QLCN.CongNhan
         private TextBox txtFilterTenCN;
         private PictureBox pictureBoxRemoveFilter;
         private ToolTip toolTip;
-        private DataGridViewTextBoxColumn dataGridViewColumnSTT;
-        private DataGridViewTextBoxColumn dataGridViewColumnName;
-        private DataGridViewTextBoxColumn dataGridViewColumnYear;
-        private DataGridViewTextBoxColumn dataGridViewColumnLocation;
-        private DataGridViewTextBoxColumn dataGridViewColumnID;
+        
 
         /// <summary> 
         /// Clean up any resources being used.

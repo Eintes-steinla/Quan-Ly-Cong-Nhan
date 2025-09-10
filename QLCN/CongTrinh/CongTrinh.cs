@@ -10,7 +10,7 @@ namespace QLCN.CongTrinh
 {
     public partial class CongTrinh : UserControl
     {
-        string query;
+        string? query;
         public CongTrinh()
         {
             InitializeComponent();
@@ -53,6 +53,16 @@ namespace QLCN.CongTrinh
                 return true;
             }
 
+            // Kiểm tra xã phuơng không được bỏ trống
+            if (cboXaPhuong.SelectedIndex == -1)
+            {
+                lblMessage.Text = "Vui lòng chọn địa chỉ!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                cboXaPhuong.Focus();
+                return true;
+            }
+
             return false;
         }
 
@@ -78,24 +88,34 @@ namespace QLCN.CongTrinh
 
                 command.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command.Parameters.AddWithValue("@TenCT", txtTenCT.Text);
-                command.Parameters.AddWithValue("@TinhTrang", txtTinhTrang.Text);
+                command.Parameters.AddWithValue("@TinhTrang", string.IsNullOrWhiteSpace(txtTinhTrang.Text) ? DBNull.Value : txtTinhTrang.Text);
                 DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
-                command.Parameters.AddWithValue("@NgayBatDau", ngayBatDau.ToString("yyyy-MM-dd"));
-                if (dtpNgayKetThuc.Checked && dtpNgayKetThuc.Value != DateTime.MinValue)
-                    command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@NgayBatDau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (dtpNgayKetThuc.Checked)
+                {
+                    if (dtpNgayKetThuc.Value.Date <= dtpNgayKetThuc.Value.Date)
+                        command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
+                    else
+                        command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value);
+                }
                 else
                     command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
-                command.Parameters.AddWithValue("@DuToan", txtDuToan.Text);
-                command.Parameters.AddWithValue("@ChuDauTu", txtChuDauTu.Text);
-                command.Parameters.AddWithValue("@GhiChu", txtGhiChu.Text);
+
+                command.Parameters.AddWithValue("@DuToan",
+    string.IsNullOrWhiteSpace(txtDuToan.Text)
+        ? DBNull.Value
+        : Convert.ToDecimal(txtDuToan.Text));
+                command.Parameters.AddWithValue("@ChuDauTu", string.IsNullOrWhiteSpace(txtChuDauTu.Text) ? DBNull.Value : txtChuDauTu.Text);
+                command.Parameters.AddWithValue("@GhiChu", string.IsNullOrWhiteSpace(txtGhiChu.Text) ? DBNull.Value : txtGhiChu.Text);
                 command.ExecuteNonQuery();
 
-                query = @"insert into DiaChiCongTrinh (MaCT, MaXP, MoTaChiTiet) values (@MaCT, @MaXP, @MoTaChiTiet)";
+                query = "insert into DiaChiCongTrinh (MaCT, MaXP, MoTaChiTiet) values (@MaCT, @MaXP, @MoTaChiTiet)";
                 using SqlCommand command2 = new(query, connection);
                 command2.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
-                command2.Parameters.AddWithValue("@MoTaChiTiet", txtMoTaChiTiet.Text);
+                command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
+                command2.ExecuteNonQuery();
 
                 // Hiển thị thông báo thành công
                 lblMessage.Text = "Đã thêm công trình thành công!";
@@ -118,7 +138,7 @@ namespace QLCN.CongTrinh
                 this.ActiveControl = null;
 
                 // Làm mới datagridview
-                LoadConstructionData();
+                LoadCongTrinh();
             }
             catch (Exception ex)
             {
@@ -128,13 +148,13 @@ namespace QLCN.CongTrinh
             }
         }
         private DataTable? constructionData;
-        private void LoadConstructionData()
+        private void LoadCongTrinh()
         {
             try
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                query = @"select ct.mact, tenct, MoTaChiTiet + ', ' + TenXP + ', ' + TenQH + ', ' + TenTinh as diachi , tinhtrang, ngaybatdau, ngayketthuc, dutoan, chudautu, ct.ghichu
+                query = @"select ct.mact as mact, tenct , tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diadiem, dutoan, ngaybatdau, ngayketthuc, ct.ghichu
 from congtrinh ct
 join diachicongtrinh dt on ct.mact = dt.mact
 join XaPhuong xp on xp.MaXP = dt.MaXP
@@ -245,7 +265,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             btnRefresh.Click += btnRefresh_Click;
             btnAdd.Click += btnAdd_Click;
             btnEdit.Click += btnEdit_Click;
-            Load += ConstructionUserControl_Load;
 
 
             // Thêm sự kiện TextChanged cho các ô tìm kiếm
@@ -297,9 +316,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             txtMaCT.Focus(); // Đặt focus vào ô nhập mã công trình
         }
 
-        private void ConstructionUserControl_Load(object? sender, EventArgs e) => LoadConstructionData();
+        private void CongTrinh_Load(object? sender, EventArgs e) => LoadCongTrinh();
 
-        private int constructionID = -1;
+        private string ?mact;
         private void DgvConstruction_CellClick(object? sender, DataGridViewCellEventArgs e)
         {
             // Kiểm tra xem người dùng có nhấp vào tiêu đề cột không
@@ -312,11 +331,48 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 DataGridViewRow row = dgvConstruction.Rows[e.RowIndex];
 
                 // Hiển thị dữ liệu vào các ô nhập tương ứng
-                txtTenCT.Text = row.Cells["dataGridViewColumnName"].Value.ToString();
-                constructionID = Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value); // Lưu ID công trình để sử dụng cho việc sửa hoặc xóa
+                txtMaCT.Text = row.Cells["mact"].Value.ToString();
+                txtTenCT.Text = row.Cells["tenct"].Value.ToString();
+                txtTinhTrang.Text = row.Cells["tinhtrang"].Value.ToString();
+                txtDuToan.Text = row.Cells["dutoan"].Value.ToString();
+                txtChuDauTu.Text = row.Cells["chudautu"].Value.ToString();
+                txtGhiChu.Text = row.Cells["ghichu"].Value.ToString();
+                dtpNgayBatDau.Value = Convert.ToDateTime(row.Cells["ngaybatdau"].Value);
+                if (row.Cells["ngayketthuc"].Value != DBNull.Value)
+                    dtpNgayKetThuc.Value = Convert.ToDateTime(row.Cells["ngayketthuc"].Value);
+                else
+                    dtpNgayKetThuc.Value = DateTime.Now;
 
-                // TODO: Cần cập nhật để hiển thị dữ liệu từ database cho các trường mới
-                // Hiện tại chỉ có dữ liệu từ các cột cũ
+                // ...trong DgvConstruction_CellClick...
+                string diaChi = row.Cells["diadiem"].Value?.ToString() ?? "";
+                string[] parts = diaChi.Split(',');
+
+
+                // Lấy 3 phần cuối
+                string tenTinh = parts[^1].Trim();
+                string tenHuyen = parts[^2].Trim();
+                string tenXa = parts[^3].Trim();
+
+                // Ghép lại phần mô tả chi tiết (có thể có dấu ,)
+                string moTaChiTiet = string.Join(",", parts.Take(parts.Length - 3)).Trim();
+
+                txtMoTaChiTiet.Text = moTaChiTiet;
+
+                cboTinh.SelectedIndex = cboTinh.FindStringExact(tenTinh);
+                if (cboTinh.SelectedIndex != -1)
+                {
+                    LoadcboHuyen(Convert.ToInt32(cboTinh.SelectedValue));
+                    cboQuanHuyen.SelectedIndex = cboQuanHuyen.FindStringExact(tenHuyen);
+                }
+                if (cboQuanHuyen.SelectedIndex != -1)
+                {
+                    LoadcboXa(Convert.ToInt32(cboQuanHuyen.SelectedValue));
+                    cboXaPhuong.SelectedIndex = cboXaPhuong.FindStringExact(tenXa);
+                }
+
+
+                mact = txtMaCT.Text;
+
                 txtMaCT.Focus();
 
             }
@@ -331,7 +387,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         {
             foreach (DataGridViewRow row in dgvConstruction.Rows)
             {
-                if (Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value) == constructionID)
+                if (row.Cells["mact"].Value.ToString() == mact)
                 {
                     // Chọn dòng
                     dgvConstruction.ClearSelection();
@@ -355,7 +411,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 return;
             }
             // Kiểm tra xem đã chọn công trình nào chưa
-            if (constructionID == -1)
+            if (mact == null)
             {
                 lblMessage.Text = "Chọn một công trình để sửa!";
                 lblMessage.ForeColor = Color.Red;
@@ -371,19 +427,44 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
 
-                query = "update CongTrinh set Name = @Name, Location = @Location, Year = @Year where ID = @ID";
+                query = "update CongTrinh set mact = @mact1, tenct = @tenct, tinhtrang = @tinhtrang, chudautu = @chudautu, dutoan = @dutoan, ngaybatdau = @ngaybatdau, ngayketthuc = @ngayketthuc, ghichu = @ghichu where mact = @mact";
 
                 using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@mact1", txtMaCT.Text);
+                command.Parameters.AddWithValue("@tenct", txtTenCT.Text);
+                command.Parameters.AddWithValue("@tinhtrang", string.IsNullOrWhiteSpace(txtTinhTrang.Text) ? DBNull.Value : txtTinhTrang.Text);
+                DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
-                command.Parameters.AddWithValue("@Name", txtTenCT.Text);
-                command.Parameters.AddWithValue("@Year", string.IsNullOrEmpty(txtTenCT.Text) ? DBNull.Value : Convert.ToInt32(txtTenCT.Text));
-                command.Parameters.AddWithValue("@ID", constructionID);
+                command.Parameters.AddWithValue("@ngaybatdau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (dtpNgayKetThuc.Checked)
+                {
+                    if (dtpNgayKetThuc.Value.Date <= dtpNgayBatDau.Value.Date)
+                        command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
+                    else
+                        command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value);
+                }
+                else
+                    command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
+
+                command.Parameters.AddWithValue("@dutoan",
+    string.IsNullOrWhiteSpace(txtDuToan.Text)
+        ? DBNull.Value
+        : Convert.ToDecimal(txtDuToan.Text));
+                command.Parameters.AddWithValue("@chudautu", string.IsNullOrWhiteSpace(txtChuDauTu.Text) ? DBNull.Value : txtChuDauTu.Text);
+                command.Parameters.AddWithValue("@ghichu", string.IsNullOrWhiteSpace(txtGhiChu.Text) ? DBNull.Value : txtGhiChu.Text);
+                command.Parameters.AddWithValue("@mact", mact);
+                command.ExecuteNonQuery();
+
+                query = "update DiaChiCongTrinh set MaCT = @mact1, MaXP = @MaXP, MoTaChiTiet = @MoTaChiTiet where MaCT = @MaCT";
+                using SqlCommand command2 = new(query, connection);
+                command2.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
+                command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
+                command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
+                command2.Parameters.AddWithValue("@mact1", mact);
+                command2.ExecuteNonQuery();
 
                 // Thực thi câu lệnh
-                int rowsAffected = command.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
+                
                     lblMessage.Text = "Cập nhật công trình thành công!";
                     lblMessage.ForeColor = Color.Green;
                     TimeIntervalMessage();
@@ -402,16 +483,12 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     cboXaPhuong.SelectedIndex = -1;
                     txtMoTaChiTiet.Clear();
                     ActiveControl = null;
+                    mact = null;
 
-                    LoadConstructionData();
+                    LoadCongTrinh();
                     SelectRowById();
-                }
-                else
-                {
-                    lblMessage.Text = "Không thể cập nhật công trình. Vui lòng thử lại!";
-                    lblMessage.ForeColor = Color.Red;
-                    TimeIntervalMessage();
-                }
+                
+                
             }
             catch (Exception ex)
             {
@@ -449,7 +526,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 isDelete = true;
 
                 // Hiển thị cột checkbox
-                dataGridViewColumnCheckBox.Visible = true;
+                dgvColCheckBox.Visible = true;
 
                 // Đổi tên nút thành "Hủy xóa"
                 btnDelete.Text = "Hủy xóa";
@@ -463,9 +540,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 txtDuToan.Clear();
                 txtChuDauTu.Clear();
                 txtGhiChu.Clear();
-                cboTinh.SelectedIndex = -1;
-                cboQuanHuyen.SelectedIndex = -1;
-                cboXaPhuong.SelectedIndex = -1;
                 txtMoTaChiTiet.Clear();
                 txtTenCT.Enabled = false;
                 txtMaCT.Enabled = false;
@@ -492,8 +566,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dataGridViewColumnCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dataGridViewColumnCheckBox"].Value))
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -540,8 +614,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     List<int> idsToDelete = [];
                     foreach (DataGridViewRow row in dgvConstruction.Rows)
                     {
-                        if (row.Cells["dataGridViewColumnCheckBox"].Value != null &&
-                            Convert.ToBoolean(row.Cells["dataGridViewColumnCheckBox"].Value))
+                        if (row.Cells["dgvColCheckBox"].Value != null &&
+                            Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                         {
                             int id = Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value);
                             idsToDelete.Add(id);
@@ -576,7 +650,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         private void ResetDeleteMode()
         {
             // Ẩn cột checkbox
-            dataGridViewColumnCheckBox.Visible = false;
+            dgvColCheckBox.Visible = false;
 
             // Đổi tên nút trở lại thành Xóa
             btnDelete.Text = "Xóa";
@@ -602,25 +676,25 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             txtMaCT.Focus(); // Đặt focus vào ô nhập mã công trình
 
             // Làm mới datagridview để xóa các lựa chọn
-            LoadConstructionData();
+            LoadCongTrinh();
         }
         private void DgvConstruction_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             // Kiểm tra xem người dùng có nhấp vào cột checkbox không
-            if (e.ColumnIndex == dataGridViewColumnCheckBox.Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dgvColCheckBox.Index && e.RowIndex >= 0)
             {
                 // Đảo ngược giá trị của ô checkbox
                 bool currentValue = false;
-                if (dgvConstruction.Rows[e.RowIndex].Cells["dataGridViewColumnCheckBox"].Value != null)
-                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dataGridViewColumnCheckBox"].Value);
-                dgvConstruction.Rows[e.RowIndex].Cells["dataGridViewColumnCheckBox"].Value = !currentValue;
+                if (dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value != null)
+                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value);
+                dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value = !currentValue;
 
                 // Kiểm tra xem có dòng nào được chọn không
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dataGridViewColumnCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dataGridViewColumnCheckBox"].Value))
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -632,27 +706,27 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Đổi tên nút thành "Xác nhận xóa"
                 {
                     btnDelete.Text = "Xác nhận xóa";
-                    dataGridViewColumnCheckBox.HeaderText = "❎";
-                    dataGridViewColumnCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
+                    dgvColCheckBox.HeaderText = "❎";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
                 }
                 else if (!hasCheckedRows && btnDelete.Text == "Xác nhận xóa")
                 // Không còn dòng nào được chọn, đổi tên nút trở lại thành "Hủy xóa"
                 {
                     btnDelete.Text = "Hủy xóa";
-                    dataGridViewColumnCheckBox.HeaderText = "✅";
-                    dataGridViewColumnCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
+                    dgvColCheckBox.HeaderText = "✅";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
                 }
             }
 
             // Kiểm tra xem người dùng có nhấp vào header của cột checkbox không
-            if (e.RowIndex == -1 && e.ColumnIndex == dataGridViewColumnCheckBox.Index)
+            if (e.RowIndex == -1 && e.ColumnIndex == dgvColCheckBox.Index)
             {
                 // Kiểm tra xem có dòng nào đã được chọn chưa
                 bool anyChecked = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dataGridViewColumnCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dataGridViewColumnCheckBox"].Value))
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                     {
                         anyChecked = true;
                         break;
@@ -662,19 +736,19 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Chọn hoặc bỏ chọn tất cả các dòng
                 bool checkValue = !anyChecked;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
-                    row.Cells["dataGridViewColumnCheckBox"].Value = checkValue;
+                    row.Cells["dgvColCheckBox"].Value = checkValue;
 
                 // Cập nhật tên nút
                 if (checkValue)
                 {
-                    dataGridViewColumnCheckBox.HeaderText = "❎";
-                    dataGridViewColumnCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
+                    dgvColCheckBox.HeaderText = "❎";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
                     btnDelete.Text = "Xác nhận xóa";
                 }
                 else
                 {
-                    dataGridViewColumnCheckBox.HeaderText = "✅";
-                    dataGridViewColumnCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
+                    dgvColCheckBox.HeaderText = "✅";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
                     btnDelete.Text = "Hủy xóa";
                 }
             }
@@ -682,7 +756,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         private void DgvConstruction_SelectionChanged(object? sender, EventArgs e)
         {
             // Nếu cột checkbox đang hiển thị (đang ở chế độ xóa), không cho phép chọn dòng
-            if (dataGridViewColumnCheckBox.Visible)
+            if (dgvColCheckBox.Visible)
                 dgvConstruction.ClearSelection();
             // dgvConstruction.CurrentCell = null;
         }
@@ -799,6 +873,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     cboQuanHuyen.DataSource = dt;
                     cboQuanHuyen.DisplayMember = "TenQH";
                     cboQuanHuyen.ValueMember = "MaQH";
+                    cboQuanHuyen.SelectedIndex = -1;
 
                 }
             }
@@ -821,8 +896,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     cboTinh.DataSource = dt;
-                    cboTinh.DisplayMember = "TenTinh";  // cột hiển thị
-                    cboTinh.ValueMember = "MaTinh";     // cột giá trị 
+                    cboTinh.DisplayMember = "TenTinh";
+                    cboTinh.ValueMember = "MaTinh";
+                    cboTinh.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
@@ -849,6 +925,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     cboXaPhuong.DataSource = dt;
                     cboXaPhuong.DisplayMember = "TenXP";
                     cboXaPhuong.ValueMember = "MaXP";
+                    cboXaPhuong.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
