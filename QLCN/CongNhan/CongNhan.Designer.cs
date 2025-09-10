@@ -104,6 +104,7 @@ namespace QLCN.CongNhan
             dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
+            dateTimePicker1 = new DateTimePicker();
             cbGioiTinh = new ComboBox();
             dtpFilterNgaySinh = new DateTimePicker();
             txtFilterTenCT = new TextBox();
@@ -121,7 +122,6 @@ namespace QLCN.CongNhan
             btnExport = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
-            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -519,6 +519,17 @@ namespace QLCN.CongNhan
             panelFilter.Size = new Size(1884, 38);
             panelFilter.TabIndex = 20;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = " ";
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.ImeMode = ImeMode.NoControl;
+            dateTimePicker1.Location = new Point(705, 0);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(125, 38);
+            dateTimePicker1.TabIndex = 19;
+            dateTimePicker1.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
+            // 
             // cbGioiTinh
             // 
             cbGioiTinh.FormattingEnabled = true;
@@ -616,7 +627,7 @@ namespace QLCN.CongNhan
             panel1.Controls.Add(lblTenCT);
             panel1.Location = new Point(0, 50);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1900, 260);
+            panel1.Size = new Size(1881, 260);
             panel1.TabIndex = 21;
             // 
             // txtTenCT
@@ -664,7 +675,7 @@ namespace QLCN.CongNhan
             panel2.Controls.Add(btnRefresh);
             panel2.Location = new Point(0, 310);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1900, 100);
+            panel2.Size = new Size(1881, 100);
             panel2.TabIndex = 22;
             // 
             // btnExport
@@ -692,17 +703,6 @@ namespace QLCN.CongNhan
             panel4.Name = "panel4";
             panel4.Size = new Size(1900, 50);
             panel4.TabIndex = 24;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CustomFormat = " ";
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.ImeMode = ImeMode.NoControl;
-            dateTimePicker1.Location = new Point(705, 0);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(125, 38);
-            dateTimePicker1.TabIndex = 19;
-            dateTimePicker1.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
             // 
             // CongNhan
             // 

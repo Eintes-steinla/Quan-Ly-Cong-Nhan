@@ -211,7 +211,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                 string mact = txtFilterMaCT.Text.Trim();
                 string tenct = txtFilterTenCT.Text.Trim();
-                string tinhtrang = txtFilterTinhTrang.Text.Trim();
+                //string tinhtrang = txtFilterTinhTrang.Text.Trim();
                 string chudautu = txtFilterChuDauTu.Text.Trim();
                 string diadiem = txtFilterDiaDiem.Text.Trim();
                 DateTime? ngaybatdau = dtpFilterNgayBatDau.Checked ? dtpFilterNgayBatDau.Value.Date : null;
@@ -230,12 +230,12 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     filterExpression += $"Location like '%{tenct}%'";
                 }
 
-                if (!string.IsNullOrEmpty(tinhtrang))
-                {
-                    if (!string.IsNullOrEmpty(filterExpression))
-                        filterExpression += " and ";
-                    filterExpression += $"Year like '%{tinhtrang}%'";
-                }
+                //if (!string.IsNullOrEmpty(tinhtrang))
+                //{
+                //    if (!string.IsNullOrEmpty(filterExpression))
+                //        filterExpression += " and ";
+                //    filterExpression += $"Year like '%{tinhtrang}%'";
+                //}
 
                 // Áp dụng bộ lọc
                 var dv = new DataView(constructionData)
