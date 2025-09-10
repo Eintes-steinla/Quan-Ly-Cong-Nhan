@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="BaoCao\FormBaoCao.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="ChamCongQR\FormChamCongQR.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -23,6 +20,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Login\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NghiPhep\NghiPhep.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
