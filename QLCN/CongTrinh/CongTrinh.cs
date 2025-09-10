@@ -68,7 +68,6 @@ namespace QLCN.CongTrinh
 
         private void TxtDuToan_KeyPress(object? sender, KeyPressEventArgs e)
         {
-            // Allow control characters (like backspace) and digits
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -79,7 +78,6 @@ namespace QLCN.CongTrinh
             if (CheckRequiredFields()) return;
             try
             {
-                // Lấy kết nối từ DatabaseHelper
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
                 query = "insert into CongTrinh (MaCT, TenCT, TinhTrang, NgayBatDau, NgayKetThuc, DuToan, ChuDauTu, GhiChu) values (@MaCT, @TenCT, @TinhTrang, @NgayBatDau, @NgayKetThuc, @DuToan, @ChuDauTu, @GhiChu)";
@@ -117,12 +115,10 @@ namespace QLCN.CongTrinh
                 command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
                 command2.ExecuteNonQuery();
 
-                // Hiển thị thông báo thành công
                 lblMessage.Text = "Đã thêm công trình thành công!";
                 lblMessage.ForeColor = Color.Green;
                 TimeIntervalMessage();
 
-                // Làm mới các trường nhập liệu
                 txtMaCT.Clear();
                 txtTenCT.Clear();
                 txtTinhTrang.Clear();
@@ -131,14 +127,20 @@ namespace QLCN.CongTrinh
                 txtDuToan.Clear();
                 txtChuDauTu.Clear();
                 txtGhiChu.Clear();
-                cboTinh.SelectedIndex = -1;
-                cboQuanHuyen.SelectedIndex = -1;
-                cboXaPhuong.SelectedIndex = -1;
                 txtMoTaChiTiet.Clear();
                 this.ActiveControl = null;
 
-                // Làm mới datagridview
                 LoadCongTrinh();
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601) // Mã lỗi trùng khóa chính
+                {
+                    lblMessage.Text = "Mã công trình đã tồn tại";
+                    lblMessage.ForeColor = Color.Red;
+                    TimeIntervalMessage();
+                    txtMaCT.Focus();
+                }
             }
             catch (Exception ex)
             {
@@ -207,28 +209,32 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             {
                 if (constructionData == null) return;
 
-                string nameFilter = txtFilterMaCT.Text.Trim();
-                string locationFilter = txtFilterTenCT.Text.Trim();
-                string yearFilter = txtFilterTinhTrang.Text.Trim();
+                string mact = txtFilterMaCT.Text.Trim();
+                string tenct = txtFilterTenCT.Text.Trim();
+                string tinhtrang = txtFilterTinhTrang.Text.Trim();
+                string chudautu = txtFilterChuDauTu.Text.Trim();
+                string diadiem = txtFilterDiaDiem.Text.Trim();
+                DateTime? ngaybatdau = dtpFilterNgayBatDau.Checked ? dtpFilterNgayBatDau.Value.Date : null;
+                DateTime? ngayketthuc = dtpFilterNgayKetThuc.Checked ? dtpFilterNgayKetThuc.Value.Date : null;
 
                 // Xây dựng biểu thức lọc
                 string filterExpression = "";
 
-                if (!string.IsNullOrEmpty(nameFilter))
-                    filterExpression += $"Name like '%{nameFilter}%'";
+                if (!string.IsNullOrEmpty(mact))
+                    filterExpression += $"Name like '%{mact}%'";
 
-                if (!string.IsNullOrEmpty(locationFilter))
+                if (!string.IsNullOrEmpty(tenct))
                 {
                     if (!string.IsNullOrEmpty(filterExpression))
                         filterExpression += " and ";
-                    filterExpression += $"Location like '%{locationFilter}%'";
+                    filterExpression += $"Location like '%{tenct}%'";
                 }
 
-                if (!string.IsNullOrEmpty(yearFilter))
+                if (!string.IsNullOrEmpty(tinhtrang))
                 {
                     if (!string.IsNullOrEmpty(filterExpression))
                         filterExpression += " and ";
-                    filterExpression += $"Year like '%{yearFilter}%'";
+                    filterExpression += $"Year like '%{tinhtrang}%'";
                 }
 
                 // Áp dụng bộ lọc
@@ -318,7 +324,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
         private void CongTrinh_Load(object? sender, EventArgs e) => LoadCongTrinh();
 
-        private string ?mact;
+        private string? mact;
         private void DgvConstruction_CellClick(object? sender, DataGridViewCellEventArgs e)
         {
             // Kiểm tra xem người dùng có nhấp vào tiêu đề cột không
@@ -464,31 +470,41 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 command2.ExecuteNonQuery();
 
                 // Thực thi câu lệnh
-                
-                    lblMessage.Text = "Cập nhật công trình thành công!";
-                    lblMessage.ForeColor = Color.Green;
+
+                lblMessage.Text = "Cập nhật công trình thành công!";
+                lblMessage.ForeColor = Color.Green;
+                TimeIntervalMessage();
+
+                txtTenCT.Clear();
+                txtMaCT.Clear();
+                txtTenCT.Clear();
+                txtTinhTrang.Clear();
+                dtpNgayBatDau.Value = DateTime.Now;
+                dtpNgayKetThuc.Value = DateTime.Now;
+                txtDuToan.Clear();
+                txtChuDauTu.Clear();
+                txtGhiChu.Clear();
+                cboTinh.SelectedIndex = -1;
+                cboQuanHuyen.SelectedIndex = -1;
+                cboXaPhuong.SelectedIndex = -1;
+                txtMoTaChiTiet.Clear();
+                ActiveControl = null;
+                mact = null;
+
+                LoadCongTrinh();
+                SelectRowById();
+
+
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601) // Mã lỗi trùng khóa chính
+                {
+                    lblMessage.Text = "Mã công trình đã tồn tại";
+                    lblMessage.ForeColor = Color.Red;
                     TimeIntervalMessage();
-
-                    txtTenCT.Clear();
-                    txtMaCT.Clear();
-                    txtTenCT.Clear();
-                    txtTinhTrang.Clear();
-                    dtpNgayBatDau.Value = DateTime.Now;
-                    dtpNgayKetThuc.Value = DateTime.Now;
-                    txtDuToan.Clear();
-                    txtChuDauTu.Clear();
-                    txtGhiChu.Clear();
-                    cboTinh.SelectedIndex = -1;
-                    cboQuanHuyen.SelectedIndex = -1;
-                    cboXaPhuong.SelectedIndex = -1;
-                    txtMoTaChiTiet.Clear();
-                    ActiveControl = null;
-                    mact = null;
-
-                    LoadCongTrinh();
-                    SelectRowById();
-                
-                
+                    txtMaCT.Focus();
+                }
             }
             catch (Exception ex)
             {

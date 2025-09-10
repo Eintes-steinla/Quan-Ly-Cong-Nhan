@@ -45,7 +45,6 @@ namespace QLCN.CongTrinh
         private TextBox txtFilterTenCT;
         private PictureBox pictureBoxRemoveFilter;
         private ToolTip toolTip;
-        private DataGridViewTextBoxColumn dataGridViewColumnID;
 
 
         /// <summary> 
@@ -421,15 +420,15 @@ namespace QLCN.CongTrinh
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCT, dgvColTenCongTrinh, dgvColTinhTrang, dgvColChuDauTu, dgvColDiaDiem, dgvColDuToan, dgvColNgayBatDau, dgvColNgayKetThuc, dgvColGhiChu, dataGridViewColumnCheckBox });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.AntiqueWhite;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCT, dgvColTenCongTrinh, dgvColTinhTrang, dgvColChuDauTu, dgvColDiaDiem, dgvColDuToan, dgvColNgayBatDau, dgvColNgayKetThuc, dgvColGhiChu, dgvColCheckBox });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.AntiqueWhite;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle4;
             dgvConstruction.Location = new Point(0, 38);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
             dgvConstruction.Name = "dgvConstruction";
