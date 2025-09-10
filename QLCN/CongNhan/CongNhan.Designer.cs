@@ -37,7 +37,6 @@ namespace QLCN.CongNhan
         private DataGridView dgvConstruction;
         private Label lblMessage;
         private TextBox txtFilterMaCN;
-        private TextBox txtFilterGioiTinh;
         private TextBox txtFilterTenCN;
         private PictureBox pictureBoxRemoveFilter;
         private ToolTip toolTip;
@@ -65,8 +64,8 @@ namespace QLCN.CongNhan
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblMessage = new Label();
             btnDelete = new Button();
             btnEdit = new Button();
@@ -92,27 +91,6 @@ namespace QLCN.CongNhan
             txtMoTaChiTiet = new TextBox();
             lblMoTaChiTiet = new Label();
             dgvConstruction = new DataGridView();
-            btnRefresh = new Button();
-            panelFilter = new Panel();
-            txtFilterGhiChu = new TextBox();
-            txtFilterTenCT = new TextBox();
-            txtFilterDiaDiem = new TextBox();
-            txtFilterCCCD = new TextBox();
-            txtFilterSDT = new TextBox();
-            txtFilterMaCN = new TextBox();
-            txtFilterGioiTinh = new TextBox();
-            txtFilterTenCN = new TextBox();
-            pictureBoxRemoveFilter = new PictureBox();
-            toolTip = new ToolTip(components);
-            panel1 = new Panel();
-            txtGioiTinh = new TextBox();
-            lblGioiTinh = new Label();
-            lblTenCT = new Label();
-            panel2 = new Panel();
-            btnExport = new Button();
-            panel3 = new Panel();
-            panel4 = new Panel();
-            txtTenCT = new TextBox();
             dgvColSTT = new DataGridViewTextBoxColumn();
             dgvColMaCN = new DataGridViewTextBoxColumn();
             dgvColTenCN = new DataGridViewTextBoxColumn();
@@ -124,7 +102,26 @@ namespace QLCN.CongNhan
             dgvColTenCT = new DataGridViewTextBoxColumn();
             dgvColGhiChu = new DataGridViewTextBoxColumn();
             dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
+            btnRefresh = new Button();
+            panelFilter = new Panel();
+            cbGioiTinh = new ComboBox();
             dtpFilterNgaySinh = new DateTimePicker();
+            txtFilterTenCT = new TextBox();
+            txtFilterDiaDiem = new TextBox();
+            txtFilterMaCN = new TextBox();
+            txtFilterTenCN = new TextBox();
+            pictureBoxRemoveFilter = new PictureBox();
+            toolTip = new ToolTip(components);
+            panel1 = new Panel();
+            txtTenCT = new TextBox();
+            txtGioiTinh = new TextBox();
+            lblGioiTinh = new Label();
+            lblTenCT = new Label();
+            panel2 = new Panel();
+            btnExport = new Button();
+            panel3 = new Panel();
+            panel4 = new Panel();
+            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).BeginInit();
             panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxRemoveFilter).BeginInit();
@@ -368,24 +365,24 @@ namespace QLCN.CongNhan
             dgvConstruction.AllowUserToOrderColumns = true;
             dgvConstruction.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvConstruction.BackgroundColor = Color.White;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCN, dgvColTenCN, dgvColGioiTinh, dgvColNgaySinh, dgvColSDT, dgvColCCCD, dgvColDiaDiem, dgvColTenCT, dgvColGhiChu, dataGridViewColumnCheckBox });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.AntiqueWhite;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.AntiqueWhite;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
             dgvConstruction.Location = new Point(0, 38);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
             dgvConstruction.Name = "dgvConstruction";
@@ -394,228 +391,6 @@ namespace QLCN.CongNhan
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConstruction.Size = new Size(1884, 463);
             dgvConstruction.TabIndex = 19;
-            // 
-            // btnRefresh
-            // 
-            btnRefresh.Location = new Point(800, 23);
-            btnRefresh.Margin = new Padding(4, 5, 4, 5);
-            btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(150, 50);
-            btnRefresh.TabIndex = 18;
-            btnRefresh.Text = "Làm mới";
-            toolTip.SetToolTip(btnRefresh, "Xóa tất cả các ô nhập dữ liệu");
-            btnRefresh.UseVisualStyleBackColor = true;
-            // 
-            // panelFilter
-            // 
-            panelFilter.BackColor = Color.WhiteSmoke;
-            panelFilter.BorderStyle = BorderStyle.FixedSingle;
-            panelFilter.Controls.Add(dtpFilterNgaySinh);
-            panelFilter.Controls.Add(txtFilterGhiChu);
-            panelFilter.Controls.Add(txtFilterTenCT);
-            panelFilter.Controls.Add(txtFilterDiaDiem);
-            panelFilter.Controls.Add(txtFilterCCCD);
-            panelFilter.Controls.Add(txtFilterSDT);
-            panelFilter.Controls.Add(txtFilterMaCN);
-            panelFilter.Controls.Add(txtFilterGioiTinh);
-            panelFilter.Controls.Add(txtFilterTenCN);
-            panelFilter.Controls.Add(pictureBoxRemoveFilter);
-            panelFilter.Location = new Point(0, 0);
-            panelFilter.Name = "panelFilter";
-            panelFilter.Size = new Size(1884, 38);
-            panelFilter.TabIndex = 20;
-            // 
-            // txtFilterGhiChu
-            // 
-            txtFilterGhiChu.Location = new Point(1680, 0);
-            txtFilterGhiChu.Name = "txtFilterGhiChu";
-            txtFilterGhiChu.PlaceholderText = "GhiChu";
-            txtFilterGhiChu.Size = new Size(150, 38);
-            txtFilterGhiChu.TabIndex = 16;
-            txtFilterGhiChu.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterTenCT
-            // 
-            txtFilterTenCT.Location = new Point(1480, 0);
-            txtFilterTenCT.Name = "txtFilterTenCT";
-            txtFilterTenCT.PlaceholderText = "TenCT";
-            txtFilterTenCT.Size = new Size(200, 38);
-            txtFilterTenCT.TabIndex = 15;
-            txtFilterTenCT.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterDiaDiem
-            // 
-            txtFilterDiaDiem.Location = new Point(1210, 0);
-            txtFilterDiaDiem.Name = "txtFilterDiaDiem";
-            txtFilterDiaDiem.PlaceholderText = "DiaDiem";
-            txtFilterDiaDiem.Size = new Size(270, 38);
-            txtFilterDiaDiem.TabIndex = 14;
-            txtFilterDiaDiem.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterCCCD
-            // 
-            txtFilterCCCD.Location = new Point(1050, 0);
-            txtFilterCCCD.Name = "txtFilterCCCD";
-            txtFilterCCCD.PlaceholderText = "CCCD";
-            txtFilterCCCD.Size = new Size(160, 38);
-            txtFilterCCCD.TabIndex = 13;
-            txtFilterCCCD.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterSDT
-            // 
-            txtFilterSDT.Location = new Point(830, 0);
-            txtFilterSDT.Name = "txtFilterSDT";
-            txtFilterSDT.PlaceholderText = "SDT";
-            txtFilterSDT.Size = new Size(220, 38);
-            txtFilterSDT.TabIndex = 12;
-            txtFilterSDT.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterMaCN
-            // 
-            txtFilterMaCN.Font = new Font("Times New Roman", 13.2F);
-            txtFilterMaCN.Location = new Point(110, 0);
-            txtFilterMaCN.Name = "txtFilterMaCN";
-            txtFilterMaCN.PlaceholderText = "MaCN";
-            txtFilterMaCN.Size = new Size(150, 38);
-            txtFilterMaCN.TabIndex = 7;
-            txtFilterMaCN.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterGioiTinh
-            // 
-            txtFilterGioiTinh.Font = new Font("Times New Roman", 13.2F);
-            txtFilterGioiTinh.Location = new Point(400, 0);
-            txtFilterGioiTinh.Name = "txtFilterGioiTinh";
-            txtFilterGioiTinh.PlaceholderText = "GioiTinh";
-            txtFilterGioiTinh.Size = new Size(180, 38);
-            txtFilterGioiTinh.TabIndex = 9;
-            txtFilterGioiTinh.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtFilterTenCN
-            // 
-            txtFilterTenCN.Font = new Font("Times New Roman", 13.2F);
-            txtFilterTenCN.Location = new Point(260, 0);
-            txtFilterTenCN.Name = "txtFilterTenCN";
-            txtFilterTenCN.PlaceholderText = "TenCN";
-            txtFilterTenCN.Size = new Size(140, 38);
-            txtFilterTenCN.TabIndex = 8;
-            txtFilterTenCN.TextAlign = HorizontalAlignment.Center;
-            // 
-            // pictureBoxRemoveFilter
-            // 
-            pictureBoxRemoveFilter.BackColor = Color.Transparent;
-            pictureBoxRemoveFilter.Cursor = Cursors.Hand;
-            pictureBoxRemoveFilter.Location = new Point(0, 0);
-            pictureBoxRemoveFilter.Name = "pictureBoxRemoveFilter";
-            pictureBoxRemoveFilter.Size = new Size(38, 38);
-            pictureBoxRemoveFilter.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBoxRemoveFilter.TabIndex = 10;
-            pictureBoxRemoveFilter.TabStop = false;
-            toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(txtTenCT);
-            panel1.Controls.Add(txtMoTaChiTiet);
-            panel1.Controls.Add(lblMoTaChiTiet);
-            panel1.Controls.Add(lblXaPhuong);
-            panel1.Controls.Add(cboXaPhuong);
-            panel1.Controls.Add(lblQuanHuyen);
-            panel1.Controls.Add(cboQuanHuyen);
-            panel1.Controls.Add(txtMaCN);
-            panel1.Controls.Add(lblTinh);
-            panel1.Controls.Add(lblMaCN);
-            panel1.Controls.Add(cboTinh);
-            panel1.Controls.Add(txtTenCN);
-            panel1.Controls.Add(lblGhiChu);
-            panel1.Controls.Add(lblTenCN);
-            panel1.Controls.Add(txtGhiChu);
-            panel1.Controls.Add(txtGioiTinh);
-            panel1.Controls.Add(lblCCCD);
-            panel1.Controls.Add(lblGioiTinh);
-            panel1.Controls.Add(txtCCCD);
-            panel1.Controls.Add(dtpNgaySinh);
-            panel1.Controls.Add(lblSDT);
-            panel1.Controls.Add(lblNgaySinh);
-            panel1.Controls.Add(txtSDT);
-            panel1.Controls.Add(lblTenCT);
-            panel1.Location = new Point(0, 50);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1900, 260);
-            panel1.TabIndex = 21;
-            // 
-            // txtGioiTinh
-            // 
-            txtGioiTinh.Location = new Point(300, 123);
-            txtGioiTinh.Margin = new Padding(4, 5, 4, 5);
-            txtGioiTinh.Name = "txtGioiTinh";
-            txtGioiTinh.Size = new Size(300, 38);
-            txtGioiTinh.TabIndex = 5;
-            // 
-            // lblGioiTinh
-            // 
-            lblGioiTinh.AutoSize = true;
-            lblGioiTinh.Location = new Point(50, 123);
-            lblGioiTinh.Margin = new Padding(4, 0, 4, 0);
-            lblGioiTinh.Name = "lblGioiTinh";
-            lblGioiTinh.Size = new Size(117, 31);
-            lblGioiTinh.TabIndex = 3;
-            lblGioiTinh.Text = "Giới tính:";
-            // 
-            // lblTenCT
-            // 
-            lblTenCT.AutoSize = true;
-            lblTenCT.Location = new Point(1300, 123);
-            lblTenCT.Margin = new Padding(4, 0, 4, 0);
-            lblTenCT.Name = "lblTenCT";
-            lblTenCT.Size = new Size(193, 31);
-            lblTenCT.TabIndex = 5;
-            lblTenCT.Text = "Tên Công Trình:";
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(btnExport);
-            panel2.Controls.Add(btnAdd);
-            panel2.Controls.Add(btnEdit);
-            panel2.Controls.Add(btnDelete);
-            panel2.Controls.Add(btnRefresh);
-            panel2.Location = new Point(0, 310);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1900, 100);
-            panel2.TabIndex = 22;
-            // 
-            // btnExport
-            // 
-            btnExport.Location = new Point(1050, 23);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(150, 50);
-            btnExport.TabIndex = 19;
-            btnExport.Text = "Xuất Excel";
-            btnExport.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(dgvConstruction);
-            panel3.Controls.Add(panelFilter);
-            panel3.Location = new Point(0, 410);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1884, 540);
-            panel3.TabIndex = 23;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(lblMessage);
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1900, 50);
-            panel4.TabIndex = 24;
-            // 
-            // txtTenCT
-            // 
-            txtTenCT.Location = new Point(1550, 123);
-            txtTenCT.Margin = new Padding(4, 5, 4, 5);
-            txtTenCT.Name = "txtTenCT";
-            txtTenCT.Size = new Size(300, 38);
-            txtTenCT.TabIndex = 15;
             // 
             // dgvColSTT
             // 
@@ -716,15 +491,218 @@ namespace QLCN.CongNhan
             dataGridViewColumnCheckBox.ReadOnly = true;
             dataGridViewColumnCheckBox.Width = 52;
             // 
+            // btnRefresh
+            // 
+            btnRefresh.Location = new Point(800, 23);
+            btnRefresh.Margin = new Padding(4, 5, 4, 5);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(150, 50);
+            btnRefresh.TabIndex = 18;
+            btnRefresh.Text = "Làm mới";
+            toolTip.SetToolTip(btnRefresh, "Xóa tất cả các ô nhập dữ liệu");
+            btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // panelFilter
+            // 
+            panelFilter.BackColor = Color.WhiteSmoke;
+            panelFilter.BorderStyle = BorderStyle.FixedSingle;
+            panelFilter.Controls.Add(dateTimePicker1);
+            panelFilter.Controls.Add(cbGioiTinh);
+            panelFilter.Controls.Add(dtpFilterNgaySinh);
+            panelFilter.Controls.Add(txtFilterTenCT);
+            panelFilter.Controls.Add(txtFilterDiaDiem);
+            panelFilter.Controls.Add(txtFilterMaCN);
+            panelFilter.Controls.Add(txtFilterTenCN);
+            panelFilter.Controls.Add(pictureBoxRemoveFilter);
+            panelFilter.Location = new Point(0, 0);
+            panelFilter.Name = "panelFilter";
+            panelFilter.Size = new Size(1884, 38);
+            panelFilter.TabIndex = 20;
+            // 
+            // cbGioiTinh
+            // 
+            cbGioiTinh.FormattingEnabled = true;
+            cbGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
+            cbGioiTinh.Location = new Point(400, 0);
+            cbGioiTinh.Name = "cbGioiTinh";
+            cbGioiTinh.Size = new Size(180, 37);
+            cbGioiTinh.TabIndex = 18;
+            // 
             // dtpFilterNgaySinh
             // 
             dtpFilterNgaySinh.CustomFormat = " ";
             dtpFilterNgaySinh.Format = DateTimePickerFormat.Short;
             dtpFilterNgaySinh.Location = new Point(580, 0);
             dtpFilterNgaySinh.Name = "dtpFilterNgaySinh";
-            dtpFilterNgaySinh.Size = new Size(250, 38);
+            dtpFilterNgaySinh.Size = new Size(125, 38);
             dtpFilterNgaySinh.TabIndex = 17;
             dtpFilterNgaySinh.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
+            // 
+            // txtFilterTenCT
+            // 
+            txtFilterTenCT.Location = new Point(1480, 0);
+            txtFilterTenCT.Name = "txtFilterTenCT";
+            txtFilterTenCT.PlaceholderText = "Tìm tên CT";
+            txtFilterTenCT.Size = new Size(200, 38);
+            txtFilterTenCT.TabIndex = 15;
+            txtFilterTenCT.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtFilterDiaDiem
+            // 
+            txtFilterDiaDiem.Location = new Point(1210, 0);
+            txtFilterDiaDiem.Name = "txtFilterDiaDiem";
+            txtFilterDiaDiem.PlaceholderText = "Tìm địa điểm";
+            txtFilterDiaDiem.Size = new Size(270, 38);
+            txtFilterDiaDiem.TabIndex = 14;
+            txtFilterDiaDiem.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtFilterMaCN
+            // 
+            txtFilterMaCN.Font = new Font("Times New Roman", 13.2F);
+            txtFilterMaCN.Location = new Point(110, 0);
+            txtFilterMaCN.Name = "txtFilterMaCN";
+            txtFilterMaCN.PlaceholderText = "Tìm mã CN";
+            txtFilterMaCN.Size = new Size(150, 38);
+            txtFilterMaCN.TabIndex = 7;
+            txtFilterMaCN.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtFilterTenCN
+            // 
+            txtFilterTenCN.Font = new Font("Times New Roman", 13.2F);
+            txtFilterTenCN.Location = new Point(260, 0);
+            txtFilterTenCN.Name = "txtFilterTenCN";
+            txtFilterTenCN.PlaceholderText = "Tìm tên CN";
+            txtFilterTenCN.Size = new Size(140, 38);
+            txtFilterTenCN.TabIndex = 8;
+            txtFilterTenCN.TextAlign = HorizontalAlignment.Center;
+            // 
+            // pictureBoxRemoveFilter
+            // 
+            pictureBoxRemoveFilter.BackColor = Color.Transparent;
+            pictureBoxRemoveFilter.Cursor = Cursors.Hand;
+            pictureBoxRemoveFilter.Location = new Point(0, 0);
+            pictureBoxRemoveFilter.Name = "pictureBoxRemoveFilter";
+            pictureBoxRemoveFilter.Size = new Size(38, 38);
+            pictureBoxRemoveFilter.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxRemoveFilter.TabIndex = 10;
+            pictureBoxRemoveFilter.TabStop = false;
+            toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(txtTenCT);
+            panel1.Controls.Add(txtMoTaChiTiet);
+            panel1.Controls.Add(lblMoTaChiTiet);
+            panel1.Controls.Add(lblXaPhuong);
+            panel1.Controls.Add(cboXaPhuong);
+            panel1.Controls.Add(lblQuanHuyen);
+            panel1.Controls.Add(cboQuanHuyen);
+            panel1.Controls.Add(txtMaCN);
+            panel1.Controls.Add(lblTinh);
+            panel1.Controls.Add(lblMaCN);
+            panel1.Controls.Add(cboTinh);
+            panel1.Controls.Add(txtTenCN);
+            panel1.Controls.Add(lblGhiChu);
+            panel1.Controls.Add(lblTenCN);
+            panel1.Controls.Add(txtGhiChu);
+            panel1.Controls.Add(txtGioiTinh);
+            panel1.Controls.Add(lblCCCD);
+            panel1.Controls.Add(lblGioiTinh);
+            panel1.Controls.Add(txtCCCD);
+            panel1.Controls.Add(dtpNgaySinh);
+            panel1.Controls.Add(lblSDT);
+            panel1.Controls.Add(lblNgaySinh);
+            panel1.Controls.Add(txtSDT);
+            panel1.Controls.Add(lblTenCT);
+            panel1.Location = new Point(0, 50);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1900, 260);
+            panel1.TabIndex = 21;
+            // 
+            // txtTenCT
+            // 
+            txtTenCT.Location = new Point(1550, 123);
+            txtTenCT.Margin = new Padding(4, 5, 4, 5);
+            txtTenCT.Name = "txtTenCT";
+            txtTenCT.Size = new Size(300, 38);
+            txtTenCT.TabIndex = 15;
+            // 
+            // txtGioiTinh
+            // 
+            txtGioiTinh.Location = new Point(300, 123);
+            txtGioiTinh.Margin = new Padding(4, 5, 4, 5);
+            txtGioiTinh.Name = "txtGioiTinh";
+            txtGioiTinh.Size = new Size(300, 38);
+            txtGioiTinh.TabIndex = 5;
+            // 
+            // lblGioiTinh
+            // 
+            lblGioiTinh.AutoSize = true;
+            lblGioiTinh.Location = new Point(50, 123);
+            lblGioiTinh.Margin = new Padding(4, 0, 4, 0);
+            lblGioiTinh.Name = "lblGioiTinh";
+            lblGioiTinh.Size = new Size(117, 31);
+            lblGioiTinh.TabIndex = 3;
+            lblGioiTinh.Text = "Giới tính:";
+            // 
+            // lblTenCT
+            // 
+            lblTenCT.AutoSize = true;
+            lblTenCT.Location = new Point(1300, 123);
+            lblTenCT.Margin = new Padding(4, 0, 4, 0);
+            lblTenCT.Name = "lblTenCT";
+            lblTenCT.Size = new Size(193, 31);
+            lblTenCT.TabIndex = 5;
+            lblTenCT.Text = "Tên Công Trình:";
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(btnExport);
+            panel2.Controls.Add(btnAdd);
+            panel2.Controls.Add(btnEdit);
+            panel2.Controls.Add(btnDelete);
+            panel2.Controls.Add(btnRefresh);
+            panel2.Location = new Point(0, 310);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1900, 100);
+            panel2.TabIndex = 22;
+            // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(1050, 23);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(150, 50);
+            btnExport.TabIndex = 19;
+            btnExport.Text = "Xuất Excel";
+            btnExport.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(dgvConstruction);
+            panel3.Controls.Add(panelFilter);
+            panel3.Location = new Point(0, 410);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1884, 540);
+            panel3.TabIndex = 23;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(lblMessage);
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(1900, 50);
+            panel4.TabIndex = 24;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = " ";
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.ImeMode = ImeMode.NoControl;
+            dateTimePicker1.Location = new Point(705, 0);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(125, 38);
+            dateTimePicker1.TabIndex = 19;
+            dateTimePicker1.Value = new DateTime(2025, 9, 9, 22, 20, 12, 0);
             // 
             // CongNhan
             // 
@@ -759,11 +737,8 @@ namespace QLCN.CongNhan
         private Panel panel3;
         private Button btnExport;
         private Panel panel4;
-        private TextBox txtFilterGhiChu;
         private TextBox txtFilterTenCT;
         private TextBox txtFilterDiaDiem;
-        private TextBox txtFilterCCCD;
-        private TextBox txtFilterSDT;
         private TextBox txtGioiTinh;
         private Label lblGioiTinh;
         private Label lblTenCT;
@@ -780,5 +755,7 @@ namespace QLCN.CongNhan
         private DataGridViewTextBoxColumn dgvColGhiChu;
         private DataGridViewCheckBoxColumn dataGridViewColumnCheckBox;
         private DateTimePicker dtpFilterNgaySinh;
+        private ComboBox cbGioiTinh;
+        private DateTimePicker dateTimePicker1;
     }
 }

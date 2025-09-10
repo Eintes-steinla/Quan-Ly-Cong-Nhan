@@ -34,7 +34,7 @@
 
 
   <ItemGroup>
-    <Folder Include="NghiPhep\" />
+    <Folder Include="BaoCao\" />
     <Folder Include="NhatKyHeThong\" />
   </ItemGroup>
 </Project>

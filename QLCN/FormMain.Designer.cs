@@ -8,12 +8,14 @@
         private TabPage congTrinh;
         private TabPage chamCong;
         private TabPage hopDong;
+        private TabPage nghiPhep;
         private ImageList imageList1;
 
         private QLCN.CongTrinh.CongTrinh congTrinhControl;
         private QLCN.CongNhan.CongNhan congNhanControl;
         private QLCN.ChamCong.ChamCong chamCongControl;
         private QLCN.HopDong.HopDong hopDongControl;
+        private QLCN.NghiPhep.NghiPhep nghiPhepControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -25,6 +27,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             imageList1 = new ImageList(components);
             tabControl = new TabControl();
             congNhan = new TabPage();
@@ -35,6 +38,7 @@
             chamCongControl = new QLCN.ChamCong.ChamCong();
             hopDong = new TabPage();
             hopDongControl = new QLCN.HopDong.HopDong();
+            nghiPhep = new TabPage();
             tabControl.SuspendLayout();
             congNhan.SuspendLayout();
             congTrinh.SuspendLayout();
@@ -45,8 +49,13 @@
             // imageList1
             // 
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageSize = new Size(24, 24);
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "icons8-people-3d-fluency-32.png");
+            imageList1.Images.SetKeyName(1, "icons8-structural-32.png");
+            imageList1.Images.SetKeyName(2, "icons8-time-32.png");
+            imageList1.Images.SetKeyName(3, "icons8-copybook-32.png");
+            imageList1.Images.SetKeyName(4, "icons8-hotel-bed-32.png");
             // 
             // tabControl
             // 
@@ -54,6 +63,7 @@
             tabControl.Controls.Add(congTrinh);
             tabControl.Controls.Add(chamCong);
             tabControl.Controls.Add(hopDong);
+            tabControl.Controls.Add(nghiPhep);
             tabControl.Dock = DockStyle.Fill;
             tabControl.ImageList = imageList1;
             tabControl.Location = new Point(0, 0);
@@ -65,7 +75,7 @@
             // congNhan
             // 
             congNhan.Controls.Add(congNhanControl);
-            congNhan.ImageIndex = 1;
+            congNhan.ImageIndex = 0;
             congNhan.Location = new Point(4, 38);
             congNhan.Name = "congNhan";
             congNhan.Size = new Size(1399, 495);
@@ -86,7 +96,7 @@
             // congTrinh
             // 
             congTrinh.Controls.Add(congTrinhControl);
-            congTrinh.ImageIndex = 0;
+            congTrinh.ImageIndex = 1;
             congTrinh.Location = new Point(4, 38);
             congTrinh.Name = "congTrinh";
             congTrinh.Size = new Size(1399, 495);
@@ -128,7 +138,7 @@
             // hopDong
             // 
             hopDong.Controls.Add(hopDongControl);
-            hopDong.ImageIndex = 2;
+            hopDong.ImageIndex = 3;
             hopDong.Location = new Point(4, 38);
             hopDong.Name = "hopDong";
             hopDong.Size = new Size(1399, 495);
@@ -145,6 +155,16 @@
             hopDongControl.Name = "hopDongControl";
             hopDongControl.Size = new Size(1399, 495);
             hopDongControl.TabIndex = 0;
+            // 
+            // nghiPhep
+            // 
+            nghiPhep.ImageIndex = 4;
+            nghiPhep.Location = new Point(4, 38);
+            nghiPhep.Name = "nghiPhep";
+            nghiPhep.Size = new Size(1399, 495);
+            nghiPhep.TabIndex = 2;
+            nghiPhep.Text = "Nghỉ phép";
+            nghiPhep.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
