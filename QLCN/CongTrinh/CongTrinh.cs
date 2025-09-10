@@ -551,8 +551,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dgvColCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                    if (row.Cells["checkbox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["checkbox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -599,8 +599,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     List<int> idsToDelete = [];
                     foreach (DataGridViewRow row in dgvConstruction.Rows)
                     {
-                        if (row.Cells["dgvColCheckBox"].Value != null &&
-                            Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                        if (row.Cells["checkbox"].Value != null &&
+                            Convert.ToBoolean(row.Cells["checkbox"].Value))
                         {
                             int id = Convert.ToInt32(row.Cells["dataGridViewColumnID"].Value);
                             idsToDelete.Add(id);
@@ -670,16 +670,16 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             {
                 // Đảo ngược giá trị của ô checkbox
                 bool currentValue = false;
-                if (dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value != null)
-                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value);
-                dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value = !currentValue;
+                if (dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value != null)
+                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value);
+                dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value = !currentValue;
 
                 // Kiểm tra xem có dòng nào được chọn không
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dgvColCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                    if (row.Cells["checkbox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["checkbox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -710,8 +710,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 bool anyChecked = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["dgvColCheckBox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                    if (row.Cells["checkbox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["checkbox"].Value))
                     {
                         anyChecked = true;
                         break;
@@ -721,7 +721,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Chọn hoặc bỏ chọn tất cả các dòng
                 bool checkValue = !anyChecked;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
-                    row.Cells["dgvColCheckBox"].Value = checkValue;
+                    row.Cells["checkbox"].Value = checkValue;
 
                 // Cập nhật tên nút
                 if (checkValue)
