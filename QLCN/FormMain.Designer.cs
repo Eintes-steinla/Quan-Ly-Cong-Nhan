@@ -1,26 +1,24 @@
-﻿
-namespace QLCN
+﻿namespace QLCN
 {
     partial class FormMain
     {
         private System.ComponentModel.IContainer components = null;
         private TabControl tabControl;
-        private TabPage baoCao;
-        private TabPage chamCong;
-        private TabPage nghiPhep;
-        private TabPage phanCa;
-        private TabPage nhatKyHeThong;
         private TabPage congNhan;
         private TabPage congTrinh;
-        private System.Windows.Forms.ImageList imageList1;
+        private TabPage chamCong;
+        private TabPage hopDong;
+        private ImageList imageList1;
 
         private QLCN.CongTrinh.CongTrinh congTrinhControl;
         private QLCN.CongNhan.CongNhan congNhanControl;
         private QLCN.ChamCong.ChamCong chamCongControl;
+        private QLCN.HopDong.HopDong hopDongControl;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) components.Dispose();
+            if (disposing && (components != null))
+                components.Dispose();
             base.Dispose(disposing);
         }
 
@@ -35,14 +33,13 @@ namespace QLCN
             congTrinhControl = new QLCN.CongTrinh.CongTrinh();
             chamCong = new TabPage();
             chamCongControl = new QLCN.ChamCong.ChamCong();
-            nghiPhep = new TabPage();
-            phanCa = new TabPage();
-            baoCao = new TabPage();
-            nhatKyHeThong = new TabPage();
+            hopDong = new TabPage();
+            hopDongControl = new QLCN.HopDong.HopDong();
             tabControl.SuspendLayout();
             congNhan.SuspendLayout();
             congTrinh.SuspendLayout();
             chamCong.SuspendLayout();
+            hopDong.SuspendLayout();
             SuspendLayout();
             // 
             // imageList1
@@ -56,14 +53,10 @@ namespace QLCN
             tabControl.Controls.Add(congNhan);
             tabControl.Controls.Add(congTrinh);
             tabControl.Controls.Add(chamCong);
-            tabControl.Controls.Add(nghiPhep);
-            tabControl.Controls.Add(phanCa);
-            tabControl.Controls.Add(baoCao);
-            tabControl.Controls.Add(nhatKyHeThong);
+            tabControl.Controls.Add(hopDong);
             tabControl.Dock = DockStyle.Fill;
             tabControl.ImageList = imageList1;
             tabControl.Location = new Point(0, 0);
-            tabControl.Margin = new Padding(4, 5, 4, 5);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
             tabControl.Size = new Size(1407, 537);
@@ -72,12 +65,9 @@ namespace QLCN
             // congNhan
             // 
             congNhan.Controls.Add(congNhanControl);
-            congNhan.Dock = DockStyle.Fill;
             congNhan.ImageIndex = 1;
             congNhan.Location = new Point(4, 38);
-            congNhan.Margin = new Padding(4, 5, 4, 5);
             congNhan.Name = "congNhan";
-            congNhan.Padding = new Padding(3);
             congNhan.Size = new Size(1399, 495);
             congNhan.TabIndex = 0;
             congNhan.Text = "Công nhân";
@@ -87,111 +77,74 @@ namespace QLCN
             // 
             congNhanControl.Dock = DockStyle.Fill;
             congNhanControl.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            congNhanControl.Location = new Point(3, 3);
+            congNhanControl.Location = new Point(0, 0);
             congNhanControl.Margin = new Padding(4, 5, 4, 5);
             congNhanControl.Name = "congNhanControl";
-            congNhanControl.Size = new Size(1393, 489);
+            congNhanControl.Size = new Size(1399, 495);
             congNhanControl.TabIndex = 0;
             // 
             // congTrinh
             // 
             congTrinh.Controls.Add(congTrinhControl);
-            congTrinh.Dock = DockStyle.Fill;
             congTrinh.ImageIndex = 0;
             congTrinh.Location = new Point(4, 38);
-            congTrinh.Margin = new Padding(4, 5, 4, 5);
             congTrinh.Name = "congTrinh";
-            congTrinh.Padding = new Padding(3);
             congTrinh.Size = new Size(1399, 495);
-            congTrinh.TabIndex = 5;
+            congTrinh.TabIndex = 1;
             congTrinh.Text = "Công trình";
             congTrinh.UseVisualStyleBackColor = true;
             // 
             // congTrinhControl
             // 
             congTrinhControl.Dock = DockStyle.Fill;
-            congTrinhControl.Font = new Font("Times New Roman", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            congTrinhControl.Location = new Point(3, 3);
+            congTrinhControl.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            congTrinhControl.Location = new Point(0, 0);
             congTrinhControl.Margin = new Padding(4, 5, 4, 5);
             congTrinhControl.Name = "congTrinhControl";
-            congTrinhControl.Size = new Size(1393, 489);
+            congTrinhControl.Size = new Size(1399, 495);
             congTrinhControl.TabIndex = 0;
             // 
             // chamCong
             // 
             chamCong.Controls.Add(chamCongControl);
-            chamCong.Dock = DockStyle.Fill;
             chamCong.ImageIndex = 2;
             chamCong.Location = new Point(4, 38);
-            chamCong.Margin = new Padding(4, 5, 4, 5);
             chamCong.Name = "chamCong";
-            chamCong.Padding = new Padding(3);
             chamCong.Size = new Size(1399, 495);
-            chamCong.TabIndex = 1;
+            chamCong.TabIndex = 2;
             chamCong.Text = "Chấm công";
             chamCong.UseVisualStyleBackColor = true;
             // 
             // chamCongControl
             // 
             chamCongControl.Dock = DockStyle.Fill;
-            chamCongControl.Font = new Font("Times New Roman", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chamCongControl.Location = new Point(3, 3);
+            chamCongControl.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chamCongControl.Location = new Point(0, 0);
             chamCongControl.Margin = new Padding(4, 5, 4, 5);
             chamCongControl.Name = "chamCongControl";
-            chamCongControl.Size = new Size(1393, 489);
+            chamCongControl.Size = new Size(1399, 495);
             chamCongControl.TabIndex = 0;
             // 
-            // nghiPhep
+            // hopDong
             // 
-            nghiPhep.Dock = DockStyle.Fill;
-            nghiPhep.ImageIndex = 3;
-            nghiPhep.Location = new Point(4, 34);
-            nghiPhep.Margin = new Padding(4, 5, 4, 5);
-            nghiPhep.Name = "nghiPhep";
-            nghiPhep.Padding = new Padding(3);
-            nghiPhep.Size = new Size(1399, 499);
-            nghiPhep.TabIndex = 2;
-            nghiPhep.Text = "Nghỉ phép";
-            nghiPhep.UseVisualStyleBackColor = true;
+            hopDong.Controls.Add(hopDongControl);
+            hopDong.ImageIndex = 2;
+            hopDong.Location = new Point(4, 38);
+            hopDong.Name = "hopDong";
+            hopDong.Size = new Size(1399, 495);
+            hopDong.TabIndex = 2;
+            hopDong.Text = "Hợp đồng";
+            hopDong.UseVisualStyleBackColor = true;
             // 
-            // phanCa
+            // hopDongControl
             // 
-            phanCa.Dock = DockStyle.Fill;
-            phanCa.ImageIndex = 4;
-            phanCa.Location = new Point(4, 34);
-            phanCa.Margin = new Padding(4, 5, 4, 5);
-            phanCa.Name = "phanCa";
-            phanCa.Padding = new Padding(3);
-            phanCa.Size = new Size(1399, 499);
-            phanCa.TabIndex = 3;
-            phanCa.Text = "Phân ca / Ca làm";
-            phanCa.UseVisualStyleBackColor = true;
-            // 
-            // baoCao
-            // 
-            baoCao.Dock = DockStyle.Fill;
-            baoCao.ImageIndex = 5;
-            baoCao.Location = new Point(4, 34);
-            baoCao.Margin = new Padding(4, 5, 4, 5);
-            baoCao.Name = "baoCao";
-            baoCao.Padding = new Padding(3);
-            baoCao.Size = new Size(1399, 499);
-            baoCao.TabIndex = 4;
-            baoCao.Text = "Báo cáo";
-            baoCao.UseVisualStyleBackColor = true;
-            // 
-            // nhatKyHeThong
-            // 
-            nhatKyHeThong.Dock = DockStyle.Fill;
-            nhatKyHeThong.ImageIndex = 6;
-            nhatKyHeThong.Location = new Point(4, 34);
-            nhatKyHeThong.Margin = new Padding(4, 5, 4, 5);
-            nhatKyHeThong.Name = "nhatKyHeThong";
-            nhatKyHeThong.Padding = new Padding(3);
-            nhatKyHeThong.Size = new Size(1399, 499);
-            nhatKyHeThong.TabIndex = 5;
-            nhatKyHeThong.Text = "Nhật ký hệ thống";
-            nhatKyHeThong.UseVisualStyleBackColor = true;
+            hopDongControl.Dock = DockStyle.Fill;
+            hopDongControl.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            hopDongControl.Location = new Point(0, 0);
+            hopDongControl.Margin = new Padding(4, 5, 4, 5);
+            hopDongControl.Name = "hopDongControl";
+            hopDongControl.Size = new Size(1399, 495);
+            hopDongControl.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -199,8 +152,7 @@ namespace QLCN
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1407, 537);
             Controls.Add(tabControl);
-            Font = new Font("Times New Roman", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 5, 4, 5);
+            Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Hệ thống quản lý công nhân";
@@ -209,6 +161,7 @@ namespace QLCN
             congNhan.ResumeLayout(false);
             congTrinh.ResumeLayout(false);
             chamCong.ResumeLayout(false);
+            hopDong.ResumeLayout(false);
             ResumeLayout(false);
         }
     }
