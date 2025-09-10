@@ -31,4 +31,10 @@
     <PackageReference Include="ClosedXML" Version="0.104.2" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="NghiPhep\" />
+    <Folder Include="NhatKyHeThong\" />
+  </ItemGroup>
 </Project>
