@@ -217,13 +217,22 @@ namespace QLCN.CongTrinh
             // 
             cboTinhTrang.DisplayMember = "Key";
             cboTinhTrang.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboTinhTrang.Items.AddRange(new object[] { resources.GetObject("cboTinhTrang.Items") });
             cboTinhTrang.Location = new Point(300, 123);
             cboTinhTrang.Margin = new Padding(4, 5, 4, 5);
             cboTinhTrang.Name = "cboTinhTrang";
             cboTinhTrang.Size = new Size(300, 37);
             cboTinhTrang.TabIndex = 5;
             cboTinhTrang.ValueMember = "Value";
+            var cboTinhTrangItems = new Dictionary<string, int>
+            {
+                { "Chưa khởi công", 0 },
+                { "Đang thi công", 1 },
+                { "Tạm dừng", 2 },
+                { "Hoàn thành", 3 },
+                { "Bị hủy", 4 }
+            };
+            cboTinhTrang.DataSource = new BindingSource(cboTinhTrangItems, null);
+
             // 
             // lblTinhTrang
             // 
@@ -584,24 +593,43 @@ namespace QLCN.CongTrinh
             cboFilterDuToan.DisplayMember = "Key";
             cboFilterDuToan.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFilterDuToan.FormattingEnabled = true;
-            cboFilterDuToan.Items.AddRange(new object[] { resources.GetObject("cboFilterDuToan.Items") });
             cboFilterDuToan.Location = new Point(1120, 0);
             cboFilterDuToan.Name = "cboFilterDuToan";
             cboFilterDuToan.Size = new Size(160, 37);
             cboFilterDuToan.TabIndex = 22;
             cboFilterDuToan.ValueMember = "Value";
+            var cboFilterDuToanItems = new Dictionary<string, int>
+            {
+                { "Tất cả", 0 },
+                { "Trên 1 tỉ", 1 },
+                {"Trên 2 tỉ", 2 },
+                {"Trên 5 tỉ", 3 },
+                {"Trên 10 tỉ", 4 },
+                {"Trên 20 tỉ", 5 },
+            };
+            cboFilterDuToan.DataSource = new BindingSource(cboFilterDuToanItems, null);
             // 
             // cboFilterTinhTrang
             // 
             cboFilterTinhTrang.DisplayMember = "Key";
             cboFilterTinhTrang.DropDownStyle = ComboBoxStyle.DropDownList;
             cboFilterTinhTrang.FormattingEnabled = true;
-            cboFilterTinhTrang.Items.AddRange(new object[] { resources.GetObject("cboFilterTinhTrang.Items") });
             cboFilterTinhTrang.Location = new Point(400, 0);
             cboFilterTinhTrang.Name = "cboFilterTinhTrang";
             cboFilterTinhTrang.Size = new Size(180, 37);
             cboFilterTinhTrang.TabIndex = 21;
             cboFilterTinhTrang.ValueMember = "Value";
+            var cboFilterTinhTrangItems = new Dictionary<string, int>
+            {
+                { "Tất cả", 0 },
+                { "Chưa khởi công", 1 },
+                { "Đang thi công", 2 },
+                { "Tạm dừng", 3 },
+                { "Hoàn thành",4 },
+                { "Bị hủy", 5 }
+            };
+            cboFilterTinhTrang.DataSource = new BindingSource(cboFilterTinhTrangItems, null);
+
             // 
             // dtpFilterNgayKetThuc
             // 

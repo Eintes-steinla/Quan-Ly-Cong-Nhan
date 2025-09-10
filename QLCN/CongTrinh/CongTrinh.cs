@@ -302,8 +302,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             dtpFilterNgayBatDau.Checked = false;
             dtpFilterNgayKetThuc.Value = DateTime.Now;
             dtpFilterNgayKetThuc.Checked = false;
-            cboFilterTinhTrang.SelectedIndex = -1;
-            cboFilterDuToan.SelectedIndex = -1;
+            cboFilterTinhTrang.SelectedIndex = 0;
+            cboFilterDuToan.SelectedIndex = 0;
 
             txtFilterMaCT.Focus();
             ApplyFilter();
