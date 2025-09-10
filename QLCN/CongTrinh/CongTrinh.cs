@@ -62,6 +62,15 @@ namespace QLCN.CongTrinh
                 cboXaPhuong.Focus();
                 return true;
             }
+            // Kiểm tra tình trạng không được bỏ trống
+            if (cboTinhTrang.SelectedIndex == -1)
+            {
+                lblMessage.Text = "Vui lòng chọn tình trạng công trình!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                cboTinhTrang.Focus();
+                return true;
+            }
 
             return false;
         }
@@ -86,7 +95,7 @@ namespace QLCN.CongTrinh
 
                 command.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command.Parameters.AddWithValue("@TenCT", txtTenCT.Text);
-                command.Parameters.AddWithValue("@TinhTrang", string.IsNullOrWhiteSpace(txtTinhTrang.Text) ? DBNull.Value : txtTinhTrang.Text);
+                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedValue ?? DBNull.Value);
                 DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
                 command.Parameters.AddWithValue("@NgayBatDau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -121,7 +130,7 @@ namespace QLCN.CongTrinh
 
                 txtMaCT.Clear();
                 txtTenCT.Clear();
-                txtTinhTrang.Clear();
+                cboTinhTrang.SelectedIndex = -1;
                 dtpNgayBatDau.Value = DateTime.Now;
                 dtpNgayKetThuc.Value = DateTime.Now;
                 txtDuToan.Clear();
@@ -200,6 +209,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
 
             LoadcboTinh();
+            dtpFilterNgayBatDau.Checked = false;
+            dtpFilterNgayKetThuc.Checked = false;
 
         }
 
@@ -208,27 +219,63 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             try
             {
                 if (constructionData == null) return;
+                var filters = new List<string>();
 
-                string mact = txtFilterMaCT.Text.Trim();
-                string tenct = txtFilterTenCT.Text.Trim();
-                string chudautu = txtFilterChuDauTu.Text.Trim();
-                string diadiem = txtFilterDiaDiem.Text.Trim();
-                DateTime? ngaybatdau = dtpFilterNgayBatDau.Checked ? dtpFilterNgayBatDau.Value.Date : null;
-                DateTime? ngayketthuc = dtpFilterNgayKetThuc.Checked ? dtpFilterNgayKetThuc.Value.Date : null;
+                string mact = txtFilterMaCT.Text.Trim().Replace("'", "''");
+                string tenct = txtFilterTenCT.Text.Trim().Replace("'", "''");
+                string chudautu = txtFilterChuDauTu.Text.Trim().Replace("'", "''");
+                string diadiem = txtFilterDiaDiem.Text.Trim().Replace("'", "''");
+                DateTime? ngaybatdau = dtpFilterNgayBatDau.Checked ? dtpFilterNgayBatDau.Value.Date : (DateTime?)null;
+                DateTime? ngayketthuc = dtpFilterNgayKetThuc.Checked ? dtpFilterNgayKetThuc.Value.Date : (DateTime?)null;
 
-                // Xây dựng biểu thức lọc
-                string filterExpression = "";
+                string tinhtrang = cboFilterTinhTrang.Text;
+                string duToan = cboFilterDuToan.Text;
 
                 if (!string.IsNullOrEmpty(mact))
-                    filterExpression += $"Name like '%{mact}%'";
+                    filters.Add($"mact LIKE '%{mact}%'");
 
                 if (!string.IsNullOrEmpty(tenct))
+                    filters.Add($"tenct LIKE '%{tenct}%'");
+
+                if (!string.IsNullOrEmpty(chudautu))
+                    filters.Add($"chudautu LIKE '%{chudautu}%'");
+
+                if (!string.IsNullOrEmpty(diadiem))
+                    filters.Add($"diadiem LIKE '%{diadiem}%'");
+
+                if (ngaybatdau.HasValue)
+                    filters.Add($"ngaybatdau >= #{ngaybatdau:yyyy-MM-dd}#");
+
+                if (ngayketthuc.HasValue)
+                    filters.Add($"ngayketthuc <= #{ngayketthuc:yyyy-MM-dd}#");
+
+                if (!string.IsNullOrEmpty(tinhtrang) && tinhtrang != "Tất cả")
+                    filters.Add($"tinhtrang = '{tinhtrang}'");
+
+                if (!string.IsNullOrEmpty(duToan) && duToan != "Tất cả")
                 {
-                    if (!string.IsNullOrEmpty(filterExpression))
-                        filterExpression += " and ";
-                    filterExpression += $"Location like '%{tenct}%'";
+                    switch (duToan)
+                    {
+                        case "Trên 1 tỉ":
+                            filters.Add("dutoan >= 1000000000");
+                            break;
+                        case "Trên 2 tỉ":
+                            filters.Add("dutoan >= 2000000000");
+                            break;
+                        case "Trên 5 tỉ":
+                            filters.Add("dutoan >= 5000000000");
+                            break;
+                        case "Trên 10 tỉ":
+                            filters.Add("dutoan >= 10000000000");
+                            break;
+                        case "Trên 20 tỉ":
+                            filters.Add("dutoan >= 20000000000");
+                            break;
+                    }
                 }
-                // Áp dụng bộ lọc
+
+                string filterExpression = string.Join(" AND ", filters);
+
                 var dv = new DataView(constructionData)
                 {
                     RowFilter = filterExpression
@@ -237,9 +284,10 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
             catch (Exception)
             {
-                dgvConstruction.DataSource = null; // Nếu có lỗi, xóa DataSource
+                dgvConstruction.DataSource = null; // Nếu có lỗi, clear DataSource
             }
         }
+
 
         private void TxtFilter_TextChanged(object? sender, EventArgs e) => ApplyFilter();
 
@@ -248,9 +296,16 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         {
             txtFilterMaCT.Clear();
             txtFilterTenCT.Clear();
-            txtFilterMaCT.Focus(); // Đặt focus vào ô tìm kiếm tên công trình
+            txtFilterChuDauTu.Clear();
+            txtFilterDiaDiem.Clear();
+            dtpFilterNgayBatDau.Value = DateTime.Now;
+            dtpFilterNgayBatDau.Checked = false;
+            dtpFilterNgayKetThuc.Value = DateTime.Now;
+            dtpFilterNgayKetThuc.Checked = false;
+            cboFilterTinhTrang.SelectedIndex = -1;
+            cboFilterDuToan.SelectedIndex = -1;
 
-            // Áp dụng lại bộ lọc (sẽ hiển thị tất cả dữ liệu vì các ô tìm kiếm đã được xóa)
+            txtFilterMaCT.Focus();
             ApplyFilter();
         }
 
@@ -266,6 +321,13 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             // Thêm sự kiện TextChanged cho các ô tìm kiếm
             txtFilterMaCT.TextChanged += TxtFilter_TextChanged;
             txtFilterTenCT.TextChanged += TxtFilter_TextChanged;
+            txtFilterChuDauTu.TextChanged += TxtFilter_TextChanged;
+            txtFilterDiaDiem.TextChanged += TxtFilter_TextChanged;
+            dtpFilterNgayBatDau.ValueChanged += (s, e) => ApplyFilter();
+            dtpFilterNgayKetThuc.ValueChanged += (s, e) => ApplyFilter();
+            cboFilterTinhTrang.SelectedIndexChanged += (s, e) => ApplyFilter();
+            cboFilterDuToan.SelectedIndexChanged += (s, e) => ApplyFilter();
+
             // Đăng ký sự kiện KeyDown cho các TextBox
             /* txtName.KeyDown += TextBox_KeyDown;
             txtLocation.KeyDown += TextBox_KeyDown;
@@ -285,7 +347,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             // Xóa nội dung của tất cả các ô nhập liệu
             txtMaCT.Clear();
             txtTenCT.Clear();
-            txtTinhTrang.Clear();
+            cboTinhTrang.SelectedIndex = -1;
             dtpNgayBatDau.Value = DateTime.Now;
             dtpNgayKetThuc.Value = DateTime.Now;
             txtDuToan.Clear();
@@ -316,7 +378,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Hiển thị dữ liệu vào các ô nhập tương ứng
                 txtMaCT.Text = row.Cells["mact"].Value.ToString();
                 txtTenCT.Text = row.Cells["tenct"].Value.ToString();
-                txtTinhTrang.Text = row.Cells["tinhtrang"].Value.ToString();
+                cboTinhTrang.Text = row.Cells["tinhtrang"].Value.ToString();
                 txtDuToan.Text = row.Cells["dutoan"].Value.ToString();
                 txtChuDauTu.Text = row.Cells["chudautu"].Value.ToString();
                 txtGhiChu.Text = row.Cells["ghichu"].Value.ToString();
@@ -411,7 +473,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 using SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@mact1", txtMaCT.Text);
                 command.Parameters.AddWithValue("@tenct", txtTenCT.Text);
-                command.Parameters.AddWithValue("@tinhtrang", string.IsNullOrWhiteSpace(txtTinhTrang.Text) ? DBNull.Value : txtTinhTrang.Text);
+                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedValue ?? DBNull.Value);
                 DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
                 command.Parameters.AddWithValue("@ngaybatdau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -450,7 +512,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 txtTenCT.Clear();
                 txtMaCT.Clear();
                 txtTenCT.Clear();
-                txtTinhTrang.Clear();
+                cboTinhTrang.SelectedIndex = -1;
                 dtpNgayBatDau.Value = DateTime.Now;
                 dtpNgayKetThuc.Value = DateTime.Now;
                 txtDuToan.Clear();
@@ -526,7 +588,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                 txtMaCT.Clear();
                 txtTenCT.Clear();
-                txtTinhTrang.Clear();
+                cboTinhTrang.SelectedIndex = -1;
                 dtpNgayBatDau.Value = DateTime.Now;
                 dtpNgayKetThuc.Value = DateTime.Now;
                 txtDuToan.Clear();
@@ -536,7 +598,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 txtTenCT.Enabled = false;
                 txtMaCT.Enabled = false;
                 txtTenCT.Enabled = false;
-                txtTinhTrang.Enabled = false;
+                cboTinhTrang.Enabled = false;
                 dtpNgayBatDau.Enabled = false;
                 dtpNgayKetThuc.Enabled = false;
                 txtDuToan.Enabled = false;
@@ -609,7 +671,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                         if (row.Cells["checkbox"].Value != null &&
                             Convert.ToBoolean(row.Cells["checkbox"].Value))
                         {
-                            string ?mact = row.Cells["mact"].Value?.ToString();
+                            string? mact = row.Cells["mact"].Value?.ToString();
                             dsmact.Add(mact);
                         }
                     }
@@ -653,7 +715,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             txtTenCT.Enabled = true;
             txtMaCT.Enabled = true;
             txtTenCT.Enabled = true;
-            txtTinhTrang.Enabled = true;
+            cboTinhTrang.Enabled = true;
             dtpNgayBatDau.Enabled = true;
             dtpNgayKetThuc.Enabled = true;
             txtDuToan.Enabled = true;
@@ -944,9 +1006,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 LoadcboXa(maHuyen);
         }
 
-        private void txtFilterName_TextChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }
