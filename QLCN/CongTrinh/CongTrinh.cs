@@ -505,6 +505,13 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         private bool isDelete = false;
         private void btnDelete_Click(object? sender, EventArgs e)
         {
+            if (dgvConstruction.RowCount == 0)
+            {
+                lblMessage.Text = "Không có công trình nào để xóa!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                return;
+            }
             if (!isDelete)
             {
                 // Chuyển sang chế độ xóa
