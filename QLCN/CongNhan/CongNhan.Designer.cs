@@ -551,25 +551,23 @@ namespace QLCN.CongNhan
             // dtpFilterNgaySinh2
             // 
             dtpFilterNgaySinh2.CustomFormat = "";
-            dtpFilterNgaySinh2.Format = DateTimePickerFormat.Custom;
             dtpFilterNgaySinh2.ImeMode = ImeMode.NoControl;
             dtpFilterNgaySinh2.Location = new Point(735, 0);
             dtpFilterNgaySinh2.Name = "dtpFilterNgaySinh2";
             dtpFilterNgaySinh2.ShowCheckBox = true;
             dtpFilterNgaySinh2.Size = new Size(155, 33);
             dtpFilterNgaySinh2.TabIndex = 19;
-            dtpFilterNgaySinh2.Value = new DateTime(2025, 10, 1, 0, 0, 0, 0);
+            dtpFilterNgaySinh2.Value = DateTime.Now;
             // 
             // dtpFilterNgaySinh1
             // 
             dtpFilterNgaySinh1.CustomFormat = "";
-            dtpFilterNgaySinh1.Format = DateTimePickerFormat.Custom;
             dtpFilterNgaySinh1.Location = new Point(580, 0);
             dtpFilterNgaySinh1.Name = "dtpFilterNgaySinh1";
             dtpFilterNgaySinh1.ShowCheckBox = true;
             dtpFilterNgaySinh1.Size = new Size(155, 33);
             dtpFilterNgaySinh1.TabIndex = 17;
-            dtpFilterNgaySinh1.Value = new DateTime(2025, 9, 24, 0, 0, 0, 0);
+            dtpFilterNgaySinh1.Value = DateTime.Now;
             // 
             // txtFilterTenCT
             // 
@@ -711,7 +709,6 @@ namespace QLCN.CongNhan
             btnXemChamCong.TabIndex = 22;
             btnXemChamCong.Text = "Xem chấm công";
             btnXemChamCong.UseVisualStyleBackColor = true;
-            btnXemChamCong.Click += btnXemChamCong_Click;
             // 
             // btnXemHD
             // 
@@ -721,7 +718,6 @@ namespace QLCN.CongNhan
             btnXemHD.TabIndex = 21;
             btnXemHD.Text = "Xem hợp đồng";
             btnXemHD.UseVisualStyleBackColor = true;
-            btnXemHD.Click += btnXemHD_Click;
             // 
             // btnExport
             // 
