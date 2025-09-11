@@ -95,13 +95,13 @@ namespace QLCN.CongTrinh
 
                 command.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command.Parameters.AddWithValue("@TenCT", txtTenCT.Text);
-                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedValue ?? DBNull.Value);
+                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedItem);
                 DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
                 command.Parameters.AddWithValue("@NgayBatDau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (dtpNgayKetThuc.Checked)
                 {
-                    if (dtpNgayKetThuc.Value.Date <= dtpNgayKetThuc.Value.Date)
+                    if (dtpNgayKetThuc.Value.Date <= dtpNgayBatDau.Value.Date)
                         command.Parameters.AddWithValue("@NgayKetThuc", DBNull.Value);
                     else
                         command.Parameters.AddWithValue("@NgayKetThuc", dtpNgayKetThuc.Value);
@@ -165,7 +165,7 @@ namespace QLCN.CongTrinh
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                query = @"select ct.mact as mact, tenct , tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diadiem, dutoan, ngaybatdau, ngayketthuc, ct.ghichu
+                query = @"select ct.mact, tenct, tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diachi, dutoan, ngaybatdau , ngayketthuc , ct.ghichu
 from congtrinh ct
 join diachicongtrinh dt on ct.mact = dt.mact
 join XaPhuong xp on xp.MaXP = dt.MaXP
@@ -211,6 +211,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             LoadcboTinh();
             dtpFilterNgayBatDau.Checked = false;
             dtpFilterNgayKetThuc.Checked = false;
+            cboFilterTinhTrang.SelectedIndex = 0;
+            cboFilterDuToan.SelectedIndex = 0;
 
         }
 
@@ -241,13 +243,13 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     filters.Add($"chudautu LIKE '%{chudautu}%'");
 
                 if (!string.IsNullOrEmpty(diadiem))
-                    filters.Add($"diadiem LIKE '%{diadiem}%'");
+                    filters.Add($"diachi LIKE '%{diadiem}%'");
 
                 if (ngaybatdau.HasValue)
-                    filters.Add($"ngaybatdau >= #{ngaybatdau:yyyy-MM-dd}#");
+                    filters.Add($"ngaybatdau >= #{ngaybatdau.Value:MM/dd/yyyy}#");
 
                 if (ngayketthuc.HasValue)
-                    filters.Add($"ngayketthuc <= #{ngayketthuc:yyyy-MM-dd}#");
+                    filters.Add($"ngayketthuc <= #{ngayketthuc.Value:MM/dd/yyyy}#");
 
                 if (!string.IsNullOrEmpty(tinhtrang) && tinhtrang != "Tất cả")
                     filters.Add($"tinhtrang = '{tinhtrang}'");
@@ -304,7 +306,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             dtpFilterNgayKetThuc.Checked = false;
             cboFilterTinhTrang.SelectedIndex = 0;
             cboFilterDuToan.SelectedIndex = 0;
-
             txtFilterMaCT.Focus();
             ApplyFilter();
         }
@@ -328,10 +329,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             cboFilterTinhTrang.SelectedIndexChanged += (s, e) => ApplyFilter();
             cboFilterDuToan.SelectedIndexChanged += (s, e) => ApplyFilter();
 
-            // Đăng ký sự kiện KeyDown cho các TextBox
-            /* txtName.KeyDown += TextBox_KeyDown;
-            txtLocation.KeyDown += TextBox_KeyDown;
-            txtYear.KeyDown += TextBox_KeyDown; */
+
             dgvConstruction.CellClick += DgvConstruction_CellClick;
             dgvConstruction.DataBindingComplete += DgvConstruction_DataBindingComplete;
             dgvConstruction.Sorted += DgvConstruction_Sorted;
@@ -376,19 +374,19 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 DataGridViewRow row = dgvConstruction.Rows[e.RowIndex];
 
                 // Hiển thị dữ liệu vào các ô nhập tương ứng
-                txtMaCT.Text = row.Cells["mact"].Value.ToString();
-                txtTenCT.Text = row.Cells["tenct"].Value.ToString();
-                cboTinhTrang.Text = row.Cells["tinhtrang"].Value.ToString();
-                txtDuToan.Text = row.Cells["dutoan"].Value.ToString();
-                txtChuDauTu.Text = row.Cells["chudautu"].Value.ToString();
-                txtGhiChu.Text = row.Cells["ghichu"].Value.ToString();
-                dtpNgayBatDau.Value = Convert.ToDateTime(row.Cells["ngaybatdau"].Value);
-                if (row.Cells["ngayketthuc"].Value != DBNull.Value)
-                    dtpNgayKetThuc.Value = Convert.ToDateTime(row.Cells["ngayketthuc"].Value);
+                txtMaCT.Text = row.Cells["dgvColMaCT"].Value.ToString();
+                txtTenCT.Text = row.Cells["dgvColTenCT"].Value.ToString();
+                cboTinhTrang.Text = row.Cells["dgvColTinhTrang"].Value.ToString();
+                txtDuToan.Text = row.Cells["dgvColDuToan"].Value.ToString();
+                txtChuDauTu.Text = row.Cells["dgvColChuDauTu"].Value.ToString();
+                txtGhiChu.Text = row.Cells["dgvColGhiChu"].Value.ToString();
+                dtpNgayBatDau.Value = Convert.ToDateTime(row.Cells["dgvColNgayBatDau"].Value);
+                if (row.Cells["dgvColNgayKetThuc"].Value != DBNull.Value)
+                    dtpNgayKetThuc.Value = Convert.ToDateTime(row.Cells["dgvColNgayKetThuc"].Value);
                 else
                     dtpNgayKetThuc.Value = DateTime.Now;
 
-                string diaChi = row.Cells["diadiem"].Value?.ToString() ?? "";
+                string diaChi = row.Cells["dgvColDiaDiem"].Value?.ToString() ?? "";
                 string[] parts = diaChi.Split(',');
 
 
@@ -429,7 +427,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         {
             foreach (DataGridViewRow row in dgvConstruction.Rows)
             {
-                if (row.Cells["mact"].Value.ToString() == mact)
+                if (row.Cells["dgvColMaCT"].Value.ToString() == mact)
                 {
                     // Chọn dòng
                     dgvConstruction.ClearSelection();
@@ -473,7 +471,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 using SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@mact1", txtMaCT.Text);
                 command.Parameters.AddWithValue("@tenct", txtTenCT.Text);
-                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedValue ?? DBNull.Value);
+                command.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedItem);
                 DateTime ngayBatDau = dtpNgayBatDau.Checked ? dtpNgayBatDau.Value : DateTime.Now;
 
                 command.Parameters.AddWithValue("@ngaybatdau", ngayBatDau.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -620,8 +618,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["checkbox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["checkbox"].Value))
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -668,10 +666,10 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     List<string> dsmact = [];
                     foreach (DataGridViewRow row in dgvConstruction.Rows)
                     {
-                        if (row.Cells["checkbox"].Value != null &&
-                            Convert.ToBoolean(row.Cells["checkbox"].Value))
+                        if (row.Cells["dgvColCheckBox"].Value != null &&
+                            Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                         {
-                            string? mact = row.Cells["mact"].Value?.ToString();
+                            string? mact = row.Cells["dgvColMaCT"].Value?.ToString();
                             dsmact.Add(mact);
                         }
                     }
@@ -737,16 +735,16 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             {
                 // Đảo ngược giá trị của ô checkbox
                 bool currentValue = false;
-                if (dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value != null)
-                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value);
-                dgvConstruction.Rows[e.RowIndex].Cells["checkbox"].Value = !currentValue;
+                if (dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value != null)
+                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value);
+                dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value = !currentValue;
 
                 // Kiểm tra xem có dòng nào được chọn không
                 bool hasCheckedRows = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["checkbox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["checkbox"].Value))
+                    if (row.Cells["dgvColCheckbox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckbox"].Value))
                     {
                         hasCheckedRows = true;
                         break;
@@ -777,8 +775,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 bool anyChecked = false;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
                 {
-                    if (row.Cells["checkbox"].Value != null &&
-                        Convert.ToBoolean(row.Cells["checkbox"].Value))
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
                     {
                         anyChecked = true;
                         break;
@@ -788,7 +786,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Chọn hoặc bỏ chọn tất cả các dòng
                 bool checkValue = !anyChecked;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
-                    row.Cells["checkbox"].Value = checkValue;
+                    row.Cells["dgvColCheckBox"].Value = checkValue;
 
                 // Cập nhật tên nút
                 if (checkValue)
@@ -875,15 +873,15 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     for (int i = 0; i < rowCount; i++)
                     {
                         worksheet.Cell(i + 4, 1).Value = i + 1;
-                        worksheet.Cell(i + 4, 2).Value = dgvConstruction.Rows[i].Cells["mact"].Value.ToString();
-                        worksheet.Cell(i + 4, 3).Value = dgvConstruction.Rows[i].Cells["tenct"].Value.ToString();
-                        worksheet.Cell(i + 4, 4).Value = dgvConstruction.Rows[i].Cells["tinhtrang"].Value.ToString();
-                        worksheet.Cell(i + 4, 5).Value = dgvConstruction.Rows[i].Cells["chudautu"].Value.ToString();
-                        worksheet.Cell(i + 4, 6).Value = dgvConstruction.Rows[i].Cells["diadiem"].Value.ToString();
-                        worksheet.Cell(i + 4, 7).Value = dgvConstruction.Rows[i].Cells["dutoan"].Value != DBNull.Value ? Convert.ToDecimal(dgvConstruction.Rows[i].Cells["dutoan"].Value) : (decimal?)null;
-                        worksheet.Cell(i + 4, 8).Value = Convert.ToDateTime(dgvConstruction.Rows[i].Cells["ngaybatdau"].Value);
-                        worksheet.Cell(i + 4, 9).Value = dgvConstruction.Rows[i].Cells["ngayketthuc"].Value != DBNull.Value ? Convert.ToDateTime(dgvConstruction.Rows[i].Cells["ngayketthuc"].Value) : (DateTime?)null;
-                        worksheet.Cell(i + 4, 10).Value = dgvConstruction.Rows[i].Cells["ghichu"].Value.ToString();
+                        worksheet.Cell(i + 4, 2).Value = dgvConstruction.Rows[i].Cells["dgvColMaCT"].Value.ToString();
+                        worksheet.Cell(i + 4, 3).Value = dgvConstruction.Rows[i].Cells["dgvColTenCT"].Value.ToString();
+                        worksheet.Cell(i + 4, 4).Value = dgvConstruction.Rows[i].Cells["dgvColTinhTrang"].Value.ToString();
+                        worksheet.Cell(i + 4, 5).Value = dgvConstruction.Rows[i].Cells["dgvColChuDauTu"].Value.ToString();
+                        worksheet.Cell(i + 4, 6).Value = dgvConstruction.Rows[i].Cells["dgvColDiaDiem"].Value.ToString();
+                        worksheet.Cell(i + 4, 7).Value = dgvConstruction.Rows[i].Cells["dgvColDuToan"].Value != DBNull.Value ? Convert.ToDecimal(dgvConstruction.Rows[i].Cells["dgvColDuToan"].Value) : (decimal?)null;
+                        worksheet.Cell(i + 4, 8).Value = Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayBatDau"].Value);
+                        worksheet.Cell(i + 4, 9).Value = dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value != DBNull.Value ? Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value) : (DateTime?)null;
+                        worksheet.Cell(i + 4, 10).Value = dgvConstruction.Rows[i].Cells["dgvColGhiChu"].Value.ToString();
                     }
 
                     // Định dạng dữ liệu
@@ -1006,6 +1004,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 LoadcboXa(maHuyen);
         }
 
+        private void btnImport_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
