@@ -101,7 +101,7 @@ namespace QLCN.CongNhan
             dgvColDiaDiem = new DataGridViewTextBoxColumn();
             dgvColTenCT = new DataGridViewTextBoxColumn();
             dgvColGhiChu = new DataGridViewTextBoxColumn();
-            dataGridViewColumnCheckBox = new DataGridViewCheckBoxColumn();
+            dgvColCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
             pictureBoxRemoveFilter = new PictureBox();
@@ -119,9 +119,9 @@ namespace QLCN.CongNhan
             lblGioiTinh = new Label();
             lblTenCT = new Label();
             panel2 = new Panel();
+            btnImport = new Button();
             btnXemChamCong = new Button();
             btnXemHD = new Button();
-            btnImport = new Button();
             btnExport = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -143,7 +143,6 @@ namespace QLCN.CongNhan
             lblMessage.Name = "lblMessage";
             lblMessage.Size = new Size(1800, 30);
             lblMessage.TabIndex = 0;
-            lblMessage.Text = "test";
             lblMessage.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnDelete
@@ -180,7 +179,7 @@ namespace QLCN.CongNhan
             txtMaCN.Location = new Point(300, 23);
             txtMaCN.Margin = new Padding(4, 5, 4, 5);
             txtMaCN.Name = "txtMaCN";
-            txtMaCN.Size = new Size(300, 38);
+            txtMaCN.Size = new Size(300, 33);
             txtMaCN.TabIndex = 3;
             // 
             // lblMaCN
@@ -189,7 +188,7 @@ namespace QLCN.CongNhan
             lblMaCN.Location = new Point(50, 23);
             lblMaCN.Margin = new Padding(4, 0, 4, 0);
             lblMaCN.Name = "lblMaCN";
-            lblMaCN.Size = new Size(176, 31);
+            lblMaCN.Size = new Size(140, 25);
             lblMaCN.TabIndex = 1;
             lblMaCN.Text = "Mã công nhân:";
             // 
@@ -198,7 +197,7 @@ namespace QLCN.CongNhan
             txtTenCN.Location = new Point(300, 73);
             txtTenCN.Margin = new Padding(4, 5, 4, 5);
             txtTenCN.Name = "txtTenCN";
-            txtTenCN.Size = new Size(300, 38);
+            txtTenCN.Size = new Size(300, 33);
             txtTenCN.TabIndex = 4;
             // 
             // lblTenCN
@@ -207,18 +206,18 @@ namespace QLCN.CongNhan
             lblTenCN.Location = new Point(50, 73);
             lblTenCN.Margin = new Padding(4, 0, 4, 0);
             lblTenCN.Name = "lblTenCN";
-            lblTenCN.Size = new Size(182, 31);
+            lblTenCN.Size = new Size(145, 25);
             lblTenCN.TabIndex = 2;
             lblTenCN.Text = "Tên công nhân:";
             // 
             // dtpNgaySinh
             // 
-            dtpNgaySinh.CustomFormat = " dd/MM/yy";
+            dtpNgaySinh.CustomFormat = "";
             dtpNgaySinh.Format = DateTimePickerFormat.Custom;
             dtpNgaySinh.Location = new Point(300, 173);
             dtpNgaySinh.Margin = new Padding(4, 5, 4, 5);
             dtpNgaySinh.Name = "dtpNgaySinh";
-            dtpNgaySinh.Size = new Size(300, 38);
+            dtpNgaySinh.Size = new Size(300, 33);
             dtpNgaySinh.TabIndex = 6;
             // 
             // lblNgaySinh
@@ -227,7 +226,7 @@ namespace QLCN.CongNhan
             lblNgaySinh.Location = new Point(50, 173);
             lblNgaySinh.Margin = new Padding(4, 0, 4, 0);
             lblNgaySinh.Name = "lblNgaySinh";
-            lblNgaySinh.Size = new Size(128, 31);
+            lblNgaySinh.Size = new Size(106, 25);
             lblNgaySinh.TabIndex = 4;
             lblNgaySinh.Text = "Ngày sinh:";
             // 
@@ -236,7 +235,7 @@ namespace QLCN.CongNhan
             txtSDT.Location = new Point(1550, 23);
             txtSDT.Margin = new Padding(4, 5, 4, 5);
             txtSDT.Name = "txtSDT";
-            txtSDT.Size = new Size(300, 38);
+            txtSDT.Size = new Size(300, 33);
             txtSDT.TabIndex = 8;
             // 
             // lblSDT
@@ -245,7 +244,7 @@ namespace QLCN.CongNhan
             lblSDT.Location = new Point(1300, 23);
             lblSDT.Margin = new Padding(4, 0, 4, 0);
             lblSDT.Name = "lblSDT";
-            lblSDT.Size = new Size(69, 31);
+            lblSDT.Size = new Size(59, 25);
             lblSDT.TabIndex = 6;
             lblSDT.Text = "SDT:";
             // 
@@ -254,7 +253,7 @@ namespace QLCN.CongNhan
             txtCCCD.Location = new Point(1550, 73);
             txtCCCD.Margin = new Padding(4, 5, 4, 5);
             txtCCCD.Name = "txtCCCD";
-            txtCCCD.Size = new Size(300, 38);
+            txtCCCD.Size = new Size(300, 33);
             txtCCCD.TabIndex = 9;
             // 
             // lblCCCD
@@ -263,7 +262,7 @@ namespace QLCN.CongNhan
             lblCCCD.Location = new Point(1300, 73);
             lblCCCD.Margin = new Padding(4, 0, 4, 0);
             lblCCCD.Name = "lblCCCD";
-            lblCCCD.Size = new Size(93, 31);
+            lblCCCD.Size = new Size(79, 25);
             lblCCCD.TabIndex = 7;
             lblCCCD.Text = "CCCD:";
             // 
@@ -272,7 +271,7 @@ namespace QLCN.CongNhan
             txtGhiChu.Location = new Point(1550, 173);
             txtGhiChu.Margin = new Padding(4, 5, 4, 5);
             txtGhiChu.Name = "txtGhiChu";
-            txtGhiChu.Size = new Size(300, 38);
+            txtGhiChu.Size = new Size(300, 33);
             txtGhiChu.TabIndex = 10;
             // 
             // lblGhiChu
@@ -281,7 +280,7 @@ namespace QLCN.CongNhan
             lblGhiChu.Location = new Point(1300, 173);
             lblGhiChu.Margin = new Padding(4, 0, 4, 0);
             lblGhiChu.Name = "lblGhiChu";
-            lblGhiChu.Size = new Size(107, 31);
+            lblGhiChu.Size = new Size(87, 25);
             lblGhiChu.TabIndex = 8;
             lblGhiChu.Text = "Ghi chú:";
             // 
@@ -291,8 +290,9 @@ namespace QLCN.CongNhan
             cboTinh.Location = new Point(900, 23);
             cboTinh.Margin = new Padding(4, 5, 4, 5);
             cboTinh.Name = "cboTinh";
-            cboTinh.Size = new Size(300, 37);
+            cboTinh.Size = new Size(300, 33);
             cboTinh.TabIndex = 11;
+            cboTinh.SelectedIndexChanged += cboTinh_SelectedIndexChanged;
             // 
             // lblTinh
             // 
@@ -300,7 +300,7 @@ namespace QLCN.CongNhan
             lblTinh.Location = new Point(700, 23);
             lblTinh.Margin = new Padding(4, 0, 4, 0);
             lblTinh.Name = "lblTinh";
-            lblTinh.Size = new Size(110, 31);
+            lblTinh.Size = new Size(90, 25);
             lblTinh.TabIndex = 9;
             lblTinh.Text = "Tỉnh/TP:";
             // 
@@ -310,8 +310,9 @@ namespace QLCN.CongNhan
             cboQuanHuyen.Location = new Point(900, 73);
             cboQuanHuyen.Margin = new Padding(4, 5, 4, 5);
             cboQuanHuyen.Name = "cboQuanHuyen";
-            cboQuanHuyen.Size = new Size(300, 37);
+            cboQuanHuyen.Size = new Size(300, 33);
             cboQuanHuyen.TabIndex = 12;
+            cboQuanHuyen.SelectedIndexChanged += cboQuanHuyen_SelectedIndexChanged;
             // 
             // lblQuanHuyen
             // 
@@ -319,7 +320,7 @@ namespace QLCN.CongNhan
             lblQuanHuyen.Location = new Point(700, 73);
             lblQuanHuyen.Margin = new Padding(4, 0, 4, 0);
             lblQuanHuyen.Name = "lblQuanHuyen";
-            lblQuanHuyen.Size = new Size(159, 31);
+            lblQuanHuyen.Size = new Size(128, 25);
             lblQuanHuyen.TabIndex = 10;
             lblQuanHuyen.Text = "Quận/Huyện:";
             // 
@@ -329,7 +330,7 @@ namespace QLCN.CongNhan
             cboXaPhuong.Location = new Point(900, 123);
             cboXaPhuong.Margin = new Padding(4, 5, 4, 5);
             cboXaPhuong.Name = "cboXaPhuong";
-            cboXaPhuong.Size = new Size(300, 37);
+            cboXaPhuong.Size = new Size(300, 33);
             cboXaPhuong.TabIndex = 13;
             // 
             // lblXaPhuong
@@ -338,7 +339,7 @@ namespace QLCN.CongNhan
             lblXaPhuong.Location = new Point(700, 123);
             lblXaPhuong.Margin = new Padding(4, 0, 4, 0);
             lblXaPhuong.Name = "lblXaPhuong";
-            lblXaPhuong.Size = new Size(143, 31);
+            lblXaPhuong.Size = new Size(115, 25);
             lblXaPhuong.TabIndex = 11;
             lblXaPhuong.Text = "Xã/Phường:";
             // 
@@ -358,7 +359,7 @@ namespace QLCN.CongNhan
             lblMoTaChiTiet.Location = new Point(700, 173);
             lblMoTaChiTiet.Margin = new Padding(4, 0, 4, 0);
             lblMoTaChiTiet.Name = "lblMoTaChiTiet";
-            lblMoTaChiTiet.Size = new Size(185, 31);
+            lblMoTaChiTiet.Size = new Size(152, 25);
             lblMoTaChiTiet.TabIndex = 12;
             lblMoTaChiTiet.Text = "Mô tả địa điểm:";
             // 
@@ -378,7 +379,7 @@ namespace QLCN.CongNhan
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCN, dgvColTenCN, dgvColGioiTinh, dgvColNgaySinh, dgvColSDT, dgvColCCCD, dgvColDiaDiem, dgvColTenCT, dgvColGhiChu, dataGridViewColumnCheckBox });
+            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCN, dgvColTenCN, dgvColGioiTinh, dgvColNgaySinh, dgvColSDT, dgvColCCCD, dgvColDiaDiem, dgvColTenCT, dgvColGhiChu, dgvColCheckBox });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -387,18 +388,21 @@ namespace QLCN.CongNhan
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvConstruction.Location = new Point(0, 38);
+            dgvConstruction.Dock = DockStyle.Bottom;
+            dgvConstruction.Location = new Point(0, 36);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
             dgvConstruction.Name = "dgvConstruction";
             dgvConstruction.ReadOnly = true;
             dgvConstruction.RowHeadersWidth = 51;
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvConstruction.Size = new Size(1884, 463);
+            dgvConstruction.Size = new Size(1884, 504);
             dgvConstruction.TabIndex = 19;
+            dgvConstruction.AutoGenerateColumns = false;
             // 
             // dgvColSTT
             // 
             dgvColSTT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSTT.DataPropertyName = "STT";
             dgvColSTT.HeaderText = "STT";
             dgvColSTT.MinimumWidth = 8;
             dgvColSTT.Name = "dgvColSTT";
@@ -408,6 +412,7 @@ namespace QLCN.CongNhan
             // dgvColMaCN
             // 
             dgvColMaCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColMaCN.DataPropertyName = "MaCN";
             dgvColMaCN.HeaderText = "Mã CN";
             dgvColMaCN.MinimumWidth = 8;
             dgvColMaCN.Name = "dgvColMaCN";
@@ -417,6 +422,7 @@ namespace QLCN.CongNhan
             // dgvColTenCN
             // 
             dgvColTenCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColTenCN.DataPropertyName = "TenCN";
             dgvColTenCN.HeaderText = "Tên CN";
             dgvColTenCN.MinimumWidth = 8;
             dgvColTenCN.Name = "dgvColTenCN";
@@ -426,6 +432,7 @@ namespace QLCN.CongNhan
             // dgvColGioiTinh
             // 
             dgvColGioiTinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGioiTinh.DataPropertyName = "GioiTinh";
             dgvColGioiTinh.HeaderText = "Giới tính";
             dgvColGioiTinh.MinimumWidth = 8;
             dgvColGioiTinh.Name = "dgvColGioiTinh";
@@ -435,6 +442,7 @@ namespace QLCN.CongNhan
             // dgvColNgaySinh
             // 
             dgvColNgaySinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColNgaySinh.DataPropertyName = "NgaySinh";
             dgvColNgaySinh.HeaderText = "Ngày sinh";
             dgvColNgaySinh.MinimumWidth = 8;
             dgvColNgaySinh.Name = "dgvColNgaySinh";
@@ -444,6 +452,7 @@ namespace QLCN.CongNhan
             // dgvColSDT
             // 
             dgvColSDT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSDT.DataPropertyName = "SDT";
             dgvColSDT.HeaderText = "SDT";
             dgvColSDT.MinimumWidth = 8;
             dgvColSDT.Name = "dgvColSDT";
@@ -453,6 +462,7 @@ namespace QLCN.CongNhan
             // dgvColCCCD
             // 
             dgvColCCCD.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColCCCD.DataPropertyName = "CCCD";
             dgvColCCCD.HeaderText = "CCCD";
             dgvColCCCD.MinimumWidth = 8;
             dgvColCCCD.Name = "dgvColCCCD";
@@ -462,6 +472,7 @@ namespace QLCN.CongNhan
             // dgvColDiaDiem
             // 
             dgvColDiaDiem.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColDiaDiem.DataPropertyName = "DiaDiem";
             dgvColDiaDiem.HeaderText = "Địa điểm";
             dgvColDiaDiem.MinimumWidth = 8;
             dgvColDiaDiem.Name = "dgvColDiaDiem";
@@ -471,6 +482,7 @@ namespace QLCN.CongNhan
             // dgvColTenCT
             // 
             dgvColTenCT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColTenCT.DataPropertyName = "TenCT";
             dgvColTenCT.HeaderText = "Tên CT";
             dgvColTenCT.MinimumWidth = 8;
             dgvColTenCT.Name = "dgvColTenCT";
@@ -480,20 +492,23 @@ namespace QLCN.CongNhan
             // dgvColGhiChu
             // 
             dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGhiChu.DataPropertyName = "GhiChu";
             dgvColGhiChu.HeaderText = "Ghi chú";
             dgvColGhiChu.MinimumWidth = 8;
             dgvColGhiChu.Name = "dgvColGhiChu";
             dgvColGhiChu.ReadOnly = true;
             dgvColGhiChu.Width = 150;
             // 
-            // dataGridViewColumnCheckBox
+            // dgvColCheckBox
             // 
-            dataGridViewColumnCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewColumnCheckBox.HeaderText = "✅";
-            dataGridViewColumnCheckBox.MinimumWidth = 6;
-            dataGridViewColumnCheckBox.Name = "dataGridViewColumnCheckBox";
-            dataGridViewColumnCheckBox.ReadOnly = true;
-            dataGridViewColumnCheckBox.Width = 52;
+            dgvColCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvColCheckBox.HeaderText = "✅";
+            dgvColCheckBox.MinimumWidth = 6;
+            dgvColCheckBox.Name = "dgvColumnCheckBox";
+            dgvColCheckBox.ReadOnly = true;
+            dgvColCheckBox.Width = 43;
+            dgvColCheckBox.Visible = false;
+
             // 
             // btnRefresh
             // 
@@ -518,6 +533,7 @@ namespace QLCN.CongNhan
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterMaCN);
             panelFilter.Controls.Add(txtFilterTenCN);
+            panelFilter.Dock = DockStyle.Top;
             panelFilter.Location = new Point(0, 0);
             panelFilter.Name = "panelFilter";
             panelFilter.Size = new Size(1884, 38);
@@ -543,27 +559,27 @@ namespace QLCN.CongNhan
             cboGioiTinh.Location = new Point(400, 0);
             cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
             cboGioiTinh.Name = "cboGioiTinh";
-            cboGioiTinh.Size = new Size(180, 37);
+            cboGioiTinh.Size = new Size(180, 33);
             cboGioiTinh.TabIndex = 16;
             // 
             // dtpFilterNgaySinhDen
             // 
-            dtpFilterNgaySinhDen.CustomFormat = " dd/MM/yy";
+            dtpFilterNgaySinhDen.CustomFormat = "";
             dtpFilterNgaySinhDen.Format = DateTimePickerFormat.Custom;
             dtpFilterNgaySinhDen.ImeMode = ImeMode.NoControl;
             dtpFilterNgaySinhDen.Location = new Point(735, 0);
             dtpFilterNgaySinhDen.Name = "dtpFilterNgaySinhDen";
-            dtpFilterNgaySinhDen.Size = new Size(155, 38);
+            dtpFilterNgaySinhDen.Size = new Size(155, 33);
             dtpFilterNgaySinhDen.TabIndex = 19;
             dtpFilterNgaySinhDen.Value = new DateTime(2025, 10, 1, 0, 0, 0, 0);
             // 
             // dtpFilterNgaySinhTu
             // 
-            dtpFilterNgaySinhTu.CustomFormat = " dd/MM/yy";
+            dtpFilterNgaySinhTu.CustomFormat = "";
             dtpFilterNgaySinhTu.Format = DateTimePickerFormat.Custom;
             dtpFilterNgaySinhTu.Location = new Point(580, 0);
             dtpFilterNgaySinhTu.Name = "dtpFilterNgaySinhTu";
-            dtpFilterNgaySinhTu.Size = new Size(155, 38);
+            dtpFilterNgaySinhTu.Size = new Size(155, 33);
             dtpFilterNgaySinhTu.TabIndex = 17;
             dtpFilterNgaySinhTu.Value = new DateTime(2025, 9, 24, 0, 0, 0, 0);
             // 
@@ -572,7 +588,7 @@ namespace QLCN.CongNhan
             txtFilterTenCT.Location = new Point(1480, 0);
             txtFilterTenCT.Name = "txtFilterTenCT";
             txtFilterTenCT.PlaceholderText = "Tìm tên CT";
-            txtFilterTenCT.Size = new Size(200, 38);
+            txtFilterTenCT.Size = new Size(200, 33);
             txtFilterTenCT.TabIndex = 15;
             txtFilterTenCT.TextAlign = HorizontalAlignment.Center;
             // 
@@ -581,7 +597,7 @@ namespace QLCN.CongNhan
             txtFilterDiaDiem.Location = new Point(1230, 0);
             txtFilterDiaDiem.Name = "txtFilterDiaDiem";
             txtFilterDiaDiem.PlaceholderText = "Tìm địa điểm";
-            txtFilterDiaDiem.Size = new Size(250, 38);
+            txtFilterDiaDiem.Size = new Size(250, 33);
             txtFilterDiaDiem.TabIndex = 14;
             txtFilterDiaDiem.TextAlign = HorizontalAlignment.Center;
             // 
@@ -591,7 +607,7 @@ namespace QLCN.CongNhan
             txtFilterMaCN.Location = new Point(110, 0);
             txtFilterMaCN.Name = "txtFilterMaCN";
             txtFilterMaCN.PlaceholderText = "Tìm mã CN";
-            txtFilterMaCN.Size = new Size(150, 38);
+            txtFilterMaCN.Size = new Size(150, 33);
             txtFilterMaCN.TabIndex = 7;
             txtFilterMaCN.TextAlign = HorizontalAlignment.Center;
             // 
@@ -601,7 +617,7 @@ namespace QLCN.CongNhan
             txtFilterTenCN.Location = new Point(260, 0);
             txtFilterTenCN.Name = "txtFilterTenCN";
             txtFilterTenCN.PlaceholderText = "Tìm tên CN";
-            txtFilterTenCN.Size = new Size(140, 38);
+            txtFilterTenCN.Size = new Size(140, 33);
             txtFilterTenCN.TabIndex = 8;
             txtFilterTenCN.TextAlign = HorizontalAlignment.Center;
             // 
@@ -643,7 +659,7 @@ namespace QLCN.CongNhan
             comboBox1.Location = new Point(300, 123);
             comboBox1.Margin = new Padding(4, 5, 4, 5);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(300, 37);
+            comboBox1.Size = new Size(300, 33);
             comboBox1.TabIndex = 17;
             // 
             // cboTenCongTrinh
@@ -652,7 +668,7 @@ namespace QLCN.CongNhan
             cboTenCongTrinh.Location = new Point(1550, 123);
             cboTenCongTrinh.Margin = new Padding(4, 5, 4, 5);
             cboTenCongTrinh.Name = "cboTenCongTrinh";
-            cboTenCongTrinh.Size = new Size(300, 37);
+            cboTenCongTrinh.Size = new Size(300, 33);
             cboTenCongTrinh.TabIndex = 16;
             // 
             // lblGioiTinh
@@ -661,7 +677,7 @@ namespace QLCN.CongNhan
             lblGioiTinh.Location = new Point(50, 123);
             lblGioiTinh.Margin = new Padding(4, 0, 4, 0);
             lblGioiTinh.Name = "lblGioiTinh";
-            lblGioiTinh.Size = new Size(117, 31);
+            lblGioiTinh.Size = new Size(96, 25);
             lblGioiTinh.TabIndex = 3;
             lblGioiTinh.Text = "Giới tính:";
             // 
@@ -671,15 +687,15 @@ namespace QLCN.CongNhan
             lblTenCT.Location = new Point(1300, 123);
             lblTenCT.Margin = new Padding(4, 0, 4, 0);
             lblTenCT.Name = "lblTenCT";
-            lblTenCT.Size = new Size(193, 31);
+            lblTenCT.Size = new Size(156, 25);
             lblTenCT.TabIndex = 5;
             lblTenCT.Text = "Tên Công Trình:";
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnImport);
             panel2.Controls.Add(btnXemChamCong);
             panel2.Controls.Add(btnXemHD);
-            panel2.Controls.Add(btnImport);
             panel2.Controls.Add(btnExport);
             panel2.Controls.Add(btnAdd);
             panel2.Controls.Add(btnEdit);
@@ -690,9 +706,18 @@ namespace QLCN.CongNhan
             panel2.Size = new Size(1881, 100);
             panel2.TabIndex = 22;
             // 
+            // btnImport
+            // 
+            btnImport.Location = new Point(1142, 23);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new Size(150, 50);
+            btnImport.TabIndex = 23;
+            btnImport.Text = "Nhập Excel";
+            btnImport.UseVisualStyleBackColor = true;
+            // 
             // btnXemChamCong
             // 
-            btnXemChamCong.Location = new Point(1647, 23);
+            btnXemChamCong.Location = new Point(1632, 23);
             btnXemChamCong.Name = "btnXemChamCong";
             btnXemChamCong.Size = new Size(203, 50);
             btnXemChamCong.TabIndex = 22;
@@ -701,21 +726,12 @@ namespace QLCN.CongNhan
             // 
             // btnXemHD
             // 
-            btnXemHD.Location = new Point(1364, 23);
+            btnXemHD.Location = new Point(1362, 23);
             btnXemHD.Name = "btnXemHD";
             btnXemHD.Size = new Size(203, 50);
             btnXemHD.TabIndex = 21;
             btnXemHD.Text = "Xem hợp đồng";
             btnXemHD.UseVisualStyleBackColor = true;
-            // 
-            // btnImport
-            // 
-            btnImport.Location = new Point(1133, 23);
-            btnImport.Name = "btnImport";
-            btnImport.Size = new Size(150, 50);
-            btnImport.TabIndex = 20;
-            btnImport.Text = "Nhập Excel";
-            btnImport.UseVisualStyleBackColor = true;
             // 
             // btnExport
             // 
@@ -745,7 +761,7 @@ namespace QLCN.CongNhan
             // 
             // CongNhan
             // 
-            AutoScaleDimensions = new SizeF(14F, 29F);
+            AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel4);
             Controls.Add(panel3);
@@ -765,6 +781,8 @@ namespace QLCN.CongNhan
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ResumeLayout(false);
+            Load += CongNhan_Load;
+
 
         }
 
@@ -793,12 +811,12 @@ namespace QLCN.CongNhan
         private DataGridViewTextBoxColumn dgvColDiaDiem;
         private DataGridViewTextBoxColumn dgvColTenCT;
         private DataGridViewTextBoxColumn dgvColGhiChu;
-        private DataGridViewCheckBoxColumn dataGridViewColumnCheckBox;
-        private Button btnImport;
+        private DataGridViewCheckBoxColumn dgvColCheckBox;
         private ComboBox cboTenCongTrinh;
         private ComboBox comboBox1;
         private PictureBox pictureBoxRemoveFilter;
         private Button btnXemHD;
         private Button btnXemChamCong;
+        private Button btnImport;
     }
 }
