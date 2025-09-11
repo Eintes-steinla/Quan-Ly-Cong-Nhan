@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using QLCN.DB;
 using ClosedXML.Excel;
+using System.Diagnostics;
 namespace QLCN.CongNhan
 {
     partial class CongNhan
@@ -95,16 +96,16 @@ namespace QLCN.CongNhan
             btnRefresh = new Button();
             panelFilter = new Panel();
             pictureBoxRemoveFilter = new PictureBox();
-            cboGioiTinh = new ComboBox();
-            dtpFilterNgaySinhDen = new DateTimePicker();
-            dtpFilterNgaySinhTu = new DateTimePicker();
+            cboFilterGioiTinh = new ComboBox();
+            dtpFilterNgaySinh2 = new DateTimePicker();
+            dtpFilterNgaySinh1 = new DateTimePicker();
             txtFilterTenCT = new TextBox();
             txtFilterDiaDiem = new TextBox();
             txtFilterMaCN = new TextBox();
             txtFilterTenCN = new TextBox();
             toolTip = new ToolTip(components);
             panel1 = new Panel();
-            comboBox1 = new ComboBox();
+            cboGioiTinh = new ComboBox();
             cboTenCongTrinh = new ComboBox();
             lblGioiTinh = new Label();
             lblTenCT = new Label();
@@ -163,7 +164,6 @@ namespace QLCN.CongNhan
             btnAdd.TabIndex = 15;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
             // 
             // txtMaCN
             // 
@@ -208,6 +208,7 @@ namespace QLCN.CongNhan
             dtpNgaySinh.Location = new Point(300, 173);
             dtpNgaySinh.Margin = new Padding(4, 5, 4, 5);
             dtpNgaySinh.Name = "dtpNgaySinh";
+            dtpNgaySinh.ShowCheckBox = true;
             dtpNgaySinh.Size = new Size(300, 33);
             dtpNgaySinh.TabIndex = 6;
             // 
@@ -353,6 +354,20 @@ namespace QLCN.CongNhan
             lblMoTaChiTiet.Size = new Size(152, 25);
             lblMoTaChiTiet.TabIndex = 12;
             lblMoTaChiTiet.Text = "Mô tả địa điểm:";
+
+            dgvColSTT = new DataGridViewTextBoxColumn();
+            dgvColMaCN = new DataGridViewTextBoxColumn();
+            dgvColTenCN = new DataGridViewTextBoxColumn();
+            dgvColGioiTinh = new DataGridViewTextBoxColumn();
+            dgvColNgaySinh = new DataGridViewTextBoxColumn();
+            dgvColSDT = new DataGridViewTextBoxColumn();
+            dgvColCCCD = new DataGridViewTextBoxColumn();
+            dgvColDiaDiem = new DataGridViewTextBoxColumn();
+            dgvColTenCT = new DataGridViewTextBoxColumn();
+            dgvColGhiChu = new DataGridViewTextBoxColumn();
+            dgvColCheckBox = new DataGridViewCheckBoxColumn();
+
+
             // 
             // dgvConstruction
             // 
@@ -370,7 +385,7 @@ namespace QLCN.CongNhan
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColCheckBox });
+            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCN, dgvColTenCN, dgvColGioiTinh, dgvColNgaySinh, dgvColSDT, dgvColCCCD, dgvColDiaDiem,dgvColTenCT, dgvColGhiChu, dgvColCheckBox });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = SystemColors.Window;
             dataGridViewCellStyle4.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -388,6 +403,79 @@ namespace QLCN.CongNhan
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConstruction.Size = new Size(1884, 504);
             dgvConstruction.TabIndex = 19;
+            dgvConstruction.AutoGenerateColumns = false;
+
+            dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGhiChu.DataPropertyName = "GhiChu";
+            dgvColGhiChu.HeaderText = "Ghi chú";
+            dgvColGhiChu.MinimumWidth = 8;
+            dgvColGhiChu.Name = "dgvColGhiChu";
+            dgvColGhiChu.ReadOnly = true;
+            dgvColGhiChu.Width = 200;
+
+            dgvColTenCT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColTenCT.DataPropertyName = "TenCT";
+            dgvColTenCT.HeaderText = "Tên CT";
+            dgvColTenCT.MinimumWidth = 8;
+            dgvColTenCT.Name = "dgvColTenCT";
+            dgvColTenCT.ReadOnly = true;
+            dgvColTenCT.Width = 200;
+
+            dgvColDiaDiem.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColDiaDiem.DataPropertyName = "DiaChi";
+            dgvColDiaDiem.HeaderText = "Địa chỉ";
+            dgvColDiaDiem.MinimumWidth = 8;
+            dgvColDiaDiem.Name = "dgvColDiaDiem";
+            dgvColDiaDiem.ReadOnly = true;
+            dgvColDiaDiem.Width = 250;
+
+            dgvColCCCD.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColCCCD.DataPropertyName = "CCCD";
+            dgvColCCCD.HeaderText = "CCCD/CMND";
+            dgvColCCCD.MinimumWidth = 8;
+            dgvColCCCD.Name = "dgvColCCCD";
+            dgvColCCCD.ReadOnly = true;
+            dgvColCCCD.Width = 150;
+
+            dgvColSDT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSDT.DataPropertyName = "SDT";
+            dgvColSDT.HeaderText = "SDT";
+            dgvColSDT.MinimumWidth = 8;
+            dgvColSDT.Name = "dgvColSDT";
+            dgvColSDT.ReadOnly = true;
+            dgvColSDT.Width = 150;
+
+            dgvColNgaySinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColNgaySinh.DataPropertyName = "NgaySinh";
+            dgvColNgaySinh.HeaderText = "Ngày sinh";
+            dgvColNgaySinh.MinimumWidth = 8;
+            dgvColNgaySinh.Name = "dgvColNgaySinh";
+            dgvColNgaySinh.ReadOnly = true;
+            dgvColNgaySinh.Width = 310;
+
+            dgvColGioiTinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColGioiTinh.DataPropertyName = "GioiTinh";
+            dgvColGioiTinh.HeaderText = "Giới tinh";
+            dgvColGioiTinh.MinimumWidth = 8;
+            dgvColGioiTinh.Name = "dgvColGioiTinh";
+            dgvColGioiTinh.ReadOnly = true;
+            dgvColGioiTinh.Width = 180;
+
+            dgvColTenCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColTenCN.DataPropertyName = "TenCN";
+            dgvColTenCN.HeaderText = "Họ và tên";
+            dgvColTenCN.MinimumWidth = 8;
+            dgvColTenCN.Name = "dgvColTenCN";
+            dgvColTenCN.ReadOnly = true;
+            dgvColTenCN.Width = 140;
+
+            dgvColMaCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColMaCN.DataPropertyName = "MaCN";
+            dgvColMaCN.HeaderText = "Mã CN";
+            dgvColMaCN.MinimumWidth = 8;
+            dgvColMaCN.Name = "dgvColMaCN";
+            dgvColMaCN.ReadOnly = true;
+            dgvColMaCN.Width = 150;
             // 
             // dgvColCheckBox
             // 
@@ -398,6 +486,15 @@ namespace QLCN.CongNhan
             dgvColCheckBox.ReadOnly = true;
             dgvColCheckBox.Visible = false;
             dgvColCheckBox.Width = 125;
+
+            dgvColSTT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSTT.DataPropertyName = "STT";
+            dgvColSTT.HeaderText = "STT";
+            dgvColSTT.MinimumWidth = 8;
+            dgvColSTT.Name = "STT";
+            dgvColSTT.ReadOnly = true;
+            dgvColSTT.Width = 60;
+            
             // 
             // btnRefresh
             // 
@@ -415,9 +512,9 @@ namespace QLCN.CongNhan
             panelFilter.BackColor = Color.WhiteSmoke;
             panelFilter.BorderStyle = BorderStyle.FixedSingle;
             panelFilter.Controls.Add(pictureBoxRemoveFilter);
-            panelFilter.Controls.Add(cboGioiTinh);
-            panelFilter.Controls.Add(dtpFilterNgaySinhDen);
-            panelFilter.Controls.Add(dtpFilterNgaySinhTu);
+            panelFilter.Controls.Add(cboFilterGioiTinh);
+            panelFilter.Controls.Add(dtpFilterNgaySinh2);
+            panelFilter.Controls.Add(dtpFilterNgaySinh1);
             panelFilter.Controls.Add(txtFilterTenCT);
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterMaCN);
@@ -441,36 +538,38 @@ namespace QLCN.CongNhan
             pictureBoxRemoveFilter.TabStop = false;
             toolTip.SetToolTip(pictureBoxRemoveFilter, "Xóa tất cả bộ lọc");
             // 
-            // cboGioiTinh
+            // cboFilterGioiTinh
             // 
-            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboGioiTinh.Items.AddRange(new object[] { "Tất cả", "Nam", "Nữ", "Khác" });
-            cboGioiTinh.Location = new Point(400, 0);
-            cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
-            cboGioiTinh.Name = "cboGioiTinh";
-            cboGioiTinh.Size = new Size(180, 33);
-            cboGioiTinh.TabIndex = 16;
+            cboFilterGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboFilterGioiTinh.Items.AddRange(new object[] { "Tất cả", "Nam", "Nữ", "Khác" });
+            cboFilterGioiTinh.Location = new Point(400, 0);
+            cboFilterGioiTinh.Margin = new Padding(4, 5, 4, 5);
+            cboFilterGioiTinh.Name = "cboFilterGioiTinh";
+            cboFilterGioiTinh.Size = new Size(180, 33);
+            cboFilterGioiTinh.TabIndex = 16;
             // 
-            // dtpFilterNgaySinhDen
+            // dtpFilterNgaySinh2
             // 
-            dtpFilterNgaySinhDen.CustomFormat = "";
-            dtpFilterNgaySinhDen.Format = DateTimePickerFormat.Custom;
-            dtpFilterNgaySinhDen.ImeMode = ImeMode.NoControl;
-            dtpFilterNgaySinhDen.Location = new Point(735, 0);
-            dtpFilterNgaySinhDen.Name = "dtpFilterNgaySinhDen";
-            dtpFilterNgaySinhDen.Size = new Size(155, 33);
-            dtpFilterNgaySinhDen.TabIndex = 19;
-            dtpFilterNgaySinhDen.Value = new DateTime(2025, 10, 1, 0, 0, 0, 0);
+            dtpFilterNgaySinh2.CustomFormat = "";
+            dtpFilterNgaySinh2.Format = DateTimePickerFormat.Custom;
+            dtpFilterNgaySinh2.ImeMode = ImeMode.NoControl;
+            dtpFilterNgaySinh2.Location = new Point(735, 0);
+            dtpFilterNgaySinh2.Name = "dtpFilterNgaySinh2";
+            dtpFilterNgaySinh2.ShowCheckBox = true;
+            dtpFilterNgaySinh2.Size = new Size(155, 33);
+            dtpFilterNgaySinh2.TabIndex = 19;
+            dtpFilterNgaySinh2.Value = new DateTime(2025, 10, 1, 0, 0, 0, 0);
             // 
-            // dtpFilterNgaySinhTu
+            // dtpFilterNgaySinh1
             // 
-            dtpFilterNgaySinhTu.CustomFormat = "";
-            dtpFilterNgaySinhTu.Format = DateTimePickerFormat.Custom;
-            dtpFilterNgaySinhTu.Location = new Point(580, 0);
-            dtpFilterNgaySinhTu.Name = "dtpFilterNgaySinhTu";
-            dtpFilterNgaySinhTu.Size = new Size(155, 33);
-            dtpFilterNgaySinhTu.TabIndex = 17;
-            dtpFilterNgaySinhTu.Value = new DateTime(2025, 9, 24, 0, 0, 0, 0);
+            dtpFilterNgaySinh1.CustomFormat = "";
+            dtpFilterNgaySinh1.Format = DateTimePickerFormat.Custom;
+            dtpFilterNgaySinh1.Location = new Point(580, 0);
+            dtpFilterNgaySinh1.Name = "dtpFilterNgaySinh1";
+            dtpFilterNgaySinh1.ShowCheckBox = true;
+            dtpFilterNgaySinh1.Size = new Size(155, 33);
+            dtpFilterNgaySinh1.TabIndex = 17;
+            dtpFilterNgaySinh1.Value = new DateTime(2025, 9, 24, 0, 0, 0, 0);
             // 
             // txtFilterTenCT
             // 
@@ -512,7 +611,7 @@ namespace QLCN.CongNhan
             // 
             // panel1
             // 
-            panel1.Controls.Add(comboBox1);
+            panel1.Controls.Add(cboGioiTinh);
             panel1.Controls.Add(cboTenCongTrinh);
             panel1.Controls.Add(txtMoTaChiTiet);
             panel1.Controls.Add(lblMoTaChiTiet);
@@ -541,15 +640,15 @@ namespace QLCN.CongNhan
             panel1.Size = new Size(1881, 260);
             panel1.TabIndex = 21;
             // 
-            // comboBox1
+            // cboGioiTinh
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ", "Khác" });
-            comboBox1.Location = new Point(300, 123);
-            comboBox1.Margin = new Padding(4, 5, 4, 5);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(300, 33);
-            comboBox1.TabIndex = 17;
+            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ", "Khác" });
+            cboGioiTinh.Location = new Point(300, 123);
+            cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
+            cboGioiTinh.Name = "cboGioiTinh";
+            cboGioiTinh.Size = new Size(300, 33);
+            cboGioiTinh.TabIndex = 17;
             // 
             // cboTenCongTrinh
             // 
@@ -687,9 +786,9 @@ namespace QLCN.CongNhan
         private TextBox txtFilterDiaDiem;
         private Label lblGioiTinh;
         private Label lblTenCT;
-        private DateTimePicker dtpFilterNgaySinhTu;
-        private DateTimePicker dtpFilterNgaySinhDen;
-        private ComboBox cboGioiTinh;
+        private DateTimePicker dtpFilterNgaySinh1;
+        private DateTimePicker dtpFilterNgaySinh2;
+        private ComboBox cboFilterGioiTinh;
         private DataGridViewTextBoxColumn dgvColSTT;
         private DataGridViewTextBoxColumn dgvColMaCN;
         private DataGridViewTextBoxColumn dgvColTenCN;
@@ -702,7 +801,7 @@ namespace QLCN.CongNhan
         private DataGridViewTextBoxColumn dgvColGhiChu;
         private DataGridViewCheckBoxColumn dgvColCheckBox;
         private ComboBox cboTenCongTrinh;
-        private ComboBox comboBox1;
+        private ComboBox cboGioiTinh;
         private PictureBox pictureBoxRemoveFilter;
         private Button btnXemHD;
         private Button btnXemChamCong;

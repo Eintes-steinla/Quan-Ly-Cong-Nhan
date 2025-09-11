@@ -30,6 +30,19 @@ namespace QLCN.CongNhan
                 if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                     e.Handled = true; // Ngăn chặn ký tự không hợp lệ
             };
+            btnAdd.Click += btnAdd_Click;
+            btnEdit.Click += btnEdit_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            btnExport.Click += btnExport_Click;
+            pictureBoxRemoveFilter.Click += pictureBoxRemoveFilter_Click;
+            btnXemHD.Click += btnXemHD_Click;
+            btnXemChamCong.Click += btnXemChamCong_Click;
+            dgvConstruction.CellClick += DgvConstruction_CellClick;
+            dgvConstruction.DataBindingComplete += DgvConstruction_DataBindingComplete;
+            dgvConstruction.Sorted += DgvConstruction_Sorted;
+            // dgvConstruction.CellContentClick += DgvConstruction_CellContentClick;
+            // dgvConstruction.SelectionChanged += DgvConstruction_SelectionChanged;
         }
 
         public void TimeIntervalMessage()
@@ -52,7 +65,7 @@ namespace QLCN.CongNhan
             // Kiểm tra mã công nhân không được bỏ trống
             if (string.IsNullOrWhiteSpace(txtMaCN.Text))
             {
-                lblMessage.Text = "Vui lòng nhập mã công trình!";
+                lblMessage.Text = "Vui lòng nhập mã công nhân!";
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
                 txtMaCN.Focus();
@@ -62,7 +75,7 @@ namespace QLCN.CongNhan
             // Kiểm tra tên công nhân không được bỏ trống
             if (string.IsNullOrWhiteSpace(txtTenCN.Text))
             {
-                lblMessage.Text = "Vui lòng nhập tên công trình!";
+                lblMessage.Text = "Vui lòng nhập tên công nhân!";
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
                 txtTenCN.Focus();
@@ -78,12 +91,12 @@ namespace QLCN.CongNhan
                 return true;
             }
             // Kiểm tra giới tính không được bỏ trống
-            if (cboGioiTinh.SelectedIndex == -1)
+            if (cboGioiTinh.SelectedItem == null)
             {
-                lblMessage.Text = "Vui lòng chọn tình trạng công trình!";
+                lblMessage.Text = "Vui lòng chọn giới tính!";
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
-                cboGioiTinh.Focus();
+                cboFilterGioiTinh.Focus();
                 return true;
             }
 
@@ -158,7 +171,16 @@ namespace QLCN.CongNhan
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                query = @"SELECT cn.macn MaCN, HoTen as TenCN, LTRIM(RTRIM(RIGHT(HoTen, CHARINDEX(' ', REVERSE(HoTen) + ' ') - 1))) AS Ten, LTRIM(RTRIM(LEFT(HoTen, CHARINDEX(' ', HoTen + ' ') - 1))) AS Ho, LTRIM(RTRIM(SUBSTRING(HoTen,CHARINDEX(' ', HoTen + ' ') + 1,LEN(HoTen)- CHARINDEX(' ', HoTen + ' ')- CHARINDEX(' ', REVERSE(HoTen) + ' ')))) AS TenDem, GioiTinh, NgaySinh, SDT, CCCD, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as DiaChi, TenCT, cn.ghichu GhiChu
+                query = @"SELECT cn.macn MaCN, HoTen as TenCN, LTRIM(RTRIM(RIGHT(HoTen, CHARINDEX(' ', REVERSE(HoTen) + ' ') - 1))) AS Ten,
+                CASE 
+                    WHEN CHARINDEX(' ', HoTen) = 0 THEN NULL
+                    ELSE LTRIM(RTRIM(LEFT(HoTen, CHARINDEX(' ', HoTen + ' ') - 1)))
+                    END AS Ho,
+                CASE 
+                    WHEN (LEN(HoTen) - LEN(REPLACE(HoTen, ' ', ''))) < 2 THEN NULL
+                    ELSE LTRIM(RTRIM(SUBSTRING(HoTen,CHARINDEX(' ', HoTen + ' ') + 1,LEN(HoTen) - CHARINDEX(' ', HoTen + ' ') - CHARINDEX(' ', REVERSE(HoTen) + ' '))))
+                END AS TenDem,
+                GioiTinh, NgaySinh, SDT, CCCD, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as DiaChi, TenCT, cn.ghichu GhiChu
                     FROM congnhan cn
 					join DiaChiCongNhan dc on dc.MaCN = cn.MaCN
 					join xaphuong xp on xp.MaXP = dc.maxp
@@ -206,6 +228,8 @@ namespace QLCN.CongNhan
             LoadcboTinh();
             LoadCongTrinh();
             dtpNgaySinh.Checked = false;
+            dtpFilterNgaySinh1.Checked = false;
+            dtpFilterNgaySinh2.Checked = false;
             // dtpFilterNgayBatDau.Checked = false;
             // dtpFilterNgayKetThuc.Checked = false;
             // cboFilterTinhTrang.SelectedIndex = 0;
@@ -326,9 +350,295 @@ namespace QLCN.CongNhan
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object? sender, EventArgs e)
+        {
+            if (CheckRequiredFields()) return;
+            try
+            {
+                using SqlConnection connection = DatabaseHelper.GetConnection();
+                connection.Open();
+                query = "insert into CongNhan (macn, hoten, ngaysinh, gioitinh, sdt, cccd, mact, ghichu) values (@MaCN, @HoTen, @NgaySinh, @GioiTinh, @SDT, @CCCD, @MaCT, @GhiChu)";
+
+                using SqlCommand command = new(query, connection);
+
+                command.Parameters.AddWithValue("@MaCN", txtMaCN.Text);
+                command.Parameters.AddWithValue("@HoTen", txtTenCN.Text);
+                command.Parameters.AddWithValue("@NgaySinh", dtpNgaySinh.Value);
+                command.Parameters.AddWithValue("@GioiTinh", cboGioiTinh.SelectedItem?.ToString());
+                command.Parameters.AddWithValue("@SDT", txtSDT.Text);
+                command.Parameters.AddWithValue("@CCCD", txtCCCD.Text);
+                command.Parameters.AddWithValue("@MaCT", cboTenCongTrinh.SelectedValue);
+                command.Parameters.AddWithValue("@GhiChu", string.IsNullOrWhiteSpace(txtGhiChu.Text) ? DBNull.Value : txtGhiChu.Text);
+
+                command.ExecuteNonQuery();
+
+                query = "insert into DiaChiCongNhan (MaCN, MaXP, MoTaChiTiet) values (@MaCN, @MaXP, @MoTaChiTiet)";
+                using SqlCommand command2 = new(query, connection);
+                command2.Parameters.AddWithValue("@MaCN", txtMaCN.Text);
+                command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
+                command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
+                command2.ExecuteNonQuery();
+
+                lblMessage.Text = "Đã thêm công trình thành công!";
+                lblMessage.ForeColor = Color.Green;
+                TimeIntervalMessage();
+
+                txtMaCN.Clear();
+                txtTenCN.Clear();
+                dtpNgaySinh.Value = DateTime.Now;
+                dtpNgaySinh.Checked = false;
+                cboFilterGioiTinh.SelectedIndex = 0;
+                txtSDT.Clear();
+                txtCCCD.Clear();
+                cboTinh.SelectedIndex = -1;
+                cboTenCongTrinh.SelectedIndex = 0;
+                txtGhiChu.Clear();
+                txtMoTaChiTiet.Clear();
+                this.ActiveControl = null;
+
+                LoadCongTrinh();
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
+                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                    else if (ex.Message.Contains("UQ_")) // Tên constraint unique
+                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                    else
+                        lblMessage.Text = "Trùng dữ liệu";
+                }
+                else
+                    lblMessage.Text = $"Lỗi SQL: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+        }
+
+        private void btnDelete_Click(object? sender, EventArgs e)
         {
 
+        }
+
+        private void btnRefresh_Click(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExport_Click(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxRemoveFilter_Click(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXemHD_Click(object? sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXemChamCong_Click(object? sender, EventArgs e)
+        {
+
+        }
+
+        private string? macn;
+        private void DgvConstruction_CellClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            // Kiểm tra xem người dùng có nhấp vào tiêu đề cột không
+            if (e.RowIndex < 0)
+                return;
+
+            try
+            {
+                // Lấy dữ liệu từ dòng được chọn
+                DataGridViewRow row = dgvConstruction.Rows[e.RowIndex];
+
+                // Hiển thị dữ liệu vào các ô nhập tương ứng
+                txtMaCN.Text = row.Cells["dgvColMaCN"].Value.ToString();
+                txtTenCN.Text = row.Cells["dgvColTenCN"].Value.ToString();
+                cboGioiTinh.Text = row.Cells["dgvColGioiTinh"].Value.ToString();
+                dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["dgvColNgaySinh"].Value);
+                txtSDT.Text = row.Cells["dgvColSDT"].Value.ToString();
+                txtCCCD.Text = row.Cells["dgvColCCCD"].Value.ToString();
+                cboTenCongTrinh.SelectedIndex = cboTenCongTrinh.FindStringExact(row.Cells["dgvColTenCT"].Value.ToString());
+                txtGhiChu.Text = row.Cells["dgvColGhiChu"].Value.ToString();
+
+                string diaChi = row.Cells["dgvColDiaDiem"].Value?.ToString() ?? "";
+                cboTenCongTrinh.SelectedIndex = cboTenCongTrinh.FindStringExact(row.Cells["dgvColTenCT"].Value.ToString());
+                string[] parts = diaChi.Split(',');
+
+
+                string tenTinh = parts[^1].Trim();
+                string tenHuyen = parts[^2].Trim();
+                string tenXa = parts[^3].Trim();
+
+                string moTaChiTiet = string.Join(",", parts.Take(parts.Length - 3)).Trim();
+
+                txtMoTaChiTiet.Text = moTaChiTiet;
+
+                cboTinh.SelectedIndex = cboTinh.FindStringExact(tenTinh);
+                if (cboTinh.SelectedIndex != -1)
+                {
+                    LoadcboHuyen(Convert.ToInt32(cboTinh.SelectedValue));
+                    cboQuanHuyen.SelectedIndex = cboQuanHuyen.FindStringExact(tenHuyen);
+                }
+                if (cboQuanHuyen.SelectedIndex != -1)
+                {
+                    LoadcboXa(Convert.ToInt32(cboQuanHuyen.SelectedValue));
+                    cboXaPhuong.SelectedIndex = cboXaPhuong.FindStringExact(tenXa);
+                }
+
+
+                macn = txtMaCN.Text;
+
+                txtMaCN.Focus();
+
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi khi lấy dữ liệu: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+        }
+        private void SelectRowById()
+        {
+            foreach (DataGridViewRow row in dgvConstruction.Rows)
+            {
+                if (row.Cells["dgvColMaCN"].Value.ToString() == macn)
+                {
+                    // Chọn dòng
+                    dgvConstruction.ClearSelection();
+                    row.Selected = true;
+                    dgvConstruction.CurrentCell = row.Cells[0];
+
+                    // Cuộn đến dòng được chọn để đảm bảo nó hiển thị
+                    dgvConstruction.FirstDisplayedScrollingRowIndex = row.Index;
+                    break;
+                }
+            }
+        }
+
+        private void btnEdit_Click(object? sender, EventArgs e)
+        {
+            if (dgvConstruction.RowCount == 0)
+            {
+                lblMessage.Text = "Không có công nhân nào để sửa!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                return;
+            }
+            // Kiểm tra xem đã chọn công trình nào chưa
+            if (macn == null)
+            {
+                lblMessage.Text = "Chọn công nhân để sửa!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                return;
+            }
+
+            if (CheckRequiredFields()) return;
+            try
+            {
+
+                using SqlConnection connection = DatabaseHelper.GetConnection();
+                connection.Open();
+
+                query = "update CongNhan set macn = @macn1, hoten = @hoten, cccd = @cccd, sdt = @sdt, ngaysinh = @ngaysinh, gioitinh = @gioitinh ghichu = @ghichu, mact = @mact where macn = @macn";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@macn1", txtMaCN.Text);
+                command.Parameters.AddWithValue("@hoten", txtTenCN.Text);
+                command.Parameters.AddWithValue("@gioitinh", cboGioiTinh.SelectedItem);
+                command.Parameters.AddWithValue("@sdt", txtSDT.Text);
+                command.Parameters.AddWithValue("@cccd", txtCCCD.Text);
+                command.Parameters.AddWithValue("@mact", cboTenCongTrinh.SelectedValue);
+                command.Parameters.AddWithValue("@ghichu", string.IsNullOrWhiteSpace(txtGhiChu.Text) ? DBNull.Value : txtGhiChu.Text);
+                command.Parameters.AddWithValue("@ngaysinh", dtpNgaySinh.Value);
+                command.Parameters.AddWithValue("@macn", macn);
+                command.ExecuteNonQuery();
+
+                query = "update DiaChiCongNhan set MaXP = @MaXP, MoTaChiTiet = @MoTaChiTiet where MaCN = @macn";
+                using SqlCommand command2 = new(query, connection);
+                command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
+                command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
+                command2.Parameters.AddWithValue("@macn", txtMaCN.Text);
+                command2.ExecuteNonQuery();
+
+
+                lblMessage.Text = "Cập nhật công trình thành công!";
+                lblMessage.ForeColor = Color.Green;
+                TimeIntervalMessage();
+
+                txtTenCN.Clear();
+                txtMaCN.Clear();
+                cboGioiTinh.SelectedIndex = 0;
+                dtpNgaySinh.Value = DateTime.Now;
+                txtSDT.Clear();
+                txtCCCD.Clear();
+                txtGhiChu.Clear();
+                cboTenCongTrinh.SelectedIndex = 0;
+                txtMoTaChiTiet.Clear();
+                ActiveControl = null;
+                macn = null;
+
+                LoadCongTrinh();
+                SelectRowById();
+
+
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
+                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                    else if (ex.Message.Contains("UQ_")) // Tên constraint unique
+                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                    else
+                        lblMessage.Text = "Trùng dữ liệu";
+                }
+                else
+                    lblMessage.Text = $"Lỗi SQL: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+
+        }
+        private void DgvConstruction_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            // Đảm bảo không có dòng nào được chọn sau khi binding dữ liệu
+            dgvConstruction.ClearSelection();
+            if (dgvConstruction.Rows.Count > 0)
+                dgvConstruction.CurrentCell = null;
+        }
+        private void DgvConstruction_Sorted(object? sender, EventArgs e)
+        {
+            // Xóa lựa chọn sau khi sắp xếp
+            dgvConstruction.ClearSelection();
+
+            // Đặt CurrentCell thành null để không có ô nào được chọn
+            if (dgvConstruction.Rows.Count > 0)
+            {
+                dgvConstruction.CurrentCell = null;
+            }
         }
     }
 }

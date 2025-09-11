@@ -143,13 +143,19 @@ namespace QLCN.CongTrinh
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627 || ex.Number == 2601) // Mã lỗi trùng khóa chính
+                if (ex.Number == 2627)
                 {
-                    lblMessage.Text = "Mã công trình đã tồn tại";
-                    lblMessage.ForeColor = Color.Red;
-                    TimeIntervalMessage();
-                    txtMaCT.Focus();
+                    if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
+                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                    else if (ex.Message.Contains("UQ_")) // Tên constraint unique
+                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                    else
+                        lblMessage.Text = "Trùng dữ liệu";
                 }
+                else
+                    lblMessage.Text = $"Lỗi SQL: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
             }
             catch (Exception ex)
             {
@@ -527,13 +533,19 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627 || ex.Number == 2601) // Mã lỗi trùng khóa chính
+                if (ex.Number == 2627)
                 {
-                    lblMessage.Text = "Mã công trình đã tồn tại";
-                    lblMessage.ForeColor = Color.Red;
-                    TimeIntervalMessage();
-                    txtMaCT.Focus();
+                    if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
+                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                    else if (ex.Message.Contains("UQ_")) // Tên constraint unique
+                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                    else
+                        lblMessage.Text = "Trùng dữ liệu";
                 }
+                else
+                    lblMessage.Text = $"Lỗi SQL: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
             }
             catch (Exception ex)
             {
