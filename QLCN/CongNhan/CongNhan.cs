@@ -158,12 +158,14 @@ namespace QLCN.CongNhan
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                query = @"select ct.mact, tenct, tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diachi, dutoan, ngaybatdau , ngayketthuc , ct.ghichu
-from congtrinh ct
-join diachicongtrinh dt on ct.mact = dt.mact
-join XaPhuong xp on xp.MaXP = dt.MaXP
-join QuanHuyen qh on qh.MaQH = xp.MaQH
-join Tinh t on t.MaTinh = qh.MaTinh";
+                query = @"SELECT cn.macn MaCN, HoTen as TenCN, LTRIM(RTRIM(RIGHT(HoTen, CHARINDEX(' ', REVERSE(HoTen) + ' ') - 1))) AS Ten, LTRIM(RTRIM(LEFT(HoTen, CHARINDEX(' ', HoTen + ' ') - 1))) AS Ho, LTRIM(RTRIM(SUBSTRING(HoTen,CHARINDEX(' ', HoTen + ' ') + 1,LEN(HoTen)- CHARINDEX(' ', HoTen + ' ')- CHARINDEX(' ', REVERSE(HoTen) + ' ')))) AS TenDem, GioiTinh, NgaySinh, SDT, CCCD, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as DiaChi, TenCT, cn.ghichu GhiChu
+                    FROM congnhan cn
+					join DiaChiCongNhan dc on dc.MaCN = cn.MaCN
+					join xaphuong xp on xp.MaXP = dc.maxp
+					join quanhuyen qh on qh.maqh = xp.maqh
+					join tinh t on t.matinh = qh.matinh
+					join congtrinh ct on ct.mact = cn.mact
+                    ORDER BY Ten, TenDem, Ho";
 
                 using SqlCommand command = new(query, connection);
 
@@ -324,5 +326,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

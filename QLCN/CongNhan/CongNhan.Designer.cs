@@ -63,8 +63,8 @@ namespace QLCN.CongNhan
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CongNhan));
             lblMessage = new Label();
             btnDelete = new Button();
@@ -91,16 +91,6 @@ namespace QLCN.CongNhan
             txtMoTaChiTiet = new TextBox();
             lblMoTaChiTiet = new Label();
             dgvConstruction = new DataGridView();
-            dgvColSTT = new DataGridViewTextBoxColumn();
-            dgvColMaCN = new DataGridViewTextBoxColumn();
-            dgvColTenCN = new DataGridViewTextBoxColumn();
-            dgvColGioiTinh = new DataGridViewTextBoxColumn();
-            dgvColNgaySinh = new DataGridViewTextBoxColumn();
-            dgvColSDT = new DataGridViewTextBoxColumn();
-            dgvColCCCD = new DataGridViewTextBoxColumn();
-            dgvColDiaDiem = new DataGridViewTextBoxColumn();
-            dgvColTenCT = new DataGridViewTextBoxColumn();
-            dgvColGhiChu = new DataGridViewTextBoxColumn();
             dgvColCheckBox = new DataGridViewCheckBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
@@ -173,6 +163,7 @@ namespace QLCN.CongNhan
             btnAdd.TabIndex = 15;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // txtMaCN
             // 
@@ -370,24 +361,24 @@ namespace QLCN.CongNhan
             dgvConstruction.AllowUserToOrderColumns = true;
             dgvConstruction.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvConstruction.BackgroundColor = Color.White;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColSTT, dgvColMaCN, dgvColTenCN, dgvColGioiTinh, dgvColNgaySinh, dgvColSDT, dgvColCCCD, dgvColDiaDiem, dgvColTenCT, dgvColGhiChu, dgvColCheckBox });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.AntiqueWhite;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { dgvColCheckBox });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.AntiqueWhite;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvConstruction.DefaultCellStyle = dataGridViewCellStyle4;
             dgvConstruction.Dock = DockStyle.Bottom;
             dgvConstruction.Location = new Point(0, 36);
             dgvConstruction.Margin = new Padding(4, 5, 4, 5);
@@ -397,118 +388,16 @@ namespace QLCN.CongNhan
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConstruction.Size = new Size(1884, 504);
             dgvConstruction.TabIndex = 19;
-            dgvConstruction.AutoGenerateColumns = false;
-            // 
-            // dgvColSTT
-            // 
-            dgvColSTT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColSTT.DataPropertyName = "STT";
-            dgvColSTT.HeaderText = "STT";
-            dgvColSTT.MinimumWidth = 8;
-            dgvColSTT.Name = "dgvColSTT";
-            dgvColSTT.ReadOnly = true;
-            dgvColSTT.Width = 60;
-            // 
-            // dgvColMaCN
-            // 
-            dgvColMaCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColMaCN.DataPropertyName = "MaCN";
-            dgvColMaCN.HeaderText = "Mã CN";
-            dgvColMaCN.MinimumWidth = 8;
-            dgvColMaCN.Name = "dgvColMaCN";
-            dgvColMaCN.ReadOnly = true;
-            dgvColMaCN.Width = 150;
-            // 
-            // dgvColTenCN
-            // 
-            dgvColTenCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColTenCN.DataPropertyName = "TenCN";
-            dgvColTenCN.HeaderText = "Tên CN";
-            dgvColTenCN.MinimumWidth = 8;
-            dgvColTenCN.Name = "dgvColTenCN";
-            dgvColTenCN.ReadOnly = true;
-            dgvColTenCN.Width = 140;
-            // 
-            // dgvColGioiTinh
-            // 
-            dgvColGioiTinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColGioiTinh.DataPropertyName = "GioiTinh";
-            dgvColGioiTinh.HeaderText = "Giới tính";
-            dgvColGioiTinh.MinimumWidth = 8;
-            dgvColGioiTinh.Name = "dgvColGioiTinh";
-            dgvColGioiTinh.ReadOnly = true;
-            dgvColGioiTinh.Width = 180;
-            // 
-            // dgvColNgaySinh
-            // 
-            dgvColNgaySinh.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColNgaySinh.DataPropertyName = "NgaySinh";
-            dgvColNgaySinh.HeaderText = "Ngày sinh";
-            dgvColNgaySinh.MinimumWidth = 8;
-            dgvColNgaySinh.Name = "dgvColNgaySinh";
-            dgvColNgaySinh.ReadOnly = true;
-            dgvColNgaySinh.Width = 310;
-            // 
-            // dgvColSDT
-            // 
-            dgvColSDT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColSDT.DataPropertyName = "SDT";
-            dgvColSDT.HeaderText = "SDT";
-            dgvColSDT.MinimumWidth = 8;
-            dgvColSDT.Name = "dgvColSDT";
-            dgvColSDT.ReadOnly = true;
-            dgvColSDT.Width = 180;
-            // 
-            // dgvColCCCD
-            // 
-            dgvColCCCD.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColCCCD.DataPropertyName = "CCCD";
-            dgvColCCCD.HeaderText = "CCCD";
-            dgvColCCCD.MinimumWidth = 8;
-            dgvColCCCD.Name = "dgvColCCCD";
-            dgvColCCCD.ReadOnly = true;
-            dgvColCCCD.Width = 160;
-            // 
-            // dgvColDiaDiem
-            // 
-            dgvColDiaDiem.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColDiaDiem.DataPropertyName = "DiaDiem";
-            dgvColDiaDiem.HeaderText = "Địa điểm";
-            dgvColDiaDiem.MinimumWidth = 8;
-            dgvColDiaDiem.Name = "dgvColDiaDiem";
-            dgvColDiaDiem.ReadOnly = true;
-            dgvColDiaDiem.Width = 250;
-            // 
-            // dgvColTenCT
-            // 
-            dgvColTenCT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColTenCT.DataPropertyName = "TenCT";
-            dgvColTenCT.HeaderText = "Tên CT";
-            dgvColTenCT.MinimumWidth = 8;
-            dgvColTenCT.Name = "dgvColTenCT";
-            dgvColTenCT.ReadOnly = true;
-            dgvColTenCT.Width = 200;
-            // 
-            // dgvColGhiChu
-            // 
-            dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvColGhiChu.DataPropertyName = "GhiChu";
-            dgvColGhiChu.HeaderText = "Ghi chú";
-            dgvColGhiChu.MinimumWidth = 8;
-            dgvColGhiChu.Name = "dgvColGhiChu";
-            dgvColGhiChu.ReadOnly = true;
-            dgvColGhiChu.Width = 150;
             // 
             // dgvColCheckBox
             // 
             dgvColCheckBox.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvColCheckBox.HeaderText = "✅";
             dgvColCheckBox.MinimumWidth = 6;
-            dgvColCheckBox.Name = "dgvColumnCheckBox";
+            dgvColCheckBox.Name = "dgvColCheckBox";
             dgvColCheckBox.ReadOnly = true;
-            dgvColCheckBox.Width = 43;
             dgvColCheckBox.Visible = false;
-
+            dgvColCheckBox.Width = 125;
             // 
             // btnRefresh
             // 
@@ -555,7 +444,7 @@ namespace QLCN.CongNhan
             // cboGioiTinh
             // 
             cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
+            cboGioiTinh.Items.AddRange(new object[] { "Tất cả", "Nam", "Nữ", "Khác" });
             cboGioiTinh.Location = new Point(400, 0);
             cboGioiTinh.Margin = new Padding(4, 5, 4, 5);
             cboGioiTinh.Name = "cboGioiTinh";
@@ -655,7 +544,7 @@ namespace QLCN.CongNhan
             // comboBox1
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ", "Khác" });
             comboBox1.Location = new Point(300, 123);
             comboBox1.Margin = new Padding(4, 5, 4, 5);
             comboBox1.Name = "comboBox1";
@@ -771,6 +660,7 @@ namespace QLCN.CongNhan
             Margin = new Padding(4, 5, 4, 5);
             Name = "CongNhan";
             Size = new Size(1884, 981);
+            Load += CongNhan_Load;
             ((System.ComponentModel.ISupportInitialize)dgvConstruction).EndInit();
             panelFilter.ResumeLayout(false);
             panelFilter.PerformLayout();
@@ -781,7 +671,6 @@ namespace QLCN.CongNhan
             panel3.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ResumeLayout(false);
-            Load += CongNhan_Load;
 
 
         }
