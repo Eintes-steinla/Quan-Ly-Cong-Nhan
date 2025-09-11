@@ -612,6 +612,7 @@ namespace QLCN.CongNhan
             btnXemChamCong.TabIndex = 22;
             btnXemChamCong.Text = "Xem chấm công";
             btnXemChamCong.UseVisualStyleBackColor = true;
+            btnXemChamCong.Click += btnXemChamCong_Click;
             // 
             // btnXemHD
             // 

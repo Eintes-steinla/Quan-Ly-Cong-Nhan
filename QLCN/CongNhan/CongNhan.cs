@@ -402,5 +402,11 @@ namespace QLCN.CongNhan
             }
 
         }
+
+        private void btnXemChamCong_Click(object sender, EventArgs e)
+        {
+            LichSuChamCong lscc = new LichSuChamCong();
+            lscc.Show();
+        }
     }
 }
