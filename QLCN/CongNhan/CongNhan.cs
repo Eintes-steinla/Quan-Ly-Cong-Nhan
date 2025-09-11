@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using Microsoft.Data.SqlClient;
+using QLCN.DB;
+using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using QLCN.DB;
-using Microsoft.Data.SqlClient;
-using ClosedXML.Excel;
+using Xceed.Words.NET;
 
 namespace QLCN.CongNhan
 {
@@ -442,16 +444,6 @@ namespace QLCN.CongNhan
 
         }
 
-        private void btnXemHD_Click(object? sender, EventArgs e)
-        {
-
-        }
-
-        private void btnXemChamCong_Click(object? sender, EventArgs e)
-        {
-
-        }
-
         private string? macn;
         private void DgvConstruction_CellClick(object? sender, DataGridViewCellEventArgs e)
         {
@@ -639,6 +631,82 @@ namespace QLCN.CongNhan
             {
                 dgvConstruction.CurrentCell = null;
             }
+        }
+
+        private void btnXemHD_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tenCN = txtTenCN.Text.Trim();
+                string ngaySinh = dtpNgaySinh.Text.Trim();
+                string diaChi = cboXaPhuong.Text.Trim() + ", " + cboQuanHuyen.Text.Trim() + ", " + cboQuanHuyen.Text.Trim();
+                string sdt = txtSDT.Text.Trim();
+                string CCCD = txtCCCD.Text.Trim();
+                //loaiHD // lay tu csdl
+                string diaDiemLamViec = cboTenCongTrinh.Text.Trim();
+                DateTime homNay = DateTime.Now;
+                string ngayLamHD = homNay.ToString("dd/MM/yyyy");
+                DateTime sauMotNam = homNay.AddYears(1);
+                string ngayKetThucHD = sauMotNam.ToString("dd/MM/yyyy");
+                // luong // lay tu csdl
+
+                string templatePath = "HopDongLaoDong.docx"; // file mẫu
+                if (!File.Exists(templatePath))
+                {
+                    MessageBox.Show("Không tìm thấy file mẫu HopDongLaoDong.docx", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string filePath = $"HopDongLaoDong_{CCCD}_{DateTime.Now:yyyyMMddHHmmss}.docx";
+
+                using (var doc = DocX.Load(templatePath))
+                {
+                    doc.ReplaceText("{{ten}}", tenCN);
+                    doc.ReplaceText("{{ngaysinh}}", ngaySinh);
+                    doc.ReplaceText("{{diachi}}", diaChi);
+                    doc.ReplaceText("{{SDT}}", sdt);
+                    doc.ReplaceText("{{CCCD}}", CCCD);
+                    //loaiHD // lay tu csdl
+                    doc.ReplaceText("{{tenCongTrinh}}", diaDiemLamViec);
+                    doc.ReplaceText("{{ngayLamHD}}", ngayLamHD);
+                    doc.ReplaceText("{{ngayHetHD}}", ngayKetThucHD);
+                    // luong // lay tu csdl
+
+                    doc.SaveAs(filePath);
+                }
+
+                //MessageBox.Show($"Xuất báo cáo thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Kiểm tra xem tệp có tồn tại không trước khi mở
+                if (File.Exists(filePath))
+                {
+                    try
+                    {
+                        //Process.Start(filePath);
+                        Process.Start(new ProcessStartInfo()
+                        {
+                            FileName = filePath,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        // Xử lý lỗi nếu không thể mở tệp
+                        MessageBox.Show("Không thể mở tệp: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xuất báo cáo: " + ex.Message);
+            }
+
+        }
+
+        private void btnXemChamCong_Click(object sender, EventArgs e)
+        {
+            LichSuChamCong lscc = new LichSuChamCong();
+            lscc.Show();
         }
     }
 }
