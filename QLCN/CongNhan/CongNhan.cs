@@ -43,8 +43,8 @@ namespace QLCN.CongNhan
             dgvConstruction.CellClick += DgvConstruction_CellClick;
             dgvConstruction.DataBindingComplete += DgvConstruction_DataBindingComplete;
             dgvConstruction.Sorted += DgvConstruction_Sorted;
-            // dgvConstruction.CellContentClick += DgvConstruction_CellContentClick;
-            // dgvConstruction.SelectionChanged += DgvConstruction_SelectionChanged;
+            dgvConstruction.CellContentClick += DgvConstruction_CellContentClick;
+            dgvConstruction.SelectionChanged += DgvConstruction_SelectionChanged;
         }
 
         public void TimeIntervalMessage()
@@ -232,6 +232,7 @@ namespace QLCN.CongNhan
             dtpNgaySinh.Checked = false;
             dtpFilterNgaySinh1.Checked = false;
             dtpFilterNgaySinh2.Checked = false;
+            cboFilterGioiTinh.SelectedIndex = 0;
             // dtpFilterNgayBatDau.Checked = false;
             // dtpFilterNgayKetThuc.Checked = false;
             // cboFilterTinhTrang.SelectedIndex = 0;
@@ -398,7 +399,7 @@ namespace QLCN.CongNhan
                 txtMoTaChiTiet.Clear();
                 this.ActiveControl = null;
 
-                LoadCongTrinh();
+                LoadCongNhan();
             }
             catch (SqlException ex)
             {
@@ -422,21 +423,6 @@ namespace QLCN.CongNhan
                 lblMessage.ForeColor = Color.Red;
                 TimeIntervalMessage();
             }
-        }
-
-        private void btnDelete_Click(object? sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRefresh_Click(object? sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExport_Click(object? sender, EventArgs e)
-        {
-
         }
 
         private void pictureBoxRemoveFilter_Click(object? sender, EventArgs e)
@@ -547,7 +533,7 @@ namespace QLCN.CongNhan
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
 
-                query = "update CongNhan set macn = @macn1, hoten = @hoten, cccd = @cccd, sdt = @sdt, ngaysinh = @ngaysinh, gioitinh = @gioitinh ghichu = @ghichu, mact = @mact where macn = @macn";
+                query = "update CongNhan set macn = @macn1, hoten = @hoten, cccd = @cccd, sdt = @sdt, ngaysinh = @ngaysinh, gioitinh = @gioitinh, ghichu = @ghichu, mact = @mact where macn = @macn";
 
                 using SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@macn1", txtMaCN.Text);
@@ -585,7 +571,7 @@ namespace QLCN.CongNhan
                 ActiveControl = null;
                 macn = null;
 
-                LoadCongTrinh();
+                LoadCongNhan();
                 SelectRowById();
 
 
@@ -633,7 +619,396 @@ namespace QLCN.CongNhan
             }
         }
 
-        private void btnXemHD_Click(object sender, EventArgs e)
+        private bool isDelete = false;
+        private void btnDelete_Click(object? sender, EventArgs e)
+        {
+            if (dgvConstruction.RowCount == 0)
+            {
+                lblMessage.Text = "Không có công trình nào để xóa!";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+                return;
+            }
+            if (!isDelete)
+            {
+                // Chuyển sang chế độ xóa
+                isDelete = true;
+
+                // Hiển thị cột checkbox
+                dgvColCheckBox.Visible = true;
+
+                // Đổi tên nút thành "Hủy xóa"
+                btnDelete.Text = "Hủy xóa";
+                dgvConstruction.ClearSelection();
+
+                txtTenCN.Enabled = false;
+                txtMaCN.Enabled = false;
+                cboGioiTinh.Enabled = false;
+                dtpNgaySinh.Enabled = false;
+                txtSDT.Enabled = false;
+                txtCCCD.Enabled = false;
+                txtGhiChu.Enabled = false;
+                cboTinh.Enabled = false;
+                cboQuanHuyen.Enabled = false;
+                cboXaPhuong.Enabled = false;
+                txtMoTaChiTiet.Enabled = false;
+                cboTenCongTrinh.Enabled = false;
+                btnAdd.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRefresh.Enabled = false;
+                btnExport.Enabled = false;
+                btnImport.Enabled = false;
+
+                dgvConstruction.CellClick -= DgvConstruction_CellClick;
+
+            }
+            else
+            {
+                // Kiểm tra xem có dòng nào được chọn không
+                bool hasCheckedRows = false;
+                foreach (DataGridViewRow row in dgvConstruction.Rows)
+                {
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                    {
+                        hasCheckedRows = true;
+                        break;
+                    }
+                }
+
+                if (hasCheckedRows)
+                {
+                    // Nếu có dòng được chọn và nút đang hiển thị "Hủy xóa"
+                    if (btnDelete.Text == "Hủy xóa")
+                        // Đổi tên nút thành "Xác nhận xóa"
+                        btnDelete.Text = "Xác nhận xóa";
+                    else if (btnDelete.Text == "Xác nhận xóa")
+                    {
+                        // Thực hiện xóa các dòng đã chọn
+                        DeleteSelectedRows();
+
+                        // Trở về trạng thái ban đầu
+                        ResetDeleteMode();
+                    }
+                }
+                else
+                    // Không có dòng nào được chọn, trở về trạng thái ban đầu
+                    ResetDeleteMode();
+            }
+        }
+        private void DeleteSelectedRows()
+        {
+            try
+            {
+                // Hiển thị hộp thoại xác nhận
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc chắn muốn xóa các công nhân đã chọn?",
+                    "Xác nhận xóa",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    using SqlConnection connection = DatabaseHelper.GetConnection();
+                    connection.Open();
+
+                    // Tạo danh sách các mã cồng trình cần xóa
+                    List<string> dsmacn = [];
+                    foreach (DataGridViewRow row in dgvConstruction.Rows)
+                    {
+                        if (row.Cells["dgvColCheckBox"].Value != null &&
+                            Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                        {
+                            string? macn = row.Cells["dgvColMaCN"].Value?.ToString();
+                            dsmacn.Add(macn);
+                        }
+                    }
+
+                    // Xóa từng công trình
+                    int deletedCount = 0;
+                    foreach (string macn in dsmacn)
+                    {
+                        string query = "delete from congnhan where macn = @macn";
+                        using SqlCommand command = new(query, connection);
+                        command.Parameters.AddWithValue("@macn", macn);
+                        deletedCount += command.ExecuteNonQuery();
+                    }
+
+                    // Hiển thị thông báo thành công
+                    lblMessage.Text = $"Đã xóa {deletedCount} công nhân thành công!";
+                    lblMessage.ForeColor = Color.Green;
+                    TimeIntervalMessage();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+        }
+        private void ResetDeleteMode()
+        {
+            // Ẩn cột checkbox
+            dgvColCheckBox.Visible = false;
+
+            // Đổi tên nút trở lại thành Xóa
+            btnDelete.Text = "Xóa";
+
+            // Đặt lại trạng thái
+            isDelete = false;
+            dgvConstruction.CellClick += DgvConstruction_CellClick;
+            txtTenCN.Enabled = true;
+            txtMaCN.Enabled = true;
+            cboGioiTinh.Enabled = true;
+            dtpNgaySinh.Enabled = true;
+            txtSDT.Enabled = true;
+            txtCCCD.Enabled = true;
+            txtGhiChu.Enabled = true;
+            cboTinh.Enabled = true;
+            cboQuanHuyen.Enabled = true;
+            cboXaPhuong.Enabled = true;
+            txtMoTaChiTiet.Enabled = true;
+            cboTenCongTrinh.Enabled = true;
+            btnAdd.Enabled = true;
+            btnEdit.Enabled = true;
+            btnRefresh.Enabled = true;
+            btnExport.Enabled = true;
+            btnImport.Enabled = true;
+            txtMaCN.Focus(); // Đặt focus vào ô nhập mã công trình
+
+            int maxp = -1, maqh = -1, matinh = -1;
+            // Kiểm tra combobox Xã phường có giá trị không
+            if (cboXaPhuong.SelectedIndex != -1)
+            {
+                maxp = Convert.ToInt32(cboXaPhuong.SelectedValue);
+                maqh = Convert.ToInt32(cboQuanHuyen.SelectedValue);
+                matinh = Convert.ToInt32(cboTinh.SelectedValue);
+            }
+            // Làm mới datagridview để xóa các lựa chọn
+            LoadCongNhan();
+
+            if (maxp != -1)
+            {
+                cboTinh.SelectedValue = matinh;
+                LoadcboHuyen(matinh);
+                cboQuanHuyen.SelectedValue = maqh;
+                LoadcboXa(maqh);
+                cboXaPhuong.SelectedValue = maxp;
+            }
+            if (!string.IsNullOrWhiteSpace(txtMaCN.Text))
+            {
+                macn = txtMaCN.Text;
+                SelectRowById();}
+            else txtMaCN.Focus();
+        }
+        private void DgvConstruction_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            // Kiểm tra xem người dùng có nhấp vào cột checkbox không
+            if (e.ColumnIndex == dgvColCheckBox.Index && e.RowIndex >= 0)
+            {
+                // Đảo ngược giá trị của ô checkbox
+                bool currentValue = false;
+                if (dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value != null)
+                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value);
+                dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value = !currentValue;
+
+                // Kiểm tra xem có dòng nào được chọn không
+                bool hasCheckedRows = false;
+                foreach (DataGridViewRow row in dgvConstruction.Rows)
+                {
+                    if (row.Cells["dgvColCheckbox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckbox"].Value))
+                    {
+                        hasCheckedRows = true;
+                        break;
+                    }
+                }
+
+                // Nếu có dòng được chọn và nút đang hiển thị "Hủy xóa"
+                if (hasCheckedRows && btnDelete.Text == "Hủy xóa")
+                // Đổi tên nút thành "Xác nhận xóa"
+                {
+                    btnDelete.Text = "Xác nhận xóa";
+                    dgvColCheckBox.HeaderText = "❎";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
+                }
+                else if (!hasCheckedRows && btnDelete.Text == "Xác nhận xóa")
+                // Không còn dòng nào được chọn, đổi tên nút trở lại thành "Hủy xóa"
+                {
+                    btnDelete.Text = "Hủy xóa";
+                    dgvColCheckBox.HeaderText = "✅";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
+                }
+            }
+
+            // Kiểm tra xem người dùng có nhấp vào header của cột checkbox không
+            if (e.RowIndex == -1 && e.ColumnIndex == dgvColCheckBox.Index)
+            {
+                // Kiểm tra xem có dòng nào đã được chọn chưa
+                bool anyChecked = false;
+                foreach (DataGridViewRow row in dgvConstruction.Rows)
+                {
+                    if (row.Cells["dgvColCheckBox"].Value != null &&
+                        Convert.ToBoolean(row.Cells["dgvColCheckBox"].Value))
+                    {
+                        anyChecked = true;
+                        break;
+                    }
+                }
+
+                // Chọn hoặc bỏ chọn tất cả các dòng
+                bool checkValue = !anyChecked;
+                foreach (DataGridViewRow row in dgvConstruction.Rows)
+                    row.Cells["dgvColCheckBox"].Value = checkValue;
+
+                // Cập nhật tên nút
+                if (checkValue)
+                {
+                    dgvColCheckBox.HeaderText = "❎";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Bỏ chọn tất cả";
+                    btnDelete.Text = "Xác nhận xóa";
+                }
+                else
+                {
+                    dgvColCheckBox.HeaderText = "✅";
+                    dgvColCheckBox.HeaderCell.ToolTipText = "Chọn tất cả";
+                    btnDelete.Text = "Hủy xóa";
+                }
+            }
+        }
+        private void DgvConstruction_SelectionChanged(object? sender, EventArgs e)
+        {
+            // Nếu cột checkbox đang hiển thị (đang ở chế độ xóa), không cho phép chọn dòng
+            if (dgvColCheckBox.Visible)
+                dgvConstruction.ClearSelection();
+            // dgvConstruction.CurrentCell = null;
+        }
+
+        private void btnRefresh_Click(object? sender, EventArgs e)
+        {
+            // Xóa nội dung của tất cả các ô nhập liệu
+            txtMaCN.Clear();
+            txtTenCN.Clear();
+            cboGioiTinh.SelectedIndex = -1;
+            dtpNgaySinh.Value = DateTime.Now;
+            txtSDT.Clear();
+            txtCCCD.Clear();
+            txtGhiChu.Clear();
+            cboTenCongTrinh.SelectedIndex = 0;
+
+            cboTinh.SelectedIndex = -1;
+            cboQuanHuyen.SelectedIndex = -1;
+            cboXaPhuong.SelectedIndex = -1;
+            txtMoTaChiTiet.Clear();
+
+            txtMaCN.Focus();
+        }
+
+
+        private void btnExport_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra xem có dữ liệu để xuất không
+                if (dgvConstruction.Rows.Count == 0)
+                {
+                    lblMessage.Text = "Không có dữ liệu để xuất!";
+                    lblMessage.ForeColor = Color.Red;
+                    TimeIntervalMessage();
+                    return;
+                }
+
+                // Tạo SaveFileDialog để chọn vị trí lưu file
+                SaveFileDialog saveFileDialog = new()
+                {
+                    Filter = "Excel Files|*.xlsx",
+                    Title = "Lưu file Excel",
+                    FileName = $"DanhSachCongTrinh_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Tạo workbook mới
+                    using var workbook = new XLWorkbook();
+
+                    // Thêm worksheet
+                    var worksheet = workbook.Worksheets.Add("Danh sách công trình");
+
+                    // Đặt tiêu đề cho file Excel
+                    worksheet.Cell(1, 1).Value = "DANH SÁCH CÔNG TRÌNH";
+                    worksheet.Range(1, 1, 1, 10).Merge();
+                    worksheet.Cell(1, 1).Style.Font.Bold = true;
+                    worksheet.Cell(1, 1).Style.Font.FontSize = 16;
+                    worksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                    // Thêm tiêu đề các cột
+                    worksheet.Cell(3, 1).Value = "STT";
+                    worksheet.Cell(3, 2).Value = "Mã công trình";
+                    worksheet.Cell(3, 3).Value = "Tên công trình";
+                    worksheet.Cell(3, 4).Value = "Tình trạng";
+                    worksheet.Cell(3, 5).Value = "Chủ đầu tư";
+                    worksheet.Cell(3, 6).Value = "Địa điểm";
+                    worksheet.Cell(3, 7).Value = "Dự toán (VNĐ)";
+                    worksheet.Cell(3, 8).Value = "Ngày bắt đầu";
+                    worksheet.Cell(3, 9).Value = "Ngày kết thúc";
+                    worksheet.Cell(3, 10).Value = "Ghi chú";
+
+                    // Định dạng tiêu đề cột
+                    var headerRange = worksheet.Range(3, 1, 3, 10);
+                    headerRange.Style.Font.Bold = true;
+                    headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
+                    headerRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+                    headerRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+                    headerRange.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                    // Đổ dữ liệu từ DataGridView vào Excel
+                    int rowCount = dgvConstruction.Rows.Count;
+                    for (int i = 0; i < rowCount; i++)
+                    {
+                        worksheet.Cell(i + 4, 1).Value = i + 1;
+                        worksheet.Cell(i + 4, 2).Value = dgvConstruction.Rows[i].Cells["dgvColMaCT"].Value.ToString();
+                        worksheet.Cell(i + 4, 3).Value = dgvConstruction.Rows[i].Cells["dgvColTenCT"].Value.ToString();
+                        worksheet.Cell(i + 4, 4).Value = dgvConstruction.Rows[i].Cells["dgvColTinhTrang"].Value.ToString();
+                        worksheet.Cell(i + 4, 5).Value = dgvConstruction.Rows[i].Cells["dgvColChuDauTu"].Value.ToString();
+                        worksheet.Cell(i + 4, 6).Value = dgvConstruction.Rows[i].Cells["dgvColDiaDiem"].Value.ToString();
+                        worksheet.Cell(i + 4, 7).Value = dgvConstruction.Rows[i].Cells["dgvColDuToan"].Value != DBNull.Value ? Convert.ToDecimal(dgvConstruction.Rows[i].Cells["dgvColDuToan"].Value) : (decimal?)null;
+                        worksheet.Cell(i + 4, 8).Value = Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayBatDau"].Value);
+                        worksheet.Cell(i + 4, 9).Value = dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value != DBNull.Value ? Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value) : (DateTime?)null;
+                        worksheet.Cell(i + 4, 10).Value = dgvConstruction.Rows[i].Cells["dgvColGhiChu"].Value.ToString();
+                    }
+
+                    // Định dạng dữ liệu
+                    var dataRange = worksheet.Range(4, 1, dgvConstruction.Rows.Count + 3, 10);
+                    dataRange.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                    dataRange.Style.Alignment.WrapText = true;
+                    dataRange.Style.Font.FontSize = 12;
+                    dataRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+                    dataRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+
+                    // Căn giữa cột STT và Năm thực hiện
+                    worksheet.Column(1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                    // Tự động điều chỉnh độ rộng các cột
+                    worksheet.Columns().AdjustToContents();
+
+                    // Lưu file Excel
+                    workbook.SaveAs(saveFileDialog.FileName);
+
+                    lblMessage.Text = "Xuất Excel thành công!";
+                    lblMessage.ForeColor = Color.Green;
+                    TimeIntervalMessage();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"Lỗi khi xuất Excel: {ex.Message}";
+                lblMessage.ForeColor = Color.Red;
+                TimeIntervalMessage();
+            }
+        }
+
+        private void btnXemHD_Click(object? sender, EventArgs e)
         {
             try
             {
@@ -703,7 +1078,7 @@ namespace QLCN.CongNhan
 
         }
 
-        private void btnXemChamCong_Click(object sender, EventArgs e)
+        private void btnXemChamCong_Click(object? sender, EventArgs e)
         {
             LichSuChamCong lscc = new LichSuChamCong();
             lscc.Show();

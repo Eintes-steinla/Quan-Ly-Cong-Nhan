@@ -500,12 +500,11 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 command.Parameters.AddWithValue("@mact", mact);
                 command.ExecuteNonQuery();
 
-                query = "update DiaChiCongTrinh set MaCT = @mact1, MaXP = @MaXP, MoTaChiTiet = @MoTaChiTiet where MaCT = @MaCT";
+                query = "update DiaChiCongTrinh set MaXP = @MaXP, MoTaChiTiet = @MoTaChiTiet where MaCT = @MaCT";
                 using SqlCommand command2 = new(query, connection);
                 command2.Parameters.AddWithValue("@MaCT", txtMaCT.Text);
                 command2.Parameters.AddWithValue("@MaXP", cboXaPhuong.SelectedValue);
                 command2.Parameters.AddWithValue("@MoTaChiTiet", string.IsNullOrWhiteSpace(txtMoTaChiTiet.Text) ? DBNull.Value : txtMoTaChiTiet.Text);
-                command2.Parameters.AddWithValue("@mact1", mact);
                 command2.ExecuteNonQuery();
 
 
@@ -596,18 +595,8 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 btnDelete.Text = "Hủy xóa";
                 dgvConstruction.ClearSelection();
 
-                txtMaCT.Clear();
-                txtTenCT.Clear();
-                cboTinhTrang.SelectedIndex = -1;
-                dtpNgayBatDau.Value = DateTime.Now;
-                dtpNgayKetThuc.Value = DateTime.Now;
-                txtDuToan.Clear();
-                txtChuDauTu.Clear();
-                txtGhiChu.Clear();
-                txtMoTaChiTiet.Clear();
                 txtTenCT.Enabled = false;
                 txtMaCT.Enabled = false;
-                txtTenCT.Enabled = false;
                 cboTinhTrang.Enabled = false;
                 dtpNgayBatDau.Enabled = false;
                 dtpNgayKetThuc.Enabled = false;
@@ -618,9 +607,12 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 cboQuanHuyen.Enabled = false;
                 cboXaPhuong.Enabled = false;
                 txtMoTaChiTiet.Enabled = false;
+                btnAdd.Enabled = false;
+                btnEdit.Enabled = false;
+                btnRefresh.Enabled = false;
+                btnExport.Enabled = false;
+                btnImport.Enabled = false;
 
-                btnAdd.Click -= btnAdd_Click;
-                btnEdit.Click -= btnEdit_Click;
                 dgvConstruction.CellClick -= DgvConstruction_CellClick;
 
             }
@@ -719,12 +711,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
             // Đặt lại trạng thái
             isDelete = false;
-            btnAdd.Click += btnAdd_Click;
-            btnEdit.Click += btnEdit_Click;
             dgvConstruction.CellClick += DgvConstruction_CellClick;
             txtTenCT.Enabled = true;
             txtMaCT.Enabled = true;
-            txtTenCT.Enabled = true;
             cboTinhTrang.Enabled = true;
             dtpNgayBatDau.Enabled = true;
             dtpNgayKetThuc.Enabled = true;
@@ -735,10 +724,40 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             cboQuanHuyen.Enabled = true;
             cboXaPhuong.Enabled = true;
             txtMoTaChiTiet.Enabled = true;
+            btnAdd.Enabled = true;
+            btnEdit.Enabled = true;
+            btnRefresh.Enabled = true;
+            btnExport.Enabled = true;
+            btnImport.Enabled = true;
             txtMaCT.Focus(); // Đặt focus vào ô nhập mã công trình
 
+            int maxp = -1, maqh = -1, matinh = -1;
+            // Kiểm tra combobox Xã phường có giá trị không
+            if (cboXaPhuong.SelectedIndex != -1)
+            {
+                maxp = Convert.ToInt32(cboXaPhuong.SelectedValue);
+                maqh = Convert.ToInt32(cboQuanHuyen.SelectedValue);
+                matinh = Convert.ToInt32(cboTinh.SelectedValue);
+            }
             // Làm mới datagridview để xóa các lựa chọn
             LoadCongTrinh();
+
+            if (maxp != -1)
+            {
+                cboTinh.SelectedValue = matinh;
+                LoadcboHuyen(matinh);
+                cboQuanHuyen.SelectedValue = maqh;
+                LoadcboXa(maqh);
+                cboXaPhuong.SelectedValue = maxp;
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtMaCT.Text))
+            {
+                mact = txtMaCT.Text;
+                SelectRowById();
+            }
+            else txtMaCT.Focus();
+
         }
         private void DgvConstruction_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {

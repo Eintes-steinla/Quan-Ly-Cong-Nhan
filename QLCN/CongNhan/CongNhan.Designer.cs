@@ -141,7 +141,7 @@ namespace QLCN.CongNhan
             btnDelete.Location = new Point(474, 23);
             btnDelete.Margin = new Padding(4, 5, 4, 5);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(150, 50);
+            btnDelete.Size = new Size(200, 50);
             btnDelete.TabIndex = 17;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = true;
@@ -401,9 +401,10 @@ namespace QLCN.CongNhan
             dgvConstruction.ReadOnly = true;
             dgvConstruction.RowHeadersWidth = 51;
             dgvConstruction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvConstruction.Size = new Size(1884, 504);
+            dgvConstruction.Size = new Size(1884, 498);
             dgvConstruction.TabIndex = 19;
             dgvConstruction.AutoGenerateColumns = false;
+            dgvConstruction.Dock = DockStyle.Fill;
 
             dgvColGhiChu.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvColGhiChu.DataPropertyName = "GhiChu";
