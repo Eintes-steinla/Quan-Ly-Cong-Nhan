@@ -26,6 +26,7 @@
 
         private void InitializeComponent()
         {
+            
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             imageList1 = new ImageList(components);
@@ -45,6 +46,8 @@
             chamCong.SuspendLayout();
             hopDong.SuspendLayout();
             SuspendLayout();
+
+            
             // 
             // imageList1
             // 

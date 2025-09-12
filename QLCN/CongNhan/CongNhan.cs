@@ -18,6 +18,8 @@ namespace QLCN.CongNhan
             Event();
         }
 
+        public void SetCongTrinh(string maCT) => cboFilterTenCT.Text = maCT;
+
         private void Event()
         {
             txtCCCD.KeyPress += (s, e) =>
@@ -252,9 +254,10 @@ namespace QLCN.CongNhan
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
-                    query = "SELECT MaQH, TenQH FROM QuanHuyen WHERE MaTinh = @MaTinh";
+                    string query = "SELECT MaQH, TenQH FROM QuanHuyen WHERE MaTinh = @MaTinh";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@MaTinh", SqlDbType.Int).Value = maTinh;
+                    da.SelectCommand.Parameters.AddWithValue("@MaTinh", maTinh);
+
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -263,6 +266,48 @@ namespace QLCN.CongNhan
                     cboQuanHuyen.ValueMember = "MaQH";
                     cboQuanHuyen.SelectedIndex = -1;
 
+                    // AutoComplete
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                        autoSource.Add(row["TenQH"].ToString());
+
+                    cboQuanHuyen.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cboQuanHuyen.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    cboQuanHuyen.AutoCompleteCustomSource = autoSource;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải Quận/Huyện: {ex.Message}");
+            }
+        }
+
+
+        private void LoadcboTinh()
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    string query = "SELECT MaTinh, TenTinh FROM Tinh";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    // Gán DataSource
+                    cboTinh.DataSource = dt;
+                    cboTinh.DisplayMember = "TenTinh";
+                    cboTinh.ValueMember = "MaTinh";
+                    cboTinh.SelectedIndex = -1;
+
+                    // Tạo AutoComplete cho ComboBox
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        autoSource.Add(row["TenTinh"].ToString());
+                    }
+
+                    cboTinh.AutoCompleteCustomSource = autoSource;
                 }
             }
             catch (Exception ex)
@@ -273,29 +318,6 @@ namespace QLCN.CongNhan
             }
         }
 
-        private void LoadcboTinh()
-        {
-            try
-            {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
-                {
-                    query = "SELECT MaTinh, TenTinh FROM Tinh";
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    cboTinh.DataSource = dt;
-                    cboTinh.DisplayMember = "TenTinh";
-                    cboTinh.ValueMember = "MaTinh";
-                    cboTinh.SelectedIndex = -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = $"Lỗi khi tải dữ liệu: {ex.Message}";
-                lblMessage.ForeColor = Color.Red;
-                TimeIntervalMessage();
-            }
-        }
 
         private void LoadcboXa(int maHuyen)
         {
@@ -305,7 +327,7 @@ namespace QLCN.CongNhan
                 {
                     string query = "SELECT MaXP, TenXP FROM XaPhuong WHERE MaQH = @MaHuyen";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@MaHuyen", SqlDbType.Int).Value = maHuyen;
+                    da.SelectCommand.Parameters.AddWithValue("@MaHuyen", maHuyen);
 
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -314,11 +336,18 @@ namespace QLCN.CongNhan
                     cboXaPhuong.DisplayMember = "TenXP";
                     cboXaPhuong.ValueMember = "MaXP";
                     cboXaPhuong.SelectedIndex = -1;
+
+                    // AutoComplete
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                        autoSource.Add(row["TenXP"].ToString());
+
+                    cboXaPhuong.AutoCompleteCustomSource = autoSource;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi load Xã: " + ex.Message);
+                MessageBox.Show($"Lỗi khi tải Xã/Phường: {ex.Message}");
             }
         }
 
@@ -330,13 +359,13 @@ namespace QLCN.CongNhan
 
         private void CongNhan_Load(object? sender, EventArgs e) => LoadCongNhan();
 
-        private void LoadCongTrinh()
+        public void LoadCongTrinh()
         {
             try
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT mact, tenct FROM congtrinh";
+                    string query = "SELECT mact, tenct FROM congtrinh where tinhtrang not in (N'Đã hoàn thành', N'Bị hủy')";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -345,11 +374,16 @@ namespace QLCN.CongNhan
                     cboTenCongTrinh.DisplayMember = "tenct";
                     cboTenCongTrinh.ValueMember = "mact";
                     cboTenCongTrinh.SelectedIndex = 0;
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                        autoSource.Add(row["tenct"].ToString());
+
+                    cboTenCongTrinh.AutoCompleteCustomSource = autoSource;
+                    cboTenCongTrinh.Text = "";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
 
@@ -569,7 +603,6 @@ namespace QLCN.CongNhan
                 cboTenCongTrinh.SelectedIndex = 0;
                 txtMoTaChiTiet.Clear();
                 ActiveControl = null;
-                macn = null;
 
                 LoadCongNhan();
                 SelectRowById();
@@ -799,7 +832,8 @@ namespace QLCN.CongNhan
             if (!string.IsNullOrWhiteSpace(txtMaCN.Text))
             {
                 macn = txtMaCN.Text;
-                SelectRowById();}
+                SelectRowById();
+            }
             else txtMaCN.Focus();
         }
         private void DgvConstruction_CellContentClick(object? sender, DataGridViewCellEventArgs e)
@@ -895,7 +929,7 @@ namespace QLCN.CongNhan
             txtSDT.Clear();
             txtCCCD.Clear();
             txtGhiChu.Clear();
-            cboTenCongTrinh.SelectedIndex = 0;
+            cboTenCongTrinh.SelectedIndex = -1;
 
             cboTinh.SelectedIndex = -1;
             cboQuanHuyen.SelectedIndex = -1;

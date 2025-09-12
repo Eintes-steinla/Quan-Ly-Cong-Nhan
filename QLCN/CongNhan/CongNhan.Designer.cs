@@ -99,7 +99,7 @@ namespace QLCN.CongNhan
             cboFilterGioiTinh = new ComboBox();
             dtpFilterNgaySinh2 = new DateTimePicker();
             dtpFilterNgaySinh1 = new DateTimePicker();
-            txtFilterTenCT = new TextBox();
+            cboFilterTenCT = new ComboBox();
             txtFilterDiaDiem = new TextBox();
             txtFilterMaCN = new TextBox();
             txtFilterTenCN = new TextBox();
@@ -278,7 +278,9 @@ namespace QLCN.CongNhan
             // 
             // cboTinh
             // 
-            cboTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTinh.DropDownStyle = ComboBoxStyle.DropDown;
+            cboTinh.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboTinh.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboTinh.Location = new Point(900, 23);
             cboTinh.Margin = new Padding(4, 5, 4, 5);
             cboTinh.Name = "cboTinh";
@@ -298,7 +300,9 @@ namespace QLCN.CongNhan
             // 
             // cboQuanHuyen
             // 
-            cboQuanHuyen.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboQuanHuyen.DropDownStyle = ComboBoxStyle.DropDown;
+            cboQuanHuyen.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboQuanHuyen.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboQuanHuyen.Location = new Point(900, 73);
             cboQuanHuyen.Margin = new Padding(4, 5, 4, 5);
             cboQuanHuyen.Name = "cboQuanHuyen";
@@ -318,7 +322,9 @@ namespace QLCN.CongNhan
             // 
             // cboXaPhuong
             // 
-            cboXaPhuong.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboXaPhuong.DropDownStyle = ComboBoxStyle.DropDown;
+            cboXaPhuong.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboXaPhuong.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboXaPhuong.Location = new Point(900, 123);
             cboXaPhuong.Margin = new Padding(4, 5, 4, 5);
             cboXaPhuong.Name = "cboXaPhuong";
@@ -516,7 +522,7 @@ namespace QLCN.CongNhan
             panelFilter.Controls.Add(cboFilterGioiTinh);
             panelFilter.Controls.Add(dtpFilterNgaySinh2);
             panelFilter.Controls.Add(dtpFilterNgaySinh1);
-            panelFilter.Controls.Add(txtFilterTenCT);
+            panelFilter.Controls.Add(cboFilterTenCT);
             panelFilter.Controls.Add(txtFilterDiaDiem);
             panelFilter.Controls.Add(txtFilterMaCN);
             panelFilter.Controls.Add(txtFilterTenCN);
@@ -570,14 +576,12 @@ namespace QLCN.CongNhan
             dtpFilterNgaySinh1.TabIndex = 17;
             dtpFilterNgaySinh1.Value = DateTime.Now;
             // 
-            // txtFilterTenCT
+            // cboFilterTenCT
             // 
-            txtFilterTenCT.Location = new Point(1480, 0);
-            txtFilterTenCT.Name = "txtFilterTenCT";
-            txtFilterTenCT.PlaceholderText = "Tìm tên CT";
-            txtFilterTenCT.Size = new Size(200, 38);
-            txtFilterTenCT.TabIndex = 15;
-            txtFilterTenCT.TextAlign = HorizontalAlignment.Center;
+            cboFilterTenCT.Location = new Point(1480, 0);
+            cboFilterTenCT.Name = "cboFilterTenCT";
+            cboFilterTenCT.Size = new Size(200, 38);
+            cboFilterTenCT.TabIndex = 15;
             // 
             // txtFilterDiaDiem
             // 
@@ -651,7 +655,9 @@ namespace QLCN.CongNhan
             // 
             // cboTenCongTrinh
             // 
-            cboTenCongTrinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTenCongTrinh.DropDownStyle = ComboBoxStyle.DropDown;
+            cboTenCongTrinh.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboTenCongTrinh.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboTenCongTrinh.Location = new Point(1550, 123);
             cboTenCongTrinh.Margin = new Padding(4, 5, 4, 5);
             cboTenCongTrinh.Name = "cboTenCongTrinh";
@@ -781,7 +787,7 @@ namespace QLCN.CongNhan
         private Panel panel3;
         private Button btnExport;
         private Panel panel4;
-        private TextBox txtFilterTenCT;
+        private ComboBox cboFilterTenCT;
         private TextBox txtFilterDiaDiem;
         private Label lblGioiTinh;
         private Label lblTenCT;
@@ -799,7 +805,7 @@ namespace QLCN.CongNhan
         private DataGridViewTextBoxColumn dgvColTenCT;
         private DataGridViewTextBoxColumn dgvColGhiChu;
         private DataGridViewCheckBoxColumn dgvColCheckBox;
-        private ComboBox cboTenCongTrinh;
+        public ComboBox cboTenCongTrinh;
         private ComboBox cboGioiTinh;
         private PictureBox pictureBoxRemoveFilter;
         private Button btnXemHD;

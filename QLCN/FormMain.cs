@@ -8,6 +8,16 @@ namespace QLCN
         public FormMain()
         {
             InitializeComponent();
+            congTrinhControl.CongTrinhSelected += (maCT) =>
+    {
+        tabControl.SelectedTab = congNhan;
+        congNhanControl.SetCongTrinh(maCT);
+    };
+            congTrinhControl.CongTrinhMoi += (s, e) =>
+            {
+                congNhanControl.LoadCongTrinh();
+                congNhanControl.cboTenCongTrinh.Text = string.Empty;
+            };
         }
     }
 }

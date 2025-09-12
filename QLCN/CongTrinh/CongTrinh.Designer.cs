@@ -37,6 +37,7 @@ namespace QLCN.CongTrinh
         private Button btnEdit;
         private Button btnDelete;
         private Button btnRefresh;
+        private Button btnXemDSCN;
         private Panel panelFilter;
         private DataGridView dgvConstruction;
         private Label lblMessage;
@@ -75,6 +76,7 @@ namespace QLCN.CongTrinh
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
+            btnXemDSCN = new Button();
             txtMaCT = new TextBox();
             lblMaCT = new Label();
             txtTenCT = new TextBox();
@@ -111,6 +113,7 @@ namespace QLCN.CongTrinh
             dgvColNgayKetThuc = new DataGridViewTextBoxColumn();
             dgvColGhiChu = new DataGridViewTextBoxColumn();
             dgvColCheckBox = new DataGridViewCheckBoxColumn();
+            dgvColSLCN = new DataGridViewTextBoxColumn();
             btnRefresh = new Button();
             panelFilter = new Panel();
             cboFilterDuToan = new ComboBox();
@@ -330,7 +333,9 @@ namespace QLCN.CongTrinh
             // 
             // cboTinh
             // 
-            cboTinh.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTinh.DropDownStyle = ComboBoxStyle.DropDown;
+            cboTinh.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboTinh.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboTinh.Location = new Point(900, 23);
             cboTinh.Margin = new Padding(4, 5, 4, 5);
             cboTinh.Name = "cboTinh";
@@ -350,7 +355,9 @@ namespace QLCN.CongTrinh
             // 
             // cboQuanHuyen
             // 
-            cboQuanHuyen.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboQuanHuyen.DropDownStyle = ComboBoxStyle.DropDown;
+            cboQuanHuyen.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboQuanHuyen.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboQuanHuyen.Location = new Point(900, 73);
             cboQuanHuyen.Margin = new Padding(4, 5, 4, 5);
             cboQuanHuyen.Name = "cboQuanHuyen";
@@ -370,7 +377,9 @@ namespace QLCN.CongTrinh
             // 
             // cboXaPhuong
             // 
-            cboXaPhuong.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboXaPhuong.DropDownStyle = ComboBoxStyle.DropDown;
+            cboXaPhuong.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboXaPhuong.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboXaPhuong.Location = new Point(900, 123);
             cboXaPhuong.Margin = new Padding(4, 5, 4, 5);
             cboXaPhuong.Name = "cboXaPhuong";
@@ -423,7 +432,7 @@ namespace QLCN.CongTrinh
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvConstruction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvConstruction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { STT, dgvColMaCT, dgvColTenCT, dgvColTinhTrang, dgvColChuDauTu, dgvColDiaDiem, dgvColDuToan, dgvColNgayBatDau, dgvColNgayKetThuc, dgvColGhiChu, dgvColCheckBox });
+            dgvConstruction.Columns.AddRange(new DataGridViewColumn[] { STT, dgvColMaCT, dgvColTenCT, dgvColTinhTrang, dgvColChuDauTu, dgvColDiaDiem, dgvColDuToan, dgvColNgayBatDau, dgvColNgayKetThuc, dgvColGhiChu, dgvColSLCN, dgvColCheckBox });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Times New Roman", 13.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -455,9 +464,17 @@ namespace QLCN.CongTrinh
             // 
             // dgvColMaCT
             // 
+            dgvColSLCN.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvColSLCN.DataPropertyName = "slcn";
+            dgvColSLCN.HeaderText = "Số lượng công nhân";
+            dgvColSLCN.MinimumWidth = 8;
+            dgvColSLCN.Name = "dgvColSLCN";
+            dgvColSLCN.ReadOnly = true;
+            dgvColSLCN.Width = 140;
+
             dgvColMaCT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvColMaCT.DataPropertyName = "mact";
-            dgvColMaCT.HeaderText = "Mã CT";
+            dgvColMaCT.HeaderText = "Mã công trình";
             dgvColMaCT.MinimumWidth = 8;
             dgvColMaCT.Name = "dgvColMaCT";
             dgvColMaCT.ReadOnly = true;
@@ -467,7 +484,7 @@ namespace QLCN.CongTrinh
             // 
             dgvColTenCT.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvColTenCT.DataPropertyName = "tenct";
-            dgvColTenCT.HeaderText = "Tên CT";
+            dgvColTenCT.HeaderText = "Tên công trình";
             dgvColTenCT.MinimumWidth = 8;
             dgvColTenCT.Name = "dgvColTenCT";
             dgvColTenCT.ReadOnly = true;
@@ -715,6 +732,7 @@ namespace QLCN.CongTrinh
             panel2.Controls.Add(btnEdit);
             panel2.Controls.Add(btnDelete);
             panel2.Controls.Add(btnRefresh);
+            panel2.Controls.Add(btnXemDSCN);
             panel2.Location = new Point(3, 316);
             panel2.Name = "panel2";
             panel2.Size = new Size(1878, 88);
@@ -729,6 +747,15 @@ namespace QLCN.CongTrinh
             btnImport.Text = "Nhập Excel";
             btnImport.UseVisualStyleBackColor = true;
             btnImport.Click += btnImport_Click;
+            
+            btnXemDSCN.Location = new Point(1478, 23);
+            btnXemDSCN.Name = "btnXemDSCN";
+            btnXemDSCN.Size = new Size(300, 50);
+            btnXemDSCN.TabIndex = 20;
+            btnXemDSCN.Text = "Xem danh sách công nhân";
+            btnXemDSCN.UseVisualStyleBackColor = true;
+            btnXemDSCN.Visible = false;
+            btnXemDSCN.Click += btnXemDSCN_Click;
             // 
             // btnExport
             // 
@@ -807,6 +834,7 @@ namespace QLCN.CongTrinh
         private DataGridViewTextBoxColumn dgvColNgayBatDau;
         private DataGridViewTextBoxColumn dgvColNgayKetThuc;
         private DataGridViewTextBoxColumn dgvColGhiChu;
+        private DataGridViewTextBoxColumn dgvColSLCN;
         private DataGridViewCheckBoxColumn dgvColCheckBox;
     }
 }

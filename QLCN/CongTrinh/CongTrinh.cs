@@ -82,6 +82,8 @@ namespace QLCN.CongTrinh
                 e.Handled = true;
             }
         }
+
+        public event EventHandler CongTrinhMoi;
         private void btnAdd_Click(object? sender, EventArgs e)
         {
             if (CheckRequiredFields()) return;
@@ -138,17 +140,19 @@ namespace QLCN.CongTrinh
                 txtGhiChu.Clear();
                 txtMoTaChiTiet.Clear();
                 this.ActiveControl = null;
+                btnXemDSCN.Visible = false;
 
                 LoadCongTrinh();
+                CongTrinhMoi?.Invoke(this, EventArgs.Empty);
             }
             catch (SqlException ex)
             {
                 if (ex.Number == 2627)
                 {
                     if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
-                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                        lblMessage.Text = "Mã công trình đã tồn tại";
                     else if (ex.Message.Contains("UQ_")) // Tên constraint unique
-                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                        lblMessage.Text = "Tên công trình đã tồn tại";
                     else
                         lblMessage.Text = "Trùng dữ liệu";
                 }
@@ -171,12 +175,14 @@ namespace QLCN.CongTrinh
             {
                 using SqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                query = @"select ct.mact, tenct, tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diachi, dutoan, ngaybatdau , ngayketthuc , ct.ghichu
+                query = @" select ct.mact, tenct, tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh) as diachi, dutoan, ngaybatdau , ngayketthuc , ct.ghichu, count(macn) slcn
 from congtrinh ct
 join diachicongtrinh dt on ct.mact = dt.mact
 join XaPhuong xp on xp.MaXP = dt.MaXP
 join QuanHuyen qh on qh.MaQH = xp.MaQH
-join Tinh t on t.MaTinh = qh.MaTinh";
+join Tinh t on t.MaTinh = qh.MaTinh
+left join congnhan cn on cn.mact = ct.mact
+group by ct.mact, tenct, tinhtrang, chudautu, trim(iif(MoTaChiTiet is null, '', motachitiet + ', ') + TenXP + ', ' + TenQH + ', ' + TenTinh), dutoan, ngaybatdau, ngayketthuc, ct.ghichu";
 
                 using SqlCommand command = new(query, connection);
 
@@ -342,7 +348,35 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             btnDelete.Click += btnDelete_Click;
             dgvConstruction.CellContentClick += DgvConstruction_CellContentClick;
             dgvConstruction.SelectionChanged += DgvConstruction_SelectionChanged;
+            dgvConstruction.CellPainting += dgvConstruction_CellPainting;
             btnExport.Click += btnExport_Click;
+        }
+
+        private void dgvConstruction_CellPainting(object? sender, DataGridViewCellPaintingEventArgs e)
+        {
+            // Nếu không phải cột checkbox hoặc là header thì bỏ qua
+            if (e.ColumnIndex == dgvColCheckBox.Index && e.RowIndex >= 0)
+            {
+                var row = dgvConstruction.Rows[e.RowIndex];
+                string? tinhTrang = row.Cells["dgvColTinhTrang"].Value?.ToString();
+
+                // Nếu không phải "Đã hoàn thành" hoặc "Bị hủy" thì làm mờ ô
+                if (tinhTrang != "Đã hoàn thành" && tinhTrang != "Bị hủy")
+                {
+                    e.PaintBackground(e.CellBounds, true);
+
+                    // Vẽ hình chữ nhật nền xám
+                    using (Brush brush = new SolidBrush(Color.LightGray))
+                    {
+                        e.Graphics.FillRectangle(brush, e.CellBounds);
+                    }
+
+                    // Vẽ khung ô (để không bị mất border)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+
+                    e.Handled = true; // Đánh dấu là đã xử lý xong
+                }
+            }
         }
 
 
@@ -418,6 +452,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
 
                 mact = txtMaCT.Text;
+                btnXemDSCN.Visible = true;
 
                 txtMaCT.Focus();
 
@@ -523,10 +558,12 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 txtGhiChu.Clear();
                 txtMoTaChiTiet.Clear();
                 ActiveControl = null;
-                mact = null;
 
                 LoadCongTrinh();
                 SelectRowById();
+                btnXemDSCN.Visible = false;
+                CongTrinhMoi?.Invoke(this, EventArgs.Empty);
+
 
 
             }
@@ -535,9 +572,9 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 if (ex.Number == 2627)
                 {
                     if (ex.Message.Contains("PK_")) // Tên constraint khóa chính
-                        lblMessage.Text = "Mã công nhân đã tồn tại";
+                        lblMessage.Text = "Mã công trình đã tồn tại";
                     else if (ex.Message.Contains("UQ_")) // Tên constraint unique
-                        lblMessage.Text = "Đã có công nhân có CCCD/CMND/Số điện thoại này";
+                        lblMessage.Text = "Tên công trình đã tồn tại";
                     else
                         lblMessage.Text = "Trùng dữ liệu";
                 }
@@ -583,6 +620,23 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 TimeIntervalMessage();
                 return;
             }
+            bool coDongHopLe = false;
+            foreach (DataGridViewRow r in dgvConstruction.Rows)
+            {
+                string? tinhTrang = r.Cells["dgvColTinhTrang"].Value?.ToString();
+                if (tinhTrang == "Đã hoàn thành" || tinhTrang == "Bị hủy")
+                {
+                    coDongHopLe = true;
+                    break;
+                }
+            }
+
+            if (!coDongHopLe)
+            {
+                lblMessage.Text = "Không có công trình nào đã hoàn thành/bị hủy";
+                lblMessage.ForeColor = Color.Red;
+                return;
+            }
             if (!isDelete)
             {
                 // Chuyển sang chế độ xóa
@@ -590,6 +644,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                 // Hiển thị cột checkbox
                 dgvColCheckBox.Visible = true;
+                btnXemDSCN.Visible = false;
 
                 // Đổi tên nút thành "Hủy xóa"
                 btnDelete.Text = "Hủy xóa";
@@ -640,14 +695,16 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     {
                         // Thực hiện xóa các dòng đã chọn
                         DeleteSelectedRows();
+                        CongTrinhMoi?.Invoke(this, EventArgs.Empty);
+
 
                         // Trở về trạng thái ban đầu
                         ResetDeleteMode();
                     }
                 }
                 else
-                    // Không có dòng nào được chọn, trở về trạng thái ban đầu
-                    ResetDeleteMode();
+                // Không có dòng nào được chọn, trở về trạng thái ban đầu
+                { ResetDeleteMode(); btnXemDSCN.Visible = true; }
             }
         }
         private void DeleteSelectedRows()
@@ -757,18 +814,27 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 SelectRowById();
             }
             else txtMaCT.Focus();
+            btnXemDSCN.Visible = false;
 
         }
         private void DgvConstruction_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             // Kiểm tra xem người dùng có nhấp vào cột checkbox không
+
             if (e.ColumnIndex == dgvColCheckBox.Index && e.RowIndex >= 0)
             {
+                DataGridViewRow rows = dgvConstruction.Rows[e.RowIndex];
+                string? tinhTrang = rows.Cells["dgvColTinhTrang"].Value?.ToString();
+                if (tinhTrang != "Đã hoàn thành" && tinhTrang != "Bị hủy")
+                {
+                    dgvConstruction.CancelEdit();
+                    return;
+                }
                 // Đảo ngược giá trị của ô checkbox
                 bool currentValue = false;
-                if (dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value != null)
-                    currentValue = Convert.ToBoolean(dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value);
-                dgvConstruction.Rows[e.RowIndex].Cells["dgvColCheckBox"].Value = !currentValue;
+                if (rows.Cells["dgvColCheckBox"].Value != null)
+                    currentValue = Convert.ToBoolean(rows.Cells["dgvColCheckBox"].Value);
+                rows.Cells["dgvColCheckBox"].Value = !currentValue;
 
                 // Kiểm tra xem có dòng nào được chọn không
                 bool hasCheckedRows = false;
@@ -817,7 +883,11 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 // Chọn hoặc bỏ chọn tất cả các dòng
                 bool checkValue = !anyChecked;
                 foreach (DataGridViewRow row in dgvConstruction.Rows)
-                    row.Cells["dgvColCheckBox"].Value = checkValue;
+                {
+                    string? tinhTrang = row.Cells["dgvColTinhTrang"].Value?.ToString();
+                    if (tinhTrang == "Đã hoàn thành" || tinhTrang == "Bị hủy")
+                        row.Cells["dgvColCheckBox"].Value = checkValue;
+                }
 
                 // Cập nhật tên nút
                 if (checkValue)
@@ -874,7 +944,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
 
                     // Đặt tiêu đề cho file Excel
                     worksheet.Cell(1, 1).Value = "DANH SÁCH CÔNG TRÌNH";
-                    worksheet.Range(1, 1, 1, 10).Merge();
+                    worksheet.Range(1, 1, 1, 11).Merge();
                     worksheet.Cell(1, 1).Style.Font.Bold = true;
                     worksheet.Cell(1, 1).Style.Font.FontSize = 16;
                     worksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
@@ -890,6 +960,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     worksheet.Cell(3, 8).Value = "Ngày bắt đầu";
                     worksheet.Cell(3, 9).Value = "Ngày kết thúc";
                     worksheet.Cell(3, 10).Value = "Ghi chú";
+                    worksheet.Cell(3, 11).Value = "Số lượng công nhân";
 
                     // Định dạng tiêu đề cột
                     var headerRange = worksheet.Range(3, 1, 3, 10);
@@ -913,6 +984,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                         worksheet.Cell(i + 4, 8).Value = Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayBatDau"].Value);
                         worksheet.Cell(i + 4, 9).Value = dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value != DBNull.Value ? Convert.ToDateTime(dgvConstruction.Rows[i].Cells["dgvColNgayKetThuc"].Value) : (DateTime?)null;
                         worksheet.Cell(i + 4, 10).Value = dgvConstruction.Rows[i].Cells["dgvColGhiChu"].Value.ToString();
+                        worksheet.Cell(i + 4, 11).Value = dgvConstruction.Rows[i].Cells["dgvColSoLuongCongNhan"].Value != DBNull.Value ? Convert.ToInt32(dgvConstruction.Rows[i].Cells["dgvColSoLuongCongNhan"].Value) : (int?)null;
                     }
 
                     // Định dạng dữ liệu
@@ -959,9 +1031,10 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
-                    query = "SELECT MaQH, TenQH FROM QuanHuyen WHERE MaTinh = @MaTinh";
+                    string query = "SELECT MaQH, TenQH FROM QuanHuyen WHERE MaTinh = @MaTinh";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@MaTinh", SqlDbType.Int).Value = maTinh;
+                    da.SelectCommand.Parameters.AddWithValue("@MaTinh", maTinh);
+
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -970,6 +1043,48 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     cboQuanHuyen.ValueMember = "MaQH";
                     cboQuanHuyen.SelectedIndex = -1;
 
+                    // AutoComplete
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                        autoSource.Add(row["TenQH"].ToString());
+
+                    cboQuanHuyen.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    cboQuanHuyen.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    cboQuanHuyen.AutoCompleteCustomSource = autoSource;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải Quận/Huyện: {ex.Message}");
+            }
+        }
+
+
+        private void LoadcboTinh()
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    string query = "SELECT MaTinh, TenTinh FROM Tinh";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    // Gán DataSource
+                    cboTinh.DataSource = dt;
+                    cboTinh.DisplayMember = "TenTinh";
+                    cboTinh.ValueMember = "MaTinh";
+                    cboTinh.SelectedIndex = -1;
+
+                    // Tạo AutoComplete cho ComboBox
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        autoSource.Add(row["TenTinh"].ToString());
+                    }
+
+                    cboTinh.AutoCompleteCustomSource = autoSource;
                 }
             }
             catch (Exception ex)
@@ -980,29 +1095,6 @@ join Tinh t on t.MaTinh = qh.MaTinh";
             }
         }
 
-        private void LoadcboTinh()
-        {
-            try
-            {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
-                {
-                    query = "SELECT MaTinh, TenTinh FROM Tinh";
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    cboTinh.DataSource = dt;
-                    cboTinh.DisplayMember = "TenTinh";
-                    cboTinh.ValueMember = "MaTinh";
-                    cboTinh.SelectedIndex = -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = $"Lỗi khi tải dữ liệu: {ex.Message}";
-                lblMessage.ForeColor = Color.Red;
-                TimeIntervalMessage();
-            }
-        }
 
         private void LoadcboXa(int maHuyen)
         {
@@ -1012,7 +1104,7 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                 {
                     string query = "SELECT MaXP, TenXP FROM XaPhuong WHERE MaQH = @MaHuyen";
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@MaHuyen", SqlDbType.Int).Value = maHuyen;
+                    da.SelectCommand.Parameters.AddWithValue("@MaHuyen", maHuyen);
 
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -1021,13 +1113,21 @@ join Tinh t on t.MaTinh = qh.MaTinh";
                     cboXaPhuong.DisplayMember = "TenXP";
                     cboXaPhuong.ValueMember = "MaXP";
                     cboXaPhuong.SelectedIndex = -1;
+
+                    // AutoComplete
+                    AutoCompleteStringCollection autoSource = new AutoCompleteStringCollection();
+                    foreach (DataRow row in dt.Rows)
+                        autoSource.Add(row["TenXP"].ToString());
+
+                    cboXaPhuong.AutoCompleteCustomSource = autoSource;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi load Xã: " + ex.Message);
+                MessageBox.Show($"Lỗi khi tải Xã/Phường: {ex.Message}");
             }
         }
+
 
         private void cboQuanHuyen_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1039,5 +1139,16 @@ join Tinh t on t.MaTinh = qh.MaTinh";
         {
 
         }
+
+        private void btnXemDSCN_Click(object? sender, EventArgs e)
+        {
+            if (dgvConstruction.CurrentRow != null)
+            {
+                string? maCT = dgvConstruction.CurrentRow.Cells["dgvColMaCT"].Value?.ToString();
+                CongTrinhSelected?.Invoke(maCT);
+            }
+        }
+        public event Action<string> CongTrinhSelected;
+
     }
 }
